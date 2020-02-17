@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script type="text/javascript" >
+        var comjson= {
+             "content": //["content"][0]["properties"][duration"]
+                  [
+                     {
+                       "properties": 
+                          { "title": "game title",             //string. Game title
+                            "duration": 40,             //positive integer. Expected game length [min]
+                            "description": "game description",      //string. Game description
+                            "players":
+                            {
+                                "min": 3,   //positive integer. Number of players lower bound
+                                "max": 4    //positive integer. Number of players upper bound
+                            },           
+                            "volume": 5,                //positive integer. Consumables' active ingridient volume related to total volume 0...100 [%]
+                            "condition": 2              //0/1/2/3. Level of active ingredient side-effect symptoms.
+                            },
+                        "settings": {
+                           "random": true,             //boolean. Whether elements are ordered randomly during play
+                            "contentElementDuration": 180 //positive integer. The time each content element is displayed for. 60...599 [sec]
+                            },
+                        "contentElements":             //array of objects
+                            [
+                                {
+                                    "type": "question1",     //string. Type of element. "question"/"task"
+                                    "str": "mis sa hommikul sõid",
+                                    "repeatable": true,     //boolean. Whether element can be repeated in the game sequence
+                                    "likelyRepeats": 4     //REQUIRED IF repeatable=true //[1-n] n=10. How many repeats is the most likely to happen. Default: 3
+                                },
+                                {
+                                    "type": "task1",
+                                    "str": "tee kolm kätekõverdust",
+                                    "repeatable": false,
+                                },
+                                {
+                                    "type": "question2",     //string. Type of element. "question"/"task"
+                                    "str": "mis sa hommikul sõid",
+                                    "repeatable": true,     //boolean. Whether element can be repeated in the game sequence
+                                    "likelyRepeats": 2     //REQUIRED IF repeatable=true //[1-n] n=10. How many repeats is the most likely to happen. Default: 3
+                                },
+                                {
+                                    "type": "task2",
+                                    "str": "tee kolm kätekõverdust",
+                                    "repeatable": false,
+                                },
+                             ]
+                          }
+                     ]
+                }
+            var strjson=JSON.stringify(comjson);
+            var json=JSON.parse(strjson);
+            var backup ={
+                "gameOrder":[],
+                "selectedGame": 0,
+                "currentQuestion":0,
+                "state":0};
+                //state 0 =menu state 1=in game state 3=settings
+            
+
+            document.addEventListener('keyup', function (event) {
+                if (event.defaultPrevented) {
+                    return;
+            }
+            var key = event.key || event.keyCode;
+            if (key === 'x') {
+                if(backup.state === 0){
+                    questionIn();
+                    backup.state = 1;
+                }
+            }
+
+            if (key === 'a') {
+            //alert(key);
+            backup.currentQuestion=backup.currentQuestion-2;
+            if(backup.currentQuestion<0){backup.currentQuestion=0;}   
+            nextQuestion();
+       
+            }
+            if (key === 'd') {
+            //alert(key);
+            nextQuestion();
+            }
+            });
+
+            //var key = event.key || event.keyCode;
+            var gameOrder=gameOrderer();
+            backup.gameOrder=gameOrder;
+            function gameOrderer(){
+                var nrOfContentElements=json.content[backup.selectedGame].contentElements.length;
+                //console.log(nrOfContentElements);
+                var i;
+                var nrOfType=nrOfContentElements;
+                for(i=0;i<nrOfContentElements;i++){
+                    if(json.content[backup.selectedGame].contentElements[i].repeatable){
+                        nrOfType=nrOfType + json.content[backup.selectedGame].contentElements[i].likelyRepeats-1;
+                        }
+                }
+                var gameOrder=new Array(nrOfType);
+                var currentTypeNr=0;
+                var j;
+                for(i=0;i<nrOfType;i++){
+                    if(json.content[backup.selectedGame].contentElements[currentTypeNr].repeatable){
+                        for(j=0;j<json.content[backup.selectedGame].contentElements[currentTypeNr].likelyRepeats;j++){
+                            gameOrder[i+j]=currentTypeNr
+                        }
+                        i=i+j-1;
+                    }
+                    else if(!(json.content[backup.selectedGame].contentElements[currentTypeNr].repeatable)){
+                        gameOrder[i]=currentTypeNr;
+                    }
+                    currentTypeNr++;
+                }
+                //console.log(gameOrder);
+                shuffle(gameOrder);
+                //console.log(gameOrder);
+                return gameOrder;
+            }
+            function shuffle(array) {
+                var currentIndex = array.length, temporaryValue, randomIndex;
+
+                while (0 !== currentIndex) {                   
+                    randomIndex = Math.floor(Math.random() * currentIndex);
+                    currentIndex -= 1;                   
+                    temporaryValue = array[currentIndex];
+                    array[currentIndex] = array[randomIndex];
+                    array[randomIndex] = temporaryValue;
+                }
+
+                return array;
+                }
+            
+            var interval;
+            function startTimer(duration) {
+
+                var timer = duration;
+                var minutes=1;
+                var seconds=1;
+                interval=setInterval(function timerInterval() {
+                minutes = parseInt(timer / 60, 10);
+                seconds = parseInt(timer % 60, 10);
+                
+                seconds = seconds < 10 ? "0" + seconds : seconds;
+                document.getElementById('timer').innerHTML = minutes + ":" + seconds;
+                if(timer===0){nextQuestion();}
+                timer--;//Interval väiksemaks timer iga x intervali tagant väiksemaks
+            }, 1000);
+            }
+            
+            function menu() {
+                backup.state = 0;
+                var div =document.getElementById('mänguNimi');
+                div.innerHTML = "<h2> Mängu nimi: "+ json.content[0].properties.title +"</h2>";
+                var div = document.getElementById('kirjeldus');
+                div.innerHTML = div.innerHTML + "<p class='inner'> Mängu kirjeldus: "+ json.content[0].properties.description +"</p>";
+                div.innerHTML = div.innerHTML + "<p class='inner'> Keskmine mängu kestvus: "+ json.content[0].properties.duration +"</p>";
+                div.innerHTML = div.innerHTML + "<p class='inner'> Mängijate arv: "+ json.content[0].properties.players.min +"-"+ json.content[0].properties.players.max +"</p>";
+                div.innerHTML = div.innerHTML + "<p class='inner'> Soovitatav vol: "+ json.content[0].properties.volume +"% </p>";
+                div.innerHTML = div.innerHTML + "<p class='inner'> Konditsioon: "+ json.content[0].properties.condition +"</p>";
+            }
+
+            function menuIn(){
+                document.getElementById("bodyid").innerHTML='<div><div class="game-properties-menu-title" id="mänguNimi"></div><div class="game-properties-menu" id="propeties"><div class="game-properties-menu-description" id="kirjeldus"></div></div></div>'
+
+                menu();
+            }
+            function questionIn(){
+                document.getElementById("bodyid").innerHTML='<div><div class="game-contentElements-type" id="tüüp"></div><div class="game-contentElements-str" id="küsimus"></div><div id="timer">Laeb?</div></div>'
+                backup.currentQuestion=0;
+                nextQuestion();
+            }
+
+            function nextQuestion(){
+                            clearInterval(interval);
+                            startTimer(json.content[backup.selectedGame].settings.contentElementDuration);
+                            //console.log(gameOrder);
+                            //console.log(backup.gameOrder[backup.currentQuestion]);
+                            var div =document.getElementById('tüüp');
+                            div.innerHTML = "<h2>"+ json.content[backup.selectedGame].contentElements[(backup.gameOrder[backup.currentQuestion])].type +"</h2>";
+                            var div = document.getElementById('küsimus');
+                            div.innerHTML =  "<p class='inner'>"+ json.content[backup.selectedGame].contentElements[(backup.gameOrder[backup.currentQuestion])].str +"</p>";
+                            backup.currentQuestion++;
+                            if(backup.currentQuestion>=backup.gameOrder.length){
+                                //console.log("ei saa "+backup.gameOrder.length);
+                                backup.currentQuestion=backup.gameOrder.length-1;
+                            }
+                            
+                        }
+
+        </script>
+        <style>
+        body {background: #444850;}
+        .game-contentElements-str {
+            color: yellow;
+            background: #1f1f1f;
+        }
+        .game-contentElements-type{
+            color: yellow;
+        }
+        .game-properties-menu-description {
+            color: yellow;
+            background: #1f1f1f;
+        }
+        .game-properties-menu-title{
+            color: yellow;
+        }
+        </style>
+    </head>
+    <body onload=" menuIn()" id="bodyid">
+        
+    </body>
+</html>
