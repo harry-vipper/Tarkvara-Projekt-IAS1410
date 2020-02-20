@@ -10,6 +10,17 @@
     --activeitemcolor: #b5c0ca;
     --hoveritemcolor: hsla(209, 17%, 60%, 1);
     --buttonitemcolor: #5c6f82;
+    --highlightcolor: hsl(34, 100%, 50%);
+    --subtlehighlightcolor: #315477;
+}
+@keyframes attention-highlight {
+    0% {background: var(--highlightcolor);}
+}
+@keyframes subtle-highlight {
+    0% {background: var(--subtlehighlightcolor);}
+}
+.t-subtle-highlight {
+    animation: subtle-highlight 1s !important;
 }
 body {font-family: 'roboto';font-weight: 300;background: var(--bgcolor);color: var(--textcolor);margin: 0;}
 .body-wrapper{
@@ -127,7 +138,10 @@ color: black;
     position: relative;
     overflow: auto;
 }
-.list-elements {}
+.list-elements {
+    display: flex;
+    flex-direction: column;
+}
 
 .checkbox {display: inline-block;width: 1em;height: 1em;margin: 0 0.5em 0 0;padding: 0;position: relative;box-sizing: border-box;top: 0.1em;transition: background 0.2s, border 0.2s;}
 
@@ -198,7 +212,7 @@ h3 {
 }
 .list-element-item-interactable{
     fill: var(--hoveritemcolor);
-    background: var(--itemcolor);
+    /* background: var(--itemcolor); */
 }
 .list-element-item-interactable:hover{
     background: var(--hoveritemcolor);
@@ -229,7 +243,7 @@ option {
     font-weight: 200;
 }
 
-.list-element-item {background: var(--itemcolor);margin: 0.5em 0;padding: 0 0 0.5em 0;}
+.list-element-item {background: var(--itemcolor);margin: 0.5em 0;padding: 0 0 0.5em 0;transition: background 0.5s;animation-name: attention-highlight;animation-duration: 1s;animation-iteration-count: 1;}
 
 .list-element-content {
     min-height: 12em;
@@ -269,4 +283,11 @@ option {
 .footer-button-device:hover {
     background: var(--activeitemcolor);
     color: var(--bgcolor);
+}
+
+
+
+.select-str {
+    font-size: 1em;
+    background: var(--inputarea-bgcolor);
 }

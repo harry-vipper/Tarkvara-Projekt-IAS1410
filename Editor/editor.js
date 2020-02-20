@@ -67,6 +67,13 @@ function redraw() {
         addGameButton(file[i]["id"]);
     }
 }
+function reId(index) {
+    let i=0;
+    for(i=0; i<file[getIndexFromId(selectedGame)]["contentElements"].length; i++) {
+        file[getIndexFromId(selectedGame)]["contentElements"][i]["id"]=i;
+    }
+    return i;   //the largest e_id, to set the nextElementId variable
+}
 function toggleCheckbox(property_id) {
     setCheckbox(property_id, saveData(property_id));
 }
@@ -95,10 +102,16 @@ function getElementIndexFromEid(id, e_id) {
         }
     }
 }
+function swap(arr, x, y) {
+    var b = arr[x];
+    arr[x] = arr[y];
+    arr[y] = b;
+    return arr;
+}
 function saveData(property, id) {
     id = (typeof id === 'undefined') ? property : id;
     let game=file[getIndexFromId(selectedGame)];
-    let val;
+    let val, minVal, maxVal;
     switch(property) {
         case 'name':
             game["properties"]["name"]=document.getElementById(id).value;
@@ -132,13 +145,55 @@ function saveData(property, id) {
                 document.getElementById(id).value=2;
                 return game["properties"]["players"]["max"]=2;
             }
+        case 'volume':
+            maxVal=100;
+            minVal=0;
+            val=document.getElementById(id).value
+            if (val>=minVal && val<=maxVal) {
+                return game["properties"]["volume"]=val;
+            }
+            else {
+                if (val<minVal) {
+                    document.getElementById(id).value=minVal;
+                    return game["properties"]["volume"]=minVal;
+                }
+                if (val>maxVal) {
+                    document.getElementById(id).value=maxVal;
+                    return game["properties"]["volume"]=maxVal;
+                }
+                
+            }
+        case 'duration':
+            maxVal=599;
+            minVal=60;
+            val=document.getElementById(id).value
+            if (val>=minVal && val<=maxVal) {
+                return game["settings"]["contentElementDuration"]=val;
+            }
+            else {
+                if (val<minVal) {
+                    document.getElementById(id).value=minVal;
+                    return game["settings"]["contentElementDuration"]=minVal;
+                }
+                if (val>maxVal) {
+                    document.getElementById(id).value=maxVal;
+                    return game["settings"]["contentElementDuration"]=maxVal;
+                }
+                
+            }
+        case 'condition':
+            return game["properties"]["condition"]=document.getElementById(id).value;
         case 'c_random':
             return game["settings"]["random"]=!game["settings"]["random"];
         case 'c_mg1':
             return game["settings"]["minigames"]["mg1"]=!game["settings"]["minigames"]["mg1"];
         case 'c_mg2':
             return game["settings"]["minigames"]["mg2"]=!game["settings"]["minigames"]["mg2"];
-        default:
+        case 'c_mg3':
+            return game["settings"]["minigames"]["mg3"]=!game["settings"]["minigames"]["mg3"];
+            
+        default: 
+            //Elements
             let type=property.match(/^e-(.*)_([0-9])$/);
             e_index=getElementIndexFromEid(selectedGame, Number(type[2]));
             console.log(type);
@@ -203,9 +258,9 @@ function GameObject() {
         random: true,
         contentElementDuration: 180,
         minigames: {
-            m1:true,
-            m2:true,
-            m3:true
+            mg1:true,
+            mg2:true,
+            mg3:true
         }
     };
     this.contentElements= [
@@ -221,6 +276,8 @@ function addElement(e_id) {
     let newElementId=nextElementId;
     file[getIndexFromId(selectedGame)]["contentElements"].splice(getElementIndexFromEid(getIndexFromId(selectedGame), e_id)+1, 0, new ElementObject());
     document.getElementById("e_"+String(e_id)).after(createElement(getElementIndexFromEid(getIndexFromId(selectedGame), newElementId)));
+    reOrderElements();
+    
 }
 function selectGame(id) {
     selectedGame=id;
@@ -229,6 +286,7 @@ function selectGame(id) {
         document.getElementById("list-game-item-title_"+String(file[i]["id"])).classList.remove("list-game-item-title-active");
     }
     document.getElementById("list-game-item-title_"+String(id)).classList.add("list-game-item-title-active");
+    nextElementId=reId();
     createGameSettings(id);
     createGameElements(id);
 }
@@ -242,19 +300,35 @@ function createGameSettings(id) {
     <p>Kirjeldus</p>
     <textarea onchange="saveData('description', 'settings-desc')" spellcheck="false" class="t-area-wide list-settings-desc" id="settings-desc"></textarea>
     <p>Mängijate soovituslik arv<input onchange="saveData('min', 'settings-players-min')" class="input-digit" id="settings-players-min"></input>-<input onchange="saveData('max', 'settings-players-max')" class="input-digit"  id="settings-players-max"></input></p>
+    <p>Soovituslik vol<input onchange="saveData('volume', 'settings-volume')" class="input-digit" id="settings-volume"></input>%</p>
+    <p>Konditsioon
+        <select onchange="saveData('condition', 'settings-condition')" class="select-str" id="settings-condition">
+            <option value="0">Kaine</option>
+            <option value="1">Juba timm</option>
+            <option value="2">Lappes</option>
+        </select>
+    </p>
+
+    <p>Elemendi kestus<input onchange="saveData('contentElementDuration', 'settings-contentElementDuration')" class="input-digit" id="settings-contentElementDuration"></input>sec</p>
     <p><span id="c_random" class="checkbox checkbox-unchecked" onclick="toggleCheckbox('c_random')"></span>Suvaline elementide järjestus</p>
     <h3>Minimängud</h3>
+
     <p><span id="c_mg1" class="checkbox checkbox-unchecked" onclick="toggleCheckbox('c_mg1')"></span>Truth Dare</p>
-    <p><span id="c_mg2" class="checkbox checkbox-unchecked" onclick="toggleCheckbox('c_mg2')"></span>Tähelepanu test</p>`;
+    <p><span id="c_mg2" class="checkbox checkbox-unchecked" onclick="toggleCheckbox('c_mg2')"></span>Tähelepanu test</p>
+    <p><span id="c_mg3" class="checkbox checkbox-unchecked" onclick="toggleCheckbox('c_mg3')"></span>Ayy lmao</p>`;
 
     document.getElementById("settings-name").value=file[getIndexFromId(selectedGame)]["properties"]["name"];
     document.getElementById("settings-desc").value=file[getIndexFromId(selectedGame)]["properties"]["description"];
     document.getElementById("settings-players-min").value=file[getIndexFromId(selectedGame)]["properties"]["players"]["min"];
     document.getElementById("settings-players-max").value=file[getIndexFromId(selectedGame)]["properties"]["players"]["max"];
     document.getElementById("settings-desc").value=file[getIndexFromId(selectedGame)]["properties"]["description"];
+    document.getElementById("settings-volume").value=file[getIndexFromId(selectedGame)]["properties"]["volume"];
+    document.getElementById("settings-condition").value=file[getIndexFromId(selectedGame)]["properties"]["condition"];
+    document.getElementById("settings-contentElementDuration").value=file[getIndexFromId(selectedGame)]["settings"]["contentElementDuration"];
     setCheckbox("c_random", file[getIndexFromId(selectedGame)]["settings"]["random"]);
     setCheckbox("c_mg1", file[getIndexFromId(selectedGame)]["settings"]["minigames"]["mg1"]);
     setCheckbox("c_mg2", file[getIndexFromId(selectedGame)]["settings"]["minigames"]["mg2"]);
+    setCheckbox("c_mg3", file[getIndexFromId(selectedGame)]["settings"]["minigames"]["mg3"]);
     
 }
 function removeGameSettings() {
@@ -264,14 +338,19 @@ function createGameElements() {
     for(let i=0; i<file[getIndexFromId(selectedGame)]["contentElements"].length; i++) {
         document.getElementById("list-elements").appendChild(createElement(i));
     }
+    reOrderElements();
 }
 function deleteElement(e_id) {
-    e_index=getElementIndexFromEid(selectedGame, e_id);
-    file[getIndexFromId(selectedGame)]["contentElements"].splice(e_index, 1);
-    removeElement(e_id);
+    if(file[getIndexFromId(selectedGame)]["contentElements"].length>1) {
+        e_index=getElementIndexFromEid(selectedGame, e_id);
+        file[getIndexFromId(selectedGame)]["contentElements"].splice(e_index, 1);
+        removeElement(e_id);
+    }
 }
 function removeElement(e_id) {
     document.getElementById("e_"+String(e_id)).remove();
+    reOrderElements();
+    
 }
 function removeGameElements () {
     document.getElementById("list-elements").innerHTML="";
@@ -280,7 +359,8 @@ function createElement(e_index) {
     e_id=file[getIndexFromId(selectedGame)]["contentElements"][e_index]["id"];
     let element=document.createElement('div');
     element.id="e_"+String(e_id);
-    element.innerHTML=`<div class="list-element-item">
+    element.style="order:"+String(e_index)+";";
+    element.innerHTML=`<div id="e-bg_`+String(e_id)+`" class="list-element-item">
     <div class="list-element-item-title">
         <select id="e-type_`+String(e_id)+`" onchange="saveData('e-type_`+String(e_id)+`', 'e-type_`+String(e_id)+`')">
             <option value="task">ÜLESANNE</option>
@@ -302,7 +382,7 @@ function createElement(e_index) {
             </button>
         </div>
         <div class="list-element-item-interactable-input">
-            <input id="e-seq_`+String(e_id)+`">
+            <input id="e-seq_`+String(e_id)+`" onchange="sendToOrder('`+String(e_id)+`')">
         </div>
         <div class="list-element-item-interactable">
             <button onclick="moveUp('`+String(e_id)+`')">
@@ -333,6 +413,45 @@ function createElement(e_index) {
     return element;
     
 }
+function reOrderElements() {
+    for(let e_index=0; e_index<file[getIndexFromId(selectedGame)]["contentElements"].length; e_index++) {
+        document.getElementById("e_"+String(file[getIndexFromId(selectedGame)]["contentElements"][e_index]["id"])).style="order: "+String(e_index)+";";
+        document.getElementById("e-seq_"+String(file[getIndexFromId(selectedGame)]["contentElements"][e_index]["id"])).value=e_index;
+    }
+}
+function sendToOrder(e_id) {
+    let init_e_index=getElementIndexFromEid(getIndexFromId(selectedGame), e_id);
+    let target_e_index=document.getElementById("e-seq_"+String(file[getIndexFromId(selectedGame)]["contentElements"][init_e_index]["id"])).value;
+    let arr=file[getIndexFromId(selectedGame)]["contentElements"];
+    let tmp=arr.splice(init_e_index, 1);
+    arr.splice(target_e_index, 0, tmp[0]);
+    reOrderElements();
+    let target=document.getElementById("e-bg_"+String(file[getIndexFromId(selectedGame)]["contentElements"][target_e_index]["id"]))
+    target.scrollIntoView();
+    triggerAnimation(target, "t-subtle-highlight");
+}
+function triggerAnimation(target, className) {
+    target.classList.remove(className);
+    target.offsetWidth;
+    target.classList.add(className);
+}
+function moveUp(e_id) {
+    let e_index=getElementIndexFromEid(getIndexFromId(selectedGame), e_id);
+    if(e_index>0) {
+        swap(file[getIndexFromId(selectedGame)]["contentElements"], e_index, e_index-1);
+    }
+    reOrderElements();
+    triggerAnimation(document.getElementById("e-bg_"+String(e_id)), "t-subtle-highlight");
+}
+function moveDown(e_id) {
+    let e_index=getElementIndexFromEid(getIndexFromId(selectedGame), e_id);
+    if(e_index<file[getIndexFromId(selectedGame)]["contentElements"].length-1) {
+        swap(file[getIndexFromId(selectedGame)]["contentElements"], e_index+1, e_index);
+    }
+    reOrderElements();
+    triggerAnimation(document.getElementById("e-bg_"+String(e_id)), "t-subtle-highlight");
+}
+
 function addGameButton(id) {
     document.getElementById("list-game-list").innerHTML+=`<div class="list-game-item list-game-button" id="list-game-item_`+String(id)+`">
     <div class="list-game-item-title" id="list-game-item-title_`+String(id)+`" onclick="selectGame(`+String(id)+`)">
