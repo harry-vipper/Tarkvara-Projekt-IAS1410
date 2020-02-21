@@ -22,20 +22,28 @@
 .t-subtle-highlight {
     animation: subtle-highlight 1s !important;
 }
-body {font-family: 'roboto';font-weight: 300;background: var(--bgcolor);color: var(--textcolor);margin: 0;}
 .body-wrapper{
     width: 60%;
     position: relative;
     margin: 2em auto 10em auto;
     /* background: purple; */
 }
+body {font-family: 'roboto';font-weight: 300;background: var(--bgcolor);color: var(--textcolor);margin: 0;}
+@media only screen and (max-width: 768px) {
+    .body-wrapper{
+    width: 90%;
+    font-size: 0.9em;
+}
+}
+
+
 p {
     margin: 1em;
     padding: 0;
 }
 .i {
-    width:1em;
-    height:1em;
+    width: 1em;
+    height: 1em;
     display: block;
     position: relative;
     margin: auto;

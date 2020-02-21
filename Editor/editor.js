@@ -134,25 +134,38 @@ function saveData(property, id) {
             return game["properties"]["description"]=document.getElementById(id).value;
         case 'min':
             val=document.getElementById(id).value
-            if (val>=2) {
-                if(val>game["properties"]["players"]["max"]) {
-                    game["properties"]["players"]["max"]=val;
-                    document.getElementById("settings-players-max").value=val;
+            if (!isNaN(val)) {
+                if (val>=2) {
+                    if(val>game["properties"]["players"]["max"]) {
+                        game["properties"]["players"]["max"]=val;
+                        document.getElementById("settings-players-max").value=val;
+                    }
+                    return game["properties"]["players"]["min"]=val;
                 }
-                return game["properties"]["players"]["min"]=val;
+                else {
+                    document.getElementById(id).value=2;
+                    return game["properties"]["players"]["min"]=2;
+                }
             }
             else {
                 document.getElementById(id).value=2;
                 return game["properties"]["players"]["min"]=2;
             }
+            
         case 'max':
             val=document.getElementById(id).value
-            if (val>=2) {
-                if(val<game["properties"]["players"]["min"]) {
-                    game["properties"]["players"]["min"]=val;
-                    document.getElementById("settings-players-min").value=val;
+            if (!isNaN(val)) {
+                if (val>=2) {
+                    if(val<game["properties"]["players"]["min"]) {
+                        game["properties"]["players"]["min"]=val;
+                        document.getElementById("settings-players-min").value=val;
+                    }
+                    return game["properties"]["players"]["max"]=val;
                 }
-                return game["properties"]["players"]["max"]=val;
+                else {
+                    document.getElementById(id).value=2;
+                    return game["properties"]["players"]["max"]=2;
+                }
             }
             else {
                 document.getElementById(id).value=2;
@@ -162,37 +175,49 @@ function saveData(property, id) {
             maxVal=100;
             minVal=0;
             val=document.getElementById(id).value
-            if (val>=minVal && val<=maxVal) {
-                return game["properties"]["volume"]=val;
+            if (!isNaN(val)) {
+                if (val>=minVal && val<=maxVal) {
+                    return game["properties"]["volume"]=val;
+                }
+                else {
+                    if (val<minVal) {
+                        document.getElementById(id).value=minVal;
+                        return game["properties"]["volume"]=minVal;
+                    }
+                    if (val>maxVal) {
+                        document.getElementById(id).value=maxVal;
+                        return game["properties"]["volume"]=maxVal;
+                    }
+                    
+                }
             }
             else {
-                if (val<minVal) {
-                    document.getElementById(id).value=minVal;
-                    return game["properties"]["volume"]=minVal;
-                }
-                if (val>maxVal) {
-                    document.getElementById(id).value=maxVal;
-                    return game["properties"]["volume"]=maxVal;
-                }
-                
+                document.getElementById(id).value=maxVal;
+                return game["properties"]["volume"]=maxVal;
             }
         case 'duration':
             maxVal=599;
             minVal=60;
             val=document.getElementById(id).value
-            if (val>=minVal && val<=maxVal) {
-                return game["settings"]["contentElementDuration"]=val;
+            if (!isNaN(val)) {
+                if (val>=minVal && val<=maxVal) {
+                    return game["settings"]["contentElementDuration"]=val;
+                }
+                else {
+                    if (val<minVal) {
+                        document.getElementById(id).value=minVal;
+                        return game["settings"]["contentElementDuration"]=minVal;
+                    }
+                    if (val>maxVal) {
+                        document.getElementById(id).value=maxVal;
+                        return game["settings"]["contentElementDuration"]=maxVal;
+                    }
+                    
+                }
             }
             else {
-                if (val<minVal) {
-                    document.getElementById(id).value=minVal;
-                    return game["settings"]["contentElementDuration"]=minVal;
-                }
-                if (val>maxVal) {
-                    document.getElementById(id).value=maxVal;
-                    return game["settings"]["contentElementDuration"]=maxVal;
-                }
-                
+                document.getElementById(id).value=maxVal;
+                return game["settings"]["contentElementDuration"]=maxVal;
             }
         case 'condition':
             return game["properties"]["condition"]=document.getElementById(id).value;
@@ -218,17 +243,25 @@ function saveData(property, id) {
                 case "str":
                     return game["contentElements"][e_index]["str"]=document.getElementById(id).value;
                 case 'probability':
+                    maxVal=10;
+                    minVal=1;
                     val=document.getElementById(id).value
-                    if (val>=1 && val<=10) {
-                        return game["contentElements"][e_index]["likelyRepeats"]=val;
+                    if (!isNaN(val)) {
+                        if (val>=minVal && val<=maxVal) {
+                            return game["contentElements"][e_index]["likelyRepeats"]=val;
+                        }
+                        else if(val<=maxVal) {
+                            document.getElementById(id).value=minVal;
+                            return game["contentElements"][e_index]["likelyRepeats"]=minVal;
+                        }
+                        else if(val>=minVal) {
+                            document.getElementById(id).value=maxVal;
+                            return game["contentElements"][e_index]["likelyRepeats"]=maxVal;
+                        }
                     }
-                    else if(val<=10) {
-                        document.getElementById(id).value=1;
-                        return game["contentElements"][e_index]["likelyRepeats"]=1;
-                    }
-                    else if(val>=1) {
-                        document.getElementById(id).value=10;
-                        return game["contentElements"][e_index]["likelyRepeats"]=10;
+                    else {
+                        document.getElementById(id).value=minVal;
+                        return game["contentElements"][e_index]["likelyRepeats"]=minVal;
                     }
                 case 'type':
                     /*switch(document.getElementById(id).value) {
