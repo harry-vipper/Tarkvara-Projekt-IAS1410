@@ -30,7 +30,7 @@ body {font-family: 'roboto';font-weight: 300;background: var(--bgcolor);color: v
     /* background: purple; */
 }
 p {
-    margin: 0.5em;
+    margin: 1em;
     padding: 0;
 }
 .i {
@@ -46,16 +46,18 @@ p {
 }
 .t-area-wide {
     width: 100%;
-    /* display: block; */
+    display: block;
     background: var(--inputarea-bgcolor);
     border: none;
     outline: none;
     color: var(--inputarea-textcolor);
     padding: 0.5em;
     box-sizing: border-box;
-    margin: 0.5em 0;
+    margin: 0 0 1em 0;
     resize: vertical;
-    min-height: 3em;
+    min-height: 4em;
+    padding: 1.2em;
+    font-family: roboto;
 }
 .list-settings-name {}
 .list-settings-desc {
@@ -76,7 +78,7 @@ color: black;
     position: relative;
 }
 .list-game-item-title {
-    padding: 0.5em 0.5em;
+    padding: 0.1px;
     width: calc(100% - 3.4em);
     box-sizing: border-box;
 }
@@ -122,7 +124,7 @@ color: black;
 }
 .list-game-new-button {
     text-align: center;
-    padding: 0.5em;
+    padding: 0.1px;
     background: var(--buttonitemcolor);
     box-sizing: border-box;
 }
@@ -137,6 +139,7 @@ color: black;
     box-sizing: border-box;
     position: relative;
     overflow: auto;
+    margin: 0 0 3em 0;
 }
 .list-elements {
     display: flex;
@@ -161,27 +164,30 @@ h2, h3 {
 }
 
 h2 {
-    margin: 0.8em 0.333em;
-    font-size: 1.5em;
+    margin: 1.2em 0.8em;
+    font-size: 1.2em;
     color: var(--title1color);
 }
 
 h3 {
-    margin: 0.8em 0.5em;
+    padding: 1em 1em 0.5em 1em;
     font-size: 1em;
     color: var(--title2color);
     font-weight: 300;
+    margin: 0;
 }
 
 .input-digit {
-    background: var(--inputarea-bgcolor);
+    background: transparent;
     border: none;
-    height: 1.5em;
+    height: 100%;
     width: 3em;
-    margin: 0 0.4em;
+    /* margin: 0 0.4em; */
     padding: 0.3em;
     box-sizing: border-box;
     color: var(--inputarea-textcolor);
+    font-family: roboto;
+    outline: none;
 }
 .list-element-item-interactable-input {
     position: relative;
@@ -234,6 +240,7 @@ select {
     font-size: 1.3em;
     font-family: roboto;
     font-weight: 200;
+    outline: none;
 }
 
 option {
@@ -243,7 +250,7 @@ option {
     font-weight: 200;
 }
 
-.list-element-item {background: var(--itemcolor);margin: 0.5em 0;padding: 0 0 0.5em 0;transition: background 0.5s;animation-name: attention-highlight;animation-duration: 1s;animation-iteration-count: 1;}
+.list-element-item {background: var(--itemcolor);margin: 0.5em 0;padding: 0 0 0.1px 0;transition: background 0.5s;animation-name: attention-highlight;animation-duration: 1s;animation-iteration-count: 1;}
 
 .list-element-content {
     min-height: 12em;
@@ -290,4 +297,27 @@ option {
 .select-str {
     font-size: 1em;
     background: var(--inputarea-bgcolor);
+    margin: 0 0.5em;
+}
+
+.input-heading {
+    background: var(--inputarea-bgcolor);
+}
+
+span.input-bg {
+    background: var(--inputarea-bgcolor);
+    /* height: 1.6em; */
+    padding: 0 0.3em;
+    box-sizing: border-box;
+    border: none;
+    position: relative;
+    display: inline-block;
+    margin: 0 0.5em;
+}
+.setting-disabled {
+    opacity: 0.4;
+}
+
+button {
+    outline: none;
 }

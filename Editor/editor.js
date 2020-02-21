@@ -3,8 +3,13 @@ var nextFileIndex=0;
 var nextElementId=0;
 var file=[];
 var selectedGame=undefined;
-
+function calculateExpectedTimes() {
+    for(let i=0; i<file.length; i++) {
+        file[i]["properties"]["duration"]=file[i]["contentElements"].length*file[i]["settings"]["contentElementDuration"]/60;
+    }
+}
 function jsonDownload() {
+    calculateExpectedTimes();
     /*var file = new File(["Hello, world!"], "hello world.txt", {type: "text/plain;charset=utf-8"});
     saveAs(file);
     /**/
@@ -86,6 +91,14 @@ function setCheckbox(id, value, context) {
     else {
         context.querySelector('#'+id).classList.add("checkbox-unchecked")
         context.querySelector('#'+id).classList.remove("checkbox-checked")
+    }
+}
+function setEnableState(context, id, state) {
+    if (state) {
+        context.querySelector("#"+id).classList.remove("setting-disabled");
+    }
+    else {
+        context.querySelector("#"+id).classList.add("setting-disabled");
     }
 }
 function getIndexFromId(id) {
@@ -200,6 +213,7 @@ function saveData(property, id) {
             console.log(e_index);
             switch(type[1]) {
                 case "c-repeatable":
+                    setEnableState(document, "e-box-probability_"+String(type[2]), !game["contentElements"][e_index]["repeatable"]);
                     return game["contentElements"][e_index]["repeatable"]=!game["contentElements"][e_index]["repeatable"];
                 case "str":
                     return game["contentElements"][e_index]["str"]=document.getElementById(id).value;
@@ -274,8 +288,8 @@ function newGame() {
 }
 function addElement(e_id) {
     let newElementId=nextElementId;
-    file[getIndexFromId(selectedGame)]["contentElements"].splice(getElementIndexFromEid(getIndexFromId(selectedGame), e_id)+1, 0, new ElementObject());
-    document.getElementById("e_"+String(e_id)).after(createElement(getElementIndexFromEid(getIndexFromId(selectedGame), newElementId)));
+    file[getIndexFromId(selectedGame)]["contentElements"].splice(getElementIndexFromEid(selectedGame, e_id)+1, 0, new ElementObject());
+    document.getElementById("e_"+String(e_id)).after(createElement(getElementIndexFromEid(selectedGame, newElementId)));
     reOrderElements();
     
 }
@@ -295,12 +309,13 @@ function setGameButtonTitle(id, title) {
 }
 function createGameSettings(id) {
     document.getElementById("list-settings").innerHTML=`<h2>MÄNGU SEADED</h2>
-    <p>Nimi</p>
+    <h3 class="input-heading">Nimi</h3>
     <textarea onchange="saveData('name', 'settings-name')" spellcheck="false" class="t-area-wide list-settings-name" id="settings-name"></textarea>
-    <p>Kirjeldus</p>
+    <h3 class="input-heading">Kirjeldus</h3>
     <textarea onchange="saveData('description', 'settings-desc')" spellcheck="false" class="t-area-wide list-settings-desc" id="settings-desc"></textarea>
-    <p>Mängijate soovituslik arv<input onchange="saveData('min', 'settings-players-min')" class="input-digit" id="settings-players-min"></input>-<input onchange="saveData('max', 'settings-players-max')" class="input-digit"  id="settings-players-max"></input></p>
-    <p>Soovituslik vol<input onchange="saveData('volume', 'settings-volume')" class="input-digit" id="settings-volume"></input>%</p>
+    <h3>Sätted</h3>
+    <p>Mängijate soovituslik arv<span class="input-bg"><input onchange="saveData('min', 'settings-players-min')" class="input-digit" id="settings-players-min"></input>-<input onchange="saveData('max', 'settings-players-max')" class="input-digit"  id="settings-players-max"></input></span></p>
+    <p>Soovituslik vol<span class="input-bg"><input onchange="saveData('volume', 'settings-volume')" class="input-digit" id="settings-volume"></input>%</span></p>
     <p>Konditsioon
         <select onchange="saveData('condition', 'settings-condition')" class="select-str" id="settings-condition">
             <option value="0">Kaine</option>
@@ -309,7 +324,7 @@ function createGameSettings(id) {
         </select>
     </p>
 
-    <p>Elemendi kestus<input onchange="saveData('contentElementDuration', 'settings-contentElementDuration')" class="input-digit" id="settings-contentElementDuration"></input>sec</p>
+    <p>Elemendi kestus<span class="input-bg"><input onchange="saveData('contentElementDuration', 'settings-contentElementDuration')" class="input-digit" id="settings-contentElementDuration"></input>sec</span></p>
     <p><span id="c_random" class="checkbox checkbox-unchecked" onclick="toggleCheckbox('c_random')"></span>Suvaline elementide järjestus</p>
     <h3>Minimängud</h3>
 
@@ -402,7 +417,7 @@ function createElement(e_index) {
     </div>
     
     <textarea onchange="saveData('e-str_`+String(e_id)+`')" spellcheck="false" class="t-area-wide list-element-content" id="e-str_`+String(e_id)+`"></textarea>
-    <p><span id="e-c-repeatable_`+String(e_id)+`" class="checkbox checkbox-unchecked" onclick="toggleCheckbox('e-c-repeatable_`+String(e_id)+`')"></span>Korduv <span><input onchange="saveData('e-probability_`+String(e_id)+`')" class="input-digit" id="e-probability_`+String(e_id)+`"></input>Tõenäoliseim korduste arv</span></p>
+    <p><span id="e-c-repeatable_`+String(e_id)+`" class="checkbox checkbox-unchecked" onclick="toggleCheckbox('e-c-repeatable_`+String(e_id)+`')"></span>Korduv <span id="e-box-probability_`+String(e_id)+`"><span class="input-bg"><input onchange="saveData('e-probability_`+String(e_id)+`')" class="input-digit" id="e-probability_`+String(e_id)+`"></input></span>Tõenäoliseim korduste arv</span></p>
 </div>`;
     console.log(element);
     element.querySelector("#e-seq_"+String(e_id)).value=e_index;
@@ -410,6 +425,7 @@ function createElement(e_index) {
     element.querySelector("#e-probability_"+String(e_id)).value=file[getIndexFromId(selectedGame)]["contentElements"][e_index]["likelyRepeats"];
     element.querySelector("#e-type_"+String(e_id)).value=file[getIndexFromId(selectedGame)]["contentElements"][e_index]["type"];
     setCheckbox("e-c-repeatable_"+String(e_id), file[getIndexFromId(selectedGame)]["contentElements"][e_index]["repeatable"], element);
+    setEnableState(element, "e-box-probability_"+String(e_id), file[getIndexFromId(selectedGame)]["contentElements"][e_index]["repeatable"]);
     return element;
     
 }
@@ -420,7 +436,7 @@ function reOrderElements() {
     }
 }
 function sendToOrder(e_id) {
-    let init_e_index=getElementIndexFromEid(getIndexFromId(selectedGame), e_id);
+    let init_e_index=getElementIndexFromEid(selectedGame, e_id);
     let target_e_index=document.getElementById("e-seq_"+String(file[getIndexFromId(selectedGame)]["contentElements"][init_e_index]["id"])).value;
     let arr=file[getIndexFromId(selectedGame)]["contentElements"];
     let tmp=arr.splice(init_e_index, 1);
@@ -436,7 +452,7 @@ function triggerAnimation(target, className) {
     target.classList.add(className);
 }
 function moveUp(e_id) {
-    let e_index=getElementIndexFromEid(getIndexFromId(selectedGame), e_id);
+    let e_index=getElementIndexFromEid(selectedGame, e_id);
     if(e_index>0) {
         swap(file[getIndexFromId(selectedGame)]["contentElements"], e_index, e_index-1);
     }
@@ -444,7 +460,7 @@ function moveUp(e_id) {
     triggerAnimation(document.getElementById("e-bg_"+String(e_id)), "t-subtle-highlight");
 }
 function moveDown(e_id) {
-    let e_index=getElementIndexFromEid(getIndexFromId(selectedGame), e_id);
+    let e_index=getElementIndexFromEid(selectedGame, e_id);
     if(e_index<file[getIndexFromId(selectedGame)]["contentElements"].length-1) {
         swap(file[getIndexFromId(selectedGame)]["contentElements"], e_index+1, e_index);
     }
@@ -476,12 +492,13 @@ function deleteGame(id) {
     if (window.confirm("Kas soovid mängu kustutada?")) {
         for(let i=0; i<file.length; i++) {
             if(file[i]["id"]==id) {
-                file.splice(id, 1);
+                file.splice(i, 1);
                 break;
             }
         }
         removeGameButton(id);
         removeGameSettings();
+        removeGameElements();
         selectedGame=undefined;
     }
 }
