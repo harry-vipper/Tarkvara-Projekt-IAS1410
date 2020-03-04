@@ -351,14 +351,14 @@ function createGameSettings(id) {
     <textarea onchange="saveData('description', 'settings-desc')" spellcheck="false" class="t-area-wide list-settings-desc" id="settings-desc"></textarea>
     <h3>Sätted</h3>
     <p>Mängijate soovituslik arv<span class="input-bg"><input onchange="saveData('min', 'settings-players-min')" class="input-digit" id="settings-players-min"></input>-<input onchange="saveData('max', 'settings-players-max')" class="input-digit"  id="settings-players-max"></input></span></p>
-    <p>Soovituslik vol<span class="input-bg"><input onchange="saveData('volume', 'settings-volume')" class="input-digit" id="settings-volume"></input>%</span></p>
+    <!--<p>Soovituslik vol<span class="input-bg"><input onchange="saveData('volume', 'settings-volume')" class="input-digit" id="settings-volume"></input>%</span></p>
     <p>Konditsioon
         <select onchange="saveData('condition', 'settings-condition')" class="select-str" id="settings-condition">
             <option value="0">Kaine</option>
             <option value="1">Juba timm</option>
             <option value="2">Lappes</option>
         </select>
-    </p>
+    </p>-->
 
     <p>Elemendi kestus<span class="input-bg"><input onchange="saveData('contentElementDuration', 'settings-contentElementDuration')" class="input-digit" id="settings-contentElementDuration"></input>sec</span></p>
     <p><span id="c_random" class="checkbox checkbox-unchecked" onclick="toggleCheckbox('c_random')"></span>Suvaline elementide järjestus</p>
@@ -373,8 +373,8 @@ function createGameSettings(id) {
     document.getElementById("settings-players-min").value=file[getIndexFromId(selectedGame)]["properties"]["players"]["min"];
     document.getElementById("settings-players-max").value=file[getIndexFromId(selectedGame)]["properties"]["players"]["max"];
     document.getElementById("settings-desc").value=file[getIndexFromId(selectedGame)]["properties"]["description"];
-    document.getElementById("settings-volume").value=file[getIndexFromId(selectedGame)]["properties"]["volume"];
-    document.getElementById("settings-condition").value=file[getIndexFromId(selectedGame)]["properties"]["condition"];
+    //document.getElementById("settings-volume").value=file[getIndexFromId(selectedGame)]["properties"]["volume"];
+    //document.getElementById("settings-condition").value=file[getIndexFromId(selectedGame)]["properties"]["condition"];
     document.getElementById("settings-contentElementDuration").value=file[getIndexFromId(selectedGame)]["settings"]["contentElementDuration"];
     setCheckbox("c_random", file[getIndexFromId(selectedGame)]["settings"]["random"]);
     setCheckbox("c_mg1", file[getIndexFromId(selectedGame)]["settings"]["minigames"]["mg1"]);
