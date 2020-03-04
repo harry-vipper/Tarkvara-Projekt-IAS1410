@@ -3,6 +3,9 @@ var nextFileIndex=0;
 var nextElementId=0;
 var file=[];
 var selectedGame=undefined;
+function encodeInput(str) {
+    return he.encode(str);
+}
 function calculateExpectedTimes() {
     for(let i=0; i<file.length; i++) {
         file[i]["properties"]["duration"]=file[i]["contentElements"].length*file[i]["settings"]["contentElementDuration"]/60;
@@ -127,13 +130,13 @@ function saveData(property, id) {
     let val, minVal, maxVal;
     switch(property) {
         case 'name':
-            game["properties"]["name"]=document.getElementById(id).value;
+            game["properties"]["name"]=encodeInput(document.getElementById(id).value);
             setGameButtonTitle(selectedGame, game["properties"]["name"]);
             return game["properties"]["name"];
         case 'description':
-            return game["properties"]["description"]=document.getElementById(id).value;
+            return game["properties"]["description"]=encodeInput(document.getElementById(id).value);
         case 'min':
-            val=document.getElementById(id).value
+            val=encodeInput(document.getElementById(id).value);
             if (!isNaN(val)) {
                 if (val>=2) {
                     if(val>game["properties"]["players"]["max"]) {
@@ -153,7 +156,7 @@ function saveData(property, id) {
             }
             
         case 'max':
-            val=document.getElementById(id).value
+            val=encodeInput(document.getElementById(id).value);
             if (!isNaN(val)) {
                 if (val>=2) {
                     if(val<game["properties"]["players"]["min"]) {
@@ -174,7 +177,7 @@ function saveData(property, id) {
         case 'volume':
             maxVal=100;
             minVal=0;
-            val=document.getElementById(id).value
+            val=encodeInput(document.getElementById(id).value);
             if (!isNaN(val)) {
                 if (val>=minVal && val<=maxVal) {
                     return game["properties"]["volume"]=val;
@@ -198,7 +201,7 @@ function saveData(property, id) {
         case 'duration':
             maxVal=599;
             minVal=60;
-            val=document.getElementById(id).value
+            val=encodeInput(document.getElementById(id).value);
             if (!isNaN(val)) {
                 if (val>=minVal && val<=maxVal) {
                     return game["settings"]["contentElementDuration"]=val;
@@ -220,7 +223,7 @@ function saveData(property, id) {
                 return game["settings"]["contentElementDuration"]=maxVal;
             }
         case 'condition':
-            return game["properties"]["condition"]=document.getElementById(id).value;
+            return game["properties"]["condition"]=encodeInput(document.getElementById(id).value);;
         case 'c_random':
             return game["settings"]["random"]=!game["settings"]["random"];
         case 'c_mg1':
@@ -245,7 +248,7 @@ function saveData(property, id) {
                 case 'probability':
                     maxVal=10;
                     minVal=1;
-                    val=document.getElementById(id).value
+                    val=encodeInput(document.getElementById(id).value);
                     if (!isNaN(val)) {
                         if (val>=minVal && val<=maxVal) {
                             return game["contentElements"][e_index]["likelyRepeats"]=val;
@@ -275,7 +278,7 @@ function saveData(property, id) {
                             val='question';
                             break;   
                     }*/
-                    return game["contentElements"][e_index]["type"]=document.getElementById(id).value;
+                    return game["contentElements"][e_index]["type"]=encodeInput(document.getElementById(id).value);
             }
     }
 }
@@ -471,13 +474,20 @@ function reOrderElements() {
 function sendToOrder(e_id) {
     let init_e_index=getElementIndexFromEid(selectedGame, e_id);
     let target_e_index=document.getElementById("e-seq_"+String(file[getIndexFromId(selectedGame)]["contentElements"][init_e_index]["id"])).value;
-    let arr=file[getIndexFromId(selectedGame)]["contentElements"];
-    let tmp=arr.splice(init_e_index, 1);
-    arr.splice(target_e_index, 0, tmp[0]);
-    reOrderElements();
-    let target=document.getElementById("e-bg_"+String(file[getIndexFromId(selectedGame)]["contentElements"][target_e_index]["id"]))
-    target.scrollIntoView();
-    triggerAnimation(target, "t-subtle-highlight");
+    if (target_e_index>=0 && target_e_index<file[getIndexFromId(selectedGame)]["contentElements"].length) {
+        let arr=file[getIndexFromId(selectedGame)]["contentElements"];
+        let tmp=arr.splice(init_e_index, 1);
+        arr.splice(target_e_index, 0, tmp[0]);
+        reOrderElements();
+        let target=document.getElementById("e-bg_"+String(file[getIndexFromId(selectedGame)]["contentElements"][target_e_index]["id"]))
+        target.scrollIntoView();
+        triggerAnimation(target, "t-subtle-highlight");
+    }
+    else {
+        document.getElementById("e-seq_"+String(file[getIndexFromId(selectedGame)]["contentElements"][init_e_index]["id"])).value=getIndexFromId(selectedGame, e_id);
+        reOrderElements();
+    }
+    
 }
 function triggerAnimation(target, className) {
     target.classList.remove(className);

@@ -1,0 +1,12 @@
+<svg width="12.7mm" height="12.7mm" version="1.1" viewBox="0 0 12.7 12.7" xmlns="http://www.w3.org/2000/svg">
+ <g transform="translate(0 -284.3)">
+  <g transform="translate(-37.042 -1.0518e-5)">
+   <rect x="41.804" y="285.36" width="3.175" height="3.175" style="fill:var(--svg-b-left)"/>
+   <rect x="38.1" y="289.06" width="3.175" height="3.175" style="fill:var(--svg-b-top)"/>
+   <rect x="45.508" y="289.06" width="3.175" height="3.175" style="fill:var(--svg-b-right)"/>
+   <rect x="41.804" y="289.06" width="3.175" height="3.175" style="fill:var(--svg-b-bottom)"/>
+   <rect x="41.804" y="292.77" width="3.175" height="3.175" style="fill:var(--svg-b-center)"/>
+   <path transform="matrix(.26458 0 0 .26458 37.042 284.3)" d="m18 4v12h12v-12h-12zm2 2h8v8h-8v-8zm-16 12v12h12v-12h-12zm14 0v12h12v-12h-12zm14 0v12h12v-12h-12zm-26 2h8v8h-8v-8zm14 0h8v8h-8v-8zm14 0h8v8h-8v-8zm-16 12v12h12v-12h-12zm2 2h8v8h-8v-8z" style="fill:var(--svg-fgcolor)"/>
+  </g>
+ </g>
+</svg>
