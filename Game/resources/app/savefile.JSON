@@ -1,0 +1,42 @@
+{
+ "gameData": {
+  "gameOrder": [
+   0,
+   0,
+   0,
+   0,
+   1,
+   2,
+   2,
+   3,
+   -1,
+   -2,
+   -1,
+   -2,
+   -1,
+   -2
+  ],
+  "selectedGame": 1,
+  "currentQuestion": 13,
+  "state": 2
+ },
+ "settings": {
+  "toggle": [
+   1,
+   1,
+   1
+  ],
+  "color": {
+   "foreground": [
+    100,
+    97,
+    100
+   ],
+   "background": [
+    100,
+    5,
+    15
+   ]
+  }
+ }
+}
