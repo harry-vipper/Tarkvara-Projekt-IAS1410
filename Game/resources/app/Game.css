@@ -1,6 +1,7 @@
 body {
     overflow: hidden;
     margin: 0;
+    font-family: 'Raleway';
 }   
 
 .footer {
@@ -10,13 +11,17 @@ body {
     width: 100%;
     text-align: center;
     background: var(--dullColor);
-    margin: auto;        
+    margin: auto;
+    font-size: 1.3em;
 }
 
 
 .footer h3{
+    margin: 0 0.6em;
     margin-block-start: 0;
     margin-block-end: 0;
+    display: inline;
+    font-family:;
 }
 
 .UI-smallSVG {

@@ -1,36 +1,27 @@
 {
  "gameData": {
   "gameOrder": [
-   2,
-   -1,
    0,
-   0,
-   2,
    1,
-   0,
-   -2,
-   -2,
-   3,
-   -2,
-   0,
+   2,
    -1,
-   -1
+   -2
   ],
-  "selectedGame": 0,
-  "currentQuestion": 1,
+  "selectedGame": 11,
+  "currentQuestion": 3,
   "state": 2
  },
  "settings": {
   "toggle": [
    1,
    1,
-   0
+   1
   ],
   "color": {
    "foreground": [
-    88,
-    97,
-    90
+    18,
+    100,
+    96
    ],
    "background": [
     100,

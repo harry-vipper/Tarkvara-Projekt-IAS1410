@@ -1,6 +1,9 @@
 
 var nextFileIndex=0;
 var nextElementId=0;
+var jsonWrapper={   //this is the object in which the file object is put into, to factor for the spec requiring a "content" object at the root.
+    content: undefined
+};
 var file=[];
 var selectedGame=undefined;
 function encodeInput(str) {
@@ -16,7 +19,8 @@ function jsonDownload() {
     /*var file = new File(["Hello, world!"], "hello world.txt", {type: "text/plain;charset=utf-8"});
     saveAs(file);
     /**/
-    var text=JSON.stringify(file);
+    jsonWrapper.content=file;
+    var text=JSON.stringify(jsonWrapper);
     var filename="games.json";
     var element = document.createElement('a');
     element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
@@ -50,7 +54,19 @@ function jsonUpload() {
                         /*removeGameButton(id);
                         removeGameSettings();
                         selectedGame=undefined;*/
-                        file=JSON.parse(fileReader.result);
+                        file=JSON.parse(decodeHTML(fileReader.result)).content;
+                        let i=0;
+                        
+                        file.forEach(function(gameObject){
+                            gameObject.id=i;
+                            i++;
+                            let j=0;
+                            gameObject.contentElements.forEach(function(element) {
+                                element.id=j;
+                                j++;
+                            })
+                        })
+                        //file=decodeURIComponent(file);
                         selectedGame=0;
                         document.getElementById("footer-button-upload").value=null;
                         redraw();
@@ -62,11 +78,12 @@ function jsonUpload() {
             }
 
     };
-    
-
-    
-
 }
+var decodeHTML = function (html) {
+	var txt = document.createElement('textarea');
+	txt.innerHTML = html;
+	return txt.value;
+};
 function redraw() {
     removeGameButtons();
     removeGameSettings();
@@ -130,9 +147,9 @@ function saveData(property, id) {
     let val, minVal, maxVal;
     switch(property) {
         case 'name':
-            game["properties"]["name"]=encodeInput(document.getElementById(id).value);
-            setGameButtonTitle(selectedGame, game["properties"]["name"]);
-            return game["properties"]["name"];
+            game["properties"]["title"]=encodeInput(document.getElementById(id).value);
+            setGameButtonTitle(selectedGame, game["properties"]["title"]);
+            return game["properties"]["title"];
         case 'description':
             return game["properties"]["description"]=encodeInput(document.getElementById(id).value);
         case 'min':
@@ -198,7 +215,7 @@ function saveData(property, id) {
                 document.getElementById(id).value=maxVal;
                 return game["properties"]["volume"]=maxVal;
             }
-        case 'duration':
+        case 'contentElementDuration':
             maxVal=599;
             minVal=60;
             val=encodeInput(document.getElementById(id).value);
@@ -294,7 +311,7 @@ function GameObject() {
     let index=nextFileIndex;
     this.id=nextFileIndex;
     this.properties={
-        name: "Mäng "+String(name),
+        title: "Mäng "+String(name),
         duration: 60,
         description: "",
         players: {
@@ -368,7 +385,7 @@ function createGameSettings(id) {
     <p><span id="c_mg2" class="checkbox checkbox-unchecked" onclick="toggleCheckbox('c_mg2')"></span>Tähelepanu test</p>
     <p><span id="c_mg3" class="checkbox checkbox-unchecked" onclick="toggleCheckbox('c_mg3')"></span>Ayy lmao</p>`;
 
-    document.getElementById("settings-name").value=file[getIndexFromId(selectedGame)]["properties"]["name"];
+    document.getElementById("settings-name").value=file[getIndexFromId(selectedGame)]["properties"]["title"];
     document.getElementById("settings-desc").value=file[getIndexFromId(selectedGame)]["properties"]["description"];
     document.getElementById("settings-players-min").value=file[getIndexFromId(selectedGame)]["properties"]["players"]["min"];
     document.getElementById("settings-players-max").value=file[getIndexFromId(selectedGame)]["properties"]["players"]["max"];
@@ -514,7 +531,7 @@ function moveDown(e_id) {
 function addGameButton(id) {
     document.getElementById("list-game-list").innerHTML+=`<div class="list-game-item list-game-button" id="list-game-item_`+String(id)+`">
     <div class="list-game-item-title" id="list-game-item-title_`+String(id)+`" onclick="selectGame(`+String(id)+`)">
-        <p id="list-game-item-title-p_`+String(id)+`">`+file[getIndexFromId(id)]["properties"]["name"]+`</p>
+        <p id="list-game-item-title-p_`+String(id)+`">`+file[getIndexFromId(id)]["properties"]["title"]+`</p>
     </div>
     <div class="list-game-item-interactable">
         <button onclick="deleteGame('`+String(id)+`')">

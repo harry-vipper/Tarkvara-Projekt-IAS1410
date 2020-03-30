@@ -42,49 +42,35 @@ function gameMenu_handler(context, style, controls, contentElementObject, localT
         float: left;
         width: 72px;
     
-        text-align: center;
         font-size: 1.5em;
+        font-family: 'Now light';padding: 0.55em 0.4em 0.25em 0.4em;height: 2em;width: 2em;text-align: center;
     }
     
     
     .`+UID+`game-game-menu-nr-selected{
         color: var(--`+UID+`_bgColorDarkest);
         background-color: var(--`+UID+`_fgColor);
-        
-        border: var(--`+UID+`_fgColor);
-        border-style: solid;
-        border-width: 15px 0 15px 0;
-        margin-right: 10px;
     }
     .`+UID+`game-game-menu-nr-not-selected{
         color: var(--`+UID+`_fgColor);
         background-color: var(--`+UID+`_bgColorDarkest);
-        
-        border: var(--`+UID+`_bgColorDarkest);
-        border-style: solid;
-        border-width: 15px 0 15px 0;
         margin-right: 10px;
     }
     .`+UID+`game-game-title{
         margin-left: 82px;
         font-size: 1.5em;
-    
+        padding: 0.55em 0.4em 0.25em 0.8em;
+        min-height: 2em;
+        font-weight: 200;
+        font-family: 'Raleway semibold';
     }
     .`+UID+`game-game-title-selected{
         color: var(--`+UID+`_bgColorDarkest);
         background-color: var(--`+UID+`_fgColor);
-        
-        border: var(--`+UID+`_fgColor);
-        border-style: solid;
-        border-width: 15px;
     }
     .`+UID+`game-game-title-not-selected{
         color: var(--`+UID+`_fgColor);
         background-color: var(--`+UID+`_bgColorDarkest);
-        
-        border: var(--`+UID+`_bgColorDarkest);
-        border-style: solid;
-        border-width: 15px;
     }
     .`+UID+`game-game-menu-head{
         margin: auto;
@@ -120,6 +106,8 @@ function gameMenu_handler(context, style, controls, contentElementObject, localT
         width:80%;
         margin: auto;
         overflow: hidden;
+        padding: 1em;
+        font-family: 'Now Light';
     }
     .`+UID+`description-right{
         height:100%;
@@ -142,9 +130,9 @@ function gameMenu_handler(context, style, controls, contentElementObject, localT
     screenElement.setAttribute("id",UID+"body-wrapper");
 
     let content=`<div class="`+UID+`body-main-div" id="`+UID+`bodyMainDiv">
-    <div class="`+UID+`game-game-menu-title" id="`+UID+`MainHeader">
+    <!--<div class="`+UID+`game-game-menu-title" id="`+UID+`MainHeader">
     <h1>Mänguvalik</h1>
-    </div></div>
+    </div></div>-->
     `; 
 
     screenElement.innerHTML=content;

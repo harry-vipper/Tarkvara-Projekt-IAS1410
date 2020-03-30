@@ -32,6 +32,9 @@ function save_handler(context, style, controls, contentElementObject, localTimer
         overflow: hidden;
         margin: 0;
     }
+    .`+UID+`game-save-menu-title h1{
+        margin: 1em 0 2em 0;
+    }
     .`+UID+`game-save-menu-title{
         color: var(--`+UID+`_fgColor);
         margin: auto;
@@ -42,18 +45,11 @@ function save_handler(context, style, controls, contentElementObject, localTimer
     .`+UID+`game-save-menu-head-selected{
         color: var(--`+UID+`_bgColorDarkest);
         background-color: var(--`+UID+`_fgColor);
-        
-        border: var(--`+UID+`_fgColor);
-        border-style: solid;
-        border-width: 15px 0 15px 0;
     }
     .`+UID+`game-save-menu-head-not-selected{
         color: var(--`+UID+`_fgColor);
         background-color: var(--`+UID+`_bgColorDarkest);
         
-        border: var(--`+UID+`_bgColorDarkest);
-        border-style: solid;
-        border-width: 15px 0 15px 0;
     }
     .`+UID+`game-save-menu-head{
         margin: auto;
@@ -62,6 +58,10 @@ function save_handler(context, style, controls, contentElementObject, localTimer
         margin-block-start: 1em;
         margin-block-end: 1em;
         font-size: 1.5em;
+        padding: 0.5em;
+        box-sizing: border-box;
+        transition: background 0.1s ease-in-out, color 0.2s ease-in-out;
+        
     }
     .`+UID+`game-save-menu-head h2{
         margin-block-start: 0;
@@ -88,6 +88,8 @@ function save_handler(context, style, controls, contentElementObject, localTimer
         width:80%;
         margin: auto;
         overflow: hidden;
+        padding: 2em 0 3em 0;
+        box-sizing: border-box;
     }
     `;
     var screenElement=document.createElement("div");

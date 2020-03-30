@@ -54,22 +54,20 @@ function question_handler(context, style, controls, contentElementObject, localT
         width: 70%;
         margin: auto;
         font-size: 1.5em;
+        padding: 1em;
+        box-sizing: border-box;
     
     }
     .`+UID+`game-contentElements-nr{
         color: var(--`+UID+`_bgColorDarkest);
         background-color: var(--`+UID+`_fgColor);
         float: left;
-        width: 72px;
     
         text-align: center;
         
         font-size: 1.5em;
     
-        border: var(--`+UID+`_fgColor);
-        border-style: solid;
-        border-width: 15px 0 15px 0;
-        margin-right: 10px;
+        font-size: 1.5em;font-family: 'Now light';padding: 0.55em 0.4em 0.25em 0.4em;height: 2em;width: 2em;text-align: center;
     }
     .`+UID+`game-contentElements-type{
         color:var(--`+UID+`_bgColorDarkest);
@@ -79,9 +77,10 @@ function question_handler(context, style, controls, contentElementObject, localT
     
         font-size: 1.5em;
     
-        border: var(--`+UID+`_fgColor);
-        border-style: solid;
-        border-width: 15px;
+        padding: 0.55em 0.4em 0.25em 0.8em;
+        height: 2em;
+        font-weight: 200;
+        font-family: 'Raleway semibold';
     }
     .`+UID+`game-contentElements-type h2{
         margin-block-start: 0;
@@ -93,6 +92,7 @@ function question_handler(context, style, controls, contentElementObject, localT
     }
     .`+UID+`timer {
         float: right;
+        font-family: 'Roboto';
     }
     `;
 
