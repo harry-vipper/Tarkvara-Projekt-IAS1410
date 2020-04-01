@@ -3,11 +3,11 @@ var controls={
         listenerActive:false,
         linkId:0,
         bind:{
-            up: 'w',
-            down: 's',
-            left: 'a',
-            right: 'd',
-            confirm: 'x' 
+            up: ['w', '8'],
+            down: ['s', '2'],
+            left: ['a', '4'],
+            right: ['d', '6'],
+            confirm: ['x', '5']
         },
         link:{
            up:[],
@@ -57,7 +57,14 @@ var controls={
         },
         
         set: function(selectedKey,keyDuration,keyAction,keyDescription){
-            var keyBinds=[controls.key.bind.up,controls.key.bind.down,controls.key.bind.left,controls.key.bind.right,controls.key.bind.confirm];
+            keyDescription.toUpperCase();
+            var keyBinds = [
+                controls.key.bind.up, 
+                controls.key.bind.down, 
+                controls.key.bind.left,
+                controls.key.bind.right, 
+                controls.key.bind.confirm
+            ];
             this.linkId++;
             if(!controls.key.listenerActive){
                 document.addEventListener('keydown',keyDownFunction);
@@ -82,44 +89,56 @@ var controls={
             }
 
             function findAction(pressDuration){
-                if(keyBinds.includes(event.key,0)){
-                    find:
-                    for(i=0;i<5;i++){
-                        if (event.key === keyBinds[i]){
-                            var values=Object.values(controls.key.link);
-                            if(values[i].length!==0){
-                                var keyDurations=[];
-                                for(j=0;j<values[i].length;j++){
-                                    keyDurations[j]=values[i][j].duration;
-                                }
-                                keyDurations.push(86400000);
-                                keyDurations.sort(function(a, b){return a-b});
-                                for(j=0;j<keyDurations.length;j++){
-                                    if(keyDurations[j]>pressDuration){
-                                        if(j===0) break find;
-                                        else{ 
-                                            for(k=0;k<keyDurations.length;k++){
-                                                if(keyDurations[j-1]===values[i][k].duration){
-                                                    values[i][k].action(pressDuration);
+                let keyTarget=undefined;
+                let ct=0;
+                for(ct; ct<keyBinds.length;ct++){
+                    if(keyBinds[ct].includes(event.key,0)) {
+                        keyTarget=ct;
+                        break;
+                    }
+                };
+                if(keyTarget!=undefined){
+                    var values=Object.values(controls.key.link);
+                    var i=keyTarget;
+                    if(values[i].length!==0){
+                        //Create array of set key functions' required keypress durations, to compare later
+                        var keyDurations=[];
+                        for(j=0;j<values[i].length;j++){
+                            keyDurations[j]=values[i][j].duration;
+                        }
+                        //Add a 24hr limit
+                        keyDurations.push(86400000);
 
-                                                    break find;
-                                                }
-                                            }
+                        //Sort it from from smaller to larger
+                        keyDurations.sort(function(a, b){return a-b});
+
+                        //Go over every keypress event
+                        for(j=0;j<keyDurations.length;j++){
+
+                            //If the currently pressed key duration is under the specified duration if the selected event
+                            if(keyDurations[j]>pressDuration){
+                                if(j===0) return false; //This was less than the first element, so no action should be taken
+                                
+                                else{ 
+                                    for(k=0;k<keyDurations.length;k++){
+                                        if(keyDurations[j-1]===values[i][k].duration){
+                                            values[i][k].action(pressDuration);
+                                            return true;
                                         }
                                     }
                                 }
                             }
                         }
+                        return false;
                     }
                 }
             }
+            
             if(keyDescription===false){return this.linkId;}
             else{
-                footerUISVG(keyDescription,selectedKey);
+                //footerUISVG(keyDescription,selectedKey);
                 return this.linkId;
             }
         }
-    
     }
-
 }

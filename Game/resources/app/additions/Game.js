@@ -1,7 +1,3 @@
-const DEBUG=true;
-const fs = require("fs");
-const path = require("path");
-
 var screens = [
     {
         screenObject: {
@@ -9,8 +5,8 @@ var screens = [
             initialiser: task_handler, //(divObject,)
             contentElementObject:{
                 str:"Task1 sisu mida iganes"
-            },//Jupp JSONist ainult mis vaja on kuidas see siia saada veel vaatab
-            settings: {//tühi, need täidab mingi funktsioon startupil
+            },
+            settings: {
                 colors: color,
                 duration: 180,
                 jne:0
@@ -121,31 +117,7 @@ var i,j,k,l;
 
 var savefile;
 
-function notify(str, typestr) {
-	var typeColors={
-		"draw": {
-			"c":"#fff",
-			"b":"#00dc72"
-		},
-		"update": {
-			"c":"#fff",
-			"b":"#8300dc"
-		},
-		"function": {
-			"c":"#fff",
-			"b":"#b1034b"
-		}
-	};
-	if(DEBUG==true) {
-		if(typeColors[typestr]!=undefined) {
-			console.log('%c '+typestr+" %c  "+str, 'background:'+typeColors[typestr]["b"]+'; color:'+typeColors[typestr]["c"]+";", "" );
-		}
-		else {
-			console.log(str);
-		}
-		
-	}
-}
+
 
 function gameOrderer(){
     var nrOfContentElements=game.content[savefile.gameData.selectedGame].contentElements.length;  
@@ -186,16 +158,14 @@ function gameOrderer(){
 }
 
 function shuffle(array) {
-    var currentIndex = array.length, temporaryValue, randomIndex;
-
-    while (0 !== currentIndex) {                   
-        randomIndex = Math.floor(Math.random() * currentIndex);
-        currentIndex -= 1;                   
-        temporaryValue = array[currentIndex];
-        array[currentIndex] = array[randomIndex];
-        array[randomIndex] = temporaryValue;
+    var current=array.length, temp, random;
+    while (0 !== current) {                   
+        random = Math.floor(Math.random() * current);
+        current --;                   
+        temp = array[current];
+        array[current] = array[random];
+        array[random] = temp;
     }
-
     return array;
 }
 
@@ -217,7 +187,7 @@ function startTimer(duration,timerLocationId,onTimeout,whatNext,localTimerIds) {
         }, 10));
 }
 
-function UIDgenerator(){
+/*function UIDgenerator(){
     let UID="id"
     var char='abcdefghijklmnopqrstuvwxyz0123456789';
    for (i = 0; i < 7; i++) {
@@ -225,36 +195,20 @@ function UIDgenerator(){
    }
     return UID;
 }
-
+*/
 function startup(){
-    savefileLoader(); 
+    /*savefileLoader(); 
     gamefileLoader();
     footerColors();
     if(savefile.gameData.state===2){
         nextScreen("save");
     }
-    else exitScreen("gameMenu");
+    else exitScreen("gameMenu");*/
 }
 
-function savefileSaver(){
-    let strFile=JSON.stringify(savefile,null,1);
-    let savepath = path.join(__dirname, 'savefile.JSON');
-    fs.writeFileSync(savepath, strFile, function (err){if(DEBUG)notify("Save ERROR","function")});
-}
 
-function savefileLoader(){
-    let savepath = path.join(__dirname, 'savefile.JSON');
-    let loadFile = fs.readFileSync(savepath);
-    savefile=JSON.parse(loadFile);
-}
 
-function gamefileLoader(){
-    let gamepath = path.join(__dirname, 'gamefile.JSON');
-    let loadFile = fs.readFileSync(gamepath);
-    game=JSON.parse(loadFile);
-}
-
-function footerColors(){
+function footerColors(){//Sets footer color variables in STYLE 
     let screenSettings={colors:color};
     screenSettings["colors"].bgcolor=new screenSettings["colors"].Color100(savefile.settings.color.background[0],savefile.settings.color.background[1],savefile.settings.color.background[2]);
     screenSettings["colors"].fgcolor=new screenSettings["colors"].Color100(savefile.settings.color.foreground[0],savefile.settings.color.foreground[1],savefile.settings.color.foreground[2]);
@@ -265,6 +219,11 @@ function footerColors(){
     document.documentElement.style.setProperty("--dullColor",screenSettings.colors.css(palette.bg.dull));
     document.documentElement.style.setProperty("--secondaryColor",screenSettings.colors.css(palette.bg.darkest));
 }
+
+
+
+
+
 
 function nextScreen(nextType) {
     var UID=UIDgenerator();
@@ -288,6 +247,7 @@ function getScreenObjectFromType(nextType){
 
 function screenObjectFiller(nextType,UID){
     if(DEBUG){
+       // debugger;
         console.log(nextType);
         console.log(savefile.gameData.state);
     }
@@ -356,7 +316,7 @@ function nextTypeFinder(){
     return type;
 }
 
-function MenuSetState(elementId,state,selected,notSelected) {
+/*function MenuSetState(elementId,state,selected,notSelected) {
     var element = document.getElementById(elementId);
     if (state=="selected") {
         element.classList.remove(notSelected);
@@ -366,7 +326,7 @@ function MenuSetState(elementId,state,selected,notSelected) {
         element.classList.remove(selected);
         element.classList.add(notSelected);
     }
-}
+}*/
 
 function minigame_handler(context, style, controls, contentElementObject, localTimerIds, screenSettings,gameData,settings,UID) {
     if(gameData.gameOrder[gameData.currentQuestion]===-1){
@@ -413,26 +373,8 @@ function footerUISVG(description,key){
         "</h3></a>";
 }
 
-function clearTimers(localTimerIds){
-    for(i=0;i<localTimerIds.length;i++){
-        clearInterval(localTimerIds[i])
-    }
-    localTimerIds.length=0;
-}
 
-function clearStyle(){
-    document.getElementById("styleId").innerHTML="";
-}
-
-function clearFooter(){
-    document.getElementById("footerId").innerHTML="";
-}
-
-function clearBody(){
-    document.getElementById("bodyId").innerHTML="";
-}
-
-function reloadFooter(){
+/*function reloadFooter(){
     for(i=0;i<controls.key.link.up.length;i++){
         footerUISVG(controls.key.link.up[i].description,"up");
     }
@@ -448,7 +390,7 @@ function reloadFooter(){
     for(i=0;i<controls.key.link.confirm.length;i++){
         footerUISVG(controls.key.link.confirm[i].description,"confirm");
     }
-}
+}*/
 
 function logicController(whatNext){
     if(whatNext==="gameMenu"){
@@ -487,14 +429,7 @@ function logicController(whatNext){
     savefileSaver();
 }
 
-function exitScreen(whatNext) {
-    clearTimers(localTimerIds);
-    controls.key.clear.byKey("all");
-    clearFooter();
-    clearStyle()
-    clearBody();
-    logicController(whatNext);
-}
+
 
 //window.requestAnimationFrame(function (){logicController(whatNext)});
 //setTimeout(function(){logicController(whatNext);},0);

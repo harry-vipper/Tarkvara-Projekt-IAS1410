@@ -1,0 +1,129 @@
+#UID_menulistContainer {
+    width: 80%;
+    margin: auto;
+    height: auto;
+    position: relative;
+    padding: 5% 0;
+}
+
+.UID_menulistItem {
+    width: 100%;
+    position: relative;
+}
+
+.UID_menulistHeader {
+    width: 100%;
+    position: relative;
+    min-height: 4em;
+    display: grid;
+    grid-column-gap: 1em;
+    grid-template-columns: min-content auto;
+    margin: 1em 0;
+}
+
+.UID_menulistHeaderNumber {
+    background: var(--fgColor-normal);
+    height: 100%;
+    position: relative;
+    min-width: 4em;
+    width: min-content;
+    color: var(--bgColor-dark);
+    font-size: 1.4em;
+    padding: 0.3em 0.5em 0 0.5em;
+    /* margin-inline-end: 0; */
+    /* margin-inline-start: 0; */
+    /* margin-block-end: 0; */
+    margin-block-start: 0;
+}
+
+.UID_menulistHeaderTitle {
+    background: var(--fgColor-normal);
+}
+
+.UID_menulistDescriptionBackground {
+    width: 200%;
+    position: relative;
+    left: -50%;
+    padding: 0 50%;
+    background: var(--bgColor-darkest);
+    clear: both;
+}
+
+.UID_menulistDescription {
+    width: 50%;
+    display: grid;
+    padding: 1em 0;
+    margin: 0;
+    grid-template-columns: 60% auto;
+    grid-column-gap: 1em;
+}
+
+.UID_menulistDescriptionText {
+    /* background: #ff000026; */
+    color: var(--fgColor-normal);
+    font-size: 1.7em;
+    font-weight: 300;
+    margin: 0;
+}
+
+.UID_menulistDescriptionPropertiesElement {
+    width: 100%;
+    min-height: 4em;
+    display: grid;
+    grid-template-columns: 4em auto;
+}
+
+.UID_menulistDescriptionProperties {
+    position: relative;
+    margin: 0;
+}
+
+.UID_menulistDescriptionPropertiesElementIcon {
+    height: 4em;
+    width: 4em;
+    background: var(--fgColor-normal);
+}
+
+.UID_menulistDescriptionPropertiesElementValue {
+    color: var(--fgColor-normal);
+    font-size: 3.3em;
+    font-weight: 300;
+}
+
+.UID_menulistDescriptionPropertiesElementValue p {
+    margin: 0 0.3em;
+}
+
+span.UID_menulistDescriptionPropertiesElementValue-small {
+    font-size: 0.6em;
+    padding: 0 0.2em;
+}
+
+.UID_menulistDescriptionText p {
+    margin: 0;
+}
+
+.UID_menulistHeaderNumber p {
+    margin: 0;
+    padding: 0;
+    font-size: 2em;
+    font-family: 'Now Light';
+    text-align: center;
+    width: min-content;
+    display: inline;
+    margin-inline-end: 0;
+    margin-inline-start: 0;
+    margin-block-end: 0;
+    margin-block-start: 0;
+}
+
+.UID_menulistHeaderTitle {
+    color: var(--bgColor-dark);
+    font-family: 'Raleway';
+    font-weight: 700;
+    font-size: 2.6em;
+}
+
+.UID_menulistHeaderTitle p {
+    margin: 0.18em 0.3em;
+}

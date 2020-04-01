@@ -1,0 +1,92 @@
+:root {
+    --fgColor-dull: #a9a54c;
+    --fgColor-darkest: #727029;
+    --fgColor-dark: #afaa2c;
+    --fgColor-normal: #fff40c;
+    --fgColor-bright: #fffcb0;
+    --fgColor-brightest: #fffba2;
+    --fgColor-bloom: #fff40c;
+    --bgColor-dull: #b0b0b0;
+    --bgColor-darkest: #1c2228;
+    --bgColor-dark: #2f3943;
+    --bgColor-normal: #394551;
+    --bgColor-bright: #73889d;
+    --bgColor-brightest: #73889d;
+    --bgColor-bloom: #394551;
+
+    --footerColor: var(--fgColor-normal);
+}
+.r_hidden {
+    display: none !important;
+}
+.r_invis {
+    opacity: 0 !important;
+}
+.r_invisCapable {
+    /*opacity: 1;*/
+    transition: opacity 0.3s ease-in-out;
+}
+div#screenContainer {
+    width: 1024px;
+    height: 1024px;
+    position: relative;
+    margin: auto;
+    background: var(--bgColor-dark);
+    /* overflow-y: hidden; */
+    overflow-x: visible;
+}
+body {
+    background: #844343;
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto';
+    color: white;
+    height: 1024px;
+    width: 1280px;
+    overflow: hidden;
+}
+
+
+
+#footer {
+    background: fixed;
+    position: absolute;
+    bottom: 0;
+    height: 5em;
+    width: 100%;
+    background: var(--bgColor-normal);
+}
+
+.footerElementGroup {
+    height: 4em;
+    margin: auto;
+}
+
+.footerElementGroupTitle {
+    font-size: 3em;
+    float: left;
+    font-family: 'Now';
+    padding: 0.3em;
+    color: var(--footerColor);
+}
+
+.footerElementGroup p {
+    margin: 0;
+}
+
+.footerElement {
+    font-size: 3em;
+    float: left;
+    font-family: 'Now';
+    padding: 0.3em;
+    display: grid;
+    grid-template-columns: 1.1em auto;
+    grid-column-gap: 0.2em;
+    color: var(--footerColor);
+}
+
+.footerElementIcon {
+    width: 1.1em;
+    height: 1.1em;
+    background: #ff00004a;
+}

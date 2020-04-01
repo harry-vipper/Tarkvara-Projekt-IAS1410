@@ -1,0 +1,10 @@
+Kalev
+HTML näidised (mängu alguse splash, splash, task-question, load-old-game, game-end, settings)
+CSS nende juurde
+
+
+Harry
+Kui HTML näidised valmis, siis Task ja Question screenid
+colors
+monitor
+
