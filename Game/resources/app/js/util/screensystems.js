@@ -72,6 +72,14 @@ system={
         },
         loadResource: function(URI) {
             return fs.promises.readFile(path.join(__dirname, URI), {encoding: 'UTF-8'});
+        },
+        loadCSStoDOM: function(id, URI) {
+            let link=document.createElement('link');
+            link.setAttribute("rel", "stylesheet");
+            link.setAttribute("type", "text/css");
+            link.setAttribute("href", URI);
+            link.setAttribute("id", id);
+            document.getElementsByTagName('head')[0].appendChild(link)
         }
         /*launch: function() {
 

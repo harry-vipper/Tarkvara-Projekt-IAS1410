@@ -35,22 +35,29 @@ screen_gameSelectionMenu={
                 element.classList.add("r_invis");
                 return (delay(this.fadeTime, localTimerIds));
             }
+        },
+        render.footer={
+
         }
+        render.forceRedraw=function(element) {
+            element.offsetHeight;
+        },
         render.menuEntry={
             //listEntry
             create: function(instance) {
                 let container=document.createElement('div');
                 container.classList.add(render.strUID("UID_menulistItem"))
+                container.setAttribute("id", "_"+instance.index+"_UID_element");
                 let str=`
                     <div class="UID_menulistHeader">
-                        <div id="`+instance.index+`_UID_header_index" class="UID_menulistHeaderNumber">
+                        <div id="_`+instance.index+`_UID_header_index" class="UID_menulistHeaderNumber">
                             <p>`+(instance.index+1)+`</p>
                         </div>
-                        <div id="`+instance.index+`_UID_header_title" class="UID_menulistHeaderTitle">
-                            <p>`+instance.properties.title+`</p>
+                        <div id="_`+instance.index+`_UID_header_title" class="UID_menulistHeaderTitle">
+                            <p>`+instance.properties.title.toUpperCase()+`</p>
                         </div>
                     </div>
-                    <div id="`+instance.index+`_UID_header_description" class="UID_menulistDescriptionBackground r_hidden">
+                    <div id="_`+instance.index+`_UID_header_description" class="UID_menulistDescriptionBackground r_hidden">
                         <div class="UID_menulistDescription">
                             <div class="UID_menulistDescriptionText">
                                 <p>`+instance.properties.description+`</p>
@@ -64,8 +71,34 @@ screen_gameSelectionMenu={
                                         <p>`+instance.properties.duration+`<span class="UID_menulistDescriptionPropertiesElementValue-small">min</span></span></p>
                                     </div>
                                 </div>
+                                <div class="UID_menulistDescriptionPropertiesElement">
+                                    <div class="UID_menulistDescriptionPropertiesElementIcon">
+                                        <svg></svg>
+                                    </div>
+                                    <div class="UID_menulistDescriptionPropertiesElementValue">
+                                        <p>`+instance.properties.players.min+"-"+instance.properties.players.max+`</p>
+                                    </div>
+                                </div>
+                                <div class="UID_menulistDescriptionPropertiesElement">
+                                    <div class="UID_menulistDescriptionPropertiesElementIcon">
+                                        <svg></svg>
+                                    </div>
+                                    <div class="UID_menulistDescriptionPropertiesElementValue">
+                                        <p>`+instance.properties.volume+`<span class="UID_menulistDescriptionPropertiesElementValue-small">%</span></span></p>
+                                    </div>
+                                </div>
+                                <div class="UID_menulistDescriptionPropertiesElement">
+                                    <div class="UID_menulistDescriptionPropertiesElementIcon">
+                                        <svg></svg>
+                                    </div>
+                                    <div class="UID_menulistDescriptionPropertiesElementValue">
+                                        <p>`+instance.properties.condition+`<span class="UID_menulistDescriptionPropertiesElementValue-small">%</span></span></p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
+                    </div>
+                    <div id="_`+instance.index+`_UID_element_after" class="UID_element_after"></div>
                 `;
                 str.split("UID").join(UID);
                 container.innerHTML=str;
@@ -73,24 +106,28 @@ screen_gameSelectionMenu={
             },
             activate: function(index) {
                 index=String(index);
-                document.getElementById(index+render.strUID("_UID_header_index")).classList.add(render.strUID("UID_menulistHeaderActive"));
-                document.getElementById(index+render.strUID("_UID_header_title")).classList.add(render.strUID("UID_menulistHeaderActive"));
-                document.getElementById(index+render.strUID("_UID_header_description")).classList.remove(render.strUID("r_hidden"));
+                document.getElementById("_"+index+render.strUID("_UID_header_index")).classList.add(render.strUID("UID_menulistHeaderActive"));
+                document.getElementById("_"+index+render.strUID("_UID_header_title")).classList.add(render.strUID("UID_menulistHeaderActive"));
+                document.getElementById("_"+index+render.strUID("_UID_header_description")).classList.remove(render.strUID("r_hidden"));
             },
             deactivate: function(index) {
                 index=String(index);
-                console.log(index+render.strUID("_UID_header_index"));
-                document.getElementById(index+render.strUID("_UID_header_index")).classList.remove(render.strUID("UID_menulistHeaderActive"));
-                document.getElementById(index+render.strUID("_UID_header_title")).classList.remove(render.strUID("UID_menulistHeaderActive"));
-                document.getElementById(index+render.strUID("_UID_header_description")).classList.add(render.strUID("r_hidden"));
+                document.getElementById("_"+index+render.strUID("_UID_header_index")).classList.remove(render.strUID("UID_menulistHeaderActive"));
+                document.getElementById("_"+index+render.strUID("_UID_header_title")).classList.remove(render.strUID("UID_menulistHeaderActive"));
+                document.getElementById("_"+index+render.strUID("_UID_header_description")).classList.add(render.strUID("r_hidden"));
             }
         },
         system.screen.loadResource("/resources/css/gameSelectionMenu.css").then(
             (css)=>{
                 //Render
 
-
-                style.innerHTML=css;
+                if(fileCSS) {
+                    system.screen.loadCSStoDOM("placeHolderDOMCSS", "resources/css/gameSelectionMenu.css");
+                }
+                else{
+                    style.innerHTML=css;
+                }
+                
                 
                 //Create list
                 let menuListContainer=document.createElement('div');
@@ -112,6 +149,7 @@ screen_gameSelectionMenu={
                     controls.key.set('up', 0, /**/()=>{selectGame('-');}, "Eelmine");
                     controls.key.set('down', 0, /**/()=>{selectGame('+');}, "Järgmine");
                     controls.key.set('confirm', 0, /**/()=>{}, "Alusta");
+                    const scroller = new SweetScroll();
                     
                     function selectGame(direction) {
                         render.menuEntry.deactivate(screenContent.savefile.content.gameData.selectedGame);
@@ -120,7 +158,16 @@ screen_gameSelectionMenu={
                             screenContent.savefile.content.gameData.selectedGame, 
                             screenContent.gamefile.content.content.length
                         );
+                        //document.getElementById(screenContent.savefile.content.gameData.selectedGame+render.strUID("_UID_header_title")).scrollIntoView();
+                        
+                        let elementId="_"+screenContent.savefile.content.gameData.selectedGame+render.strUID("_UID_element");
+                        
+                        
                         render.menuEntry.activate(screenContent.savefile.content.gameData.selectedGame);
+                        scroller.to(
+                            ("#"+elementId)
+                        )
+                        //render.forceRedraw(document.getElementById(render.strUID("UID_menulistContainer")));
                     }
                     function calcNextIndex(direction, data, size) {
                         if(direction==='+') {
@@ -145,8 +192,9 @@ screen_gameSelectionMenu={
         
         
         /*scroll:{
-
-        }
+            var offsetHeight = document.getElementById('myDiv').offsetHeight;
+            document.getElementById(UID+"bodyMainDiv").style.top="-100px";
+        } 
 
         */
         

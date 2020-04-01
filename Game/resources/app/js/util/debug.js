@@ -1,4 +1,5 @@
 const DEBUG=true;
+const fileCSS=true;
 function notify(str, typestr) {
 	var typeColors={
 		"draw": {
@@ -12,6 +13,10 @@ function notify(str, typestr) {
 		"function": {
 			"c":"#fff",
 			"b":"#b1034b"
+		},
+		"controls": {
+			"c":"#2f3943",
+			"b":"#fff40c"
 		}
 	};
 	if(DEBUG==true) {
@@ -23,4 +28,10 @@ function notify(str, typestr) {
 		}
 		
 	}
+}
+if (DEBUG) {
+    /*debugger;
+    //electron.BrowserWindow.getCurrentWindow
+    debugger;
+    mainWindow.webContents.openDevTools()*/
 }

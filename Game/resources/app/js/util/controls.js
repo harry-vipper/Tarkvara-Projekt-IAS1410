@@ -80,11 +80,10 @@ var controls={
             }
 
             function keyUpFunction(event){
-                notify(event.key, "update");
                 if ( !whichKey[event.key] ) return;
                 var pressDuration = event.timeStamp - whichKey[event.key];
                 whichKey[event.key] = 0;
-                notify(pressDuration, "update");
+                notify("Pressed "+event.key+" for "+Math.floor(pressDuration)+"ms", "controls");
                 findAction(pressDuration);
             }
 
