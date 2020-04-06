@@ -24,24 +24,7 @@ screen_gameSelectionMenu={
     {
         render.strUID=function(str) {
             return str.split("UID").join(UID);
-        };
-        render.fade={
-            fadeTime:300,
-            in: function(element) {
-                element.classList.remove("r_invis");
-                return (delay(this.fadeTime, localTimerIds));
-            },
-            out: function(element) {
-                element.classList.add("r_invis");
-                return (delay(this.fadeTime, localTimerIds));
-            }
-        },
-        render.footer={
-
-        }
-        render.forceRedraw=function(element) {
-            element.offsetHeight;
-        },
+          };
         render.menuEntry={
             //listEntry
             create: function(instance) {

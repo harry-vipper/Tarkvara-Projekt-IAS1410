@@ -1,24 +1,19 @@
-#UID_menulistContainer {
+#UID_elementContainer {
     width: 80%;
     margin: auto;
     /* height: auto; */
     position: relative;
     padding: 5% 0;
 }
-.UID_menulistItem::after {
-    /* display: block; */
-    /* content: ""; */
-    height: 1px;
-}
-.UID_menulistHeaderActive {
+.UID_listHeaderActive {
     background: var(--fgColor-normal);
 }
-.UID_menulistItem {
+.UID_listItem {
     width: 100%;
     position: relative;
 }
 
-.UID_menulistHeader {
+.UID_listHeader {
     width: 100%;
     position: relative;
     min-height: 4em;
@@ -28,7 +23,7 @@
     margin: 1em 0;
 }
 
-.UID_menulistHeaderNumber {
+.UID_listHeaderNumber {
     background: var(--bgColor-normal);
     height: 100%;
     position: relative;
@@ -41,7 +36,7 @@
     display: table;
 }
 
-.UID_menulistHeaderTitle {
+.UID_listHeaderTitle {
     background: var(--bgColor-normal);
     color: var(--fgColor-normal);
     font-family: 'Raleway';
@@ -49,21 +44,22 @@
     font-size: 2.6em;
     font-family: 'Roboto';
 }
-.UID_menulistHeaderActive {
+.UID_listHeaderActive {
     background: var(--fgColor-normal)!important;
     color: var(--bgColor-dark)!important;
     transition: background 0.1s ease-in-out;
 }
-.UID_menulistDescriptionBackground {
+.UID_listDescriptionBackground {
     width: 200%;
     position: relative;
     left: -50%;
     padding: 0 50%;
     background: var(--bgColor-darkest);
     clear: both;
+    min-height: 40em;
 }
 
-.UID_menulistDescription {
+.UID_listDescription {
     width: 50%;
     display: grid;
     padding: 1em 0;
@@ -72,7 +68,7 @@
     grid-column-gap: 1em;
 }
 
-.UID_menulistDescriptionText {
+.UID_listDescriptionText {
     /* background: #ff000026; */
     color: var(--fgColor-normal);
     font-size: 1.7em;
@@ -80,7 +76,7 @@
     margin: 0;
 }
 
-.UID_menulistDescriptionPropertiesElement {
+.UID_listDescriptionPropertiesElement {
     width: 100%;
     min-height: 4em;
     display: grid;
@@ -88,37 +84,18 @@
     margin: 0.5em 0;
 }
 
-.UID_menulistDescriptionProperties {
+.UID_listDescriptionTimer {
     position: relative;
     margin: 0;
+    bottom: 0;
 }
 
-.UID_menulistDescriptionPropertiesElementIcon {
-    height: 4em;
-    width: 4em;
-    background: var(--fgColor-normal);
-}
 
-.UID_menulistDescriptionPropertiesElementValue {
-    color: var(--fgColor-normal);
-    font-size: 3.3em;
-    font-weight: 300;
-}
-
-.UID_menulistDescriptionPropertiesElementValue p {
-    margin: 0 0.3em;
-}
-
-span.UID_menulistDescriptionPropertiesElementValue-small {
-    font-size: 0.6em;
-    padding: 0 0.2em;
-}
-
-.UID_menulistDescriptionText p {
+.UID_listDescriptionText p {
     margin: 0;
 }
 
-.UID_menulistHeaderNumber p {
+.UID_listHeaderNumber p {
     margin: 0;
     padding: 0;
     font-size: 2em;
@@ -136,7 +113,7 @@ span.UID_menulistDescriptionPropertiesElementValue-small {
     position: relative;
 }
 
-.UID_menulistHeaderTitle p {
+.UID_listHeaderTitle p {
     margin: 0.18em 0.3em;
 }
 

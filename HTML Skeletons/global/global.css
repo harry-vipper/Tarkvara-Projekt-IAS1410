@@ -16,31 +16,43 @@
 
     --footerColor: var(--fgColor-normal);
 }
+.r_hidden {
+    /*height: 0 !important;*/
+    display: none !important;
+}
+.r_invis {
+    opacity: 0 !important;
+}
+.r_invisCapable {
+    /*opacity: 1;*/
+    transition: opacity 0.3s ease-in-out;
+}
 div#screenContainer {
     width: 1024px;
-    height: 1024px;
+    /* min-height: 1024px; */
     position: relative;
     margin: auto;
     background: var(--bgColor-dark);
     /* overflow-y: hidden; */
-    overflow-x: visible;
+    /* overflow-x: visible; */
+    padding: 0 0 5em 0;
 }
 body {
     background: #844343;
+    background: var(--bgColor-dark);
     margin: 0;
     padding: 0;
     font-family: 'Roboto';
     color: white;
-    height: 1024px;
-    width: 1280px;
+    min-height: 1024px;
+    /* width: 1280px; */
     overflow: hidden;
 }
 
 
 
 #footer {
-    background: fixed;
-    position: absolute;
+    position: fixed;
     bottom: 0;
     height: 5em;
     width: 100%;
