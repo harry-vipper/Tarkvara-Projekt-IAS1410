@@ -1,3 +1,4 @@
 var screens={
-    gameSelectionMenu: screen_gameSelectionMenu
+    gameSelectionMenu: screen_gameSelectionMenu,
+    splash:screen_splash,
 };

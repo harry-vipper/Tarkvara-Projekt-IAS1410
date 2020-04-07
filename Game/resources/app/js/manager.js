@@ -12,15 +12,21 @@ function startup() {
     localTimerIds,  Array of active timers
     screenSettings, settings like colors
     UID   
-    */
+    {
+            gamefile: file.gamefile,
+            savefile: file.savefile
+    }
 
-    screens.gameSelectionMenu.handler(
+    */
+    screens.splash.handler(
         document.getElementById("screenContainer"),
         document.getElementById("screenStyleContainer"),
         controls,
         {
-            gamefile: file.gamefile,
-            savefile: file.savefile
+            icon:0,
+            text:"MINGI TEXT",
+            movetime:900,
+            staytime:3000,
         },
         system.screen.timers.localTimerIds,
         system.settings,
