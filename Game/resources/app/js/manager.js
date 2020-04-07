@@ -23,7 +23,7 @@ function startup() {
         document.getElementById("screenStyleContainer"),
         controls,
         {
-            icon:0,
+            icon:"arrow",
             text:"MINGI TEXT",
             movetime:900,
             staytime:3000,

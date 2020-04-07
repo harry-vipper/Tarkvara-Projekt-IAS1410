@@ -23,14 +23,13 @@ screen_splash={
     {
     system.screen.loadResource("/resources/css/interSplash.css").then(
         (css)=>{
+            //Load style for splash
             if(fileCSS) {
                 system.screen.loadCSStoDOM("placeHolderDOMCSS", "resources/css/interSplash.css");
             }
             else{
                 style.innerHTML=css;
             }
-
-            let icon=this.findIcon(screenContent.icon)
 
             let str=`
                 <svg style="display: none" width="50.8mm" height="50.8mm" version="1.1" viewBox="0 0 50.8 50.8" preserveAspectRatio="xMinYMin meet" xmlns="http://www.w3.org/2000/svg">
@@ -56,75 +55,55 @@ screen_splash={
 
                 <div id="UID_splashContainer">
                     <div id="UID_splashbox_left" class="UID_splashbox UID_splashbox_left UID_splashbox_left-start">
-                        <div class="UID_splashbox_icon">`+icon+`</div>
+                        <div class="UID_splashbox_icon">
+                            <svg class="i" width="508mm" height="508mm" version="1.1" viewBox="0 0 50.8 50.8" preserveAspectRatio="xMinYMin meet">
+                                <use xlink:href="#i-trisign-`+screenContent.icon+`" />
+                            </svg>
+                        </div>
                     </div>
+
                     <div id="UID_splashbox_right" class="UID_splashbox UID_splashbox_right UID_splashbox_right-start">
                         <div class="UID_splashbox_text">
                             <p>`+screenContent.text+`</p>
                         </div>
                     </div>
                 </div>`;
-            str=str.split("UID").join(UID);
+
+            str=str.split("UID").join(UID);//Replace UID in str with correct UID
             context.innerHTML=str;
 
             return delay(screenContent.movetime,localTimerIds);
         
     }).then(()=>{
-                    
+                //Start box animation to move to the middle of the screen  
                 document.getElementById(UID+"_splashbox_left").classList.add(UID+"_splashbox_left-end");
                 document.getElementById(UID+"_splashbox_right").classList.add(UID+"_splashbox_right-end");
 
                 document.getElementById(UID+"_splashbox_left").classList.remove(UID+"_splashbox_left-start");
                 document.getElementById(UID+"_splashbox_right").classList.remove(UID+"_splashbox_right-start");
-                render.fade.in(context);
-                return delay(screenContent.movetime,localTimerIds);
+                render.fade.in(context); //Display boxes
+                return delay(screenContent.movetime,localTimerIds);//Wait for boxes to move to the middle of the screen
                 
     }).then(()=>{
         
-            console.log("Jõudis keskele");
-            return delay(screenContent.staytime,localTimerIds);
+            return delay(screenContent.staytime,localTimerIds);//Wait so user can read boxes
 
     }).then(()=>{
-
-            console.log("Hakkab ära minema")
+            //Start box animation to move off the screen  
             document.getElementById(UID+"_splashbox_left").classList.remove(UID+"_splashbox_left-end");
             document.getElementById(UID+"_splashbox_right").classList.remove(UID+"_splashbox_right-end");
 
             document.getElementById(UID+"_splashbox_left").classList.add(UID+"_splashbox_left-start");
             document.getElementById(UID+"_splashbox_right").classList.add(UID+"_splashbox_right-start");
-            return delay(screenContent.movetime,localTimerIds);                    
+            return delay(screenContent.movetime,localTimerIds); //Wait for boxes to move off the screen                   
 
     }).then(()=>{
-        
-            console.log("LÄBI");
+
+            //Mis pärast saab
 
     }).catch((error)=>{
         console.log("Error caught"+error)
-    })
+    });
     
-
-
-    },
-    findIcon: function(iconNr){
-        if(iconNr===0){
-            return `<svg class="i" width="508mm" height="508mm" version="1.1" viewBox="0 0 50.8 50.8" preserveAspectRatio="xMinYMin meet">
-                <use xlink:href="#i-trisign-exclamationmark" />
-            </svg>`;
-        }
-        else if(iconNr===1){
-            return `<svg class="i" width="508mm" height="508mm" version="1.1" viewBox="0 0 50.8 50.8" preserveAspectRatio="xMinYMin meet">
-                <use xlink:href="#i-trisign-bolt" />
-            </svg>`;
-        }
-        else if(iconNr===2){
-            return `<svg class="i" width="508mm" height="508mm" version="1.1" viewBox="0 0 50.8 50.8" preserveAspectRatio="xMinYMin meet">
-                <use xlink:href="#i-trisign-arrow" />
-            </svg>`;
-        }
-        else{
-            console.log("Icon not found");
-            return err;
-        }
     }
-
 }
