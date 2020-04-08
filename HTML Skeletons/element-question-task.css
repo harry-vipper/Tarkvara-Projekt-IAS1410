@@ -61,11 +61,11 @@
 
 .UID_listDescription {
     width: 50%;
-    display: grid;
+    /* display: grid; */
     padding: 1em 0;
     margin: 0;
-    grid-template-columns: 60% auto;
-    grid-column-gap: 1em;
+    /* grid-template-columns: 60% auto; */
+    /* grid-column-gap: 1em; */
 }
 
 .UID_listDescriptionText {
@@ -85,9 +85,10 @@
 }
 
 .UID_listDescriptionTimer {
-    position: relative;
+    position: absolute;
     margin: 0;
     bottom: 0;
+    right: 50%;
 }
 
 
@@ -119,4 +120,11 @@
 
 .UID_element_after {
     /* height: 1px; */
+}
+
+.UID_listDescriptionTimer p {
+    margin: 0;
+    font-size: 10em;
+    font-weight: 100;
+    color: var(--fgColor-normal);
 }
