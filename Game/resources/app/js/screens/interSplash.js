@@ -21,7 +21,7 @@ screen_splash={
     UID   
     */
     {
-    system.screen.loadResource("/resources/css/interSplash.css").then(
+    return system.screen.loadResource("/resources/css/interSplash.css").then(
         (css)=>{
             //Load style for splash
             if(fileCSS) {
@@ -95,15 +95,9 @@ screen_splash={
 
             document.getElementById(UID+"_splashbox_left").classList.add(UID+"_splashbox_left-start");
             document.getElementById(UID+"_splashbox_right").classList.add(UID+"_splashbox_right-start");
-            return delay(screenContent.movetime,localTimerIds); //Wait for boxes to move off the screen                   
-
+            return delay(screenContent.movetime,localTimerIds); //Wait for boxes to move off the screen
     }).then(()=>{
-
-            //Mis pärast saab
-
-    }).catch((error)=>{
-        console.log("Error caught"+error)
+        return render.fade.out(context);
     });
-    
     }
 }

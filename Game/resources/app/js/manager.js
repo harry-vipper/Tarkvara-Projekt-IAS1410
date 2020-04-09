@@ -1,7 +1,26 @@
 function startup() {
+    
     //Load savefile and game JSON
     file.savefile.load();
     file.gamefile.load();
+    let lastScreenPromise=new Promise((resolve)=>{resolve()});
+    //if there's an old game
+    //lastScreenPromise=system.screen.displayScreen("saveLoadmenu", undefined);
+    
+    lastScreenPromise=lastScreenPromise.then(()=>{
+        system.screen.displayScreen("gameSelectionMenu", undefined);
+    });
+    
+    //Järgmine tegevus
+    lastScreenPromise=lastScreenPromise.then((output)=>{
+        if(output.type="startGame") {
+            //Genereeri mängu array
+
+            //
+        }
+        //system.screen.displayScreen("gameSelectionMenu", undefined);
+    });
+        
 
     //start main menu:
     /*
@@ -23,7 +42,9 @@ function startup() {
             staytime:3000,
         }
     */
-    screens.question_Task.handler(
+
+
+    /*screens.question_Task.handler(
         document.getElementById("screenContainer"),
         document.getElementById("screenStyleContainer"),
         controls,
@@ -39,8 +60,10 @@ function startup() {
             duration:30,
         },
         render,
-        /*system.screen.UID.generate()*/"UID"
-    )
+        /*system.screen.UID.generate()"UID"
+    )*/
+
+    //system.screen.displayScreen();
     
     //footeri värvid
     /*if(file.savefile.content.gameData.state===2){

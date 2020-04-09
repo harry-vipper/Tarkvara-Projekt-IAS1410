@@ -27,9 +27,137 @@ function exitScreen(whatNext) {
 var system;
 system={
     screen: {
+        displayScreen: function(type, data) {
+            switch(type) {
+                case "minigame-td":
+                    alert("käi putsi");
+                    break;
+                case "gameSelectionMenu":
+                    return screens.gameSelectionMenu.handler(
+                        document.getElementById("screenContainer"),
+                        document.getElementById("screenStyleContainer"),
+                        controls,
+                        {
+                            gamefile: file.gamefile,
+                            savefile: file.savefile
+                        },
+                        system.screen.timers.localTimerIds,
+                        {
+                            duration:30,
+                        },
+                        render,
+                        system.screen.UID.generate()
+                    ).then((output)=>{
+                        return render.fade.out(document.getElementById("screenContainer")).then(()=>{return output;});
+                    }).then((output)=>{
+                        this.destroy();
+                        console.log(output);
+                    });
+                case "game-element-question":
+                    screens.splash.handler(
+                        document.getElementById("screenContainer"),
+                        document.getElementById("screenStyleContainer"),
+                        controls,
+                        {
+                            icon:"arrow",
+                            text:"MINGI TEXT",
+                            movetime:900,
+                            staytime:3000,
+                        }
+                        ,
+                        system.screen.timers.localTimerIds,
+                        null,
+                        render,
+                        system.screen.UID.generate()
+        
+                    ).then(()=> {
+                        this.destroy();
+                        return screens.question_task.handler(
+                            document.getElementById("screenContainer"),
+                            document.getElementById("screenStyleContainer"),
+                            controls,
+                            {
+                                type:"question",
+                                number:3,
+                                content:"Küsimuse sisu midgi midagi midagi",
+                            },
+                            system.screen.timers.localTimerIds,
+                            //system.settings
+                            {
+                                duration:30,
+                            },
+                            render,
+                            system.screen.UID.generate() 
+                        );
+                        }
+                    ).then((output)=>{
+                        return render.fade.out(document.getElementById("screenContainer")).then(()=>{return output;});
+                    });
+            }
+            /*screens.splash.handler(
+                document.getElementById("screenContainer"),
+                document.getElementById("screenStyleContainer"),
+                controls,
+                {
+                    icon:"arrow",
+                    text:"MINGI TEXT",
+                    movetime:900,
+                    staytime:3000,
+                }
+                ,
+                system.screen.timers.localTimerIds,
+                null,
+                render,
+                system.screen.UID.generate()
+
+            ).then(()=> {
+                this.destroy();
+                return screens.gameSelectionMenu.handler(
+                    document.getElementById("screenContainer"),
+                    document.getElementById("screenStyleContainer"),
+                    controls,
+                    {
+                        gamefile: file.gamefile,
+                        savefile: file.savefile
+                    },
+                    system.screen.timers.localTimerIds,
+                    {
+                        duration:30,
+                    },
+                    render,
+                    system.screen.UID.generate()
+                );
+                }
+            ).then((output)=>{
+                return render.fade.out(document.getElementById("screenContainer")).then(()=>{return output;});
+            }).then((output)=>{
+                this.destroy();
+                console.log(output);
+                return screens.question_task.handler(
+                    document.getElementById("screenContainer"),
+                    document.getElementById("screenStyleContainer"),
+                    controls,
+                    {
+                        type:"question",
+                        number:3,
+                        content:"Küsimuse sisu midgi midagi midagi",
+                    },
+                    system.screen.timers.localTimerIds,
+                    //system.settings
+                    {
+                        duration:30,
+                    },
+                    render,
+                    system.screen.UID.generate() 
+                );
+            });*/
+        },
         UID: {
             lastUID: 0, //0 to zzzz (басс26)
             generate: function() {
+                if (DEFAULT_UID) {
+                    return "UID";
+                }
                 let length=4;
                 let char='abcdefghijklmnopqrstuvwxyz';
                 if (this.lastUID>=Math.pow(char.length, length)) {
@@ -80,6 +208,12 @@ system={
             link.setAttribute("href", URI);
             link.setAttribute("id", id);
             document.getElementsByTagName('head')[0].appendChild(link)
+        },
+        destroy: function() {
+            this.timers.clear();
+            this.body.clear();
+            this.style.clear();
+            this.footer.clear();
         }
         /*launch: function() {
 

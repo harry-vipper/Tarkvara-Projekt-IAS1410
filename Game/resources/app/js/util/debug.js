@@ -1,4 +1,5 @@
 const DEBUG=true;
+const DEFAULT_UID=true;
 const fileCSS=true;
 function notify(str, typestr) {
 	var typeColors={

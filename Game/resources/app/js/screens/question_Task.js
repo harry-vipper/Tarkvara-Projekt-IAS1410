@@ -1,6 +1,6 @@
 //Question/Task screem
-var screen_question_Task;
-screen_question_Task={
+var screen_question_task;
+screen_question_task={
     handler: function(
         context,       
         style,        
@@ -28,8 +28,12 @@ screen_question_Task={
     let palette=screenSettings["colors"].palette;
     palette=screenSettings["colors"].getPalette(screenSettings["colors"].fgcolor, screenSettings["colors"].bgcolor);
     */
-    
-   system.screen.loadResource("/resources/css/element-question-task.css").then(
+    var end;
+    var endpromise=new Promise((resolve) =>{
+           end=resolve;
+       }
+    );
+    system.screen.loadResource("/resources/css/element-question-task.css").then(
     (css)=>{
 
         if(fileCSS) {
@@ -54,9 +58,9 @@ screen_question_Task={
     }
     ).then(()=>{
 
-        controls.key.set("up",1000,()=>{exitScreen("gameMenu");},"Exit Game");
-        controls.key.set("left",0,()=>{exitScreen("previousType");},"Previous Question");//Mis juhtub promisega kui need tulevad
-        controls.key.set("right",0,()=>{exitScreen("nextType");},"Next Question");
+        controls.key.set("up",1000,()=>{end({type: "gameMenu", value: "last"});},"Exit Game");
+        controls.key.set("left",0,()=>{end({type: "nextScreen", value: "last"});},"Previous Question");//Mis juhtub promisega kui need tulevad
+        controls.key.set("right",0,()=>{end({type: "nextScreen", value: "next"});},"Next Question");
         return startTimer(screenSettings.duration,UID+"_timer",localTimerIds);
     }
     /*var promiseResolve, promiseReject;

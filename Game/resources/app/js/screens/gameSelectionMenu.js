@@ -21,7 +21,13 @@ screen_gameSelectionMenu={
     screenSettings, settings like colors
     UID   
     */
-    {
+    {   
+        let output="cracka";
+        var end;
+        var endpromise=new Promise((resolve) =>{
+                end=resolve;
+            }
+        );
         render.strUID=function(str) {
             return str.split("UID").join(UID);
           };
@@ -99,7 +105,7 @@ screen_gameSelectionMenu={
                 document.getElementById("_"+index+render.strUID("_UID_header_title")).classList.remove(render.strUID("UID_menulistHeaderActive"));
                 document.getElementById("_"+index+render.strUID("_UID_header_description")).classList.add(render.strUID("r_hidden"));
             }
-        },
+        }
         system.screen.loadResource("/resources/css/gameSelectionMenu.css").then(
             (css)=>{
                 //Render
@@ -129,9 +135,9 @@ screen_gameSelectionMenu={
             }).then(
                 ()=>{
 
-                    controls.key.set('up', 0, /**/()=>{selectGame('-');}, "Eelmine");
-                    controls.key.set('down', 0, /**/()=>{selectGame('+');}, "Järgmine");
-                    controls.key.set('confirm', 0, /**/()=>{}, "Alusta");
+                    controls.key.set('up', 0, ()=>{selectGame('-');}, "Eelmine");
+                    controls.key.set('down', 0, ()=>{selectGame('+');}, "Järgmine");
+                    controls.key.set('confirm', 0, ()=>{end(output);}, "Alusta");
                     const scroller = new SweetScroll();
                     
                     function selectGame(direction) {
@@ -183,7 +189,6 @@ screen_gameSelectionMenu={
         
         //Make a palette if there is none
         //do stuff
-        
-    
+        return endpromise;
     }
 }
