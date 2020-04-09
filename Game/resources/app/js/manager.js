@@ -16,20 +16,28 @@ function startup() {
             gamefile: file.gamefile,
             savefile: file.savefile
     }
-
-    */
-    screens.splash.handler(
-        document.getElementById("screenContainer"),
-        document.getElementById("screenStyleContainer"),
-        controls,
-        {
+{
             icon:"arrow",
             text:"MINGI TEXT",
             movetime:900,
             staytime:3000,
-        },
+        }
+    */
+    screens.question_Task.handler(
+        document.getElementById("screenContainer"),
+        document.getElementById("screenStyleContainer"),
+        controls,
+        {
+            type:"question",
+            number:3,
+            content:"Küsimuse sisu midgi midagi midagi",
+        }
+        ,
         system.screen.timers.localTimerIds,
-        system.settings,
+        //system.settings
+        {
+            duration:30,
+        },
         render,
         /*system.screen.UID.generate()*/"UID"
     )
