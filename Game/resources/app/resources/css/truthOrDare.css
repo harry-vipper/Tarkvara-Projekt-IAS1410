@@ -1,0 +1,95 @@
+.UID_circleSVG {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: block;
+    top: 0;
+    left: 0;
+    stroke: var(--fgColor-normal);
+}
+
+#UID_UIdiv {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background: var(--bgColor-dark);
+    color: var(--fgColor-normal);
+}
+
+.UID_circle {
+    display: table;
+    width: 600px;
+    height: 600px;
+    margin: auto;
+    vertical-align: middle;
+    position: absolute;
+    top: 84px;
+    left: 84px;
+}
+
+.UID_circle-centerer {
+    display: table-cell;
+    vertical-align: middle;
+    position: relative;
+    height: 90%;
+}
+.UID_arrow_animation {
+    animation-timing-function: cubic-bezier(0.34, 0, 0, 0.99);
+    animation-fill-mode: forwards;
+}
+.UID_UI_smalltext {
+}
+.UID_arrow_pointing {}
+.UID_arrow_pointed {}
+.UID_arrow_pointed_animation {
+    animation-duration: 8s;
+    animation-name: UID_arrow_pointed_kf;
+}
+.UID_arrow_pointing_animation {
+    animation-duration: 10s;
+    animation-name: UID_arrow_pointing_kf;
+}
+.UID_circleSVG {}
+@keyframes UID_arrow_pointed_kf {
+    0% {transform: rotate(0deg);}
+    100% {transform: rotate(1600deg);}
+}
+@keyframes UID_arrow_pointing_kf {
+    0% {transform: rotate(0deg);}
+    100% {transform: rotate(-1690deg);}
+}
+.UID_UI-largeSVG {display: block;width: 400px;position: absolute;top: 168px;right: 20px;}
+.UID_buttonSymbol_glow_middle {
+    --svg-b-top-glow: transparent;
+    --svg-b-top: var(--fgColor-dark);
+    --svg-b-right-glow: transparent;
+    --svg-b-right: var(--fgColor-dark);
+    --svg-b-bottom-glow: transparent;
+    --svg-b-bottom: var(--fgColor-dark);
+    --svg-b-left-glow: transparent;
+    --svg-b-left: var(--fgColor-dark);
+    --svg-b-center-glow: var(--fgColor-normal);
+    --svg-b-center: var(--fgColor-dark);
+}
+
+p#UID_nextNotice {
+    position: relative;
+    width: 60%;
+    margin: auto;
+    text-align: center;
+    top: 20px;
+    font-size: 1.5em;
+    color: var(--bgColor-normal);
+    background: var(--fgColor-normal);
+    padding: 0.5em;
+}
+
+.UID_UI_text_startNotice {
+    position: absolute;
+    width: 360px;
+    text-align: center;
+    top: 330px;
+    font-size: 1.5em;
+    color: var(--fgColor-normal);
+    background: var(--bgColor-darkest); 
+}

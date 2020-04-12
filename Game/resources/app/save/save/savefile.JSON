@@ -1,33 +1,48 @@
 {
-    "gameData": {
-     "gameOrder": [
-      0,
-      1,
-      2,
-      -1,
-      -2
-     ],
-     "selectedGame": 11,
-     "currentQuestion": 3,
-     "state": 2
-    },
-    "settings": {
-     "toggle": [
-      1,
-      1,
-      1
-     ],
-     "color": {
-      "foreground": [
-       18,
-       100,
-       96
-      ],
-      "background": [
-       100,
-       5,
-       15
-      ]
-     }
-    }
-   }
+ "gameData": {
+  "gameOrder": [
+   0,
+   0,
+   0,
+   0,
+   -2,
+   -1,
+   -2,
+   0,
+   -1,
+   0,
+   -2,
+   2,
+   0,
+   -2,
+   -1,
+   -1,
+   0,
+   1,
+   0,
+   0
+  ],
+  "selectedGame": 0,
+  "currentQuestion": 4,
+  "state": 1
+ },
+ "settings": {
+  "toggle": [
+   1,
+   1,
+   1
+  ],
+  "color": {
+   "foreground": [
+    18,
+    100,
+    96
+   ],
+   "background": [
+    100,
+    5,
+    15
+   ]
+  }
+ }
+}

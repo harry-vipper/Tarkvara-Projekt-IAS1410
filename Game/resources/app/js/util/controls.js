@@ -57,7 +57,7 @@ var controls={
         },
         
         set: function(selectedKey,keyDuration,keyAction,keyDescription){
-            keyDescription.toUpperCase();
+            if(keyDescription!==false)keyDescription=keyDescription.toUpperCase();
             var keyBinds = [
                 controls.key.bind.up, 
                 controls.key.bind.down, 
@@ -135,7 +135,7 @@ var controls={
             
             if(keyDescription===false){return this.linkId;}
             else{
-                //footerUISVG(keyDescription,selectedKey);
+                system.screen.footer.UISVG(keyDescription,selectedKey,keyDuration);
                 return this.linkId;
             }
         }

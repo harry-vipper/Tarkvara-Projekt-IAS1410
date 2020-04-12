@@ -17,6 +17,16 @@ render.footer={
 render.forceRedraw=function(element) {
   element.offsetHeight;
 };
+render.setAnimation=function (id, className) {
+	this.forceRedraw(id);
+	document.querySelector("#"+String(id)).classList.add(className);
+	this.forceRedraw(id);
+}
+render.removeAnimation=function (id, className) {
+	this.forceRedraw(id);
+	document.querySelector("#"+String(id)).classList.remove(className);
+	this.forceRedraw(id);
+}
 //Sweet-Scroll
 document.addEventListener(
     'DOMContentLoaded',

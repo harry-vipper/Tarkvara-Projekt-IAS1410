@@ -14,6 +14,8 @@
     --bgColor-brightest: #73889d;
     --bgColor-bloom: #394551;
 
+    --primaryColor:  var(--fgColor-normal);
+    --secondaryColor:  var(--bgColor-darkest);
     --footerColor: var(--fgColor-normal);
 }
 .r_hidden {
@@ -90,5 +92,71 @@ body {
 .footerElementIcon {
     width: 1.1em;
     height: 1.1em;
-    background: #ff00004a;
+    background: var(--bgColor-normal);
+}
+
+.UI_smallSVG{
+    width: 100%;
+    height: 100%;
+}
+
+.buttonSymbol_glow_up {
+    --svg-b-up-glow: var(--primaryColor);
+    --svg-b-up: var(--primaryColor);
+    --svg-b-right-glow: transparent;
+    --svg-b-right: var(--secondaryColor);
+    --svg-b-down-glow: transparent;
+    --svg-b-down: var(--secondaryColor);
+    --svg-b-left-glow: transparent;
+    --svg-b-left: var(--secondaryColor);
+    --svg-b-confirm-glow: transparent;
+    --svg-b-confirm: var(--secondaryColor);
+}
+.buttonSymbol_glow_down {
+    --svg-b-up-glow: transparent;
+    --svg-b-up: var(--secondaryColor);
+    --svg-b-right-glow: transparent;
+    --svg-b-right: var(--secondaryColor);
+    --svg-b-down-glow: var(--primaryColor);
+    --svg-b-down: var(--primaryColor);
+    --svg-b-left-glow: transparent;
+    --svg-b-left: var(--secondaryColor);
+    --svg-b-confirm-glow: transparent;
+    --svg-b-confirm: var(--secondaryColor);
+}
+.buttonSymbol_glow_left {
+    --svg-b-up-glow: transparent;
+    --svg-b-up: var(--secondaryColor);
+    --svg-b-right-glow: transparent;
+    --svg-b-right: var(--secondaryColor);
+    --svg-b-down-glow: transparent;
+    --svg-b-down: var(--secondaryColor);
+    --svg-b-left-glow: var(--primaryColor);
+    --svg-b-left: var(--primaryColor);
+    --svg-b-confirm-glow: transparent;
+    --svg-b-confirm: var(--secondaryColor);
+}
+.buttonSymbol_glow_right {
+    --svg-b-up-glow: transparent;
+    --svg-b-up: var(--secondaryColor);
+    --svg-b-right-glow: var(--primaryColor);
+    --svg-b-right: var(--primaryColor);
+    --svg-b-down-glow: transparent;
+    --svg-b-down: var(--secondaryColor);
+    --svg-b-left-glow: transparent;
+    --svg-b-left: var(--secondaryColor);
+    --svg-b-confirm-glow: transparent;
+    --svg-b-confirm: var(--secondaryColor);
+}
+.buttonSymbol_glow_confirm {
+    --svg-b-up-glow: transparent;
+    --svg-b-up: var(--secondaryColor);
+    --svg-b-right-glow: transparent;
+    --svg-b-right: var(--secondaryColor);
+    --svg-b-down-glow: transparent;
+    --svg-b-down: var(--secondaryColor);
+    --svg-b-left-glow: transparent;
+    --svg-b-left: var(--secondaryColor);
+    --svg-b-confirm-glow: var(--primaryColor);
+    --svg-b-confirm: var(--primaryColor);
 }

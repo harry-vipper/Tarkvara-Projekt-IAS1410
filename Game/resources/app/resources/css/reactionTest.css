@@ -1,0 +1,53 @@
+.UID_invisible {
+    opacity: 0 !important;
+}
+#UID_UIdiv {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    background: var(--bgColor);
+    color: var(--fgColor);
+}
+.UID_UI_fadeable {
+    transition: opacity 400ms ease-in-out 0s;
+    opacity: 1;
+}
+
+.UID_UI-largeSVG {display: block;width: 400px;position: absolute;top: 168px;right: 20px;}
+
+.UID_buttonSymbol_glow_middle {
+    --svg-b-top-glow: transparent;
+    --svg-b-top: var(--fgColorInactive);
+    --svg-b-right-glow: transparent;
+    --svg-b-right: var(--fgColorInactive);
+    --svg-b-bottom-glow: transparent;
+    --svg-b-bottom: var(--fgColorInactive);
+    --svg-b-left-glow: transparent;
+    --svg-b-left: var(--fgColorInactive);
+    --svg-b-center-glow: var(--fgColor);
+    --svg-b-center: var(--fgColorBrightest);
+}
+
+p#UID_nextNotice {
+    position: relative;
+    width: 60%;
+    margin: auto;
+    text-align: center;
+    top: 20px;
+    font-size: 1.5em;
+    color: var(--bgColor);
+    background: var(--fgColor);
+    padding: 0.5em;
+}
+
+.UID_UI_text_startNotice {
+    position: absolute;
+    width: 360px;
+    text-align: left;
+    top: 90px;
+    left: 40px;
+    font-size: 5em;
+    font-weight: 600;
+    font-family: 'Raleway';
+    margin: 0;
+}

@@ -22,7 +22,7 @@ screen_gameSelectionMenu={
     UID   
     */
     {   
-        let output="cracka";
+        
         var end;
         var endpromise=new Promise((resolve) =>{
                 end=resolve;
@@ -137,7 +137,7 @@ screen_gameSelectionMenu={
 
                     controls.key.set('up', 0, ()=>{selectGame('-');}, "Eelmine");
                     controls.key.set('down', 0, ()=>{selectGame('+');}, "Järgmine");
-                    controls.key.set('confirm', 0, ()=>{end(output);}, "Alusta");
+                    controls.key.set('confirm', 0, ()=>{end({type:"startGame"});}, "Alusta");
                     const scroller = new SweetScroll();
                     
                     function selectGame(direction) {
@@ -179,13 +179,6 @@ screen_gameSelectionMenu={
                 }
         );
         
-        
-        /*scroll:{
-            var offsetHeight = document.getElementById('myDiv').offsetHeight;
-            document.getElementById(UID+"bodyMainDiv").style.top="-100px";
-        } 
-
-        */
         
         //Make a palette if there is none
         //do stuff

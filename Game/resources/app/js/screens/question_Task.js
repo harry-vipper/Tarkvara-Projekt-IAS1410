@@ -58,30 +58,16 @@ screen_question_task={
     }
     ).then(()=>{
 
-        controls.key.set("up",1000,()=>{end({type: "gameMenu", value: "last"});},"Exit Game");
-        controls.key.set("left",0,()=>{end({type: "nextScreen", value: "last"});},"Previous Question");//Mis juhtub promisega kui need tulevad
+        controls.key.set("up",1000,()=>{end({type: "gameSelectionMenu", value: null});},"Exit Game");
+        controls.key.set("left",0,()=>{end({type: "nextScreen", value: "last"});},"Previous Question");
         controls.key.set("right",0,()=>{end({type: "nextScreen", value: "next"});},"Next Question");
         return startTimer(screenSettings.duration,UID+"_timer",localTimerIds);
     }
-    /*var promiseResolve, promiseReject;
-
-    var promise = new Promise(function(resolve, reject){
-    promiseResolve = resolve;
-    promiseReject = reject;
-    });
-
-    promiseResolve();
-    */
     ).then(()=>{
         console.log("Timer done!!");
-        //next screen
-        //return...
-    }
-    ).catch(()=>{
-        console.log("Error tuli")
-        //mingi handlemine
+        return end({type: "nextScreen", value: "next"})
     });
-
+    return endpromise;
     },
     setContent:function(screenElement,screenContent,UID){
         //Paneb õige sisu
@@ -118,29 +104,4 @@ screen_question_task={
         </div>
     </div>
     `,
-}
-function startTimer(duration,timerLocationId,localTimerIds) {//Vaja promise peale üle teha
-
-    return new Promise((resolve)=>{
-        let timer = duration;
-        let minutes=1;
-        let seconds=1;
-        let i=0;
-        let length=localTimerIds.length;
-    
-        localTimerIds[length]=setInterval(()=>{
-            minutes = parseInt(timer / 60, 10);
-            seconds = parseInt(timer % 60, 10);
-            
-            seconds = seconds < 10 ? "0" + seconds : seconds;
-            document.getElementById(timerLocationId).innerHTML = minutes + ":" + seconds;
-            if(timer===0){
-                notify("TIMER 0", "function");
-                clearInterval(localTimerIds[length]);//localTimerIdsse jääb alles!!! vist pole halb---clearInterval(null) errorit ei anna
-                localTimerIds[length]=null;
-                resolve();}
-            if(i===100){i=0;timer--;}
-            i++;
-            }, 10);
-        });
 }
