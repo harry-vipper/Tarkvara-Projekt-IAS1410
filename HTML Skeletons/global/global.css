@@ -46,7 +46,7 @@ body {
     color: white;
     min-height: 1024px;
     /* width: 1280px; */
-    overflow: hidden;
+    /* overflow: hidden; */
 }
 
 
@@ -54,14 +54,21 @@ body {
 #footer {
     position: fixed;
     bottom: 0;
+    /* bottom: 5em; */
     height: 5em;
-    width: 100%;
+    width: fit-content;
     background: var(--bgColor-normal);
+    overflow: hidden;
+    white-space: nowrap;
 }
 
 .footerElementGroup {
     height: 4em;
     margin: auto;
+    /* float: left; */
+    display: inline-block;
+    white-space: nowrap;
+    min-width: 1em;
 }
 
 .footerElementGroupTitle {
