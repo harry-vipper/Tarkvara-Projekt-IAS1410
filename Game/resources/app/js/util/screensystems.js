@@ -288,6 +288,47 @@ system={
             }
         },
         footer:{
+            SCROLL_PIXELS_PER_SECOND: 60,
+            SCROLL_WAITTIME: 2,
+            SCROLL_FADETIME: 0.8,
+            updateAnimation: function() {
+                notify("Updating footer animation", "function");
+                let wrapperDiv=document.getElementById("footer_scrollWrapper");
+                let displayDiv=document.getElementById("footer");
+                let styleTag=document.getElementById("footer-style");
+
+
+                let scrollDistance = (-1 *wrapperDiv.clientWidth) +displayDiv.clientWidth;
+                let time=0;
+                let keyframes;
+                let style;
+                if (wrapperDiv.clientWidth>displayDiv.clientWidth) {
+                    
+                    time=Math.abs(scrollDistance)/this.SCROLL_PIXELS_PER_SECOND+(this.SCROLL_WAITTIME*2);
+                    keyframes=
+                    `@keyframes _footer_kf
+                    {
+                        0%{opacity: 0;transform:translateX(0);}
+                        `+((this.SCROLL_FADETIME/time)*100)+`%{opacity: 1;}
+                        `+((this.SCROLL_WAITTIME/time)*100)+`%{transform:translateX(0);}
+                        `+(100-((this.SCROLL_WAITTIME/time)*100))+`%{transform:translateX(`+scrollDistance+`px);}
+                        `+(100-((this.SCROLL_FADETIME/time)*100))+`%{opacity: 1; transform:translateX(`+scrollDistance+`px);}
+                        100%{opacity: 0;transform:translateX(`+scrollDistance+`px);}
+                    }`;
+                    style='animation:_footer_kf '+time+'s cubic-bezier(0.13, 0, 0.87, 1) infinite';
+                    styleTag.innerHTML=keyframes;
+                    wrapperDiv.style.cssText=style;
+                    notify("time:"+ time, "draw");
+                    notify("dis:"+ scrollDistance, "draw");
+                    notify("abs dis:"+ Math.abs(scrollDistance), "draw");
+                    notify("ratio:"+ Math.abs(scrollDistance)/this.SCROLL_PIXELS_PER_SECOND, "draw");
+                    notify("calc: "+ (this.SCROLL_FADETIME/time), "draw");
+                }
+                else {
+                    styleTag.innerHTML="";
+                }
+                return time;
+            },
             clear: function(){
                 this.hold=false;
                 this.press=false;
@@ -337,7 +378,7 @@ system={
                     }
                     else{
                         this.hold=true;
-                        document.getElementById("footer").innerHTML+=`
+                        document.getElementById("footer_scrollWrapper").innerHTML+=`
                         <div id="footerElementGroupHold" class="footerElementGroup">
                             <div class="footerElementGroupTitle">
                                 <p>HOIA:</p>
@@ -359,7 +400,7 @@ system={
                     }
                     else{
                         this.press=true;
-                        document.getElementById("footer").innerHTML+=`
+                        document.getElementById("footer_scrollWrapper").innerHTML+=`
                         <div id="footerElementGroupPress" class="footerElementGroup">
                             <div class="footerElementGroupTitle">
                                 <p>VAJUTA:</p>

@@ -138,6 +138,12 @@ screen_gameSelectionMenu={
                     controls.key.set('up', 0, ()=>{selectGame('-');}, "Eelmine");
                     controls.key.set('down', 0, ()=>{selectGame('+');}, "Järgmine");
                     controls.key.set('confirm', 0, ()=>{end({type:"startGame"});}, "Alusta");
+
+
+                    controls.key.set('confirm', 1500, ()=>{}, "ДОСТОПРИМЕЧАТЕЛЬНОСТИ");
+                    controls.key.set('left', 1500, ()=>{}, "MARDO M*NN");
+                    controls.key.set('right', 1500, ()=>{}, "VEEL ÜKS PIKK SÕNA");
+
                     const scroller = new SweetScroll();
                     
                     function selectGame(direction) {

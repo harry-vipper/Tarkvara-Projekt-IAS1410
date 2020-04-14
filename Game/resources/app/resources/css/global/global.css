@@ -13,10 +13,10 @@
     --bgColor-bright: #73889d;
     --bgColor-brightest: #73889d;
     --bgColor-bloom: #394551;
-
     --primaryColor:  var(--fgColor-normal);
     --secondaryColor:  var(--bgColor-darkest);
     --footerColor: var(--fgColor-normal);
+    --footerGroupTitleColor: var(--fgColor-dull);
 }
 .r_hidden {
     /*height: 0 !important;*/
@@ -59,11 +59,16 @@ body {
     height: 5em;
     width: 100%;
     background: var(--bgColor-normal);
+    overflow: hidden;
+    white-space: nowrap;
 }
 
 .footerElementGroup {
     height: 4em;
-    margin: auto;
+    margin: 0 2em;
+    display: inline-block;
+    white-space: nowrap;
+    min-width: 1em;
 }
 
 .footerElementGroupTitle {
@@ -71,7 +76,7 @@ body {
     float: left;
     font-family: 'Now';
     padding: 0.3em;
-    color: var(--footerColor);
+    color: var(--footerGroupTitleColor);
 }
 
 .footerElementGroup p {
@@ -82,16 +87,16 @@ body {
     font-size: 3em;
     float: left;
     font-family: 'Now';
-    padding: 0.3em;
+    padding: 0.1em 0.5em;
     display: grid;
-    grid-template-columns: 1.1em auto;
+    grid-template-columns: 1.5em auto;
     grid-column-gap: 0.2em;
     color: var(--footerColor);
 }
 
 .footerElementIcon {
-    width: 1.1em;
-    height: 1.1em;
+    width: 1.5em;
+    height: 1.5em;
     background: var(--bgColor-normal);
 }
 
@@ -159,4 +164,15 @@ body {
     --svg-b-left: var(--secondaryColor);
     --svg-b-confirm-glow: var(--primaryColor);
     --svg-b-confirm: var(--primaryColor);
+}
+
+#footer_scrollWrapper {
+    width: max-content;
+    /* position: absolute; */
+    /* transform: translateX(-1900px); */
+}
+
+.footerElementText {
+    font-size: 0.9em;
+    margin: 0.26em 0 0 0;
 }

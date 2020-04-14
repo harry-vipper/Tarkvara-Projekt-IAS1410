@@ -136,8 +136,10 @@ var controls={
             if(keyDescription===false){return this.linkId;}
             else{
                 system.screen.footer.UISVG(keyDescription,selectedKey,keyDuration);
+                system.screen.footer.updateAnimation();
                 return this.linkId;
             }
+            
         }
     }
 }
