@@ -175,8 +175,8 @@ span.UID_menulistDescriptionPropertiesElementValue-small {
 }
 .UID_switch-on {
     --svg-innercolor: var(--fgColor-normal);
+    --svg-outercolor: var(--bgColor-darkest);
 }
-
 
 .UID_switch-selected {
     --svg-outercolor: var(--bgColor-normal);

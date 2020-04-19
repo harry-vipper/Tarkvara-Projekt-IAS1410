@@ -34,14 +34,15 @@ screen_question_task={
        }
     );
     system.screen.loadResource("/resources/css/element-question-task.css").then(
-    (css)=>{
+    (css)=>{style.innerHTML=css;
 
-        if(fileCSS) {
+        /*if(fileCSS) {
             system.screen.loadCSStoDOM("placeHolderDOMCSS", "resources/css/element-question-task.css");
         }
         else{
             style.innerHTML=css;
-        }}
+        }*/
+    }
     ).then(()=>{
 
         let str=this.HTMLbase;

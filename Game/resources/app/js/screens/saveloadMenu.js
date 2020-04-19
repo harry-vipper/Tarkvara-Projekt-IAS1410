@@ -34,14 +34,15 @@ screen_saveloadMenu={
        }
     );
     system.screen.loadResource("/resources/css/saveloadMenu.css").then(
-    (css)=>{
+    (css)=>{style.innerHTML=css;
 
-        if(fileCSS) {
+        /*if(fileCSS) {
             system.screen.loadCSStoDOM("placeHolderDOMCSS", "resources/css/saveloadMenu.css");
         }
         else{
             style.innerHTML=css;
-        }}
+        }*/
+    }
     ).then(()=>{
 
         let str=this.HTMLbase;
