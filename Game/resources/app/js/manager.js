@@ -4,10 +4,11 @@ function startup() {
     file.savefile.load();
     file.gamefile.load();
     
-    //system.screen.displayScreen("game-element-reaction-test",undefined);
+    //system.screen.displayScreen("settingsMenu",undefined);
 
     //See töötab
     //Always
+    
     var lastScreenPromise=new Promise((resolve)=>{resolve()});
     
     if(file.savefile.content.gameData.state===2){//if there's an old game
@@ -57,7 +58,7 @@ function startup() {
             }
 
 
-            if(input.type==="startGame") {
+            else if(input.type==="startGame") {
                 file.savefile.content.gameData.state=2;
                 file.savefile.content.gameData.currentQuestion=0;
                 file.savefile.content.gameData.gameOrder=gameOrderer();
@@ -81,11 +82,13 @@ function startup() {
                 file.savefile.content.gameData.state=1;
                 return system.screen.displayScreen("gameSelectionMenu", undefined);
             }
+            else if(input.type==="settingsMenu"){
+                file.savefile.content.gameData.state=3;
+                return system.screen.displayScreen("settingsMenu", undefined);
+            }
             else{
                 debugger;
             }
-            //hunnik iffe pmst
-            //system.screen.displayScreen("gameSelectionMenu", undefined);
         }).then((output)=>{
             file.savefile.save();
             loop(output);
@@ -130,9 +133,9 @@ function gameOrderer(){
         }
         currentTypeNr++;
     }
-    
-    for(i=0;i<((gameOrder.length)/5);i++){///Iga 5 küsimuse kohta 2 minimängu -see tuleb lõpuks võtta gamefilest
-        if(file.savefile.content.settings.toggle[0]===1){
+    let count=gameOrder.length/file.savefile.content.settings.mgFrequency;
+    for(i=0;i<count;i++){
+        if(file.savefile.content.settings.toggle[0]===1){//Kas mäng lubab vaja lisada
             gameOrder.push(-1);
         }
         if(file.savefile.content.settings.toggle[1]===1){

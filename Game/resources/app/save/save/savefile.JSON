@@ -5,33 +5,26 @@
    0,
    0,
    0,
-   -2,
-   -1,
-   -2,
    0,
-   -1,
-   0,
-   -2,
    2,
    0,
    -2,
-   -1,
-   -1,
+   0,
+   0,
    0,
    1,
-   0,
    0
   ],
   "selectedGame": 0,
-  "currentQuestion": 4,
+  "currentQuestion": 0,
   "state": 1
  },
  "settings": {
   "toggle": [
-   1,
-   1,
+   0,
    1
   ],
+  "mgFrequency": 21,
   "color": {
    "foreground": [
     18,
@@ -41,7 +34,7 @@
    "background": [
     100,
     5,
-    15
+    23
    ]
   }
  }

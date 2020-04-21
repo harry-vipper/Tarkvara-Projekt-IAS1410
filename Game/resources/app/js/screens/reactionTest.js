@@ -36,15 +36,15 @@ screen_reaction_test={
             "confirm"
         ];
         system.screen.loadResource("/resources/css/reactionTest.css").then(
-        (css)=>{
+        (css)=>{style.innerHTML=css;
 
-            if(fileCSS) {
+            /*if(fileCSS) {
             system.screen.loadCSStoDOM("placeHolderDOMCSS", "resources/css/reactionTest.css");
             }
             else{
             style.innerHTML=css;
-            }}
-        ).then(()=>{
+            }*/
+        }).then(()=>{
             
             let str=this.HTMLbase;
             str=str.split("UID").join(UID);

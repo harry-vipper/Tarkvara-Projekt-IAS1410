@@ -187,64 +187,23 @@ system={
                         this.destroy();
                         return output;
                     });
-                }
-            /*screens.splash.handler(
-                document.getElementById("screenContainer"),
-                document.getElementById("screenStyleContainer"),
-                controls,
-                {
-                    icon:"arrow",
-                    text:"MINGI TEXT",
-                    movetime:900,
-                    staytime:3000,
-                }
-                ,
-                system.screen.timers.localTimerIds,
-                null,
-                render,
-                system.screen.UID.generate()
-
-            ).then(()=> {
-                this.destroy();
-                return screens.gameSelectionMenu.handler(
-                    document.getElementById("screenContainer"),
-                    document.getElementById("screenStyleContainer"),
-                    controls,
-                    {
-                        gamefile: file.gamefile,
-                        savefile: file.savefile
-                    },
-                    system.screen.timers.localTimerIds,
-                    {
-                        duration:30,
-                    },
-                    render,
-                    system.screen.UID.generate()
-                );
-                }
-            ).then((output)=>{
-                return render.fade.out(document.getElementById("screenContainer")).then(()=>{return output;});
-            }).then((output)=>{
-                this.destroy();
-                console.log(output);
-                return screens.question_task.handler(
-                    document.getElementById("screenContainer"),
-                    document.getElementById("screenStyleContainer"),
-                    controls,
-                    {
-                        type:"question",
-                        number:3,
-                        content:"Küsimuse sisu midgi midagi midagi",
-                    },
-                    system.screen.timers.localTimerIds,
-                    //system.settings
-                    {
-                        duration:30,
-                    },
-                    render,
-                    system.screen.UID.generate() 
-                );
-            });*/
+                case "settingsMenu":
+                    return screens.settingsMenu.handler(
+                        document.getElementById("screenContainer"),
+                        document.getElementById("screenStyleContainer"),
+                        controls,
+                        {
+                            gamefile: file.gamefile,
+                            savefile: file.savefile
+                        },
+                        system.screen.timers.localTimerIds,
+                        null,
+                        render,
+                        system.screen.UID.generate()
+                    ).then((output)=>{
+                        return render.fade.out(document.getElementById("screenContainer")).then(()=>{this.destroy();return output;});
+                    });
+            }
         },
         UID: {
             lastUID: 0, //0 to zzzz (басс26)
@@ -412,49 +371,6 @@ system={
                         </div>`;
                     }
                 }
-                /*
-                <div class="footerElementGroup">
-                    <div class="footerElementGroupTitle">
-                        <p>HOIA:</p>
-                    </div>
-                    <div class="footerElement">
-                        <div class="footerElementIcon"></div>
-                        <div class="footerElementText"><p>TAGASI</p></div>
-                    </div>
-                </div>
-                
-                document.getElementById("footer").innerHTML+= "<a><h3>"+ description +
-                `: <svg class="UI-smallSVG buttonSymbol_glow_`+key+`" version="1.1" viewBox="0 0 12.7 12.7" preserveAspectRatio="xMinYMin meet" xmlns="http://www.w3.org/2000/svg">
-                <filter id="filter2993" x="-.256" y="-.256" width="1.512" height="1.512" style="color-interpolation-filters:sRGB">
-                <feGaussianBlur stdDeviation="0.33866608"/>
-                </filter>
-                <filter id="filter2989" x="-.256" y="-.256" width="1.512" height="1.512" style="color-interpolation-filters:sRGB">
-                <feGaussianBlur stdDeviation="0.33866608"/>
-                </filter>
-                <filter id="filter2985" x="-.256" y="-.256" width="1.512" height="1.512" style="color-interpolation-filters:sRGB">
-                <feGaussianBlur stdDeviation="0.33866608"/>
-                </filter>
-                <filter id="filter2981" x="-.256" y="-.256" width="1.512" height="1.512" style="color-interpolation-filters:sRGB">
-                <feGaussianBlur stdDeviation="0.33866608"/>
-                </filter>
-                <filter id="filter2977" x="-.256" y="-.256" width="1.512" height="1.512" style="color-interpolation-filters:sRGB">
-                <feGaussianBlur stdDeviation="0.33866608"/>
-                </filter>
-
-                <g transform="translate(0 -284.3)">
-                    <path d="m4.7626 285.36v3.175h3.175v-3.175zm0.5291 0.52917h2.1167v2.1167h-2.1167z" style="fill:var(--svg-b-up-glow);filter:url(#filter2977);paint-order:markers fill stroke"/>
-                    <path d="m4.7626 285.36v3.175h3.175v-3.175zm0.5291 0.52917h2.1167v2.1167h-2.1167z" style="fill:var(--svg-b-up);paint-order:markers fill stroke"/>
-                    <path d="m8.4667 289.06v3.175h3.175v-3.175zm0.5292 0.52917h2.1167v2.1167h-2.1167z" style="fill:var(--svg-b-right-glow);filter:url(#filter2981);paint-order:markers fill stroke"/>
-                    <path d="m8.4667 289.06v3.175h3.175v-3.175zm0.5292 0.52917h2.1167v2.1167h-2.1167z" style="fill:var(--svg-b-right);paint-order:markers fill stroke"/>
-                    <path d="m4.7626 292.77v3.175h3.175v-3.175zm0.5291 0.52917h2.1167v2.1167h-2.1167z" style="fill:var(--svg-b-down-glow);filter:url(#filter2985);paint-order:markers fill stroke"/>
-                    <path d="m4.7626 292.77v3.175h3.175v-3.175zm0.5291 0.52917h2.1167v2.1167h-2.1167z" style="fill:var(--svg-b-down);paint-order:markers fill stroke"/>
-                    <path d="m1.0584 289.06v3.175h3.175v-3.175zm0.5292 0.52917h2.1166v2.1167h-2.1166z" style="fill:var(--svg-b-left-glow);filter:url(#filter2989);paint-order:markers fill stroke"/>
-                    <path d="m1.0584 289.06v3.175h3.175v-3.175zm0.5292 0.52917h2.1166v2.1167h-2.1166z" style="fill:var(--svg-b-left);paint-order:markers fill stroke"/>
-                    <path d="m4.7625 289.06v3.175h3.175v-3.175zm0.5292 0.52917h2.1167v2.1167h-2.1167z" style="fill:var(--svg-b-confirm-glow);filter:url(#filter2993);paint-order:markers fill stroke"/>
-                    <path d="m4.7625 289.06v3.175h3.175v-3.175zm0.5292 0.52917h2.1167v2.1167h-2.1167z" style="fill:var(--svg-b-confirm);paint-order:markers fill stroke"/>
-                </g>
-                </svg>`+
-                "</h3></a>";*/
             }
 
         },

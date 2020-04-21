@@ -20,15 +20,15 @@ screen_truth_or_dare={
         }
     );
     system.screen.loadResource("/resources/css/truthOrDare.css").then(
-    (css)=>{
+    (css)=>{style.innerHTML=css;
 
-        if(fileCSS) {
+        /*if(fileCSS) {
            system.screen.loadCSStoDOM("placeHolderDOMCSS", "resources/css/truthOrDare.css");
         }
         else{
            style.innerHTML=css;
-        }}
-    ).then(()=>{
+        }*/
+    }).then(()=>{
         let str=this.HTMLbase.key;
         str=str.split("UID").join(UID);
 
