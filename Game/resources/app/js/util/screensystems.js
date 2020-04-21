@@ -332,7 +332,7 @@ system={
             clear: function(){
                 this.hold=false;
                 this.press=false;
-                document.getElementById("footer").innerHTML="";
+                document.getElementById("footer_scrollWrapper").innerHTML="";
             },
             hold:false,
             press:false,

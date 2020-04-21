@@ -52,7 +52,7 @@ var controls={
                     }
                 }
             }
-            if(!found){notify("targetId not found!!!", "function");}
+            if(!found){notify("targetId not found", "controls");}
             }
         },
         
