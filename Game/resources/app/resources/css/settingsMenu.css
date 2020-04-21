@@ -179,11 +179,11 @@ span.UID_menulistDescriptionPropertiesElementValue-small {
 }
 
 .UID_switch-selected {
-    --svg-outercolor: var(--bgColor-normal);
+    --svg-outercolor: var(--bgColor-darkest);
 }
 
 .UID_switch-off {
-    --svg-innercolor: var(--bgColor-darkest);
+    --svg-innercolor: var(--bgColor-dark);
 }
 
 .UID_menuHeaderTitle {
@@ -217,8 +217,8 @@ span.UID_menulistDescriptionPropertiesElementValue-small {
 .UID_menulistSettingValueArrows svg {
     height: 4em;
     width: 2.8em;
-    --svg-downcolor: var(--fgColor-darkest);
-    --svg-upcolor: var(--fgColor-darkest);
+    --svg-downcolor: var(--fgColor-dull);
+    --svg-upcolor: var(--fgColor-dull);
 }
 
 .UID_menulistSettingValue {

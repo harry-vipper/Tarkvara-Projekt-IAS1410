@@ -12,7 +12,8 @@ app.on("ready",function(){
         "fullscreen": false,
         //frame: false,
         webPreferences: {
-            nodeIntegration: true
+            nodeIntegration: true,
+            //webSecurity: false
         }
     });
     mainWindow.webContents.openDevTools();
@@ -20,6 +21,7 @@ app.on("ready",function(){
         app.exit(0);
       })
     mainWindow.setAutoHideMenuBar(true);
+        
     mainWindow.loadURL(url.format({
         pathname: path.join(__dirname,"Game.html"),
         protocol:"file:",

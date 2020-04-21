@@ -86,7 +86,6 @@ screen_settingsMenu={
                 else{
                     var elementId=render.strUID("_0_UID_menuHeader");
                 }
-                console.log(elementId);
                 
                 
                 render.menuEntry.activate(screen_settingsMenu.selectedSetting);
@@ -125,8 +124,8 @@ screen_settingsMenu={
                 }
                 else{
                     if(screen_settingsMenu.settingSelected){
-                        let contrast=screen_settingsMenu.contrastCheck();
-                        if(contrast===true){//siia tuleb lock contrastCheckiga
+                        let contrast=screen_settingsMenu.contrastCheck(0,0);
+                        if(contrast===true){
                             controls.key.clear.byKey("all");
                             system.screen.footer.clear();
                             screen_settingsMenu.upDownLoader(screenElement,screenContent,screen_settingsMenu.selectedSetting,false);
@@ -153,33 +152,58 @@ screen_settingsMenu={
 
             }
             function changeValue(direction,index){
-                if(direction==="+"){
-                    if(index===2){
+                if(index===2){
+                    if(direction==="+"){
                         screenContent.savefile.content.settings.mgFrequency++;
                         if(screenContent.savefile.content.settings.mgFrequency>100)screenContent.savefile.content.settings.mgFrequency=100;
                     }
-                    else if(index>=3 && index<=5){
-                        screenContent.savefile.content.settings.color.foreground[index-3]++;
-                        if(screenContent.savefile.content.settings.color.foreground[index-3]>100)screenContent.savefile.content.settings.color.foreground[index-3]=100;
-                    }
-                    else if(index>=6 && index<=8){
-                        screenContent.savefile.content.settings.color.background[index-6]++;
-                        if(screenContent.savefile.content.settings.color.background[index-6]>100)screenContent.savefile.content.settings.color.background[index-6]=100;
-                    }
-                }
-                else if(direction==="-"){
-                    if(index===2){
+                    else if(direction==="-"){
                         screenContent.savefile.content.settings.mgFrequency--;
                         if(screenContent.savefile.content.settings.mgFrequency<0)screenContent.savefile.content.settings.mgFrequency=0;
                     }
-                    else if(index>=3 && index<=5){
+                }
+                else if(direction==="+"){
+                    if(index===3 || index===4){
+                        screenContent.savefile.content.settings.color.foreground[index-3]++;
+                        if(screenContent.savefile.content.settings.color.foreground[index-3]>100)screenContent.savefile.content.settings.color.foreground[index-3]=100;
+                    }
+                    else if(index===5){
+                        if(screen_settingsMenu.contrastCheck(1,0)){
+                            screenContent.savefile.content.settings.color.foreground[index-3]++;
+                        }
+                    }
+                    else if(index===6 || index===7){
+                        screenContent.savefile.content.settings.color.background[index-6]++;
+                        if(screenContent.savefile.content.settings.color.background[index-6]>100)screenContent.savefile.content.settings.color.background[index-6]=100;
+                    }
+                    else if(index===8){
+                        if(screen_settingsMenu.contrastCheck(0,1)){
+                            screenContent.savefile.content.settings.color.background[index-6]++;
+                        }
+                    }
+                    color.setColor();
+                }
+                else if(direction==="-"){
+                    if(index===3 || index===4){
                         screenContent.savefile.content.settings.color.foreground[index-3]--;
                         if(screenContent.savefile.content.settings.color.foreground[index-3]<0)screenContent.savefile.content.settings.color.foreground[index-3]=0;
                     }
-                    else if(index>=6 && index<=8){
+                    else if(index===5){
+                        if(screen_settingsMenu.contrastCheck(-1,0)){
+                            screenContent.savefile.content.settings.color.foreground[index-3]--;
+                        }
+                    }
+                    else if(index===6 || index===7){
                         screenContent.savefile.content.settings.color.background[index-6]--;
                         if(screenContent.savefile.content.settings.color.background[index-6]<0)screenContent.savefile.content.settings.color.background[index-6]=0;
                     }
+                    else if(index===8){
+                        if(screen_settingsMenu.contrastCheck(0,-1)){
+                            screenContent.savefile.content.settings.color.background[index-6]--;
+                        }
+                    }
+                    color.setColor();
+                    
                 }
                 screen_settingsMenu.valueLoader(screenElement,screenContent);
                 screen_settingsMenu.upDownLoader(screenElement,screenContent,screen_settingsMenu.selectedSetting,true);
@@ -188,12 +212,16 @@ screen_settingsMenu={
         
         return endpromise;
     },
-    contrastCheck:function(){
-        /*let B= (savefile.settings.colour.background[0]*100 + savefile.settings.colour.background[1]*450 + savefile.settings.colour.background[2]*450)/1000; 
-        let P= (savefile.settings.colour.foreground[0]*100 + savefile.settings.colour.foreground[1]*450 + savefile.settings.colour.foreground[2]*450)/1000;
-        console.log(Math.round(Math.abs(B - P)));
-        if(Math.round(Math.abs(B - P))>0)*/return true;//Hetkel alati true ülemisi väärtusi ja 0 tuleb muuta
-        //else return false;
+    contrastCheck:function(FGoffset,BGoffset){
+        let FGL=(file.savefile.content.settings.color.foreground[2])+FGoffset;
+        let BGL=(file.savefile.content.settings.color.background[2])+BGoffset;
+        console.log(FGL-BGL,BGL,FGL);
+        if(FGL-BGL<15 || BGL<25 || FGL<40){
+            return false;
+        }
+        else{
+            return true;
+        }
     },
     upDownLoader:function(screenElement,screenContent,index,state){
 
@@ -202,12 +230,27 @@ screen_settingsMenu={
         var value;
         if(index===2) value=screenContent.savefile.content.settings.mgFrequency; 
 
-        else if(index>=3 && index<=5) value=screenContent.savefile.content.settings.color.foreground[index-3];
+        else if(index===3 || index===4) value=screenContent.savefile.content.settings.color.foreground[index-3];
     
-        else if(index>=6 && index<=8) value=screenContent.savefile.content.settings.color.background[index-6];
+        else if(index===6 || index===7) value=screenContent.savefile.content.settings.color.background[index-6];
+
+        else if(index===5){
+            if(!screen_settingsMenu.contrastCheck(-1,0) && !screen_settingsMenu.contrastCheck(1,0)) value="none";
+            else if(!screen_settingsMenu.contrastCheck(-1,0)) value=0;
+            else if(!screen_settingsMenu.contrastCheck(1,0)) value=100;
+        }
+
+        else if(index===8){
+            if(!screen_settingsMenu.contrastCheck(0,-1) && !screen_settingsMenu.contrastCheck(0,1)) value="none";
+            else if(!screen_settingsMenu.contrastCheck(0,-1)) value=0;
+            else if(!screen_settingsMenu.contrastCheck(0,1)) value=100;
+        }
 
         if(state){
-            if(value===0){
+            if(value==="none"){
+                screenElement.querySelector("#_"+index+render.strUID("_UID_menulistSettingArrow")).classList.add(render.strUID("UID_arrows-upDisabled"),render.strUID("UID_arrows-downDisabled"));
+            }
+            else if(value===0){
                 screenElement.querySelector("#_"+index+render.strUID("_UID_menulistSettingArrow")).classList.add(render.strUID("UID_arrows-upEnabled"),render.strUID("UID_arrows-downDisabled"));
             }
             else if(value===100){

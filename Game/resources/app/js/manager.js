@@ -1,9 +1,11 @@
 function startup() {
     
     //Load savefile and game JSON
+
     file.savefile.load();
     file.gamefile.load();
-    
+
+    color.setColor();
     //system.screen.displayScreen("settingsMenu",undefined);
 
     //See töötab
@@ -135,10 +137,10 @@ function gameOrderer(){
     }
     let count=gameOrder.length/file.savefile.content.settings.mgFrequency;
     for(i=0;i<count;i++){
-        if(file.savefile.content.settings.toggle[0]===1){//Kas mäng lubab vaja lisada
+        if(file.savefile.content.settings.toggle[0]===1 && file.gamefile.content.content[file.savefile.content.gameData.selectedGame].settings.minigames.mg1){
             gameOrder.push(-1);
         }
-        if(file.savefile.content.settings.toggle[1]===1){
+        if(file.savefile.content.settings.toggle[1]===1 && file.gamefile.content.content[file.savefile.content.gameData.selectedGame].settings.minigames.mg2){
             gameOrder.push(-2);
         }
     }
@@ -159,7 +161,7 @@ function shuffle(array) {
     }
     return array;
 }
-function startTimer(duration,timerLocationId,localTimerIds) {//Vaja promise peale üle teha
+function startTimer(duration,timerLocationId,localTimerIds) {
 
     return new Promise((resolve)=>{
         let timer = duration;
