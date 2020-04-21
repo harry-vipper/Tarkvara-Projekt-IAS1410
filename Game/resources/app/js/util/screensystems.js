@@ -277,11 +277,7 @@ system={
                     style='animation:_footer_kf '+time+'s cubic-bezier(0.13, 0, 0.87, 1) infinite';
                     styleTag.innerHTML=keyframes;
                     wrapperDiv.style.cssText=style;
-                    notify("time:"+ time, "draw");
-                    notify("dis:"+ scrollDistance, "draw");
-                    notify("abs dis:"+ Math.abs(scrollDistance), "draw");
-                    notify("ratio:"+ Math.abs(scrollDistance)/this.SCROLL_PIXELS_PER_SECOND, "draw");
-                    notify("calc: "+ (this.SCROLL_FADETIME/time), "draw");
+                    notify("Footer scroll calculation: time:" + time + " dis:" + scrollDistance + " ratio:"+ Math.abs(scrollDistance)/this.SCROLL_PIXELS_PER_SECOND + " calc: "+ (this.SCROLL_FADETIME/time), "draw");
                 }
                 else {
                     styleTag.innerHTML="";
