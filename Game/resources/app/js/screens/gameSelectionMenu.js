@@ -124,38 +124,37 @@ screen_gameSelectionMenu={
                 context.appendChild(menuListContainer);
 
                 let i=0;
-                screenContent.gamefile.content.content.forEach((entry)=>{
+                screenContent.gamefile.content.forEach((entry)=>{
                     entry.index=i;
                     i++;
                     menuListContainer.appendChild(render.menuEntry.create(entry));
                 })
-                screenContent.savefile.content.gameData.selectedGame=0;
-                    render.menuEntry.activate(screenContent.savefile.content.gameData.selectedGame);
+                screenContent.savefile.gameData.selectedGame=0;
+                    render.menuEntry.activate(screenContent.savefile.gameData.selectedGame);
                 return render.fade.in(context);
             }).then(
                 ()=>{
 
-                    controls.key.set('up', 0, ()=>{selectGame('-');}, "Eelmine");
-                    controls.key.set('down', 0, ()=>{selectGame('+');}, "Järgmine");
-                    controls.key.set('confirm', 0, ()=>{end({type:"startGame"});}, "Alusta");
-                    controls.key.set('left', 0, ()=>{end({type:"settingsMenu"});}, "Seaded");
-
+                    controls.key.set('up', 0, ()=>{selectGame('-');}, screenContent.languagefile["9"][screenContent.savefile.settings.language]);
+                    controls.key.set('down', 0, ()=>{selectGame('+');}, screenContent.languagefile["10"][screenContent.savefile.settings.language]);
+                    controls.key.set('confirm', 1000, ()=>{end({type:"startGame"});}, screenContent.languagefile["11"][screenContent.savefile.settings.language]);
+                    controls.key.set('left', 0, ()=>{end({type:"settingsMenu"});}, screenContent.languagefile["12"][screenContent.savefile.settings.language]);
 
                     const scroller = new SweetScroll();
                     
                     function selectGame(direction) {
-                        render.menuEntry.deactivate(screenContent.savefile.content.gameData.selectedGame);
-                        screenContent.savefile.content.gameData.selectedGame=calcNextIndex(
+                        render.menuEntry.deactivate(screenContent.savefile.gameData.selectedGame);
+                        screenContent.savefile.gameData.selectedGame=calcNextIndex(
                             direction, 
-                            screenContent.savefile.content.gameData.selectedGame, 
-                            screenContent.gamefile.content.content.length
+                            screenContent.savefile.gameData.selectedGame, 
+                            screenContent.gamefile.content.length
                         );
-                        //document.getElementById(screenContent.savefile.content.gameData.selectedGame+render.strUID("_UID_header_title")).scrollIntoView();
+                        //document.getElementById(screenContent.savefile.gameData.selectedGame+render.strUID("_UID_header_title")).scrollIntoView();
                         
-                        let elementId="_"+screenContent.savefile.content.gameData.selectedGame+render.strUID("_UID_element");
+                        let elementId="_"+screenContent.savefile.gameData.selectedGame+render.strUID("_UID_element");
                         
                         
-                        render.menuEntry.activate(screenContent.savefile.content.gameData.selectedGame);
+                        render.menuEntry.activate(screenContent.savefile.gameData.selectedGame);
                         scroller.to(
                             ("#"+elementId)
                         )

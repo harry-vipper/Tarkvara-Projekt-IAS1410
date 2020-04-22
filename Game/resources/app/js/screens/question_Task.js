@@ -21,13 +21,6 @@ screen_question_task={
     UID   
     */
     {
-
-    /*    
-    screenSettings["colors"].bgcolor=new screenSettings["colors"].Color100(settings.color.background[0],settings.color.background[1],settings.color.background[2]);
-    screenSettings["colors"].fgcolor=new screenSettings["colors"].Color100(settings.color.foreground[0],settings.color.foreground[1],settings.color.foreground[2]);
-    let palette=screenSettings["colors"].palette;
-    palette=screenSettings["colors"].getPalette(screenSettings["colors"].fgcolor, screenSettings["colors"].bgcolor);
-    */
     var end;
     var endpromise=new Promise((resolve) =>{
            end=resolve;
@@ -59,20 +52,26 @@ screen_question_task={
     }
     ).then(()=>{
 
-        controls.key.set("up",1000,()=>{end({type: "gameSelectionMenu", value: null});},"Exit Game");
-        controls.key.set("left",0,()=>{end({type: "nextScreen", value: "last"});},"Previous Question");
-        controls.key.set("right",0,()=>{end({type: "nextScreen", value: "next"});},"Next Question");
+        controls.key.set("up",1000,()=>{end({type: "gameSelectionMenu", value: null});},screenContent.languagefile[6][screenContent.savefile.settings.language]);
+        controls.key.set("left",1000,()=>{end({type: "nextScreen", value: "last"});},screenContent.languagefile[7][screenContent.savefile.settings.language]);
+        controls.key.set("right",1000,()=>{end({type: "nextScreen", value: "next"});},screenContent.languagefile[8][screenContent.savefile.settings.language]);
         return startTimer(screenSettings.duration,UID+"_timer",localTimerIds);
     }
     ).then(()=>{
-        console.log("Timer done!!");
         return end({type: "nextScreen", value: "next"})
     });
     return endpromise;
     },
     setContent:function(screenElement,screenContent,UID){
         //Paneb õige sisu
-        screenElement.querySelector("#"+UID+"_listHeaderTitle").innerHTML="<p>"+screenContent.type.toUpperCase()+"</p>";
+        let type;
+        if(screenContent.type.toUpperCase()==="QUESTION"){
+            type=screenContent.languagefile[1][screenContent.savefile.settings.language];
+        }
+        else if(screenContent.type.toUpperCase()==="TASK"){
+            type=screenContent.languagefile[2][screenContent.savefile.settings.language];
+        }
+        screenElement.querySelector("#"+UID+"_listHeaderTitle").innerHTML="<p>"+type+"</p>";
         screenElement.querySelector("#"+UID+"_listHeaderNumber").innerHTML="<p>"+screenContent.number+"</p>";
         screenElement.querySelector("#"+UID+"_listDescriptionText").innerHTML="<p>"+screenContent.content+"</p>";
     },

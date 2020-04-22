@@ -1,29 +1,3 @@
-/*function clearTimers(localTimerIds){
-    for(i=0;i<localTimerIds.length;i++){
-        clearInterval(localTimerIds[i])
-    }
-    localTimerIds.length=0;
-}
-
-function clearStyle(){
-    document.getElementById("styleId").innerHTML="";
-}
-
-function clearFooter(){
-    document.getElementById("footerId").innerHTML="";
-}
-
-function clearBody(){
-    document.getElementById("bodyId").innerHTML="";
-}
-function exitScreen(whatNext) {
-    clearTimers(localTimerIds);
-    controls.key.clear.byKey("all");
-    clearFooter();
-    clearStyle()
-    clearBody();
-    logicController(whatNext);
-}*/
 var system;
 system={
     screen: {
@@ -36,7 +10,7 @@ system={
                         controls,
                         {
                             icon:"bolt",
-                            text:"REACTION TEST",
+                            text:file.languagefile.content["4"][file.savefile.content.settings.language],
                             movetime:900,
                             staytime:3000,
                         }
@@ -52,7 +26,10 @@ system={
                             document.getElementById("screenContainer"),
                             document.getElementById("screenStyleContainer"),
                             controls,
-                            null,
+                            {
+                                savefile: file.savefile.content,
+                                languagefile: file.languagefile.content
+                            },
                             system.screen.timers.localTimerIds,
                             null,
                             render,
@@ -68,7 +45,7 @@ system={
                         controls,
                         {
                             icon:"arrow",
-                            text:"TRUTH OR DARE",
+                            text:file.languagefile.content["3"][file.savefile.content.settings.language],
                             movetime:900,
                             staytime:3000,
                         }
@@ -84,7 +61,10 @@ system={
                             document.getElementById("screenContainer"),
                             document.getElementById("screenStyleContainer"),
                             controls,
-                            null,
+                            {
+                                savefile: file.savefile.content,
+                                languagefile: file.languagefile.content
+                            },
                             system.screen.timers.localTimerIds,
                             null,
                             render,
@@ -99,13 +79,12 @@ system={
                         document.getElementById("screenStyleContainer"),
                         controls,
                         {
-                            gamefile: file.gamefile,
-                            savefile: file.savefile
+                            gamefile: file.gamefile.content,
+                            savefile: file.savefile.content,
+                            languagefile: file.languagefile.content
                         },
                         system.screen.timers.localTimerIds,
-                        {
-                            duration:30,
-                        },
+                        null,
                         render,
                         system.screen.UID.generate()
                     ).then((output)=>{
@@ -118,11 +97,10 @@ system={
                         controls,
                         {
                             icon:"exclamationmark",
-                            text:"Mäng läbi",
+                            text:file.languagefile.content["5"][file.savefile.content.settings.language],
                             movetime:900,
                             staytime:3000,
-                        }
-                        ,
+                        },
                         system.screen.timers.localTimerIds,
                         null,
                         render,
@@ -135,8 +113,9 @@ system={
                             document.getElementById("screenStyleContainer"),
                             controls,
                             {
-                                gamefile: file.gamefile,
-                                savefile: file.savefile
+                                gamefile: file.gamefile.content,
+                                savefile: file.savefile.content,
+                                languagefile: file.languagefile.content
                             },
                             system.screen.timers.localTimerIds,
                             null,
@@ -146,18 +125,19 @@ system={
                     }).then((output)=>{
                             return render.fade.out(document.getElementById("screenContainer")).then(()=>{this.destroy();return output;});
                     });
-                case "game-element-question":
+                case "game-element-question-task":
                     return screens.question_task.handler(
                         document.getElementById("screenContainer"),
                         document.getElementById("screenStyleContainer"),
                         controls,
-                        {
+                        {   
+                            languagefile:file.languagefile.content,
+                            savefile:file.savefile.content,
                             type:file.gamefile.content.content[file.savefile.content.gameData.selectedGame].contentElements[file.savefile.content.gameData.gameOrder[file.savefile.content.gameData.currentQuestion]].type,
                             number:(file.savefile.content.gameData.currentQuestion+1),
                             content:file.gamefile.content.content[file.savefile.content.gameData.selectedGame].contentElements[file.savefile.content.gameData.gameOrder[file.savefile.content.gameData.currentQuestion]].str,
                         },
                         system.screen.timers.localTimerIds,
-                        //system.settings
                         {
                             duration:file.gamefile.content.content[file.savefile.content.gameData.selectedGame].settings.contentElementDuration,
                         },
@@ -173,12 +153,9 @@ system={
                         document.getElementById("screenStyleContainer"),
                         controls,
                         {
-                            time:"12:32",
-                            date:"09/04/19",
-                            condition:"konditsioon",
-                            title:"Viimase mängu nimi",
-                        }
-                        ,
+                            savefile: file.savefile.content,
+                            languagefile: file.languagefile.content
+                        },
                         system.screen.timers.localTimerIds,
                         null,
                         render,
@@ -193,8 +170,9 @@ system={
                         document.getElementById("screenStyleContainer"),
                         controls,
                         {
-                            gamefile: file.gamefile,
-                            savefile: file.savefile
+                            gamefile: file.gamefile.content,
+                            savefile: file.savefile.content,
+                            languagefile: file.languagefile.content
                         },
                         system.screen.timers.localTimerIds,
                         null,
@@ -336,7 +314,7 @@ system={
                         document.getElementById("footer_scrollWrapper").innerHTML+=`
                         <div id="footerElementGroupHold" class="footerElementGroup">
                             <div class="footerElementGroupTitle">
-                                <p>HOIA:</p>
+                                <p>`+file.languagefile.content["33"][file.savefile.content.settings.language]+`:</p>
                             </div>
                             <div class="footerElement">
                                 <div class="footerElementIcon">`+icon+`</div>
@@ -358,7 +336,7 @@ system={
                         document.getElementById("footer_scrollWrapper").innerHTML+=`
                         <div id="footerElementGroupPress" class="footerElementGroup">
                             <div class="footerElementGroupTitle">
-                                <p>VAJUTA:</p>
+                                <p>`+file.languagefile.content["34"][file.savefile.content.settings.language]+`:</p>
                             </div>
                             <div class="footerElement">
                                 <div class="footerElementIcon">`+icon+`</div>

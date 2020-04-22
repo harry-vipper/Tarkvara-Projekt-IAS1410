@@ -9,11 +9,6 @@ screen_truth_or_dare={
         render,
         UID,
     ){
-    /*screenSettings["colors"].bgcolor=new screenSettings["colors"].Color100(settings.color.background[0],settings.color.background[1],settings.color.background[2]);
-    screenSettings["colors"].fgcolor=new screenSettings["colors"].Color100(settings.color.foreground[0],settings.color.foreground[1],settings.color.foreground[2]);
-    var palette=screenSettings["colors"].palette;
-    palette=screenSettings["colors"].getPalette(screenSettings["colors"].fgcolor, screenSettings["colors"].bgcolor);
-    */
     var end;
     var endpromise=new Promise((resolve) =>{
           end=resolve;
@@ -62,9 +57,9 @@ screen_truth_or_dare={
                 }, MG_SETTINGS.rollTime));
             }, MG_SETTINGS.fadeTime+MG_SETTINGS.inBetweenTime));
         }
-        controls.key.set("left",0,()=>{end({type: "nextScreen", value: "last"});} , "Previous");
-        controls.key.set("right",0, ()=>{end({type: "nextScreen", value: "next"});}, "Next");
-        controls.key.set("up",1000,()=>{end({type: "gameSelectionMenu", value: null});},"Exit Game");
+        controls.key.set("up",1000,()=>{end({type: "gameSelectionMenu", value: null});},screenContent.languagefile[6][screenContent.savefile.settings.language]);
+        controls.key.set("left",1000,()=>{end({type: "nextScreen", value: "last"});},screenContent.languagefile[7][screenContent.savefile.settings.language]);
+        controls.key.set("right",1000,()=>{end({type: "nextScreen", value: "next"});},screenContent.languagefile[8][screenContent.savefile.settings.language]);
         controls.key.set("confirm",0, screen_startMinigame,"Start");
         });
 

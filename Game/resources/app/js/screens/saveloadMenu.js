@@ -11,23 +11,7 @@ screen_saveloadMenu={
         render,
         UID,             
     )
-    /*
-    context,      <div> to draw into
-    style,          <style> to send styles to
-    controls,       controls object with methods to handle controls
-    screenContent,  data passed to screen, in any format, possibly suitable to this screen only
-    localTimerIds,  Array of active timers
-    screenSettings, settings like colors
-    UID   
-    */
     {
-
-    /*    
-    screenSettings["colors"].bgcolor=new screenSettings["colors"].Color100(settings.color.background[0],settings.color.background[1],settings.color.background[2]);
-    screenSettings["colors"].fgcolor=new screenSettings["colors"].Color100(settings.color.foreground[0],settings.color.foreground[1],settings.color.foreground[2]);
-    let palette=screenSettings["colors"].palette;
-    palette=screenSettings["colors"].getPalette(screenSettings["colors"].fgcolor, screenSettings["colors"].bgcolor);
-    */
     var end;
     var endpromise=new Promise((resolve) =>{
            end=resolve;
@@ -59,17 +43,17 @@ screen_saveloadMenu={
     }
     ).then(()=>{
         let choice=0;
-        controls.key.set("up",0,()=>{changeChoice();},"Move Up");
-        controls.key.set("down",0,()=>{changeChoice();},"Move Down");
-        controls.key.set("confirm",0,()=>{end({type: "choiceMade", value: choice});},"Confirm Choice");
+        controls.key.set("up",0,()=>{changeChoice();},lastCondition=screenContent.languagefile["9"][screenContent.savefile.settings.language]);
+        controls.key.set("down",0,()=>{changeChoice();},lastCondition=screenContent.languagefile["10"][screenContent.savefile.settings.language]);
+        controls.key.set("confirm",0,()=>{end({type: "choiceMade", value: choice});},lastCondition=screenContent.languagefile["17"][screenContent.savefile.settings.language]);
 
         function changeChoice(){
-            document.getElementById(choice+"_"+UID+"_header_title").classList.remove(UID+"_menulistHeaderActive");
+            document.getElementById("_"+choice+"_"+UID+"_header_title").classList.remove(UID+"_menulistHeaderActive");
 
             if(choice===0)choice=1;
             else if(choice===1)choice=0;
             
-            document.getElementById(choice+"_"+UID+"_header_title").classList.add(UID+"_menulistHeaderActive");
+            document.getElementById("_"+choice+"_"+UID+"_header_title").classList.add(UID+"_menulistHeaderActive");
             return choice;            
         }
         
@@ -78,37 +62,49 @@ screen_saveloadMenu={
     },
     setContent:function(screenElement,screenContent,UID){
         //Paneb õige sisu
-        screenElement.querySelector("#"+UID+"_lastGame_title").innerHTML=screenContent.title.toUpperCase();
-        screenElement.querySelector("#"+UID+"_lastGame_time").innerHTML=screenContent.time;
-        screenElement.querySelector("#"+UID+"_lastGame_date").innerHTML=screenContent.date;
-        screenElement.querySelector("#"+UID+"_lastGame_condition").innerHTML=screenContent.condition;
+        let lastCondition=undefined;
+        if(screenContent.savefile.lastGame.condition===0){
+            lastCondition=screenContent.languagefile["38"][screenContent.savefile.settings.language];
+        }
+        if(screenContent.savefile.lastGame.condition===1){
+            lastCondition=screenContent.languagefile["39"][screenContent.savefile.settings.language];
+        }
+        if(screenContent.savefile.lastGame.condition===2){
+            lastCondition=screenContent.languagefile["40"][screenContent.savefile.settings.language];
+        }
+        if(screenContent.savefile.lastGame.condition===3){
+            lastCondition=screenContent.languagefile["41"][screenContent.savefile.settings.language];
+        }
+        screenElement.querySelector("#_"+UID+"_menulistDescriptionText").innerHTML=`<p>
+            `+screenContent.languagefile["35"][screenContent.savefile.settings.language]+`
+            <br><span class="UID_menulistDescriptionText_title" id="UID_lastGame_title">`+screenContent.savefile.lastGame.title.toUpperCase()+`</span><br><br>
+            `+screenContent.languagefile["36"][screenContent.savefile.settings.language]+`: <span class="UID_menulistDescriptionText_time" id="UID_lastGame_time">`+screenContent.savefile.lastGame.time+` </span>
+            <span class="UID_menulistDescriptionText_date" id="UID_lastGame_date">`+screenContent.savefile.lastGame.date+`</span><br><br>
+            `+screenContent.languagefile["37"][screenContent.savefile.settings.language]+`
+            <span class="UID_menulistDescriptionText_condition" id="UID_lastGame_condition">`+lastCondition+`</span>
+        </p>`;
+        screenElement.querySelector("#_0_"+UID+"_header_title").innerHTML="<p>"+screenContent.languagefile["42"][screenContent.savefile.settings.language]+"</p>";
+        screenElement.querySelector("#_1_"+UID+"_header_title").innerHTML="<p>"+screenContent.languagefile["43"][screenContent.savefile.settings.language]+"</p>";
     },
     HTMLbase:`
     <div id="UID_menulistContainer">
     <div class="UID_menulistItem">
         <div class="UID_menulistHeader">
-            <div class="UID_menulistHeaderTitle UID_menulistHeaderActive" id="0_UID_header_title">
-                <p>JÄTKA VIIMAST MÄNGU</p>
+            <div class="UID_menulistHeaderTitle UID_menulistHeaderActive" id="_0_UID_header_title">
+                <p>LAST</p>
             </div>
         </div>
         <div class="UID_menulistDescriptionBackground">
             <div class="UID_menulistDescription">
-                <div class="UID_menulistDescriptionText">
-                    <p>
-                        Viimati mängisid mängu
-                        <br><span class="UID_menulistDescriptionText_title" id="UID_lastGame_title">Bruh</span><br><br>
-                        Kell <span class="UID_menulistDescriptionText_time" id="UID_lastGame_time">13:37</span> <span class="UID_menulistDescriptionText_date" id="UID_lastGame_date">30. veebruaril</span><br><br>
-                        Sa olid tõenäoliselt
-                        <span class="UID_menulistDescriptionText_condition" id="UID_lastGame_condition">lappes</span>
-                    </p>
+                <div class="UID_menulistDescriptionText" id="_UID_menulistDescriptionText">
                 </div>
             </div>
         </div>
     </div>
     <div class="UID_menulistItem">
         <div class="UID_menulistHeader">
-            <div class="UID_menulistHeaderTitle" id="1_UID_header_title">
-                <p>ALUSTA UUT</p>
+            <div class="UID_menulistHeaderTitle" id="_1_UID_header_title">
+                <p>NEW</p>
             </div>
         </div>
     </div>

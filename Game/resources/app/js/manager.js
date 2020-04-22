@@ -4,11 +4,10 @@ function startup() {
 
     file.savefile.load();
     file.gamefile.load();
+    file.languagefile.load();
 
     color.setColor();
-    //system.screen.displayScreen("settingsMenu",undefined);
 
-    //See töötab
     //Always
     
     var lastScreenPromise=new Promise((resolve)=>{resolve()});
@@ -40,7 +39,7 @@ function startup() {
        
         }
         else{
-            return system.screen.displayScreen("game-element-question", undefined);
+            return system.screen.displayScreen("game-element-question-task", undefined);
         }
     }
     
@@ -64,6 +63,8 @@ function startup() {
                 file.savefile.content.gameData.state=2;
                 file.savefile.content.gameData.currentQuestion=0;
                 file.savefile.content.gameData.gameOrder=gameOrderer();
+                file.savefile.content.lastGame.title=file.gamefile.content.content[file.savefile.content.gameData.selectedGame].properties.title;
+                file.savefile.content.lastGame.condition=file.gamefile.content.content[file.savefile.content.gameData.selectedGame].properties.condition;
 
                 return typeFinder();
             }

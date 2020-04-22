@@ -209,6 +209,12 @@ span.UID_menulistDescriptionPropertiesElementValue-small {
     width: 1.5em;
     text-align: right;
 }
+.UID_menulistSettingValueTextLanguage p {
+    font-size: 2.5em;
+    margin: 0.2em 0.4em;
+    width: 2.5em;
+    text-align: right;
+}
 
 .UID_menulistSettingValueArrows {
     position: relative;

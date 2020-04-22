@@ -65,10 +65,10 @@ screen_settingsMenu={
             return render.fade.in(context);
         }).then(()=>{
 
-            controls.key.set('up', 0, ()=>{changeSetting('-');}, "Eelmine");
-            controls.key.set('down', 0, ()=>{changeSetting('+');}, "Järgmine");
-            controls.key.set('confirm', 0, ()=>{selectSetting();}, "Vali");
-            controls.key.set('left', 1000, ()=>{end({type:"gameSelectionMenu"});}, "Peamenüü");
+            controls.key.set('up', 0, ()=>{changeSetting('-');}, screenContent.languagefile["9"][screenContent.savefile.settings.language]);
+            controls.key.set('down', 0, ()=>{changeSetting('+');}, screenContent.languagefile["10"][screenContent.savefile.settings.language]);
+            controls.key.set('confirm', 0, ()=>{selectSetting();}, screenContent.languagefile["13"][screenContent.savefile.settings.language]);
+            controls.key.set('left', 0, ()=>{end({type:"gameSelectionMenu"});}, screenContent.languagefile["14"][screenContent.savefile.settings.language]);
             
             const scroller = new SweetScroll();
             
@@ -77,7 +77,7 @@ screen_settingsMenu={
                 screen_settingsMenu.selectedSetting=calcNextIndex(
                     direction, 
                     screen_settingsMenu.selectedSetting, 
-                    9
+                    10
                 );
                 
                 if(screen_settingsMenu.selectedSetting>=3){
@@ -114,27 +114,38 @@ screen_settingsMenu={
             }
             function selectSetting(){
                 if(screen_settingsMenu.selectedSetting<=1){
-                    if(screenContent.savefile.content.settings.toggle[screen_settingsMenu.selectedSetting]){
-                        screenContent.savefile.content.settings.toggle[screen_settingsMenu.selectedSetting]=0;
+                    if(screenContent.savefile.settings.toggle[screen_settingsMenu.selectedSetting]){
+                        screenContent.savefile.settings.toggle[screen_settingsMenu.selectedSetting]=0;
                     }
                     else {
-                        screenContent.savefile.content.settings.toggle[screen_settingsMenu.selectedSetting]=1;
+                        screenContent.savefile.settings.toggle[screen_settingsMenu.selectedSetting]=1;
                     }
                     screen_settingsMenu.toggleLoader(screenElement,screenContent);
                 }
+                else if(screen_settingsMenu.selectedSetting===9){
+                    if(screenContent.savefile.settings.language==="ENG")screenContent.savefile.settings.language="EST";
+                    else if(screenContent.savefile.settings.language==="EST")screenContent.savefile.settings.language="ENG"
+                    screen_settingsMenu.languageLoader(screenElement,screenContent);
+                    controls.key.clear.byKey("all");
+                    system.screen.footer.clear();
+                    controls.key.set('up', 0, ()=>{changeSetting('-');}, screenContent.languagefile["9"][screenContent.savefile.settings.language]);
+                    controls.key.set('down', 0, ()=>{changeSetting('+');}, screenContent.languagefile["10"][screenContent.savefile.settings.language]);
+                    controls.key.set('confirm', 0, ()=>{selectSetting();}, screenContent.languagefile["13"][screenContent.savefile.settings.language]);
+                    controls.key.set('left', 0, ()=>{end({type:"gameSelectionMenu"});}, screenContent.languagefile["14"][screenContent.savefile.settings.language]);
+                }
                 else{
                     if(screen_settingsMenu.settingSelected){
-                        let contrast=screen_settingsMenu.contrastCheck(0,0);
+                        let contrast=screen_settingsMenu.contrastCheck(0,0,screenContent);
                         if(contrast===true){
                             controls.key.clear.byKey("all");
                             system.screen.footer.clear();
                             screen_settingsMenu.upDownLoader(screenElement,screenContent,screen_settingsMenu.selectedSetting,false);
                             screen_settingsMenu.settingSelected=false;
         
-                            controls.key.set('up', 0, ()=>{changeSetting('-');}, "Eelmine");
-                            controls.key.set('down', 0, ()=>{changeSetting('+');}, "Järgmine");
-                            controls.key.set('confirm', 0, ()=>{selectSetting();}, "Vali");
-                            controls.key.set('left', 1000, ()=>{end({type:"gameSelectionMenu"});}, "Peamenüü");
+                            controls.key.set('up', 0, ()=>{changeSetting('-');}, screenContent.languagefile["9"][screenContent.savefile.settings.language]);
+                            controls.key.set('down', 0, ()=>{changeSetting('+');}, screenContent.languagefile["10"][screenContent.savefile.settings.language]);
+                            controls.key.set('confirm', 0, ()=>{selectSetting();}, screenContent.languagefile["13"][screenContent.savefile.settings.language]);
+                            controls.key.set('left', 0, ()=>{end({type:"gameSelectionMenu"});}, screenContent.languagefile["14"][screenContent.savefile.settings.language]);
                         }
                        
                     }
@@ -144,9 +155,9 @@ screen_settingsMenu={
                         screen_settingsMenu.upDownLoader(screenElement,screenContent,screen_settingsMenu.selectedSetting,true);
                         screen_settingsMenu.settingSelected=true;
                         
-                        controls.key.set('up', 0, ()=>{changeValue('+',screen_settingsMenu.selectedSetting);}, "Suurneda");
-                        controls.key.set('down', 0, ()=>{changeValue('-',screen_settingsMenu.selectedSetting);}, "Vähenda");
-                        controls.key.set('confirm', 0, ()=>{selectSetting();}, "Kinnita");
+                        controls.key.set('up', 0, ()=>{changeValue('+',screen_settingsMenu.selectedSetting);}, screenContent.languagefile["15"][screenContent.savefile.settings.language]);
+                        controls.key.set('down', 0, ()=>{changeValue('-',screen_settingsMenu.selectedSetting);}, screenContent.languagefile["16"][screenContent.savefile.settings.language]);
+                        controls.key.set('confirm', 0, ()=>{selectSetting();}, screenContent.languagefile["17"][screenContent.savefile.settings.language]);
                     }
                 }
 
@@ -154,52 +165,53 @@ screen_settingsMenu={
             function changeValue(direction,index){
                 if(index===2){
                     if(direction==="+"){
-                        screenContent.savefile.content.settings.mgFrequency++;
-                        if(screenContent.savefile.content.settings.mgFrequency>100)screenContent.savefile.content.settings.mgFrequency=100;
+                        screenContent.savefile.settings.mgFrequency++;
+                        if(screenContent.savefile.settings.mgFrequency>100)screenContent.savefile.settings.mgFrequency=100;
                     }
                     else if(direction==="-"){
-                        screenContent.savefile.content.settings.mgFrequency--;
-                        if(screenContent.savefile.content.settings.mgFrequency<0)screenContent.savefile.content.settings.mgFrequency=0;
+                        screenContent.savefile.settings.mgFrequency--;
+                        if(screenContent.savefile.settings.mgFrequency<1)screenContent.savefile.settings.mgFrequency=1;
                     }
+                    screen_settingsMenu.minigameFrequencyLoader(screenElement,screenContent);
                 }
                 else if(direction==="+"){
                     if(index===3 || index===4){
-                        screenContent.savefile.content.settings.color.foreground[index-3]++;
-                        if(screenContent.savefile.content.settings.color.foreground[index-3]>100)screenContent.savefile.content.settings.color.foreground[index-3]=100;
+                        screenContent.savefile.settings.color.foreground[index-3]++;
+                        if(screenContent.savefile.settings.color.foreground[index-3]>100)screenContent.savefile.settings.color.foreground[index-3]=100;
                     }
                     else if(index===5){
-                        if(screen_settingsMenu.contrastCheck(1,0)){
-                            screenContent.savefile.content.settings.color.foreground[index-3]++;
+                        if(screen_settingsMenu.contrastCheck(1,0,screenContent)){
+                            screenContent.savefile.settings.color.foreground[index-3]++;
                         }
                     }
                     else if(index===6 || index===7){
-                        screenContent.savefile.content.settings.color.background[index-6]++;
-                        if(screenContent.savefile.content.settings.color.background[index-6]>100)screenContent.savefile.content.settings.color.background[index-6]=100;
+                        screenContent.savefile.settings.color.background[index-6]++;
+                        if(screenContent.savefile.settings.color.background[index-6]>100)screenContent.savefile.settings.color.background[index-6]=100;
                     }
                     else if(index===8){
-                        if(screen_settingsMenu.contrastCheck(0,1)){
-                            screenContent.savefile.content.settings.color.background[index-6]++;
+                        if(screen_settingsMenu.contrastCheck(0,1,screenContent)){
+                            screenContent.savefile.settings.color.background[index-6]++;
                         }
                     }
                     color.setColor();
                 }
                 else if(direction==="-"){
                     if(index===3 || index===4){
-                        screenContent.savefile.content.settings.color.foreground[index-3]--;
-                        if(screenContent.savefile.content.settings.color.foreground[index-3]<0)screenContent.savefile.content.settings.color.foreground[index-3]=0;
+                        screenContent.savefile.settings.color.foreground[index-3]--;
+                        if(screenContent.savefile.settings.color.foreground[index-3]<0)screenContent.savefile.settings.color.foreground[index-3]=0;
                     }
                     else if(index===5){
-                        if(screen_settingsMenu.contrastCheck(-1,0)){
-                            screenContent.savefile.content.settings.color.foreground[index-3]--;
+                        if(screen_settingsMenu.contrastCheck(-1,0,screenContent)){
+                            screenContent.savefile.settings.color.foreground[index-3]--;
                         }
                     }
                     else if(index===6 || index===7){
-                        screenContent.savefile.content.settings.color.background[index-6]--;
-                        if(screenContent.savefile.content.settings.color.background[index-6]<0)screenContent.savefile.content.settings.color.background[index-6]=0;
+                        screenContent.savefile.settings.color.background[index-6]--;
+                        if(screenContent.savefile.settings.color.background[index-6]<0)screenContent.savefile.settings.color.background[index-6]=0;
                     }
                     else if(index===8){
-                        if(screen_settingsMenu.contrastCheck(0,-1)){
-                            screenContent.savefile.content.settings.color.background[index-6]--;
+                        if(screen_settingsMenu.contrastCheck(0,-1,screenContent)){
+                            screenContent.savefile.settings.color.background[index-6]--;
                         }
                     }
                     color.setColor();
@@ -212,9 +224,9 @@ screen_settingsMenu={
         
         return endpromise;
     },
-    contrastCheck:function(FGoffset,BGoffset){
-        let FGL=(file.savefile.content.settings.color.foreground[2])+FGoffset;
-        let BGL=(file.savefile.content.settings.color.background[2])+BGoffset;
+    contrastCheck:function(FGoffset,BGoffset,screenContent){
+        let FGL=(screenContent.savefile.settings.color.foreground[2])+FGoffset;
+        let BGL=(screenContent.savefile.settings.color.background[2])+BGoffset;
         console.log(FGL-BGL,BGL,FGL);
         if(FGL-BGL<15 || BGL<25 || FGL<40){
             return false;
@@ -228,22 +240,25 @@ screen_settingsMenu={
         screenElement.querySelector("#_"+index+render.strUID("_UID_menulistSettingArrow")).classList.remove(render.strUID("UID_arrows-upEnabled"),render.strUID("UID_arrows-upDisabled"),render.strUID("UID_arrows-downEnabled"),render.strUID("UID_arrows-downDisabled"));
         
         var value;
-        if(index===2) value=screenContent.savefile.content.settings.mgFrequency; 
+        if(index===2){
+            if(screenContent.savefile.settings.mgFrequency===1) value=0;
+            else value=screenContent.savefile.settings.mgFrequency;
 
-        else if(index===3 || index===4) value=screenContent.savefile.content.settings.color.foreground[index-3];
+        }
+        else if(index===3 || index===4) value=screenContent.savefile.settings.color.foreground[index-3];
     
-        else if(index===6 || index===7) value=screenContent.savefile.content.settings.color.background[index-6];
+        else if(index===6 || index===7) value=screenContent.savefile.settings.color.background[index-6];
 
         else if(index===5){
-            if(!screen_settingsMenu.contrastCheck(-1,0) && !screen_settingsMenu.contrastCheck(1,0)) value="none";
-            else if(!screen_settingsMenu.contrastCheck(-1,0)) value=0;
-            else if(!screen_settingsMenu.contrastCheck(1,0)) value=100;
+            if(!screen_settingsMenu.contrastCheck(-1,0,screenContent) && !screen_settingsMenu.contrastCheck(1,0,screenContent)) value="none";
+            else if(!screen_settingsMenu.contrastCheck(-1,0,screenContent)) value=0;
+            else if(!screen_settingsMenu.contrastCheck(1,0,screenContent)) value=100;
         }
 
         else if(index===8){
-            if(!screen_settingsMenu.contrastCheck(0,-1) && !screen_settingsMenu.contrastCheck(0,1)) value="none";
-            else if(!screen_settingsMenu.contrastCheck(0,-1)) value=0;
-            else if(!screen_settingsMenu.contrastCheck(0,1)) value=100;
+            if(!screen_settingsMenu.contrastCheck(0,-1,screenContent) && !screen_settingsMenu.contrastCheck(0,1,screenContent)) value="none";
+            else if(!screen_settingsMenu.contrastCheck(0,-1,screenContent)) value=0;
+            else if(!screen_settingsMenu.contrastCheck(0,1,screenContent)) value=100;
         }
 
         if(state){
@@ -269,7 +284,7 @@ screen_settingsMenu={
         screenElement.querySelector("#_0"+render.strUID("_UID_menulistSettingSwitch")).classList.remove(render.strUID("UID_switch-on"),render.strUID("UID_switch-off"));
         screenElement.querySelector("#_1"+render.strUID("_UID_menulistSettingSwitch")).classList.remove(render.strUID("UID_switch-on"),render.strUID("UID_switch-off"));
         for(i=0;i<2;i++){
-            if(screenContent.savefile.content.settings.toggle[i]){
+            if(screenContent.savefile.settings.toggle[i]){
                 screenElement.querySelector("#_"+i+render.strUID("_UID_menulistSettingSwitch")).innerHTML=`<use xlink:href="#i-slider-on" />`;
                 screenElement.querySelector("#_"+i+render.strUID("_UID_menulistSettingSwitch")).classList.add(render.strUID("UID_switch-on"));
             }
@@ -281,20 +296,67 @@ screen_settingsMenu={
         return 0;
     },
     valueLoader:function(screenElement,screenContent){
-        screenElement.querySelector("#_2"+render.strUID("_UID_setting_value")).innerHTML=screenContent.savefile.content.settings.mgFrequency;
+        screenElement.querySelector("#_2"+render.strUID("_UID_setting_value")).innerHTML=screenContent.savefile.settings.mgFrequency;
         for(i=3;i<=8;i++){
             if(i<=5){
-                screenElement.querySelector("#_"+i+render.strUID("_UID_setting_value")).innerHTML=screenContent.savefile.content.settings.color.foreground[i-3];
+                screenElement.querySelector("#_"+i+render.strUID("_UID_setting_value")).innerHTML=screenContent.savefile.settings.color.foreground[i-3];
             }
             else{
-                screenElement.querySelector("#_"+i+render.strUID("_UID_setting_value")).innerHTML=screenContent.savefile.content.settings.color.background[i-6];
+                screenElement.querySelector("#_"+i+render.strUID("_UID_setting_value")).innerHTML=screenContent.savefile.settings.color.background[i-6];
             } 
         }
         return 0;
     },
+    minigameFrequencyLoader:function(screenElement,screenContent){
+        let str=screenContent.languagefile["28"][screenContent.savefile.settings.language];
+        str=str.split("###").join((screenContent.savefile.settings.mgFrequency).toString());
+        screenElement.querySelector("#"+render.strUID("_2_UID_header_description_text")).innerHTML="<p>"+str+"</p>";
+    },
+    languageLoader:function(screenElement,screenContent){
+        screenElement.querySelector("#"+render.strUID("UID_menuHeaderTitle")).innerHTML="<p>"+screenContent.languagefile["18"][screenContent.savefile.settings.language]+"</p>";//settings
+
+
+        screenElement.querySelector("#"+render.strUID("_0_UID_menulistGroupHeader")).innerHTML="<p>"+screenContent.languagefile["19"][screenContent.savefile.settings.language]+"</p>";//minigame settings
+
+        screenElement.querySelector("#"+render.strUID("_0_UID_header_title")).innerHTML="<p>"+screenContent.languagefile["3"][screenContent.savefile.settings.language]+"</p>";//tõde ja tegu
+        screenElement.querySelector("#"+render.strUID("_0_UID_header_description_text")).innerHTML="<p>"+screenContent.languagefile["26"][screenContent.savefile.settings.language]+"</p>";
+
+        screenElement.querySelector("#"+render.strUID("_1_UID_header_title")).innerHTML="<p>"+screenContent.languagefile["4"][screenContent.savefile.settings.language]+"</p>";//reaktsiooni test
+        screenElement.querySelector("#"+render.strUID("_1_UID_header_description_text")).innerHTML="<p>"+screenContent.languagefile["27"][screenContent.savefile.settings.language]+"</p>";
+
+        screenElement.querySelector("#"+render.strUID("_2_UID_header_title")).innerHTML="<p>"+screenContent.languagefile["20"][screenContent.savefile.settings.language]+"</p>";//sagedus
+        
+
+
+        screenElement.querySelector("#"+render.strUID("_1_UID_menulistGroupHeader")).innerHTML="<p>"+screenContent.languagefile["21"][screenContent.savefile.settings.language]+"</p>";//foreground color
+
+        screenElement.querySelector("#"+render.strUID("_3_UID_header_title")).innerHTML="<p>"+screenContent.languagefile["23"][screenContent.savefile.settings.language]+"</p>";//h
+
+        screenElement.querySelector("#"+render.strUID("_4_UID_header_title")).innerHTML="<p>"+screenContent.languagefile["24"][screenContent.savefile.settings.language]+"</p>";//s
+
+        screenElement.querySelector("#"+render.strUID("_5_UID_header_title")).innerHTML="<p>"+screenContent.languagefile["25"][screenContent.savefile.settings.language]+"</p>";//l
+        screenElement.querySelector("#"+render.strUID("_5_UID_header_description_text")).innerHTML="<p>"+screenContent.languagefile["29"][screenContent.savefile.settings.language]+"</p>";
+
+
+        screenElement.querySelector("#"+render.strUID("_2_UID_menulistGroupHeader")).innerHTML="<p>"+screenContent.languagefile["22"][screenContent.savefile.settings.language]+"</p>";//background color
+    
+        screenElement.querySelector("#"+render.strUID("_6_UID_header_title")).innerHTML="<p>"+screenContent.languagefile["23"][screenContent.savefile.settings.language]+"</p>";//h
+
+        screenElement.querySelector("#"+render.strUID("_7_UID_header_title")).innerHTML="<p>"+screenContent.languagefile["24"][screenContent.savefile.settings.language]+"</p>";//s
+
+        screenElement.querySelector("#"+render.strUID("_8_UID_header_title")).innerHTML="<p>"+screenContent.languagefile["25"][screenContent.savefile.settings.language]+"</p>";//l
+        screenElement.querySelector("#"+render.strUID("_8_UID_header_description_text")).innerHTML="<p>"+screenContent.languagefile["30"][screenContent.savefile.settings.language]+"</p>";
+
+        screenElement.querySelector("#"+render.strUID("_3_UID_menulistGroupHeader")).innerHTML="<p>"+screenContent.languagefile["31"][screenContent.savefile.settings.language]+"</p>";//language
+        screenElement.querySelector("#"+render.strUID("_9_UID_header_title")).innerHTML="<p>"+screenContent.languagefile["31"][screenContent.savefile.settings.language]+"</p>";
+        screenElement.querySelector("#"+render.strUID("_9_UID_header_description_text")).innerHTML="<p>"+screenContent.languagefile["32"][screenContent.savefile.settings.language]+"</p>";
+        screenElement.querySelector("#"+render.strUID("_9_UID_setting_value")).innerHTML=screenContent.savefile.settings.language;
+        screen_settingsMenu.minigameFrequencyLoader(screenElement,screenContent);
+    },
     setContent:function(screenElement,screenContent){
         this.toggleLoader(screenElement,screenContent);
         this.valueLoader(screenElement,screenContent);
+        this.languageLoader(screenElement,screenContent);
         return 0;
     },
     selectedSetting:0,
@@ -330,21 +392,21 @@ screen_settingsMenu={
     </svg>
 
     <div id="_0_UID_menuHeader" class="UID_menuHeader">
-        <div class="UID_menuHeaderTitle">
-            <p>SEADED</p>
+        <div class="UID_menuHeaderTitle" id="UID_menuHeaderTitle">
+            <p >SETTINGS</p>
         </div>
     </div>
 
     <div id="UID_menulistContainer">
 
         <div class="UID_menulistGroup">
-            <div class="UID_menulistGroupHeader">
+            <div class="UID_menulistGroupHeader" id="_0_UID_menulistGroupHeader">
                 <p>MINIMÄNGU SEADED</p>
             </div>
 
             <div class="UID_menulistItem">
                 <div id="_0_UID_header_index" class="UID_menulistHeader UID_menulistHeaderActive">
-                    <div class="UID_menulistHeaderTitle">
+                    <div class="UID_menulistHeaderTitle" id="_0_UID_header_title">
                         <p>TÕDE JA TEGU</p>
                     </div>
                     <div class="UID_menulistSettingSwitch">
@@ -355,7 +417,7 @@ screen_settingsMenu={
                 </div>
                 <div id="_0_UID_header_description" class="UID_menulistDescriptionBackground ">
                     <div class="UID_menulistDescription">
-                        <div class="UID_menulistDescriptionText">
+                        <div class="UID_menulistDescriptionText" id="_0_UID_header_description_text">
                             <p>Parameetri kirjeldus (Kui vaja)</p>
                         </div>
                     </div>
@@ -365,7 +427,7 @@ screen_settingsMenu={
 
             <div class="UID_menulistItem">
                 <div id="_1_UID_header_index" class="UID_menulistHeader">
-                    <div class="UID_menulistHeaderTitle">
+                    <div class="UID_menulistHeaderTitle" id="_1_UID_header_title">
                         <p>REAKTSIOONI TEST</p>
                     </div>
                     <div class="UID_menulistSettingSwitch">
@@ -376,7 +438,7 @@ screen_settingsMenu={
                 </div>
                 <div id="_1_UID_header_description" class="UID_menulistDescriptionBackground r_hidden">
                     <div class="UID_menulistDescription">
-                        <div class="UID_menulistDescriptionText">
+                        <div class="UID_menulistDescriptionText" id="_1_UID_header_description_text">
                             <p>Parameetri kirjeldus (Kui vaja)</p>
                         </div>
                     </div>
@@ -385,7 +447,7 @@ screen_settingsMenu={
 
             <div class="UID_menulistItem">
                 <div id="_2_UID_header_index" class="UID_menulistHeader">
-                    <div class="UID_menulistHeaderTitle">
+                    <div class="UID_menulistHeaderTitle" id="_2_UID_header_title">
                         <p>SAGEDUS</p>
                     </div>
                     <div class="UID_menulistSettingValue">
@@ -402,7 +464,7 @@ screen_settingsMenu={
                 </div>
                 <div id="_2_UID_header_description" class="UID_menulistDescriptionBackground r_hidden">
                     <div class="UID_menulistDescription">
-                        <div class="UID_menulistDescriptionText">
+                        <div class="UID_menulistDescriptionText" id="_2_UID_header_description_text">
                             <p>Parameetri kirjeldus (Kui vaja)</p>
                         </div>
                     </div>
@@ -412,13 +474,13 @@ screen_settingsMenu={
         </div>
 
         <div class="UID_menulistGroup">
-            <div class="UID_menulistGroupHeader">
+            <div class="UID_menulistGroupHeader" id="_1_UID_menulistGroupHeader">
                 <p>PEA VÄRV</p>
             </div>
 
             <div class="UID_menulistItem">
                 <div id="_3_UID_header_index" class="UID_menulistHeader">
-                    <div class="UID_menulistHeaderTitle">
+                    <div class="UID_menulistHeaderTitle" id="_3_UID_header_title">
                         <p>TOON</p>
                     </div>
                     <div class="UID_menulistSettingValue">
@@ -434,17 +496,12 @@ screen_settingsMenu={
                     </div>
                 </div>
                 <div id="_3_UID_header_description" class="UID_menulistDescriptionBackground r_hidden">
-                    <div class="UID_menulistDescription">
-                        <div class="UID_menulistDescriptionText">
-                            <p>Parameetri kirjeldus (Kui vaja)</p>
-                        </div>
-                    </div>
                 </div>
             </div>
 
             <div class="UID_menulistItem">
                 <div id="_4_UID_header_index" class="UID_menulistHeader">
-                    <div class="UID_menulistHeaderTitle">
+                    <div class="UID_menulistHeaderTitle" id="_4_UID_header_title">
                         <p>KÜLLASTUS</p>
                     </div>
                     <div class="UID_menulistSettingValue">
@@ -460,17 +517,12 @@ screen_settingsMenu={
                     </div>
                 </div>
                 <div id="_4_UID_header_description" class="UID_menulistDescriptionBackground r_hidden">
-                    <div class="UID_menulistDescription">
-                        <div class="UID_menulistDescriptionText">
-                            <p>Parameetri kirjeldus (Kui vaja)</p>
-                        </div>
-                    </div>
                 </div>
             </div>
 
             <div class="UID_menulistItem">
                 <div id="_5_UID_header_index" class="UID_menulistHeader">
-                    <div class="UID_menulistHeaderTitle">
+                    <div class="UID_menulistHeaderTitle" id="_5_UID_header_title">
                         <p>HELEDUS</p>
                     </div>
                     <div class="UID_menulistSettingValue">
@@ -487,7 +539,7 @@ screen_settingsMenu={
                 </div>
                 <div id="_5_UID_header_description" class="UID_menulistDescriptionBackground r_hidden">
                     <div class="UID_menulistDescription">
-                        <div class="UID_menulistDescriptionText">
+                        <div class="UID_menulistDescriptionText" id="_5_UID_header_description_text">
                             <p>Parameetri kirjeldus (Kui vaja)</p>
                         </div>
                     </div>
@@ -497,13 +549,13 @@ screen_settingsMenu={
         </div>
 
         <div class="UID_menulistGroup">
-            <div class="UID_menulistGroupHeader">
+            <div class="UID_menulistGroupHeader" id="_2_UID_menulistGroupHeader">
                 <p>TAUSTA VÄRV</p>
             </div>
 
             <div class="UID_menulistItem">
                 <div id="_6_UID_header_index" class="UID_menulistHeader">
-                    <div class="UID_menulistHeaderTitle">
+                    <div class="UID_menulistHeaderTitle" id="_6_UID_header_title">
                         <p>TOON</p>
                     </div>
                     <div class="UID_menulistSettingValue">
@@ -519,17 +571,12 @@ screen_settingsMenu={
                     </div>
                 </div>
                 <div id="_6_UID_header_description" class="UID_menulistDescriptionBackground r_hidden">
-                    <div class="UID_menulistDescription">
-                        <div class="UID_menulistDescriptionText">
-                            <p>Parameetri kirjeldus (Kui vaja)</p>
-                        </div>
-                    </div>
                 </div>
             </div>
 
             <div class="UID_menulistItem">
                 <div id="_7_UID_header_index" class="UID_menulistHeader">
-                    <div class="UID_menulistHeaderTitle">
+                    <div class="UID_menulistHeaderTitle" id="_7_UID_header_title">
                         <p>KÜLLASTUS</p>
                     </div>
                     <div class="UID_menulistSettingValue">
@@ -545,17 +592,12 @@ screen_settingsMenu={
                     </div>
                 </div>
                 <div id="_7_UID_header_description" class="UID_menulistDescriptionBackground r_hidden">
-                    <div class="UID_menulistDescription">
-                        <div class="UID_menulistDescriptionText">
-                            <p>Parameetri kirjeldus (Kui vaja)</p>
-                        </div>
-                    </div>
                 </div>
             </div>
 
             <div class="UID_menulistItem">
                 <div id="_8_UID_header_index" class="UID_menulistHeader">
-                    <div class="UID_menulistHeaderTitle">
+                    <div class="UID_menulistHeaderTitle" id="_8_UID_header_title">
                         <p>HELEDUS</p>
                     </div>
                     <div class="UID_menulistSettingValue">
@@ -572,7 +614,7 @@ screen_settingsMenu={
                 </div>
                 <div id="_8_UID_header_description" class="UID_menulistDescriptionBackground r_hidden">
                     <div class="UID_menulistDescription">
-                        <div class="UID_menulistDescriptionText">
+                        <div class="UID_menulistDescriptionText" id="_8_UID_header_description_text">
                             <p>Parameetri kirjeldus (Kui vaja)</p>
                         </div>
                     </div>
@@ -580,7 +622,38 @@ screen_settingsMenu={
             </div>
             
         </div>
-        
+        <div class="UID_menulistGroup">
+            <div class="UID_menulistGroupHeader" id="_3_UID_menulistGroupHeader">
+                <p>LANGUAGE</p>
+            </div>
+
+            <div class="UID_menulistItem">
+                <div id="_9_UID_header_index" class="UID_menulistHeader">
+                    <div class="UID_menulistHeaderTitle" id="_9_UID_header_title">
+                        <p>LANGUAGE</p>
+                    </div>
+                    <div class="UID_menulistSettingValue">
+                        <div id="_9_UID_menulistSettingArrows" class="UID_menulistSettingValueArrows r_invis">
+                            <svg id="_9_UID_menulistSettingArrow" width="84.667mm" height="127mm" version="1.1" viewBox="0 0 8.4667 12.7" preserveAspectRatio="xMinYMin meet" class="">
+                                <use xlink:href="#i-updownarrow" />
+                            </svg>
+                        </div>
+                        <div class="UID_menulistSettingValueTextLanguage">
+                            <p id=_9_UID_setting_value>ENG</p>
+                        </div>
+
+                    </div>
+                </div>
+                <div id="_9_UID_header_description" class="UID_menulistDescriptionBackground r_hidden">
+                    <div class="UID_menulistDescription">
+                        <div class="UID_menulistDescriptionText" id="_9_UID_header_description_text">
+                            <p>Parameetri kirjeldus (Kui vaja)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 </div>`
 }

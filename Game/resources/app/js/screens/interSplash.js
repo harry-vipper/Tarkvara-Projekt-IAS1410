@@ -11,15 +11,6 @@ screen_splash={
         render,
         UID,             
     )
-    /*
-    context,      <div> to draw into
-    style,          <style> to send styles to
-    controls,       controls object with methods to handle controls
-    screenContent,  data passed to screen, in any format, possibly suitable to this screen only
-    localTimerIds,  Array of active timers
-    screenSettings, settings like colors
-    UID   
-    */
     {
     return system.screen.loadResource("/resources/css/interSplash.css").then(
         (css)=>{style.innerHTML=css;
