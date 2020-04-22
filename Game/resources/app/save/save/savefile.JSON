@@ -1,16 +1,20 @@
 {
  "gameData": {
   "gameOrder": [
-   0,
    1,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
    2,
-   3,
-   4,
-   5,
-   -2,
-   -2
+   0,
+   0,
+   0
   ],
-  "selectedGame": 3,
+  "selectedGame": 6,
   "currentQuestion": 0,
   "state": 3,
   "date": "tt"
@@ -36,8 +40,8 @@
   "language": "EST"
  },
  "lastGame": {
-  "time": "20:41:43",
-  "title": "This game will make you smile in 5 seconds &#xDC;&#xC4;&#xD5;P3213a&#x3C;b&#x3E;\n",
+  "time": "20:48:20",
+  "title": "SFW version",
   "condition": 2,
   "date": "22/04/2020"
  }

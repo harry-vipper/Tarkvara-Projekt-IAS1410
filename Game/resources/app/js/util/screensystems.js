@@ -2,6 +2,7 @@ var system;
 system={
     screen: {
         displayScreen: function(type, data) {
+            window.scrollTo(0, 0);
             this.removeDOMLoadedCSS();
             switch(type) {
                 case "game-element-reaction-test":
