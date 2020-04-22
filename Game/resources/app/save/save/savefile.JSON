@@ -10,8 +10,8 @@
    -2,
    -2
   ],
-  "selectedGame": 0,
-  "currentQuestion": 1,
+  "selectedGame": 3,
+  "currentQuestion": 0,
   "state": 3,
   "date": "tt"
  },
@@ -23,20 +23,20 @@
   "mgFrequency": 5,
   "color": {
    "foreground": [
-    63,
-    49,
+    97,
+    100,
     64
    ],
    "background": [
-    100,
-    10,
+    67,
+    12,
     25
    ]
   },
   "language": "EST"
  },
  "lastGame": {
-  "time": "19:08:19",
+  "time": "20:41:43",
   "title": "This game will make you smile in 5 seconds &#xDC;&#xC4;&#xD5;P3213a&#x3C;b&#x3E;\n",
   "condition": 2,
   "date": "22/04/2020"

@@ -2,6 +2,7 @@ var system;
 system={
     screen: {
         displayScreen: function(type, data) {
+            this.removeDOMLoadedCSS();
             switch(type) {
                 case "game-element-reaction-test":
                     return screens.splash.handler(
@@ -351,13 +352,23 @@ system={
         loadResource: function(URI) {
             return fs.promises.readFile(path.join(__dirname, URI), {encoding: 'UTF-8'});
         },
-        loadCSStoDOM: function(id, URI) {
-            let link=document.createElement('link');
+        loadCSStoDOM: function(URI) {
+            let link=document.getElementById("placeHolderDOMCSS");
+            if(link!=undefined) {
+                link.remove();
+            }
+            link=document.createElement('link');
             link.setAttribute("rel", "stylesheet");
             link.setAttribute("type", "text/css");
             link.setAttribute("href", URI);
-            link.setAttribute("id", id);
+            link.setAttribute("id", "placeHolderDOMCSS");
             document.getElementsByTagName('head')[0].appendChild(link)
+        },
+        removeDOMLoadedCSS() {
+            let link=document.getElementById("placeHolderDOMCSS");
+            if(link!=undefined) {
+                link.remove();
+            }
         },
         destroy: function() {
             console.log("DESTRUCTION!!!")
