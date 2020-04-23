@@ -52,9 +52,9 @@ screen_question_task={
     }
     ).then(()=>{
 
-        controls.key.set("up",1000,()=>{end({type: "gameSelectionMenu", value: null});},screenContent.languagefile[6][screenContent.savefile.settings.language]);
-        controls.key.set("left",1000,()=>{end({type: "nextScreen", value: "last"});},screenContent.languagefile[7][screenContent.savefile.settings.language]);
-        controls.key.set("right",1000,()=>{end({type: "nextScreen", value: "next"});},screenContent.languagefile[8][screenContent.savefile.settings.language]);
+        controls.key.set("up",1000,()=>{end({type: "gameSelectionMenu", value: null});},insertText(6));
+        controls.key.set("left",1000,()=>{end({type: "nextScreen", value: "last"});},insertText(7));
+        controls.key.set("right",1000,()=>{end({type: "nextScreen", value: "next"});},insertText(8));
         return startTimer(screenSettings.duration,UID+"_timer",localTimerIds);
     }
     ).then(()=>{
@@ -66,10 +66,10 @@ screen_question_task={
         //Paneb õige sisu
         let type;
         if(screenContent.type.toUpperCase()==="QUESTION"){
-            type=screenContent.languagefile[1][screenContent.savefile.settings.language];
+            type=insertText(1);
         }
         else if(screenContent.type.toUpperCase()==="TASK"){
-            type=screenContent.languagefile[2][screenContent.savefile.settings.language];
+            type=insertText(2);
         }
         screenElement.querySelector("#"+UID+"_listHeaderTitle").innerHTML="<p>"+type+"</p>";
         screenElement.querySelector("#"+UID+"_listHeaderNumber").innerHTML="<p>"+screenContent.number+"</p>";

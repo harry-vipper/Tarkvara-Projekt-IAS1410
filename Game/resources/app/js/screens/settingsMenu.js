@@ -65,10 +65,10 @@ screen_settingsMenu={
             return render.fade.in(context);
         }).then(()=>{
 
-            controls.key.set('up', 0, ()=>{changeSetting('-');}, screenContent.languagefile["9"][screenContent.savefile.settings.language]);
-            controls.key.set('down', 0, ()=>{changeSetting('+');}, screenContent.languagefile["10"][screenContent.savefile.settings.language]);
-            controls.key.set('confirm', 0, ()=>{selectSetting();}, screenContent.languagefile["13"][screenContent.savefile.settings.language]);
-            controls.key.set('left', 0, ()=>{end({type:"gameSelectionMenu"});}, screenContent.languagefile["14"][screenContent.savefile.settings.language]);
+            controls.key.set('up', 0, ()=>{changeSetting('-');}, insertText("9"));
+            controls.key.set('down', 0, ()=>{changeSetting('+');}, insertText("10"));
+            controls.key.set('confirm', 0, ()=>{selectSetting();}, insertText("13"));
+            controls.key.set('left', 0, ()=>{end({type:"gameSelectionMenu"});}, insertText("14"));
             
             const scroller = new SweetScroll();
             
@@ -128,10 +128,10 @@ screen_settingsMenu={
                     screen_settingsMenu.languageLoader(screenElement,screenContent);
                     controls.key.clear.byKey("all");
                     system.screen.footer.clear();
-                    controls.key.set('up', 0, ()=>{changeSetting('-');}, screenContent.languagefile["9"][screenContent.savefile.settings.language]);
-                    controls.key.set('down', 0, ()=>{changeSetting('+');}, screenContent.languagefile["10"][screenContent.savefile.settings.language]);
-                    controls.key.set('confirm', 0, ()=>{selectSetting();}, screenContent.languagefile["13"][screenContent.savefile.settings.language]);
-                    controls.key.set('left', 0, ()=>{end({type:"gameSelectionMenu"});}, screenContent.languagefile["14"][screenContent.savefile.settings.language]);
+                    controls.key.set('up', 0, ()=>{changeSetting('-');}, insertText("9"));
+                    controls.key.set('down', 0, ()=>{changeSetting('+');}, insertText("10"));
+                    controls.key.set('confirm', 0, ()=>{selectSetting();}, insertText("13"));
+                    controls.key.set('left', 0, ()=>{end({type:"gameSelectionMenu"});}, insertText("14"));
                 }
                 else{
                     if(screen_settingsMenu.settingSelected){
@@ -142,10 +142,10 @@ screen_settingsMenu={
                             screen_settingsMenu.upDownLoader(screenElement,screenContent,screen_settingsMenu.selectedSetting,false);
                             screen_settingsMenu.settingSelected=false;
         
-                            controls.key.set('up', 0, ()=>{changeSetting('-');}, screenContent.languagefile["9"][screenContent.savefile.settings.language]);
-                            controls.key.set('down', 0, ()=>{changeSetting('+');}, screenContent.languagefile["10"][screenContent.savefile.settings.language]);
-                            controls.key.set('confirm', 0, ()=>{selectSetting();}, screenContent.languagefile["13"][screenContent.savefile.settings.language]);
-                            controls.key.set('left', 0, ()=>{end({type:"gameSelectionMenu"});}, screenContent.languagefile["14"][screenContent.savefile.settings.language]);
+                            controls.key.set('up', 0, ()=>{changeSetting('-');}, insertText("9"));
+                            controls.key.set('down', 0, ()=>{changeSetting('+');}, insertText("10"));
+                            controls.key.set('confirm', 0, ()=>{selectSetting();}, insertText("13"));
+                            controls.key.set('left', 0, ()=>{end({type:"gameSelectionMenu"});}, insertText("14"));
                         }
                        
                     }
@@ -155,9 +155,9 @@ screen_settingsMenu={
                         screen_settingsMenu.upDownLoader(screenElement,screenContent,screen_settingsMenu.selectedSetting,true);
                         screen_settingsMenu.settingSelected=true;
                         
-                        controls.key.set('up', 0, ()=>{changeValue('+',screen_settingsMenu.selectedSetting);}, screenContent.languagefile["15"][screenContent.savefile.settings.language]);
-                        controls.key.set('down', 0, ()=>{changeValue('-',screen_settingsMenu.selectedSetting);}, screenContent.languagefile["16"][screenContent.savefile.settings.language]);
-                        controls.key.set('confirm', 0, ()=>{selectSetting();}, screenContent.languagefile["17"][screenContent.savefile.settings.language]);
+                        controls.key.set('up', 0, ()=>{changeValue('+',screen_settingsMenu.selectedSetting);}, insertText("15"));
+                        controls.key.set('down', 0, ()=>{changeValue('-',screen_settingsMenu.selectedSetting);}, insertText("16"));
+                        controls.key.set('confirm', 0, ()=>{selectSetting();}, insertText("17"));
                     }
                 }
 
@@ -308,48 +308,48 @@ screen_settingsMenu={
         return 0;
     },
     minigameFrequencyLoader:function(screenElement,screenContent){
-        let str=screenContent.languagefile["28"][screenContent.savefile.settings.language];
+        let str=insertText("28");
         str=str.split("###").join((screenContent.savefile.settings.mgFrequency).toString());
         screenElement.querySelector("#"+render.strUID("_2_UID_header_description_text")).innerHTML="<p>"+str+"</p>";
     },
     languageLoader:function(screenElement,screenContent){
-        screenElement.querySelector("#"+render.strUID("UID_menuHeaderTitle")).innerHTML="<p>"+screenContent.languagefile["18"][screenContent.savefile.settings.language]+"</p>";//settings
+        screenElement.querySelector("#"+render.strUID("UID_menuHeaderTitle")).innerHTML="<p>"+insertText("18")+"</p>";//settings
 
 
-        screenElement.querySelector("#"+render.strUID("_0_UID_menulistGroupHeader")).innerHTML="<p>"+screenContent.languagefile["19"][screenContent.savefile.settings.language]+"</p>";//minigame settings
+        screenElement.querySelector("#"+render.strUID("_0_UID_menulistGroupHeader")).innerHTML="<p>"+insertText("19")+"</p>";//minigame settings
 
-        screenElement.querySelector("#"+render.strUID("_0_UID_header_title")).innerHTML="<p>"+screenContent.languagefile["3"][screenContent.savefile.settings.language]+"</p>";//tõde ja tegu
-        screenElement.querySelector("#"+render.strUID("_0_UID_header_description_text")).innerHTML="<p>"+screenContent.languagefile["26"][screenContent.savefile.settings.language]+"</p>";
+        screenElement.querySelector("#"+render.strUID("_0_UID_header_title")).innerHTML="<p>"+insertText("3")+"</p>";//tõde ja tegu
+        screenElement.querySelector("#"+render.strUID("_0_UID_header_description_text")).innerHTML="<p>"+insertText("26")+"</p>";
 
-        screenElement.querySelector("#"+render.strUID("_1_UID_header_title")).innerHTML="<p>"+screenContent.languagefile["4"][screenContent.savefile.settings.language]+"</p>";//reaktsiooni test
-        screenElement.querySelector("#"+render.strUID("_1_UID_header_description_text")).innerHTML="<p>"+screenContent.languagefile["27"][screenContent.savefile.settings.language]+"</p>";
+        screenElement.querySelector("#"+render.strUID("_1_UID_header_title")).innerHTML="<p>"+insertText("4")+"</p>";//reaktsiooni test
+        screenElement.querySelector("#"+render.strUID("_1_UID_header_description_text")).innerHTML="<p>"+insertText("27")+"</p>";
 
-        screenElement.querySelector("#"+render.strUID("_2_UID_header_title")).innerHTML="<p>"+screenContent.languagefile["20"][screenContent.savefile.settings.language]+"</p>";//sagedus
+        screenElement.querySelector("#"+render.strUID("_2_UID_header_title")).innerHTML="<p>"+insertText("20")+"</p>";//sagedus
         
 
 
-        screenElement.querySelector("#"+render.strUID("_1_UID_menulistGroupHeader")).innerHTML="<p>"+screenContent.languagefile["21"][screenContent.savefile.settings.language]+"</p>";//foreground color
+        screenElement.querySelector("#"+render.strUID("_1_UID_menulistGroupHeader")).innerHTML="<p>"+insertText("21")+"</p>";//foreground color
 
-        screenElement.querySelector("#"+render.strUID("_3_UID_header_title")).innerHTML="<p>"+screenContent.languagefile["23"][screenContent.savefile.settings.language]+"</p>";//h
+        screenElement.querySelector("#"+render.strUID("_3_UID_header_title")).innerHTML="<p>"+insertText("23")+"</p>";//h
 
-        screenElement.querySelector("#"+render.strUID("_4_UID_header_title")).innerHTML="<p>"+screenContent.languagefile["24"][screenContent.savefile.settings.language]+"</p>";//s
+        screenElement.querySelector("#"+render.strUID("_4_UID_header_title")).innerHTML="<p>"+insertText("24")+"</p>";//s
 
-        screenElement.querySelector("#"+render.strUID("_5_UID_header_title")).innerHTML="<p>"+screenContent.languagefile["25"][screenContent.savefile.settings.language]+"</p>";//l
-        screenElement.querySelector("#"+render.strUID("_5_UID_header_description_text")).innerHTML="<p>"+screenContent.languagefile["29"][screenContent.savefile.settings.language]+"</p>";
+        screenElement.querySelector("#"+render.strUID("_5_UID_header_title")).innerHTML="<p>"+insertText("25")+"</p>";//l
+        screenElement.querySelector("#"+render.strUID("_5_UID_header_description_text")).innerHTML="<p>"+insertText("29")+"</p>";
 
 
-        screenElement.querySelector("#"+render.strUID("_2_UID_menulistGroupHeader")).innerHTML="<p>"+screenContent.languagefile["22"][screenContent.savefile.settings.language]+"</p>";//background color
+        screenElement.querySelector("#"+render.strUID("_2_UID_menulistGroupHeader")).innerHTML="<p>"+insertText("22")+"</p>";//background color
     
-        screenElement.querySelector("#"+render.strUID("_6_UID_header_title")).innerHTML="<p>"+screenContent.languagefile["23"][screenContent.savefile.settings.language]+"</p>";//h
+        screenElement.querySelector("#"+render.strUID("_6_UID_header_title")).innerHTML="<p>"+insertText("23")+"</p>";//h
 
-        screenElement.querySelector("#"+render.strUID("_7_UID_header_title")).innerHTML="<p>"+screenContent.languagefile["24"][screenContent.savefile.settings.language]+"</p>";//s
+        screenElement.querySelector("#"+render.strUID("_7_UID_header_title")).innerHTML="<p>"+insertText("24")+"</p>";//s
 
-        screenElement.querySelector("#"+render.strUID("_8_UID_header_title")).innerHTML="<p>"+screenContent.languagefile["25"][screenContent.savefile.settings.language]+"</p>";//l
-        screenElement.querySelector("#"+render.strUID("_8_UID_header_description_text")).innerHTML="<p>"+screenContent.languagefile["30"][screenContent.savefile.settings.language]+"</p>";
+        screenElement.querySelector("#"+render.strUID("_8_UID_header_title")).innerHTML="<p>"+insertText("25")+"</p>";//l
+        screenElement.querySelector("#"+render.strUID("_8_UID_header_description_text")).innerHTML="<p>"+insertText("30")+"</p>";
 
-        screenElement.querySelector("#"+render.strUID("_3_UID_menulistGroupHeader")).innerHTML="<p>"+screenContent.languagefile["31"][screenContent.savefile.settings.language]+"</p>";//language
-        screenElement.querySelector("#"+render.strUID("_9_UID_header_title")).innerHTML="<p>"+screenContent.languagefile["31"][screenContent.savefile.settings.language]+"</p>";
-        screenElement.querySelector("#"+render.strUID("_9_UID_header_description_text")).innerHTML="<p>"+screenContent.languagefile["32"][screenContent.savefile.settings.language]+"</p>";
+        screenElement.querySelector("#"+render.strUID("_3_UID_menulistGroupHeader")).innerHTML="<p>"+insertText("31")+"</p>";//language
+        screenElement.querySelector("#"+render.strUID("_9_UID_header_title")).innerHTML="<p>"+insertText("31")+"</p>";
+        screenElement.querySelector("#"+render.strUID("_9_UID_header_description_text")).innerHTML="<p>"+insertText("32")+"</p>";
         screenElement.querySelector("#"+render.strUID("_9_UID_setting_value")).innerHTML=screenContent.savefile.settings.language;
         screen_settingsMenu.minigameFrequencyLoader(screenElement,screenContent);
     },

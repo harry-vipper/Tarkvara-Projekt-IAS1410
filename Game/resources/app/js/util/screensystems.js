@@ -28,10 +28,7 @@ system={
                             document.getElementById("screenContainer"),
                             document.getElementById("screenStyleContainer"),
                             controls,
-                            {
-                                savefile: file.savefile.content,
-                                languagefile: file.languagefile.content
-                            },
+                            null,
                             system.screen.timers.localTimerIds,
                             null,
                             render,
@@ -63,10 +60,7 @@ system={
                             document.getElementById("screenContainer"),
                             document.getElementById("screenStyleContainer"),
                             controls,
-                            {
-                                savefile: file.savefile.content,
-                                languagefile: file.languagefile.content
-                            },
+                            null,
                             system.screen.timers.localTimerIds,
                             null,
                             render,
@@ -83,7 +77,6 @@ system={
                         {
                             gamefile: file.gamefile.content,
                             savefile: file.savefile.content,
-                            languagefile: file.languagefile.content
                         },
                         system.screen.timers.localTimerIds,
                         null,
@@ -117,7 +110,6 @@ system={
                             {
                                 gamefile: file.gamefile.content,
                                 savefile: file.savefile.content,
-                                languagefile: file.languagefile.content
                             },
                             system.screen.timers.localTimerIds,
                             null,
@@ -133,8 +125,6 @@ system={
                         document.getElementById("screenStyleContainer"),
                         controls,
                         {   
-                            languagefile:file.languagefile.content,
-                            savefile:file.savefile.content,
                             type:file.gamefile.content.content[file.savefile.content.gameData.selectedGame].contentElements[file.savefile.content.gameData.gameOrder[file.savefile.content.gameData.currentQuestion]].type,
                             number:(file.savefile.content.gameData.currentQuestion+1),
                             content:file.gamefile.content.content[file.savefile.content.gameData.selectedGame].contentElements[file.savefile.content.gameData.gameOrder[file.savefile.content.gameData.currentQuestion]].str,
@@ -156,7 +146,6 @@ system={
                         controls,
                         {
                             savefile: file.savefile.content,
-                            languagefile: file.languagefile.content
                         },
                         system.screen.timers.localTimerIds,
                         null,
@@ -174,7 +163,6 @@ system={
                         {
                             gamefile: file.gamefile.content,
                             savefile: file.savefile.content,
-                            languagefile: file.languagefile.content
                         },
                         system.screen.timers.localTimerIds,
                         null,

@@ -187,3 +187,7 @@ function startTimer(duration,timerLocationId,localTimerIds) {
             }, 10);
         });
 }
+
+function insertText(index){
+    return file.languagefile.content[index][file.savefile.content.settings.language];
+}

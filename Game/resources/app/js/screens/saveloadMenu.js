@@ -43,9 +43,9 @@ screen_saveloadMenu={
     }
     ).then(()=>{
         let choice=0;
-        controls.key.set("up",0,()=>{changeChoice();},lastCondition=screenContent.languagefile["9"][screenContent.savefile.settings.language]);
-        controls.key.set("down",0,()=>{changeChoice();},lastCondition=screenContent.languagefile["10"][screenContent.savefile.settings.language]);
-        controls.key.set("confirm",0,()=>{end({type: "choiceMade", value: choice});},lastCondition=screenContent.languagefile["17"][screenContent.savefile.settings.language]);
+        controls.key.set("up",0,()=>{changeChoice();},lastCondition=insertText("9"));
+        controls.key.set("down",0,()=>{changeChoice();},lastCondition=insertText("10"));
+        controls.key.set("confirm",0,()=>{end({type: "choiceMade", value: choice});},lastCondition=insertText("17"));
 
         function changeChoice(){
             document.getElementById("_"+choice+"_"+UID+"_header_title").classList.remove(UID+"_menulistHeaderActive");
@@ -64,27 +64,27 @@ screen_saveloadMenu={
         //Paneb õige sisu
         let lastCondition=undefined;
         if(screenContent.savefile.lastGame.condition===0){
-            lastCondition=screenContent.languagefile["38"][screenContent.savefile.settings.language];
+            lastCondition=insertText("38");
         }
         if(screenContent.savefile.lastGame.condition===1){
-            lastCondition=screenContent.languagefile["39"][screenContent.savefile.settings.language];
+            lastCondition=insertText("39");
         }
         if(screenContent.savefile.lastGame.condition===2){
-            lastCondition=screenContent.languagefile["40"][screenContent.savefile.settings.language];
+            lastCondition=insertText("40");
         }
         if(screenContent.savefile.lastGame.condition===3){
-            lastCondition=screenContent.languagefile["41"][screenContent.savefile.settings.language];
+            lastCondition=insertText("41");
         }
         screenElement.querySelector("#_"+UID+"_menulistDescriptionText").innerHTML=`<p>
-            `+screenContent.languagefile["35"][screenContent.savefile.settings.language]+`
+            `+insertText("35")+`
             <br><span class="UID_menulistDescriptionText_title" id="UID_lastGame_title">`+screenContent.savefile.lastGame.title.toUpperCase()+`</span><br><br>
-            `+screenContent.languagefile["36"][screenContent.savefile.settings.language]+`: <span class="UID_menulistDescriptionText_time" id="UID_lastGame_time">`+screenContent.savefile.lastGame.time+` </span>
+            `+insertText("36")+`: <span class="UID_menulistDescriptionText_time" id="UID_lastGame_time">`+screenContent.savefile.lastGame.time+` </span>
             <span class="UID_menulistDescriptionText_date" id="UID_lastGame_date">`+screenContent.savefile.lastGame.date+`</span><br><br>
-            `+screenContent.languagefile["37"][screenContent.savefile.settings.language]+`
+            `+insertText("37")+`
             <span class="UID_menulistDescriptionText_condition" id="UID_lastGame_condition">`+lastCondition+`</span>
         </p>`;
-        screenElement.querySelector("#_0_"+UID+"_header_title").innerHTML="<p>"+screenContent.languagefile["42"][screenContent.savefile.settings.language]+"</p>";
-        screenElement.querySelector("#_1_"+UID+"_header_title").innerHTML="<p>"+screenContent.languagefile["43"][screenContent.savefile.settings.language]+"</p>";
+        screenElement.querySelector("#_0_"+UID+"_header_title").innerHTML="<p>"+insertText("42")+"</p>";
+        screenElement.querySelector("#_1_"+UID+"_header_title").innerHTML="<p>"+insertText("43")+"</p>";
     },
     HTMLbase:`
     <div id="UID_menulistContainer">

@@ -153,10 +153,10 @@ screen_gameSelectionMenu={
             }).then(
                 ()=>{
 
-                    controls.key.set('up', 0, ()=>{selectGame('-');}, screenContent.languagefile["9"][screenContent.savefile.settings.language]);
-                    controls.key.set('down', 0, ()=>{selectGame('+');}, screenContent.languagefile["10"][screenContent.savefile.settings.language]);
-                    controls.key.set('confirm', 1000, ()=>{end({type:"startGame"});}, screenContent.languagefile["11"][screenContent.savefile.settings.language]);
-                    controls.key.set('left', 0, ()=>{end({type:"settingsMenu"});}, screenContent.languagefile["12"][screenContent.savefile.settings.language]);
+                    controls.key.set('up', 0, ()=>{selectGame('-');}, insertText("9"));
+                    controls.key.set('down', 0, ()=>{selectGame('+');}, insertText("10"));
+                    controls.key.set('confirm', 1000, ()=>{end({type:"startGame"});}, insertText("11"));
+                    controls.key.set('left', 0, ()=>{end({type:"settingsMenu"});}, insertText("12"));
 
                     const scroller = new SweetScroll();
                     

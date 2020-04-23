@@ -1,22 +1,13 @@
 {
  "gameData": {
   "gameOrder": [
-   1,
    0,
-   0,
-   0,
-   0,
-   0,
-   0,
-   0,
-   2,
-   0,
-   0,
-   0
+   -1,
+   -2
   ],
-  "selectedGame": 6,
+  "selectedGame": 2,
   "currentQuestion": 0,
-  "state": 3,
+  "state": 2,
   "date": "tt"
  },
  "settings": {
@@ -40,9 +31,9 @@
   "language": "EST"
  },
  "lastGame": {
-  "time": "20:48:20",
-  "title": "SFW version",
+  "time": "09:14:55",
+  "title": "Mäng ",
   "condition": 2,
-  "date": "22/04/2020"
+  "date": "23/04/2020"
  }
 }
