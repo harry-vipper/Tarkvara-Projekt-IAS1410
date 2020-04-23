@@ -46,7 +46,7 @@ screen_gameSelectionMenu={
                             <p>`+instance.properties.title.toUpperCase()+`</p>
                         </div>
                     </div>
-                    <div id="_`+instance.index+`_UID_header_description" class="UID_menulistDescriptionBackground r_hidden">
+                    <div id="_`+instance.index+`_UID_header_description" class="UID_menulistDescriptionBackground r_hidden_animatable r_hidden_animatable_capable">
                         <div class="UID_menulistDescription">
                             <div class="UID_menulistDescriptionText">
                                 <p>`+instance.properties.description+`</p>
@@ -115,13 +115,13 @@ screen_gameSelectionMenu={
                 index=String(index);
                 document.getElementById("_"+index+render.strUID("_UID_header_index")).classList.add(render.strUID("UID_menulistHeaderActive"));
                 document.getElementById("_"+index+render.strUID("_UID_header_title")).classList.add(render.strUID("UID_menulistHeaderActive"));
-                document.getElementById("_"+index+render.strUID("_UID_header_description")).classList.remove(render.strUID("r_hidden"));
+                document.getElementById("_"+index+render.strUID("_UID_header_description")).classList.remove(render.strUID("r_hidden_animatable"));
             },
             deactivate: function(index) {
                 index=String(index);
                 document.getElementById("_"+index+render.strUID("_UID_header_index")).classList.remove(render.strUID("UID_menulistHeaderActive"));
                 document.getElementById("_"+index+render.strUID("_UID_header_title")).classList.remove(render.strUID("UID_menulistHeaderActive"));
-                document.getElementById("_"+index+render.strUID("_UID_header_description")).classList.add(render.strUID("r_hidden"));
+                document.getElementById("_"+index+render.strUID("_UID_header_description")).classList.add(render.strUID("r_hidden_animatable"));
             }
         }
         system.screen.loadResource("/resources/css/gameSelectionMenu.css").then(

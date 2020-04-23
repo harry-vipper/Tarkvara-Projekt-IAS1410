@@ -176,3 +176,18 @@ body {
     font-size: 0.9em;
     margin: 0.26em 0 0 0;
 }
+
+.r_hidden_animatable_capable {
+    opacity: 1;
+    animation-name: KF_description;
+    animation-duration: 0.4s;
+    animation-iteration-count: 1;
+}
+
+.r_hidden_animatable {
+    display: none;
+}
+@keyframes KF_description {
+    0% {display: unset;opacity: 0;transform: rotateX(70deg);}
+    100% {transform: none;opacity: 1;}
+}

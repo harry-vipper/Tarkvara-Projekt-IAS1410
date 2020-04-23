@@ -29,7 +29,7 @@ screen_settingsMenu={
             activate: function(index) {
                 index=String(index);
                 document.getElementById("_"+index+render.strUID("_UID_header_index")).classList.add(render.strUID("UID_menulistHeaderActive"));
-                document.getElementById("_"+index+render.strUID("_UID_header_description")).classList.remove(render.strUID("r_hidden"));
+                document.getElementById("_"+index+render.strUID("_UID_header_description")).classList.remove(render.strUID("r_hidden_animatable"));
                 if(index<=1){
                     document.getElementById("_"+index+render.strUID("_UID_menulistSettingSwitch")).classList.add(render.strUID("UID_switch-selected"));
                 }
@@ -37,7 +37,7 @@ screen_settingsMenu={
             deactivate: function(index) {
                 index=String(index);
                 document.getElementById("_"+index+render.strUID("_UID_header_index")).classList.remove(render.strUID("UID_menulistHeaderActive"));
-                document.getElementById("_"+index+render.strUID("_UID_header_description")).classList.add(render.strUID("r_hidden"));
+                document.getElementById("_"+index+render.strUID("_UID_header_description")).classList.add(render.strUID("r_hidden_animatable"));
                 if(index<=1){
                     document.getElementById("_"+index+render.strUID("_UID_menulistSettingSwitch")).classList.remove(render.strUID("UID_switch-selected"));
                 }
@@ -415,7 +415,7 @@ screen_settingsMenu={
                         </svg>
                     </div>
                 </div>
-                <div id="_0_UID_header_description" class="UID_menulistDescriptionBackground ">
+                <div id="_0_UID_header_description" class="UID_menulistDescriptionBackground r_hidden_animatable_capable">
                     <div class="UID_menulistDescription">
                         <div class="UID_menulistDescriptionText" id="_0_UID_header_description_text">
                             <p>Parameetri kirjeldus (Kui vaja)</p>
@@ -436,7 +436,7 @@ screen_settingsMenu={
                         </svg>
                     </div>
                 </div>
-                <div id="_1_UID_header_description" class="UID_menulistDescriptionBackground r_hidden">
+                <div id="_1_UID_header_description" class="UID_menulistDescriptionBackground r_hidden_animatable r_hidden_animatable_capable">
                     <div class="UID_menulistDescription">
                         <div class="UID_menulistDescriptionText" id="_1_UID_header_description_text">
                             <p>Parameetri kirjeldus (Kui vaja)</p>
@@ -462,7 +462,7 @@ screen_settingsMenu={
 
                     </div>
                 </div>
-                <div id="_2_UID_header_description" class="UID_menulistDescriptionBackground r_hidden">
+                <div id="_2_UID_header_description" class="UID_menulistDescriptionBackground r_hidden_animatable r_hidden_animatable_capable">
                     <div class="UID_menulistDescription">
                         <div class="UID_menulistDescriptionText" id="_2_UID_header_description_text">
                             <p>Parameetri kirjeldus (Kui vaja)</p>
@@ -495,7 +495,7 @@ screen_settingsMenu={
 
                     </div>
                 </div>
-                <div id="_3_UID_header_description" class="UID_menulistDescriptionBackground r_hidden">
+                <div id="_3_UID_header_description" class="UID_menulistDescriptionBackground r_hidden_animatable r_hidden_animatable_capable">
                 </div>
             </div>
 
@@ -516,7 +516,7 @@ screen_settingsMenu={
 
                     </div>
                 </div>
-                <div id="_4_UID_header_description" class="UID_menulistDescriptionBackground r_hidden">
+                <div id="_4_UID_header_description" class="UID_menulistDescriptionBackground r_hidden_animatable r_hidden_animatable_capable">
                 </div>
             </div>
 
@@ -537,7 +537,7 @@ screen_settingsMenu={
 
                     </div>
                 </div>
-                <div id="_5_UID_header_description" class="UID_menulistDescriptionBackground r_hidden">
+                <div id="_5_UID_header_description" class="UID_menulistDescriptionBackground r_hidden_animatable r_hidden_animatable_capable">
                     <div class="UID_menulistDescription">
                         <div class="UID_menulistDescriptionText" id="_5_UID_header_description_text">
                             <p>Parameetri kirjeldus (Kui vaja)</p>
@@ -570,7 +570,7 @@ screen_settingsMenu={
 
                     </div>
                 </div>
-                <div id="_6_UID_header_description" class="UID_menulistDescriptionBackground r_hidden">
+                <div id="_6_UID_header_description" class="UID_menulistDescriptionBackground r_hidden_animatable r_hidden_animatable_capable">
                 </div>
             </div>
 
@@ -591,7 +591,7 @@ screen_settingsMenu={
 
                     </div>
                 </div>
-                <div id="_7_UID_header_description" class="UID_menulistDescriptionBackground r_hidden">
+                <div id="_7_UID_header_description" class="UID_menulistDescriptionBackground r_hidden_animatable r_hidden_animatable_capable">
                 </div>
             </div>
 
@@ -612,7 +612,7 @@ screen_settingsMenu={
 
                     </div>
                 </div>
-                <div id="_8_UID_header_description" class="UID_menulistDescriptionBackground r_hidden">
+                <div id="_8_UID_header_description" class="UID_menulistDescriptionBackground r_hidden_animatable r_hidden_animatable_capable">
                     <div class="UID_menulistDescription">
                         <div class="UID_menulistDescriptionText" id="_8_UID_header_description_text">
                             <p>Parameetri kirjeldus (Kui vaja)</p>
@@ -644,7 +644,7 @@ screen_settingsMenu={
 
                     </div>
                 </div>
-                <div id="_9_UID_header_description" class="UID_menulistDescriptionBackground r_hidden">
+                <div id="_9_UID_header_description" class="UID_menulistDescriptionBackground r_hidden_animatable r_hidden_animatable_capable">
                     <div class="UID_menulistDescription">
                         <div class="UID_menulistDescriptionText" id="_9_UID_header_description_text">
                             <p>Parameetri kirjeldus (Kui vaja)</p>
