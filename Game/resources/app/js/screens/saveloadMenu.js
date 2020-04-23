@@ -18,14 +18,14 @@ screen_saveloadMenu={
        }
     );
     system.screen.loadResource("/resources/css/saveloadMenu.css").then(
-    (css)=>{style.innerHTML=css;
+    (css)=>{
 
-        /*if(fileCSS) {
-            system.screen.loadCSStoDOM("placeHolderDOMCSS", "resources/css/saveloadMenu.css");
+        if(fileCSS) {
+            system.screen.loadCSStoDOM("resources/css/saveloadMenu.css");
         }
         else{
             style.innerHTML=css;
-        }*/
+        }
     }
     ).then(()=>{
 

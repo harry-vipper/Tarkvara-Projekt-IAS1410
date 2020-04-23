@@ -27,14 +27,13 @@ screen_question_task={
        }
     );
     system.screen.loadResource("/resources/css/element-question-task.css").then(
-    (css)=>{style.innerHTML=css;
-
-        /*if(fileCSS) {
-            system.screen.loadCSStoDOM("placeHolderDOMCSS", "resources/css/element-question-task.css");
+    (css)=>{
+        if(fileCSS) {
+            system.screen.loadCSStoDOM("resources/css/element-question-task.css");
         }
         else{
             style.innerHTML=css;
-        }*/
+        }
     }
     ).then(()=>{
 

@@ -31,14 +31,14 @@ screen_reaction_test={
             "confirm"
         ];
         system.screen.loadResource("/resources/css/reactionTest.css").then(
-        (css)=>{style.innerHTML=css;
+        (css)=>{
 
-            /*if(fileCSS) {
-            system.screen.loadCSStoDOM("placeHolderDOMCSS", "resources/css/reactionTest.css");
+            if(fileCSS) {
+            system.screen.loadCSStoDOM("resources/css/reactionTest.css");
             }
             else{
             style.innerHTML=css;
-            }*/
+            }
         }).then(()=>{
             
             let str=this.HTMLbase;

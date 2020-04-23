@@ -44,13 +44,13 @@ screen_settingsMenu={
             } 
         }      
         system.screen.loadResource("/resources/css/settingsMenu.css").then(
-            (css)=>{style.innerHTML=css;
-                /*if(fileCSS) {
-                    system.screen.loadCSStoDOM("placeHolderDOMCSS", "resources/css/settingsMenu.css");
+            (css)=>{
+                if(fileCSS) {
+                    system.screen.loadCSStoDOM("resources/css/settingsMenu.css");
                 }
                 else{
                     style.innerHTML=css;
-                }*/
+                }
         }).then(()=>{
 
             let str=this.HTMLbase;

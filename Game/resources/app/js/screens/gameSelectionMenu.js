@@ -30,7 +30,7 @@ screen_gameSelectionMenu={
         );
         render.strUID=function(str) {
             return str.split("UID").join(UID);
-          };
+        };
         render.menuEntry={
             //listEntry
             create: function(instance) {
@@ -125,7 +125,7 @@ screen_gameSelectionMenu={
             }
         }
         system.screen.loadResource("/resources/css/gameSelectionMenu.css").then(
-            (css)=>{style.innerHTML=css;
+            (css)=>{
                 //Render
 
                 if(fileCSS) {
