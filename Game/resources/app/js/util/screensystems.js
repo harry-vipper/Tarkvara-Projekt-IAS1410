@@ -260,7 +260,6 @@ system={
             hold:false,
             press:false,
             UISVG: function(description,key,duration){
-                console.log(description,key,duration);
                 let icon=`<svg class="UI-smallSVG buttonSymbol_glow_`+key+`" version="1.1" viewBox="0 0 12.7 12.7" preserveAspectRatio="xMinYMin meet" xmlns="http://www.w3.org/2000/svg">
                 <filter id="filter2993" x="-.256" y="-.256" width="1.512" height="1.512" style="color-interpolation-filters:sRGB">
                 <feGaussianBlur stdDeviation="0.33866608"/>
@@ -360,7 +359,6 @@ system={
             }
         },
         destroy: function() {
-            console.log("DESTRUCTION!!!")
             this.timers.clear();
             controls.key.clear.byKey("all");
             this.body.clear();

@@ -227,7 +227,6 @@ screen_settingsMenu={
     contrastCheck:function(FGoffset,BGoffset,screenContent){
         let FGL=(screenContent.savefile.settings.color.foreground[2])+FGoffset;
         let BGL=(screenContent.savefile.settings.color.background[2])+BGoffset;
-        console.log(FGL-BGL,BGL,FGL);
         if(FGL-BGL<15 || BGL<25 || FGL<40){
             return false;
         }

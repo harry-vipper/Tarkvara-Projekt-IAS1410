@@ -24,7 +24,7 @@ function startup() {
     }
     
     lastScreenPromise=lastScreenPromise.then((output)=>{
-        console.log(output)
+
         return loop(output);
     });
     
@@ -44,7 +44,6 @@ function startup() {
     }
     
     function loop(input){
-        console.log(input)
         lastScreenPromise=lastScreenPromise.then(()=>{
             if(input.type==="choiceMade"){
                 if(input.value===1){
@@ -97,14 +96,6 @@ function startup() {
             loop(output);
         });
     }
-        
-
-   
-    //footeri värvid
-    /*if(file.savefile.content.gameData.state===2){
-        nextScreen("save");
-    }
-    else exitScreen("gameMenu");*/
 }
 
 
@@ -146,7 +137,7 @@ function gameOrderer(){
         }
     }
     if(file.gamefile.content.content[file.savefile.content.gameData.selectedGame].settings.random){shuffle(gameOrder);}
-    console.log(gameOrder);
+    notify(gameOrder,"update");
     return gameOrder;
     
 }
