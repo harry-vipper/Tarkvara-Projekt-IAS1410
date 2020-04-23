@@ -18,13 +18,13 @@
 
 .UID_circle {
     display: table;
-    width: 600px;
-    height: 600px;
+    width: 700px;
+    height: 700px;
     margin: auto;
     vertical-align: middle;
     position: absolute;
     top: 84px;
-    left: 84px;
+    left: 168px;
 }
 
 .UID_circle-centerer {
@@ -61,15 +61,15 @@
 .UID_UI-largeSVG {display: block;width: 400px;position: absolute;top: 168px;right: 20px;}
 .UID_buttonSymbol_glow_middle {
     --svg-b-top-glow: transparent;
-    --svg-b-top: var(--fgColor-dark);
+    --svg-b-top: var(--bgColor-bright);
     --svg-b-right-glow: transparent;
-    --svg-b-right: var(--fgColor-dark);
+    --svg-b-right: var(--bgColor-bright);
     --svg-b-bottom-glow: transparent;
-    --svg-b-bottom: var(--fgColor-dark);
+    --svg-b-bottom: var(--bgColor-bright);
     --svg-b-left-glow: transparent;
-    --svg-b-left: var(--fgColor-dark);
-    --svg-b-center-glow: var(--fgColor-normal);
-    --svg-b-center: var(--fgColor-dark);
+    --svg-b-left: var(--bgColor-bright);
+    --svg-b-center-glow: var(--fgColor-bloom);
+    --svg-b-center: var(--fgColor-bright);
 }
 
 p#UID_nextNotice {
@@ -84,12 +84,4 @@ p#UID_nextNotice {
     padding: 0.5em;
 }
 
-.UID_UI_text_startNotice {
-    position: absolute;
-    width: 360px;
-    text-align: center;
-    top: 330px;
-    font-size: 1.5em;
-    color: var(--fgColor-normal);
-    background: var(--bgColor-darkest); 
-}
+.UID_UI_text_startNotice {position: absolute;width: 360px;text-align: left;top: 150px;left: 40px;font-size: 6em;font-weight: 600;font-family: 'Raleway';margin: 0;}

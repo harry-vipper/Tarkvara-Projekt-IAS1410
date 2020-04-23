@@ -1,9 +1,9 @@
 {
  "gameData": {
   "gameOrder": [
+   -2,
    0,
-   -1,
-   -2
+   -1
   ],
   "selectedGame": 2,
   "currentQuestion": 0,

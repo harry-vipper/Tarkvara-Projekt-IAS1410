@@ -15,14 +15,14 @@ screen_truth_or_dare={
         }
     );
     system.screen.loadResource("/resources/css/truthOrDare.css").then(
-    (css)=>{style.innerHTML=css;
+    (css)=>{
 
-        /*if(fileCSS) {
-           system.screen.loadCSStoDOM("placeHolderDOMCSS", "resources/css/truthOrDare.css");
+        if(fileCSS) {
+           system.screen.loadCSStoDOM("resources/css/truthOrDare.css");
         }
         else{
            style.innerHTML=css;
-        }*/
+        }
     }).then(()=>{
         let str=this.HTMLbase.key;
         str=str.split("UID").join(UID);
@@ -40,6 +40,7 @@ screen_truth_or_dare={
         const arrow_pointed_angle=Math.random()*360+5*360;
 
         function screen_startMinigame() {
+            controls.key.clear.byId(keylinkId);
             render.fade.out(document.getElementById(UID+"_UIdiv"));
             localTimerIds.push(setTimeout(function(){
                 let str=screen_truth_or_dare.HTMLbase.arrow;
@@ -60,7 +61,7 @@ screen_truth_or_dare={
         controls.key.set("up",1000,()=>{end({type: "gameSelectionMenu", value: null});},insertText(6));
         controls.key.set("left",1000,()=>{end({type: "nextScreen", value: "last"});},insertText(7));
         controls.key.set("right",1000,()=>{end({type: "nextScreen", value: "next"});},insertText(8));
-        controls.key.set("confirm",0, screen_startMinigame,"Start");
+        let keylinkId=controls.key.set("confirm",0, screen_startMinigame,"Start");
         });
 
         return endpromise
@@ -98,7 +99,7 @@ screen_truth_or_dare={
                         <path d="m4.7625 289.06v3.175h3.175v-3.175zm0.5292 0.52917h2.1167v2.1167h-2.1167z" style="fill:var(--svg-b-center);paint-order:markers fill stroke"/>
                     </g>
             </svg>
-            <p class="UID_UI_smalltext UID_UI_text_startNotice">Vajuta nuppu, et alustada</p>
+            <p class="UID_UI_smalltext UID_UI_text_startNotice">VAJUTA NUPPU, ET ALUSTADA</p>
         </div>
     `,
     arrow:`

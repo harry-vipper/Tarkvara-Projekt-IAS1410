@@ -13,14 +13,14 @@ screen_splash={
     )
     {
     return system.screen.loadResource("/resources/css/interSplash.css").then(
-        (css)=>{style.innerHTML=css;
+        (css)=>{
             //Load style for splash
-            /*if(fileCSS) {
-                system.screen.loadCSStoDOM("placeHolderDOMCSS", "resources/css/interSplash.css");
+            if(fileCSS) {
+                system.screen.loadCSStoDOM("resources/css/interSplash.css");
             }
             else{
                 style.innerHTML=css;
-            }*/
+            }
 
             let str=`
                 <svg style="display: none" width="50.8mm" height="50.8mm" version="1.1" viewBox="0 0 50.8 50.8" preserveAspectRatio="xMinYMin meet" xmlns="http://www.w3.org/2000/svg">
