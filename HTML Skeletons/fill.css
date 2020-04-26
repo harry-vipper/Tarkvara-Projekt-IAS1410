@@ -1,0 +1,37 @@
+.UID_screenwrapper p {
+    font-size: 8em;
+    white-space: nowrap;
+    position: relative;
+    margin: 0;
+    color: var(--fgColor-dull);
+    font-family: 'Raleway';
+    font-weight: 100;
+}
+
+.UID_screenwrapper p span {
+    /* background: var(--fgColor-normal); */
+    /* color: var(--bgColor-dark); */
+    padding: 0 0.4em;
+    width: 5em;
+    color: var(--fgColor-normal);
+    font-weight: 800;
+}
+
+.UID_textwrapper {
+    left: -56em;
+    top: -1em;
+    /* transform: rotateZ(-0deg); */
+    position: relative;
+}
+
+p#UID_p-1 {
+    left: 4em;
+}
+
+p#UID_p-5 {
+    left: 2em;
+}
+
+p#UID_p-3 {
+    left: 0.3em;
+}
