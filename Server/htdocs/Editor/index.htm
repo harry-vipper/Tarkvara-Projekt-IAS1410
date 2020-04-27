@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <script src="resource/lib/he.js"></script>
+        <script type="text/javascript" src="editor.js"></script>
+        <link rel="stylesheet" type="text/css" href="editor.css">
+        <link href="resource/f/roboto/v20/roboto.css" rel="stylesheet">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+    </head>
+    <body>
+        <svg width="19.05mm" height="19.05mm" version="1.1" viewBox="0 0 19.05 19.05" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <symbol id="i-bin">
+                    <path d="m7.62 4e-5v1.9049h-4.7625v1.9049h13.335v-1.9049h-4.7625v-1.9049zm-3.81 4.7624v14.287h11.43v-14.287zm1.4287 1.4288h1.905v11.43h-1.905zm3.3338 0h1.905v11.43h-1.905zm3.3337 0h1.905v11.43h-1.905z"/>
+                </symbol>
+                <symbol id="i-uparrow">
+                    <path d="m0 15.346 9.2604-12.435 9.7896 12.435z"/>
+                </symbol>
+                <symbol id="i-downarrow">
+                    <path d="m0 2.9104 9.2604 12.435 9.7896-12.435z"/>
+                </symbol>
+                <symbol id="i-plus">
+                    <path transform="scale(.26458)" d="m30 0v30h-30v12h30v30h12v-30h30v-12h-30v-30h-12z"/>
+                </symbol>
+                
+            </defs>
+        </svg>
+        <div class="body-wrapper">
+            <div class="list-game">
+                <div id="list-game-list"></div>
+                    <div class="list-game-item list-game-new-button"  onclick="newGame()">
+                        <p>Lisa uus mäng</p>
+                    </div>
+                </div>
+                <div class="list-settings" id="list-settings">
+                </div>
+                <div class="list-elements" id="list-elements">
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            <button class="footer-button-local" onclick="jsonDownload()">Lae fail alla</button>
+            <button class="footer-button-local" onclick="document.getElementById('footer-button-upload').click()">Ava fail</button><input  onchange="jsonUpload()" id="footer-button-upload" style="display: none;" type="file" accept=".json"></button>
+            <button class="footer-button-device" onclick="jsonToDevice()">Salvesta seadmesse</button>
+        </div>
+    </body>
+</html>
