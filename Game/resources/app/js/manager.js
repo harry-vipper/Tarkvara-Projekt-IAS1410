@@ -108,14 +108,14 @@ function delay(time, timerArray) {
 function gameOrderer(){
     let nrOfContentElements=file.gamefile.content.content[file.savefile.content.gameData.selectedGame].contentElements.length;  
     let nrOfType=nrOfContentElements;
-    for(i=0;i<nrOfContentElements;i++){
+    for(let i=0;i<nrOfContentElements;i++){
         if(file.gamefile.content.content[file.savefile.content.gameData.selectedGame].contentElements[i].repeatable){
             nrOfType=nrOfType + file.gamefile.content.content[file.savefile.content.gameData.selectedGame].contentElements[i].likelyRepeats-1;
             }
     }
     var gameOrder=new Array(nrOfType);
     let currentTypeNr=0;
-    for(let i=0,j=0;i<nrOfType;i++){
+    for(let i=0,j=0 ;i<nrOfType;i++){
         if(file.gamefile.content.content[file.savefile.content.gameData.selectedGame].contentElements[currentTypeNr].repeatable){
             for(j=0;j<file.gamefile.content.content[file.savefile.content.gameData.selectedGame].contentElements[currentTypeNr].likelyRepeats;j++){
                 gameOrder[i+j]=currentTypeNr
@@ -128,18 +128,36 @@ function gameOrderer(){
         currentTypeNr++;
     }
     let count=gameOrder.length/file.savefile.content.settings.mgFrequency;
-    for(i=0;i<count;i++){
-        if(file.savefile.content.settings.toggle[0]===1 && file.gamefile.content.content[file.savefile.content.gameData.selectedGame].settings.minigames.mg1){
-            gameOrder.push(-1);
+    for(let i=0,random;i<count;i++){
+        if(file.gamefile.content.content[file.savefile.content.gameData.selectedGame].settings.random){
+            if(file.savefile.content.settings.toggle[0]===1 && file.gamefile.content.content[file.savefile.content.gameData.selectedGame].settings.minigames.mg1){
+                gameOrder.push(-1);
+            }
+            if(file.savefile.content.settings.toggle[1]===1 && file.gamefile.content.content[file.savefile.content.gameData.selectedGame].settings.minigames.mg2){
+                gameOrder.push(-2);
+            }
         }
-        if(file.savefile.content.settings.toggle[1]===1 && file.gamefile.content.content[file.savefile.content.gameData.selectedGame].settings.minigames.mg2){
-            gameOrder.push(-2);
+        else{
+            random=Math.floor((Math.random() * (gameOrder.length-2)) + 1);
+            if(file.savefile.content.settings.toggle[0]===1 && file.gamefile.content.content[file.savefile.content.gameData.selectedGame].settings.minigames.mg1){
+                gameOrder.splice(random,0,-1);
+            }
+            random=Math.floor((Math.random() * (gameOrder.length-2)) + 1);
+            if(file.savefile.content.settings.toggle[1]===1 && file.gamefile.content.content[file.savefile.content.gameData.selectedGame].settings.minigames.mg2){
+                gameOrder.splice(random,0,-2);
+            }
         }
     }
-    if(file.gamefile.content.content[file.savefile.content.gameData.selectedGame].settings.random){shuffle(gameOrder);}
+    if(file.gamefile.content.content[file.savefile.content.gameData.selectedGame].settings.random){
+        gameOrder.splice(0,1);
+        gameOrder.pop();
+        shuffle(gameOrder);
+        gameOrder.splice(0,0,0);
+        gameOrder.push(file.gamefile.content.content[file.savefile.content.gameData.selectedGame].contentElements.length-1)
+    }
     notify(gameOrder,"update");
+
     return gameOrder;
-    
 }
 
 function shuffle(array) {

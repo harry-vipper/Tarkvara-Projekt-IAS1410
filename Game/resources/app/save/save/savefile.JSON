@@ -1,13 +1,13 @@
 {
  "gameData": {
   "gameOrder": [
-   -2,
    0,
-   -1
+   -1,
+   0
   ],
-  "selectedGame": 2,
+  "selectedGame": 3,
   "currentQuestion": 0,
-  "state": 1
+  "state": 2
  },
  "settings": {
   "toggle": [
@@ -30,9 +30,9 @@
   "language": "EST"
  },
  "lastGame": {
-  "time": "15:34:53",
+  "time": "21:12:10",
   "title": "Mäng ",
   "condition": 2,
-  "date": "23/04/2020"
+  "date": "27/04/2020"
  }
 }

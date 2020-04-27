@@ -14,12 +14,12 @@
                 "condition": 2
             },
             "settings": {
-                "random": true,
+                "random": false,
                 "contentElementDuration": 180,
                 "minigames": {
-                    "m1": true,
-                    "m2": true,
-                    "m3": true
+                    "mg1": true,
+                    "mg2": true,
+                    "mg3": true
                 }
             },
             "contentElements": [
@@ -63,11 +63,9 @@
                 "random": false,
                 "contentElementDuration": 180,
                 "minigames": {
-                    "m1": true,
-                    "m2": true,
-                    "m3": true,
                     "mg1": false,
-                    "mg2": true
+                    "mg2": true,
+                    "mg3": true
                 }
             },
             "contentElements": [
