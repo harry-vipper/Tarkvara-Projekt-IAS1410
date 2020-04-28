@@ -2,11 +2,16 @@
  "gameData": {
   "gameOrder": [
    0,
-   1
+   2,
+   4,
+   1,
+   -1,
+   3,
+   5
   ],
-  "selectedGame": 2,
-  "currentQuestion": 1,
-  "state": 2
+  "selectedGame": 1,
+  "currentQuestion": 6,
+  "state": 1
  },
  "settings": {
   "toggle": [
@@ -29,9 +34,9 @@
   "language": "EST"
  },
  "lastGame": {
-  "time": "21:48:17",
-  "title": "Eestlane kapis",
-  "condition": 2,
+  "time": "23:54:49",
+  "title": "Kevadise ChillWeekendi hilisõhtune tunnetemäng",
+  "condition": "0",
   "date": "28/04/2020"
  }
 }

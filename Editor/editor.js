@@ -19,9 +19,7 @@ function calculateExpectedTimes() {
 }
 function jsonDownload() {
     calculateExpectedTimes();
-    /*var file = new File(["Hello, world!"], "hello world.txt", {type: "text/plain;charset=utf-8"});
-    saveAs(file);
-    /**/
+
     jsonWrapper.content=file;
     var text=JSON.stringify(jsonWrapper);
     var filename="games.json";
@@ -37,6 +35,57 @@ function jsonDownload() {
     document.body.removeChild(element);
     console.log("Downloaded");
 }
+function castToType(type, input) {
+    switch(type) {
+        case "number":
+            let val=Number(input);
+            if (isNaN(val) || val==undefined) {throw "Broken file: "+input;}
+            return val;
+        case "boolean":
+            if (input==undefined) {throw "Broken file: "+input;}
+            return !!input;
+        case "string":
+            if (input==undefined) {throw "Broken file: "+input;}
+            return input;
+        case "contentElementType":
+            if (input==undefined || (input!="task" && input!="question")) {throw "Broken file: "+input;}
+            return input;
+        default:
+            throw "Incorrect type conversion type";
+    }
+}
+function checkStructure(object) {
+    try {
+        object.content.forEach(function(game){
+            game.properties.condition=castToType("number", game.properties.condition);
+            game.properties.description=castToType("string", game.properties.description);
+            game.properties.duration=castToType("number", game.properties.duration);
+            game.properties.players.min=castToType("number", game.properties.players.min);
+            game.properties.players.max=castToType("number", game.properties.players.max);
+            game.properties.title=castToType("string", game.properties.title);
+            game.properties.volume=castToType("number", game.properties.volume);
+
+
+            game.settings.contentElementDuration=castToType("number", game.settings.contentElementDuration);
+
+            game.settings.minigames.mg1=castToType("boolean", game.settings.minigames.mg1);
+            game.settings.minigames.mg2=castToType("boolean", game.settings.minigames.mg2);
+            game.settings.random=castToType("boolean", game.settings.random);
+
+            game.contentElements.forEach(function(contentElement){
+                contentElement.likelyRepeats=castToType("number", contentElement.likelyRepeats);
+                contentElement.repeatable=castToType("boolean", contentElement.repeatable);
+                contentElement.str=castToType("string", contentElement.str);
+                contentElement.type=castToType("contentElementType", contentElement.type);
+            });
+        });
+    }
+    catch(error) {
+        console.log(error);
+        return false;
+    }
+    return true;
+}
 function jsonUpload() {
     const fileReader=new FileReader();
     fileReader.readAsText(document.getElementById("footer-button-upload").files[0]);
@@ -44,12 +93,16 @@ function jsonUpload() {
             let err=false;
             try {
                 var a=JSON.parse(fileReader.result);
+                if(!checkStructure(a)) {
+                    throw "Broken file";
+                }
                 console.log(a);
             }
             catch(e) {
                 err=true;
                 //showError
                 console.log("Non-valid JSON");
+                window.alert("Selle faili sisu polnud korrektne");
             }
             finally {
                 if(!err) {
@@ -69,6 +122,7 @@ function jsonUpload() {
                                 j++;
                             })
                         })
+                        nextFileIndex=reIdFile();
                         //file=decodeURIComponent(file);
                         selectedGame=0;
                         document.getElementById("footer-button-upload").value=null;
@@ -94,6 +148,13 @@ function redraw() {
     for(let i=0; i<file.length; i++) {
         addGameButton(file[i]["id"]);
     }
+}
+function reIdFile() {
+    let i=0;
+    for(i=0; i<file.length; i++) {
+        file["id"]=i;
+    }
+    return i;   //the largest e_id, to set the nextElementId variable
 }
 function reId(index) {
     let i=0;
@@ -158,7 +219,7 @@ function saveData(property, id) {
         case 'min':
             val=encodeInput(document.getElementById(id).value);
             if (!isNaN(val)) {
-                if (val>=2) {
+                if (val>=1) {
                     if(val>game["properties"]["players"]["max"]) {
                         game["properties"]["players"]["max"]=val;
                         document.getElementById("settings-players-max").value=val;
@@ -166,19 +227,19 @@ function saveData(property, id) {
                     return game["properties"]["players"]["min"]=val;
                 }
                 else {
-                    document.getElementById(id).value=2;
-                    return game["properties"]["players"]["min"]=2;
+                    document.getElementById(id).value=1;
+                    return game["properties"]["players"]["min"]=1;
                 }
             }
             else {
-                document.getElementById(id).value=2;
-                return game["properties"]["players"]["min"]=2;
+                document.getElementById(id).value=1;
+                return game["properties"]["players"]["min"]=1;
             }
             
         case 'max':
             val=encodeInput(document.getElementById(id).value);
             if (!isNaN(val)) {
-                if (val>=2) {
+                if (val>=1) {
                     if(val<game["properties"]["players"]["min"]) {
                         game["properties"]["players"]["min"]=val;
                         document.getElementById("settings-players-min").value=val;
@@ -186,13 +247,13 @@ function saveData(property, id) {
                     return game["properties"]["players"]["max"]=val;
                 }
                 else {
-                    document.getElementById(id).value=2;
-                    return game["properties"]["players"]["max"]=2;
+                    document.getElementById(id).value=1;
+                    return game["properties"]["players"]["max"]=1;
                 }
             }
             else {
-                document.getElementById(id).value=2;
-                return game["properties"]["players"]["max"]=2;
+                document.getElementById(id).value=1;
+                return game["properties"]["players"]["max"]=1;
             }
         case 'volume':
             maxVal=100;

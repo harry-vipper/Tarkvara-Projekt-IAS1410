@@ -74,7 +74,7 @@ screen_gameSelectionMenu={
                                         </svg>
                                     </div>
                                     <div class="UID_menulistDescriptionPropertiesElementValue">
-                                        <p>`+instance.properties.players.min+"-"+instance.properties.players.max+`</p>
+                                        <p>`+getMinMaxStr(instance.properties.players.min,instance.properties.players.max)+`</p>
                                     </div>
                                 </div>
                                 <div class="UID_menulistDescriptionPropertiesElement">
@@ -124,6 +124,12 @@ screen_gameSelectionMenu={
                 document.getElementById("_"+index+render.strUID("_UID_header_title")).classList.remove(render.strUID("UID_menulistHeaderActive"));
                 document.getElementById("_"+index+render.strUID("_UID_header_description")).classList.add(render.strUID("r_hidden_animatable"));
             }
+        };
+        function getMinMaxStr(min, max) {
+            if (min==max) {
+                return min;
+            }
+            return min+"-"+max;
         }
         system.screen.loadResource("/resources/css/gameSelectionMenu.css").then(
             (css)=>{
