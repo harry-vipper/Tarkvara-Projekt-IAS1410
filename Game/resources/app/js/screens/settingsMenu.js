@@ -342,7 +342,7 @@ screen_settingsMenu={
         screenElement.querySelector("#"+render.strUID("_4_UID_header_title")).innerHTML="<p>"+insertText("24")+"</p>";//s
 
         screenElement.querySelector("#"+render.strUID("_5_UID_header_title")).innerHTML="<p>"+insertText("25")+"</p>";//l
-        screenElement.querySelector("#"+render.strUID("_5_UID_header_description_text")).innerHTML="<p>"+insertText("29")+"</p>";
+        //screenElement.querySelector("#"+render.strUID("_5_UID_header_description_text")).innerHTML="<p>"+insertText("29")+"</p>";
 
 
         screenElement.querySelector("#"+render.strUID("_2_UID_menulistGroupHeader")).innerHTML="<p>"+insertText("22")+"</p>";//background color
@@ -352,7 +352,7 @@ screen_settingsMenu={
         screenElement.querySelector("#"+render.strUID("_7_UID_header_title")).innerHTML="<p>"+insertText("24")+"</p>";//s
 
         screenElement.querySelector("#"+render.strUID("_8_UID_header_title")).innerHTML="<p>"+insertText("25")+"</p>";//l
-        screenElement.querySelector("#"+render.strUID("_8_UID_header_description_text")).innerHTML="<p>"+insertText("30")+"</p>";
+        //screenElement.querySelector("#"+render.strUID("_8_UID_header_description_text")).innerHTML="<p>"+insertText("30")+"</p>";
 
         screenElement.querySelector("#"+render.strUID("_3_UID_menulistGroupHeader")).innerHTML="<p>"+insertText("31")+"</p>";//language
         screenElement.querySelector("#"+render.strUID("_9_UID_header_title")).innerHTML="<p>"+insertText("31")+"</p>";
@@ -545,11 +545,11 @@ screen_settingsMenu={
                     </div>
                 </div>
                 <div id="_5_UID_header_description" class="UID_menulistDescriptionBackground r_hidden_animatable r_hidden_animatable_capable">
-                    <div class="UID_menulistDescription">
+                    <!--<div class="UID_menulistDescription">
                         <div class="UID_menulistDescriptionText" id="_5_UID_header_description_text">
                             <p>Parameetri kirjeldus (Kui vaja)</p>
                         </div>
-                    </div>
+                    </div>-->
                 </div>
             </div>
             
@@ -620,11 +620,11 @@ screen_settingsMenu={
                     </div>
                 </div>
                 <div id="_8_UID_header_description" class="UID_menulistDescriptionBackground r_hidden_animatable r_hidden_animatable_capable">
-                    <div class="UID_menulistDescription">
+                <!--<div class="UID_menulistDescription">
                         <div class="UID_menulistDescriptionText" id="_8_UID_header_description_text">
                             <p>Parameetri kirjeldus (Kui vaja)</p>
                         </div>
-                    </div>
+                    </div>-->
                 </div>
             </div>
             

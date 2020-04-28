@@ -1,15 +1,21 @@
 function conditionToText(condition) {
-    if(condition===0){
+    console.log(condition);
+    switch(String(condition)) {
+        
+        case "0":
         return insertText("38");
-    }
-    if(condition===1){
+
+        case "1":
         return insertText("39");
-    }
-    if(condition===2){
-        return insertText("40");
-    }
-    if(condition===3){
+
+        case "2":
+        return insertText("40");  
+
+        case "3":
         return insertText("41");
+
+        default:
+        return insertText("38");
     }
 }
 function strToHTML(str) {

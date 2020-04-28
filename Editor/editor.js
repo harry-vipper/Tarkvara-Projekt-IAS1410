@@ -9,6 +9,9 @@ var selectedGame=undefined;
 function encodeInput(str) {
     return he.encode(str);
 }
+function decodeInput(str) {
+    return he.decode(str);
+}
 function calculateExpectedTimes() {
     for(let i=0; i<file.length; i++) {
         file[i]["properties"]["duration"]=file[i]["contentElements"].length*file[i]["settings"]["contentElementDuration"]/60;
@@ -368,14 +371,14 @@ function createGameSettings(id) {
     <textarea onchange="saveData('description', 'settings-desc')" spellcheck="false" class="t-area-wide list-settings-desc" id="settings-desc"></textarea>
     <h3>Sätted</h3>
     <p>Mängijate soovituslik arv<span class="input-bg"><input onchange="saveData('min', 'settings-players-min')" class="input-digit" id="settings-players-min"></input>-<input onchange="saveData('max', 'settings-players-max')" class="input-digit"  id="settings-players-max"></input></span></p>
-    <!--<p>Soovituslik vol<span class="input-bg"><input onchange="saveData('volume', 'settings-volume')" class="input-digit" id="settings-volume"></input>%</span></p>
+    <p>Soovituslik vol<span class="input-bg"><input onchange="saveData('volume', 'settings-volume')" class="input-digit" id="settings-volume"></input>%</span></p>
     <p>Konditsioon
         <select onchange="saveData('condition', 'settings-condition')" class="select-str" id="settings-condition">
             <option value="0">Kaine</option>
             <option value="1">Juba timm</option>
             <option value="2">Lappes</option>
         </select>
-    </p>-->
+    </p>
 
     <p>Elemendi kestus<span class="input-bg"><input onchange="saveData('contentElementDuration', 'settings-contentElementDuration')" class="input-digit" id="settings-contentElementDuration"></input>sec</span></p>
     <p><span id="c_random" class="checkbox checkbox-unchecked" onclick="toggleCheckbox('c_random')"></span>Suvaline elementide järjestus</p>
@@ -383,20 +386,20 @@ function createGameSettings(id) {
 
     <p><span id="c_mg1" class="checkbox checkbox-unchecked" onclick="toggleCheckbox('c_mg1')"></span>Truth Dare</p>
     <p><span id="c_mg2" class="checkbox checkbox-unchecked" onclick="toggleCheckbox('c_mg2')"></span>Tähelepanu test</p>
-    <p><span id="c_mg3" class="checkbox checkbox-unchecked" onclick="toggleCheckbox('c_mg3')"></span>Ayy lmao</p>`;
+    <!--<p><span id="c_mg3" class="checkbox checkbox-unchecked" onclick="toggleCheckbox('c_mg3')"></span>Ayy lmao</p>-->`;
 
-    document.getElementById("settings-name").value=file[getIndexFromId(selectedGame)]["properties"]["title"];
-    document.getElementById("settings-desc").value=file[getIndexFromId(selectedGame)]["properties"]["description"];
+    document.getElementById("settings-name").value=decodeInput(file[getIndexFromId(selectedGame)]["properties"]["title"]);
+    document.getElementById("settings-desc").value=decodeInput(file[getIndexFromId(selectedGame)]["properties"]["description"]);
     document.getElementById("settings-players-min").value=file[getIndexFromId(selectedGame)]["properties"]["players"]["min"];
     document.getElementById("settings-players-max").value=file[getIndexFromId(selectedGame)]["properties"]["players"]["max"];
     document.getElementById("settings-desc").value=file[getIndexFromId(selectedGame)]["properties"]["description"];
-    //document.getElementById("settings-volume").value=file[getIndexFromId(selectedGame)]["properties"]["volume"];
-    //document.getElementById("settings-condition").value=file[getIndexFromId(selectedGame)]["properties"]["condition"];
+    document.getElementById("settings-volume").value=file[getIndexFromId(selectedGame)]["properties"]["volume"];
+    document.getElementById("settings-condition").value=file[getIndexFromId(selectedGame)]["properties"]["condition"];
     document.getElementById("settings-contentElementDuration").value=file[getIndexFromId(selectedGame)]["settings"]["contentElementDuration"];
     setCheckbox("c_random", file[getIndexFromId(selectedGame)]["settings"]["random"]);
     setCheckbox("c_mg1", file[getIndexFromId(selectedGame)]["settings"]["minigames"]["mg1"]);
     setCheckbox("c_mg2", file[getIndexFromId(selectedGame)]["settings"]["minigames"]["mg2"]);
-    setCheckbox("c_mg3", file[getIndexFromId(selectedGame)]["settings"]["minigames"]["mg3"]);
+    //setCheckbox("c_mg3", file[getIndexFromId(selectedGame)]["settings"]["minigames"]["mg3"]);
     
 }
 function removeGameSettings() {
@@ -474,7 +477,7 @@ function createElement(e_index) {
 </div>`;
     console.log(element);
     element.querySelector("#e-seq_"+String(e_id)).value=e_index;
-    element.querySelector("#e-str_"+String(e_id)).value=file[getIndexFromId(selectedGame)]["contentElements"][e_index]["str"];
+    element.querySelector("#e-str_"+String(e_id)).value=decodeInput(file[getIndexFromId(selectedGame)]["contentElements"][e_index]["str"]);
     element.querySelector("#e-probability_"+String(e_id)).value=file[getIndexFromId(selectedGame)]["contentElements"][e_index]["likelyRepeats"];
     element.querySelector("#e-type_"+String(e_id)).value=file[getIndexFromId(selectedGame)]["contentElements"][e_index]["type"];
     setCheckbox("e-c-repeatable_"+String(e_id), file[getIndexFromId(selectedGame)]["contentElements"][e_index]["repeatable"], element);

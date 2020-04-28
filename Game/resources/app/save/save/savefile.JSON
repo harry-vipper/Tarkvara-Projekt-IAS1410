@@ -2,11 +2,10 @@
  "gameData": {
   "gameOrder": [
    0,
-   1,
-   2
+   1
   ],
-  "selectedGame": 11,
-  "currentQuestion": 2,
+  "selectedGame": 2,
+  "currentQuestion": 1,
   "state": 2
  },
  "settings": {
@@ -30,8 +29,8 @@
   "language": "EST"
  },
  "lastGame": {
-  "time": "20:52:32",
-  "title": "Parameetrite test\n",
+  "time": "21:48:17",
+  "title": "Eestlane kapis",
   "condition": 2,
   "date": "28/04/2020"
  }

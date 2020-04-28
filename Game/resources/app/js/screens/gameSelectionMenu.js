@@ -62,7 +62,7 @@ screen_gameSelectionMenu={
                                         </svg>
                                     </div>
                                     <div class="UID_menulistDescriptionPropertiesElementValue">
-                                        <p>`+instance.properties.duration+`<span class="UID_menulistDescriptionPropertiesElementValue-small">min</span></span></p>
+                                        <p>`+(parseFloat(instance.properties.duration).toFixed(0))+`<span class="UID_menulistDescriptionPropertiesElementValue-small">min</span></span></p>
                                     </div>
                                 </div>
                                 <div class="UID_menulistDescriptionPropertiesElement">
