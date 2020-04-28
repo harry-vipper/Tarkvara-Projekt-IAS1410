@@ -2,6 +2,8 @@ var controls={
     key:{
         listenerActive:false,
         linkId:0,
+        lockKeyUp:false,
+        timers:[],
         bind:{
             up: ['w', '8'],
             down: ['s', '2'],
@@ -46,7 +48,7 @@ var controls={
             for(i=0;i<values.length;i++){
                 for(j=0;j<values[i].length;j++){
                     if(values[i][j].id===targetId){
-                        values[i][j]={};
+                        values[i].splice(j,1);
                         found=true;
                         break id;
                     }
@@ -67,35 +69,70 @@ var controls={
             ];
             this.linkId++;
             if(!controls.key.listenerActive){
-                document.addEventListener('keydown',keyDownFunction);
+                document.addEventListener('keydown',keyDownFunction,{once:true});
                 document.addEventListener('keyup',keyUpFunction);
                 controls.key.listenerActive=true;
             }
             controls.key.fill(selectedKey,keyDuration,keyAction,keyDescription,this.linkId);
             var whichKey = {};
+            var length=this.timers.length;
+            
 
             function keyDownFunction(event){
                 if ( whichKey[event.key] ) return;
-                whichKey[event.key] = event.timeStamp;
+                let keyTarget= findKeyTarget(event.key);
+                if(keyTarget!=undefined){
+                    let values=Object.values(controls.key.link);
+                    if(values[keyTarget].length!==0){
+                        let keyDurations=[];
+                        for(let j=0;j<values[keyTarget].length;j++){
+                            keyDurations[j]=values[keyTarget][j].duration;
+                        }
+                        keyDurations.sort(function(a, b){return a-b});
+                        var maxPressDuration=keyDurations.pop();
+                    }
+                    else var maxPressDuration=0;
+
+                    whichKey[event.key] = JSON.parse(JSON.stringify(event.timeStamp));
+                    controls.key.timers[length]=setTimeout(()=>{
+                        controls.key.lockKeyUp=true;
+                        notify("Pressed "+event.key, "controls");
+                        findAction(maxPressDuration+1,event);
+                    },maxPressDuration);  
+                }
+                else return;
             }
 
             function keyUpFunction(event){
-                if ( !whichKey[event.key] ) return;
-                var pressDuration = event.timeStamp - whichKey[event.key];
+                if(!whichKey[event.key])return;
+                if(controls.key.lockKeyUp){
+                    whichKey[event.key] = 0;
+                    controls.key.lockKeyUp=false; 
+                    document.addEventListener('keydown',keyDownFunction,{once:true});
+                    return;
+                }
+                document.addEventListener('keydown',keyDownFunction,{once:true});
+                clearTimeout(controls.key.timers[length]);
+                let pressDuration = event.timeStamp - whichKey[event.key];
                 whichKey[event.key] = 0;
-                notify("Pressed "+event.key+" for "+Math.floor(pressDuration)+"ms", "controls");
-                findAction(pressDuration);
+                notify("Held "+event.key+" for "+Math.floor(pressDuration)+"ms", "controls");
+                findAction(pressDuration,event);
             }
 
-            function findAction(pressDuration){
+            function findKeyTarget(key){
                 let keyTarget=undefined;
                 let ct=0;
                 for(ct; ct<keyBinds.length;ct++){
-                    if(keyBinds[ct].includes(event.key,0)) {
+                    if(keyBinds[ct].includes(key,0)) {
                         keyTarget=ct;
                         break;
                     }
                 };
+                return keyTarget;
+            }
+
+            function findAction(pressDuration,event){
+                let keyTarget= findKeyTarget(event.key);
                 if(keyTarget!=undefined){
                     var values=Object.values(controls.key.link);
                     var i=keyTarget;

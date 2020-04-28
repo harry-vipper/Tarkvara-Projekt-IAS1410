@@ -218,5 +218,10 @@
     {
         "EST":"Alusta uue mänguga",
         "ENG":"Begin with a new game"
+    },
+    "44":
+    {
+        "EST":"TÄITKE KLAASID!",
+        "ENG":"FILL YOUR CUPS!"
     }
 }

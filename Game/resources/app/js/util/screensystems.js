@@ -12,7 +12,7 @@ system={
                         controls,
                         {
                             icon:"bolt",
-                            text:file.languagefile.content["4"][file.savefile.content.settings.language],
+                            text:insertText("4"),
                             movetime:900,
                             staytime:3000,
                         }
@@ -44,7 +44,7 @@ system={
                         controls,
                         {
                             icon:"arrow",
-                            text:file.languagefile.content["3"][file.savefile.content.settings.language],
+                            text:insertText("3"),
                             movetime:900,
                             staytime:3000,
                         }
@@ -92,7 +92,7 @@ system={
                         controls,
                         {
                             icon:"exclamationmark",
-                            text:file.languagefile.content["5"][file.savefile.content.settings.language],
+                            text:insertText("5"),
                             movetime:900,
                             staytime:3000,
                         },
@@ -170,6 +170,24 @@ system={
                         system.screen.UID.generate()
                     ).then((output)=>{
                         return render.fade.out(document.getElementById("screenContainer")).then(()=>{this.destroy();return output;});
+                    });
+                case "fillSplash":
+                    return screens.splash.handler(
+                        document.getElementById("screenContainer"),
+                        document.getElementById("screenStyleContainer"),
+                        controls,
+                        {
+                            icon:"exclamationmark",
+                            text:insertText("44"),
+                            movetime:900,
+                            staytime:10000,
+                        },
+                        system.screen.timers.localTimerIds,
+                        null,
+                        render,
+                        system.screen.UID.generate()
+                    ).then(()=>{
+                        return render.fade.out(document.getElementById("screenContainer")).then(()=>{this.destroy();return {"type":"fillEnd"};});
                     });
             }
         },
@@ -251,6 +269,26 @@ system={
                     styleTag.innerHTML="";
                 }
                 return time;
+            },
+            reload:function(){
+                this.clear();
+                let i;                
+                for(i=0;i<controls.key.link.up.length;i++){
+                    system.screen.footer.UISVG(controls.key.link.up[i].description,"up",controls.key.link.up[i].duration);
+                }
+                for(i=0;i<controls.key.link.down.length;i++){
+                    system.screen.footer.UISVG(controls.key.link.down[i].description,"down",controls.key.link.down[i].duration);
+                }
+                for(i=0;i<controls.key.link.left.length;i++){
+                    system.screen.footer.UISVG(controls.key.link.left[i].description,"left",controls.key.link.left[i].duration);
+                }
+                for(i=0;i<controls.key.link.right.length;i++){
+                    system.screen.footer.UISVG(controls.key.link.right[i].description,"right",controls.key.link.right[i].duration);
+                }
+                for(i=0;i<controls.key.link.confirm.length;i++){
+                    system.screen.footer.UISVG(controls.key.link.confirm[i].description,"confirm",controls.key.link.confirm[i].duration);
+                }
+                system.screen.footer.updateAnimation();
             },
             clear: function(){
                 this.hold=false;

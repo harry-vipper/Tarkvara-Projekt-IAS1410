@@ -149,16 +149,19 @@ screen_gameSelectionMenu={
                 })
                 screenContent.savefile.gameData.selectedGame=0;
                     render.menuEntry.activate(screenContent.savefile.gameData.selectedGame);
-                return render.fade.in(context);
+                const scroller = new SweetScroll();
+                scroller.to(
+                    ("#_"+screenContent.savefile.gameData.selectedGame+render.strUID("_UID_element"))
+                )
+                return render.fade.in(context).then(()=>{return scroller;});
             }).then(
-                ()=>{
+                (scroller)=>{
 
                     controls.key.set('up', 0, ()=>{selectGame('-');}, insertText("9"));
                     controls.key.set('down', 0, ()=>{selectGame('+');}, insertText("10"));
                     controls.key.set('confirm', 1000, ()=>{end({type:"startGame"});}, insertText("11"));
                     controls.key.set('left', 0, ()=>{end({type:"settingsMenu"});}, insertText("12"));
 
-                    const scroller = new SweetScroll();
                     
                     function selectGame(direction) {
                         render.menuEntry.deactivate(screenContent.savefile.gameData.selectedGame);

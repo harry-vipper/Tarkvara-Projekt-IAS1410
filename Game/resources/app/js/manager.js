@@ -8,8 +8,9 @@ function startup() {
 
     color.setColor();
 
+    var fillCounter=0;
     //Always
-    
+
     var lastScreenPromise=new Promise((resolve)=>{resolve()});
     
     if(file.savefile.content.gameData.state===2){//if there's an old game
@@ -30,6 +31,12 @@ function startup() {
     
     //Järgmised tegevused
     function typeFinder(){
+        fillCounter++;
+        if(fillCounter===Math.floor(10/file.gamefile.content.content[file.savefile.content.gameData.selectedGame].properties.condition)){
+            fillCounter=0;
+            return system.screen.displayScreen("fillSplash", undefined);
+        }
+
         if(file.savefile.content.gameData.currentQuestion>=file.savefile.content.gameData.gameOrder.length){
             return system.screen.displayScreen("gameEnd", undefined);
         }
@@ -64,7 +71,7 @@ function startup() {
                 file.savefile.content.gameData.gameOrder=gameOrderer();
                 file.savefile.content.lastGame.title=file.gamefile.content.content[file.savefile.content.gameData.selectedGame].properties.title;
                 file.savefile.content.lastGame.condition=file.gamefile.content.content[file.savefile.content.gameData.selectedGame].properties.condition;
-
+                fillCounter=0;
                 return typeFinder();
             }
             else if(input.type==="nextScreen"){
@@ -87,6 +94,9 @@ function startup() {
             else if(input.type==="settingsMenu"){
                 file.savefile.content.gameData.state=3;
                 return system.screen.displayScreen("settingsMenu", undefined);
+            }
+            else if(input.type==="fillEnd"){
+                return typeFinder();
             }
             else{
                 debugger;
@@ -127,34 +137,25 @@ function gameOrderer(){
         }
         currentTypeNr++;
     }
-    let count=gameOrder.length/file.savefile.content.settings.mgFrequency;
-    for(let i=0,random;i<count;i++){
-        if(file.gamefile.content.content[file.savefile.content.gameData.selectedGame].settings.random){
-            if(file.savefile.content.settings.toggle[0]===1 && file.gamefile.content.content[file.savefile.content.gameData.selectedGame].settings.minigames.mg1){
-                gameOrder.push(-1);
-            }
-            if(file.savefile.content.settings.toggle[1]===1 && file.gamefile.content.content[file.savefile.content.gameData.selectedGame].settings.minigames.mg2){
-                gameOrder.push(-2);
-            }
+    
+    gameOrder.splice(0,1);
+    gameOrder.pop();
+    if(file.gamefile.content.content[file.savefile.content.gameData.selectedGame].settings.random)shuffle(gameOrder);
+
+    let mgF=file.savefile.content.settings.mgFrequency;
+    let count=gameOrder.length/mgF;
+
+    for(let i=1;i<=count;i++){
+        if(file.savefile.content.settings.toggle[0]===1 && file.gamefile.content.content[file.savefile.content.gameData.selectedGame].settings.minigames.mg1){
+            gameOrder.splice(Math.floor(mgF*i-(Math.random()*mgF/2)),0,-1);
         }
-        else{
-            random=Math.floor((Math.random() * (gameOrder.length-2)) + 1);
-            if(file.savefile.content.settings.toggle[0]===1 && file.gamefile.content.content[file.savefile.content.gameData.selectedGame].settings.minigames.mg1){
-                gameOrder.splice(random,0,-1);
-            }
-            random=Math.floor((Math.random() * (gameOrder.length-2)) + 1);
-            if(file.savefile.content.settings.toggle[1]===1 && file.gamefile.content.content[file.savefile.content.gameData.selectedGame].settings.minigames.mg2){
-                gameOrder.splice(random,0,-2);
-            }
+        if(file.savefile.content.settings.toggle[1]===1 && file.gamefile.content.content[file.savefile.content.gameData.selectedGame].settings.minigames.mg2){
+            gameOrder.splice(Math.floor(mgF*i+(Math.random()*mgF/2)),0,-2);
         }
     }
-    if(file.gamefile.content.content[file.savefile.content.gameData.selectedGame].settings.random){
-        gameOrder.splice(0,1);
-        gameOrder.pop();
-        shuffle(gameOrder);
-        gameOrder.splice(0,0,0);
-        gameOrder.push(file.gamefile.content.content[file.savefile.content.gameData.selectedGame].contentElements.length-1)
-    }
+
+    gameOrder.splice(0,0,0);
+    gameOrder.push(file.gamefile.content.content[file.savefile.content.gameData.selectedGame].contentElements.length-1)
     notify(gameOrder,"update");
 
     return gameOrder;

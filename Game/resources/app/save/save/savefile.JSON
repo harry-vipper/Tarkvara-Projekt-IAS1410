@@ -2,11 +2,24 @@
  "gameData": {
   "gameOrder": [
    0,
+   0,
+   0,
+   0,
    -1,
-   0
+   -2,
+   0,
+   0,
+   -1,
+   0,
+   -2,
+   0,
+   0,
+   0,
+   1,
+   2
   ],
-  "selectedGame": 3,
-  "currentQuestion": 0,
+  "selectedGame": 0,
+  "currentQuestion": 4,
   "state": 2
  },
  "settings": {
@@ -14,7 +27,7 @@
    1,
    1
   ],
-  "mgFrequency": 5,
+  "mgFrequency": 4,
   "color": {
    "foreground": [
     97,
@@ -30,9 +43,9 @@
   "language": "EST"
  },
  "lastGame": {
-  "time": "21:12:10",
-  "title": "Mäng ",
+  "time": "15:11:44",
+  "title": "SFW version",
   "condition": 2,
-  "date": "27/04/2020"
+  "date": "28/04/2020"
  }
 }

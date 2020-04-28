@@ -41,6 +41,7 @@ screen_truth_or_dare={
 
         function screen_startMinigame() {
             controls.key.clear.byId(keylinkId);
+            system.screen.footer.reload();
             render.fade.out(document.getElementById(UID+"_UIdiv"));
             localTimerIds.push(setTimeout(function(){
                 let str=screen_truth_or_dare.HTMLbase.arrow;
@@ -61,7 +62,7 @@ screen_truth_or_dare={
         controls.key.set("up",1000,()=>{end({type: "gameSelectionMenu", value: null});},insertText(6));
         controls.key.set("left",1000,()=>{end({type: "nextScreen", value: "last"});},insertText(7));
         controls.key.set("right",1000,()=>{end({type: "nextScreen", value: "next"});},insertText(8));
-        let keylinkId=controls.key.set("confirm",0, screen_startMinigame,"Start");
+        let keylinkId=controls.key.set("confirm",0, screen_startMinigame,insertText(11));
         });
 
         return endpromise

@@ -61,16 +61,18 @@ screen_settingsMenu={
             context.appendChild(screenElement);
 
             return this.setContent(screenElement,screenContent);
-        }).then(()=>{            
-            return render.fade.in(context);
-        }).then(()=>{
+        }).then(()=>{          
+            const scroller = new SweetScroll();
+            scroller.to(
+                ("#"+render.strUID("_0_UID_menuHeader"))
+            )  
+            return render.fade.in(context).then(()=>{return scroller;});
+        }).then((scroller)=>{
 
             controls.key.set('up', 0, ()=>{changeSetting('-');}, insertText("9"));
             controls.key.set('down', 0, ()=>{changeSetting('+');}, insertText("10"));
             controls.key.set('confirm', 0, ()=>{selectSetting();}, insertText("13"));
             controls.key.set('left', 0, ()=>{end({type:"gameSelectionMenu"});}, insertText("14"));
-            
-            const scroller = new SweetScroll();
             
             function changeSetting(direction) {
                 render.menuEntry.deactivate(screen_settingsMenu.selectedSetting);
@@ -79,15 +81,17 @@ screen_settingsMenu={
                     screen_settingsMenu.selectedSetting, 
                     10
                 );
-                
-                if(screen_settingsMenu.selectedSetting>=3){
-                    var elementId="_"+screen_settingsMenu.selectedSetting+render.strUID("_UID_header_index");
-                }
-                else{
+                if(3>screen_settingsMenu.selectedSetting && screen_settingsMenu.selectedSetting>=0){
                     var elementId=render.strUID("_0_UID_menuHeader");
                 }
+                else if(6>screen_settingsMenu.selectedSetting && screen_settingsMenu.selectedSetting>2){
+                    var elementId=render.strUID("_1_UID_menulistGroupHeader");
+                }
+                else if(10>screen_settingsMenu.selectedSetting && screen_settingsMenu.selectedSetting>5){
+                    var elementId=render.strUID("_2_UID_menulistGroupHeader");
+                }
                 
-                
+                console.log(elementId)
                 render.menuEntry.activate(screen_settingsMenu.selectedSetting);
                 scroller.to(
                     ("#"+elementId)
