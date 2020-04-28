@@ -12,6 +12,7 @@ screen_splash={
         UID,             
     )
     {
+    render.footer.hide();
     return system.screen.loadResource("/resources/css/interSplash.css").then(
         (css)=>{
             //Load style for splash

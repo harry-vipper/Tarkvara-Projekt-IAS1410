@@ -14,6 +14,7 @@ screen_truth_or_dare={
           end=resolve;
         }
     );
+    render.footer.transparentize();
     system.screen.loadResource("/resources/css/truthOrDare.css").then(
     (css)=>{
 

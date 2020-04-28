@@ -21,7 +21,7 @@ screen_settingsMenu={
             }
         );
         var screenElement=document.createElement("div");
-
+        
         render.strUID=function(str) {
             return str.split("UID").join(UID);
             };
@@ -42,7 +42,8 @@ screen_settingsMenu={
                     document.getElementById("_"+index+render.strUID("_UID_menulistSettingSwitch")).classList.remove(render.strUID("UID_switch-selected"));
                 }
             } 
-        }      
+        }
+        render.footer.show();   
         system.screen.loadResource("/resources/css/settingsMenu.css").then(
             (css)=>{
                 if(fileCSS) {

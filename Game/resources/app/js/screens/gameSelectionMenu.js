@@ -28,6 +28,7 @@ screen_gameSelectionMenu={
                 end=resolve;
             }
         );
+        render.footer.show();
         render.strUID=function(str) {
             return str.split("UID").join(UID);
         };
@@ -49,7 +50,7 @@ screen_gameSelectionMenu={
                     <div id="_`+instance.index+`_UID_header_description" class="UID_menulistDescriptionBackground r_hidden_animatable r_hidden_animatable_capable">
                         <div class="UID_menulistDescription">
                             <div class="UID_menulistDescriptionText">
-                                <p>`+instance.properties.description+`</p>
+                                <p>`+strToHTML(instance.properties.description)+`</p>
                             </div>
                             <div class="UID_menulistDescriptionProperties">
                                 <div class="UID_menulistDescriptionPropertiesElement">
@@ -99,7 +100,7 @@ screen_gameSelectionMenu={
                                    
                                     </div>
                                     <div class="UID_menulistDescriptionPropertiesElementValue">
-                                        <p>`+instance.properties.condition+`<span class="UID_menulistDescriptionPropertiesElementValue-small">%</span></span></p>
+                                        <p>`+conditionToText(instance.properties.condition)+`<span class="UID_menulistDescriptionPropertiesElementValue-small"></span></span></p>
                                     </div>
                                 </div>
                             </div>

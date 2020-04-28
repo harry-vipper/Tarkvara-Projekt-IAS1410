@@ -12,7 +12,18 @@ render.fade={
   }
 };
 render.footer={
-
+	hide: function() {
+		document.getElementById("footer").classList.remove("r_halfvisible");
+		document.getElementById("footer").classList.add("r_invis");
+	},
+	show: function() {
+		document.getElementById("footer").classList.remove("r_halfvisible");
+		document.getElementById("footer").classList.remove("r_invis");
+	},
+	transparentize: function() {
+		document.getElementById("footer").classList.remove("r_invis");
+		document.getElementById("footer").classList.add("r_halfvisible");
+	},
 };
 render.forceRedraw=function(element) {
   element.offsetHeight;

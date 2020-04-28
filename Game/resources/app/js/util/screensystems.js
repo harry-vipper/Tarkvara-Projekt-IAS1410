@@ -4,6 +4,7 @@ system={
         displayScreen: function(type, data) {
             window.scrollTo(0, 0);
             this.removeDOMLoadedCSS();
+            render.footer.show();
             switch(type) {
                 case "game-element-reaction-test":
                     return screens.splash.handler(

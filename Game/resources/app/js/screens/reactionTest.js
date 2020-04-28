@@ -30,6 +30,7 @@ screen_reaction_test={
             "down",
             "confirm"
         ];
+        render.footer.transparentize();
         system.screen.loadResource("/resources/css/reactionTest.css").then(
         (css)=>{
 

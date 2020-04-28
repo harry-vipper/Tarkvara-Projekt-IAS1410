@@ -25,6 +25,9 @@
 .r_invis {
     opacity: 0 !important;
 }
+.r_halfvisible {
+    opacity: 0.4 !important;
+}
 .r_invisCapable {
     /*opacity: 1;*/
     transition: opacity 0.3s ease-in-out;
@@ -61,6 +64,7 @@ body {
     background: var(--bgColor-normal);
     overflow: hidden;
     white-space: nowrap;
+    transition: opacity 0.6s ease-in-out;
 }
 
 .footerElementGroup {
@@ -191,3 +195,4 @@ body {
     0% {display: unset;opacity: 0;transform: rotateX(70deg);}
     100% {transform: none;opacity: 1;}
 }
+

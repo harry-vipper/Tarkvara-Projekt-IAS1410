@@ -51,7 +51,7 @@ screen_editorConnect={
     },
     setContent:function(screenElement,UID){
         let i=0;
-
+        render.footer.transparentize();
         screenElement.querySelector("#"+UID+"_desc_SSID").innerHTML=insertText("48");
         screenElement.querySelector("#"+UID+"_desc_PW").innerHTML=insertText("49");
         screenElement.querySelector("#"+UID+"_desc_URL").innerHTML=insertText("50");
@@ -70,7 +70,7 @@ screen_editorConnect={
         let input=screen_editorConnect.generateName(true);
         screenElement.querySelector("#"+UID+"_param_SSID").innerHTML=input.SSID;
         screenElement.querySelector("#"+UID+"_param_PW").innerHTML=input.PW;
-        screenElement.querySelector("#"+UID+"_param_URL").innerHTML=`test.ee`;
+        screenElement.querySelector("#"+UID+"_param_URL").innerHTML=`localhost`;
 
         networkElement.querySelector("#"+UID+"_entry_0_ssid").innerHTML=input.SSID;
         
@@ -97,11 +97,12 @@ screen_editorConnect={
     },
     generateName:function(random){
         if(random){
-            return {"SSID":"TestSSID","PW":"TestPW"}//Care length
+            return {"SSID":"localhost","PW":"My name jeff"}//Care length
         }
         else{
             //Future function here
-            return {"meme":"memeSSID"};
+
+            return {"meme":"Vandivõrk"};
         }
     },
     HTMLbase:`

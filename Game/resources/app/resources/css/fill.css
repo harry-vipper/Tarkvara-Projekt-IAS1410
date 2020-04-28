@@ -6,6 +6,7 @@
     color: var(--fgColor-dull);
     font-family: 'Raleway';
     font-weight: 100;
+    text-align: center;
 }
 
 .UID_screenwrapper p span {
@@ -18,20 +19,23 @@
 }
 
 .UID_textwrapper {
-    left: -56em;
+    transform: translateX(calc(-50% + 512px));
     top: -1em;
     /* transform: rotateZ(-0deg); */
     position: relative;
+    width: max-content;
 }
 
-p#UID_p-1 {
-    left: 4em;
-}
+p#UID_p-1 {transform: translateX(-6%);}
 
 p#UID_p-5 {
-    left: 2em;
+    transform: translateX(5%);
 }
 
-p#UID_p-3 {
-    left: 0.3em;
+p#UID_p-2 {
+    transform: translateX(8%);
+}
+
+p#UID_p-6 {
+    transform: translateX(8%);
 }

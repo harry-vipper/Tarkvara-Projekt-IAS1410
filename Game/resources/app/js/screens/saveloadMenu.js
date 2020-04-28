@@ -17,6 +17,7 @@ screen_saveloadMenu={
            end=resolve;
        }
     );
+    render.footer.show();
     system.screen.loadResource("/resources/css/saveloadMenu.css").then(
     (css)=>{
 
@@ -63,18 +64,8 @@ screen_saveloadMenu={
     setContent:function(screenElement,screenContent,UID){
         //Paneb õige sisu
         let lastCondition=undefined;
-        if(screenContent.savefile.lastGame.condition===0){
-            lastCondition=insertText("38");
-        }
-        if(screenContent.savefile.lastGame.condition===1){
-            lastCondition=insertText("39");
-        }
-        if(screenContent.savefile.lastGame.condition===2){
-            lastCondition=insertText("40");
-        }
-        if(screenContent.savefile.lastGame.condition===3){
-            lastCondition=insertText("41");
-        }
+        lastCondition=conditionToText(screenContent.savefile.lastGame.condition)
+        
         screenElement.querySelector("#_"+UID+"_menulistDescriptionText").innerHTML=`<p>
             `+insertText("35")+`
             <br><span class="UID_menulistDescriptionText_title" id="UID_lastGame_title">`+screenContent.savefile.lastGame.title.toUpperCase()+`</span><br><br>

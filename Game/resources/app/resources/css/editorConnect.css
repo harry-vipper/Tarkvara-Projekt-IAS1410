@@ -1,22 +1,22 @@
 :root {
-    --fgColor-dull: #a9a54c !important;
-    --fgColor-darkest: #727029 !important;
-    --fgColor-dark: #afaa2c !important;
+    --fgColor-dull: #a5a5a5 !important;
+    --fgColor-darkest: #252525 !important;
+    --fgColor-dark: #3c3c3c !important;
     --fgColor-normal: #404040 !important;
     --fgColor-bright: #6f6f6f !important;
-    --fgColor-brightest: #fffba2 !important;
+    --fgColor-brightest: #ffffff !important;
     --fgColor-bloom: #e0e0e0 !important;
     --bgColor-dull: #b0b0b0 !important;
-    --bgColor-darkest: #0c0c0c !important;
-    --bgColor-dark: #dedede !important;
-    --bgColor-normal: #394551 !important;
+    --bgColor-darkest: #717171 !important;
+    --bgColor-dark: #e2e2e2 !important;
+    --bgColor-normal: #8a8a8a !important;
     --bgColor-bright: #b9b9b9 !important;
     --bgColor-brightest: #73889d !important;
     --bgColor-bloom: #394551 !important;
     --primaryColor: var(--fgColor-normal);
     --secondaryColor: var(--bgColor-darkest);
     --footerColor: var(--fgColor-normal);
-    --footerGroupTitleColor: var(--fgColor-dull);
+    --footerGroupTitleColor: var(--fgColor-dark);
 }
 .UID_instruction_group {
     font-size: 2em;

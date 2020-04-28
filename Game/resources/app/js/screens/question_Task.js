@@ -26,6 +26,7 @@ screen_question_task={
            end=resolve;
        }
     );
+    render.footer.transparentize();
     system.screen.loadResource("/resources/css/element-question-task.css").then(
     (css)=>{
         if(fileCSS) {
@@ -73,7 +74,7 @@ screen_question_task={
         }
         screenElement.querySelector("#"+UID+"_listHeaderTitle").innerHTML="<p>"+type+"</p>";
         screenElement.querySelector("#"+UID+"_listHeaderNumber").innerHTML="<p>"+screenContent.number+"</p>";
-        screenElement.querySelector("#"+UID+"_listDescriptionText").innerHTML="<p>"+screenContent.content+"</p>";
+        screenElement.querySelector("#"+UID+"_listDescriptionText").innerHTML="<p>"+strToHTML(screenContent.content)+"</p>";
     },
     HTMLbase:`
     <div id="screenContainer">
