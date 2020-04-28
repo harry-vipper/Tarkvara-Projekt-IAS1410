@@ -46,7 +46,7 @@ screen_saveloadMenu={
         controls.key.set("up",0,()=>{changeChoice();},lastCondition=insertText("9"));
         controls.key.set("down",0,()=>{changeChoice();},lastCondition=insertText("10"));
         controls.key.set("confirm",0,()=>{end({type: "choiceMade", value: choice});},lastCondition=insertText("17"));
-
+        
         function changeChoice(){
             document.getElementById("_"+choice+"_"+UID+"_header_title").classList.remove(UID+"_menulistHeaderActive");
 

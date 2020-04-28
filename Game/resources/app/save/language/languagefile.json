@@ -191,23 +191,23 @@
     },
     "38":
     {
-        "EST":"x0",
-        "ENG":"x0"
+        "EST":"Kaine",
+        "ENG":"Sober"
     },
     "39":
     {
-        "EST":"x1",
-        "ENG":"x1"
+        "EST":"Soe",
+        "ENG":"Warmed up"
     },
     "40":
     {
-        "EST":"x2",
-        "ENG":"x2"
+        "EST":"Lahkumas",
+        "ENG":"Going"
     },
     "41":
     {
-        "EST":"x3",
-        "ENG":"x3"
+        "EST":"Surnud",
+        "ENG":"Dead"
     },
     "42":
     {
@@ -221,7 +221,47 @@
     },
     "44":
     {
-        "EST":"TÄITKE KLAASID!",
-        "ENG":"FILL YOUR CUPS!"
+        "EST":"TÄIDA",
+        "ENG":"FILL"
+    },
+    "45":
+    {
+        "EST":"NAASE MÄNGU",
+        "ENG":"RETURN TO GAME"
+    },
+    "46":
+    {
+        "EST":"ÜHENDA SEADMEGA",
+        "ENG":"CONNECT TO THE DEVICE"
+    },
+    "47":
+    {
+        "EST":"KLAASID",
+        "ENG":"CUPS"
+    },
+    "48":
+    {
+        "EST":"Ühenda oma nutiseade või sülearvuti WiFi võrguga",
+        "ENG":"Connect your device with the WiFi network"
+    },
+    "49":
+    {
+        "EST":"Võrgu parool on:",
+        "ENG":"Network password is:"
+    },
+    "50":
+    {
+        "EST":"Ava brauseris leht",
+        "ENG":"Open the webpage in your browser"
+    },
+    "51":
+    {
+        "EST":"Lõpetades lae mängud seadmesse",
+        "ENG":"When you are finished load the games onto the device"
+    },
+    "52":
+    {
+        "EST":"WPA-2 Misiganes muud advanced settingud igaks juhuks",
+        "ENG":"WPA-2 Settings"
     }
 }

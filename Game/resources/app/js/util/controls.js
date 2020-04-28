@@ -100,7 +100,10 @@ var controls={
                         findAction(maxPressDuration+1,event);
                     },maxPressDuration);  
                 }
-                else return;
+                else{
+                    document.addEventListener('keydown',keyDownFunction,{once:true});
+                    return;
+                } 
             }
 
             function keyUpFunction(event){

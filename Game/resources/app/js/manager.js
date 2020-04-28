@@ -7,7 +7,7 @@ function startup() {
     file.languagefile.load();
 
     color.setColor();
-
+    //return system.screen.displayScreen("fill", undefined);
     var fillCounter=0;
     //Always
 
@@ -34,7 +34,7 @@ function startup() {
         fillCounter++;
         if(fillCounter===Math.floor(10/file.gamefile.content.content[file.savefile.content.gameData.selectedGame].properties.condition)){
             fillCounter=0;
-            return system.screen.displayScreen("fillSplash", undefined);
+            return system.screen.displayScreen("fill", undefined);
         }
 
         if(file.savefile.content.gameData.currentQuestion>=file.savefile.content.gameData.gameOrder.length){
@@ -97,6 +97,14 @@ function startup() {
             }
             else if(input.type==="fillEnd"){
                 return typeFinder();
+            }
+            else if(input.type==="editorConnect"){
+                return system.screen.displayScreen("editorConnect", undefined);
+            }
+            else if(input.type==="return"){
+                if(file.savefile.content.gameData.state===1) return system.screen.displayScreen("gameSelectionMenu", undefined);
+                else if(file.savefile.content.gameData.state===2) return typeFinder();
+                else if(file.savefile.content.gameData.state===3) return system.screen.displayScreen("settingsMenu", undefined);
             }
             else{
                 debugger;

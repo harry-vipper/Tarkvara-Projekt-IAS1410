@@ -62,6 +62,7 @@ screen_truth_or_dare={
         controls.key.set("up",1000,()=>{end({type: "gameSelectionMenu", value: null});},insertText(6));
         controls.key.set("left",1000,()=>{end({type: "nextScreen", value: "last"});},insertText(7));
         controls.key.set("right",1000,()=>{end({type: "nextScreen", value: "next"});},insertText(8));
+        controls.key.set('down', 1000, ()=>{end({type:"editorConnect"});}, insertText("46"));
         let keylinkId=controls.key.set("confirm",0, screen_startMinigame,insertText(11));
         });
 

@@ -73,7 +73,8 @@ screen_settingsMenu={
             controls.key.set('down', 0, ()=>{changeSetting('+');}, insertText("10"));
             controls.key.set('confirm', 0, ()=>{selectSetting();}, insertText("13"));
             controls.key.set('left', 0, ()=>{end({type:"gameSelectionMenu"});}, insertText("14"));
-            
+            controls.key.set('down', 1000, ()=>{end({type:"editorConnect"});}, insertText("46"));
+
             function changeSetting(direction) {
                 render.menuEntry.deactivate(screen_settingsMenu.selectedSetting);
                 screen_settingsMenu.selectedSetting=calcNextIndex(
@@ -136,6 +137,7 @@ screen_settingsMenu={
                     controls.key.set('down', 0, ()=>{changeSetting('+');}, insertText("10"));
                     controls.key.set('confirm', 0, ()=>{selectSetting();}, insertText("13"));
                     controls.key.set('left', 0, ()=>{end({type:"gameSelectionMenu"});}, insertText("14"));
+                    controls.key.set('down', 1000, ()=>{end({type:"editorConnect"});}, insertText("46"));
                 }
                 else{
                     if(screen_settingsMenu.settingSelected){
@@ -150,6 +152,7 @@ screen_settingsMenu={
                             controls.key.set('down', 0, ()=>{changeSetting('+');}, insertText("10"));
                             controls.key.set('confirm', 0, ()=>{selectSetting();}, insertText("13"));
                             controls.key.set('left', 0, ()=>{end({type:"gameSelectionMenu"});}, insertText("14"));
+                            controls.key.set('down', 1000, ()=>{end({type:"editorConnect"});}, insertText("46"));
                         }
                        
                     }

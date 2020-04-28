@@ -171,15 +171,12 @@ system={
                     ).then((output)=>{
                         return render.fade.out(document.getElementById("screenContainer")).then(()=>{this.destroy();return output;});
                     });
-                case "fillSplash":
-                    return screens.splash.handler(
+                case "fill":
+                    return screens.fill.handler(
                         document.getElementById("screenContainer"),
                         document.getElementById("screenStyleContainer"),
                         controls,
                         {
-                            icon:"exclamationmark",
-                            text:insertText("44"),
-                            movetime:900,
                             staytime:10000,
                         },
                         system.screen.timers.localTimerIds,
@@ -187,12 +184,25 @@ system={
                         render,
                         system.screen.UID.generate()
                     ).then(()=>{
-                        return render.fade.out(document.getElementById("screenContainer")).then(()=>{this.destroy();return {"type":"fillEnd"};});
+                        return render.fade.out(document.getElementById("screenContainer")).then(()=>{this.destroy(); return {"type":"fillEnd"};});
+                    });
+                case "editorConnect":
+                    return screens.editorConnect.handler(
+                        document.getElementById("screenContainer"),
+                        document.getElementById("screenStyleContainer"),
+                        controls,
+                        null,
+                        system.screen.timers.localTimerIds,
+                        null,
+                        render,
+                        system.screen.UID.generate()
+                    ).then((output)=> {
+                        return render.fade.out(document.getElementById("screenContainer")).then(()=>{this.destroy(); return output;});
                     });
             }
         },
         UID: {
-            lastUID: 0, //0 to zzzz (басс26)
+            lastUID: 0,
             generate: function() {
                 if (DEFAULT_UID) {
                     return "UID";
