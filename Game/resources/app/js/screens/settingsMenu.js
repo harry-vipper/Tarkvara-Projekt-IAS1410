@@ -56,7 +56,7 @@ screen_settingsMenu={
             context.innerHTML=str;
             return this.setContent(context,screenContent);
         }).then(()=>{          
-            const scroller = new SweetScroll();
+            const scroller = new SweetScroll({}, '#displayContainer',);
             scroller.to(
                 ("#"+render.strUID("_0_UID_menuHeader"))
             )  

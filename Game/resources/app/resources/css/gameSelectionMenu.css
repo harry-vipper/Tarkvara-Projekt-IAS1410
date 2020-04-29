@@ -149,3 +149,7 @@ span.UID_menulistDescriptionPropertiesElementValue-small {
     height: 100%;
     --svgColor: var(--bgColor-dark);
 }
+
+.UID_menuListHeader {
+    height: 100px;
+}
