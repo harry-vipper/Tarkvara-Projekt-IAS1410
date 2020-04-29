@@ -23,10 +23,20 @@ file={
     gamefile: {
         content: undefined,
         load: function() {
-            let loadFile = fs.readFileSync(this.path);
+            let primary=this.path.substring(0,this.path.length-18)
+ 
+            let games=path.join(primary,"Server/htdocs/games/");
+            let state=path.join(primary,"Server/htdocs/state/state.JSON");
+
+            let loadFile = fs.readFileSync(state);
+            let current =JSON.parse(loadFile);
+
+            games=path.join(games,current.activeSaveFile);
+
+            loadFile = fs.readFileSync(games);
             this.content=JSON.parse(loadFile);
         },
-        path: path.join(__dirname, '/save/game/gamefile.JSON')
+        path: __dirname
     },
     languagefile:{
         content:undefined,

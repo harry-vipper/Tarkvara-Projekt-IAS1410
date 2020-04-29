@@ -7,7 +7,6 @@ function startup() {
     file.languagefile.load();
 
     color.setColor();
-    //return system.screen.displayScreen("fill", undefined);
     var fillCounter=0;
     //Always
 
@@ -29,8 +28,8 @@ function startup() {
         return loop(output);
     });
     
-    //Järgmised tegevused
-    function typeFinder(){
+    
+    function typeFinder(){//Find game element type and return correct screen
         fillCounter++;
         if(fillCounter===Math.floor(10/file.gamefile.content.content[file.savefile.content.gameData.selectedGame].properties.condition)){
             fillCounter=0;
@@ -49,12 +48,13 @@ function startup() {
             return system.screen.displayScreen("game-element-question-task", undefined);
         }
     }
-    
+    //Next screens
     function loop(input){
         lastScreenPromise=lastScreenPromise.then(()=>{
             if(input.type==="choiceMade"){
                 if(input.value===1){
                     file.savefile.content.gameData.state=1;
+                    file.gamefile.load();
                     return system.screen.displayScreen("gameSelectionMenu", undefined);
                 }
                 if(input.value===0){
@@ -89,6 +89,7 @@ function startup() {
             }
             else if(input.type==="gameSelectionMenu"){
                 file.savefile.content.gameData.state=1;
+                file.gamefile.load();
                 return system.screen.displayScreen("gameSelectionMenu", undefined);
             }
             else if(input.type==="settingsMenu"){
@@ -102,7 +103,10 @@ function startup() {
                 return system.screen.displayScreen("editorConnect", undefined);
             }
             else if(input.type==="return"){
-                if(file.savefile.content.gameData.state===1) return system.screen.displayScreen("gameSelectionMenu", undefined);
+                if(file.savefile.content.gameData.state===1){
+                    file.gamefile.load();
+                    return system.screen.displayScreen("gameSelectionMenu", undefined);
+                }
                 else if(file.savefile.content.gameData.state===2) return typeFinder();
                 else if(file.savefile.content.gameData.state===3) return system.screen.displayScreen("settingsMenu", undefined);
             }
