@@ -18,7 +18,6 @@ screen_editorConnect={
                 end=resolve;
             }
         );
-        var screenElement=document.createElement("div");
 
         render.strUID=function(str) {
             return str.split("UID").join(UID);
@@ -35,12 +34,8 @@ screen_editorConnect={
         }).then(()=>{
             let str=this.HTMLbase;
             str=str.split("UID").join(UID);
-    
-            screenElement.setAttribute("id",UID+"_wrapper");
-            screenElement.innerHTML=str;
-            context.appendChild(screenElement);
-
-            return this.setContent(screenElement,UID);
+            context.innerHTML=str;
+            return this.setContent(context,UID);
         }).then(()=>{
             return render.fade.in(context);
         }).then(()=>{
