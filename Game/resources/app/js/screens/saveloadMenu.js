@@ -29,17 +29,10 @@ screen_saveloadMenu={
         }
     }
     ).then(()=>{
-
         let str=this.HTMLbase;
         str=str.split("UID").join(UID);
-
-        let screenElement=document.createElement("div");
-        screenElement.setAttribute("id",UID+"wrapper");
-        screenElement.innerHTML=str;
-
-        this.setContent(screenElement,screenContent,UID);
-        
-        context.appendChild(screenElement);
+        context.innerHTML=str;
+        this.setContent(context,screenContent,UID);
         return render.fade.in(context);
     }
     ).then(()=>{

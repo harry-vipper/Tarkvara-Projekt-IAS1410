@@ -20,8 +20,6 @@ screen_settingsMenu={
                 end=resolve;
             }
         );
-        var screenElement=document.createElement("div");
-        
         render.strUID=function(str) {
             return str.split("UID").join(UID);
             };
@@ -53,15 +51,10 @@ screen_settingsMenu={
                     style.innerHTML=css;
                 }
         }).then(()=>{
-
             let str=this.HTMLbase;
             str=str.split("UID").join(UID);
-    
-            screenElement.setAttribute("id",UID+"_wrapper");
-            screenElement.innerHTML=str;
-            context.appendChild(screenElement);
-
-            return this.setContent(screenElement,screenContent);
+            context.innerHTML=str;
+            return this.setContent(context,screenContent);
         }).then(()=>{          
             const scroller = new SweetScroll();
             scroller.to(
