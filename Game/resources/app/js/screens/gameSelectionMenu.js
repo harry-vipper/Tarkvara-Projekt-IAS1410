@@ -141,8 +141,11 @@ screen_gameSelectionMenu={
                 else{
                     style.innerHTML=css;
                 }
-                
-                
+                let menuListHeader=document.createElement('div');
+                menuListHeader.setAttribute("id", render.strUID("UID_menuListHeader"));
+                menuListHeader.classList.add("UID_menuListHeader");
+                context.appendChild(menuListHeader);
+
                 //Create list
                 let menuListContainer=document.createElement('div');
                 menuListContainer.setAttribute("id", render.strUID("UID_menulistContainer"));
@@ -156,7 +159,7 @@ screen_gameSelectionMenu={
                 })
                 screenContent.savefile.gameData.selectedGame=0;
                     render.menuEntry.activate(screenContent.savefile.gameData.selectedGame);
-                const scroller = new SweetScroll();
+                const scroller = new SweetScroll({header: '#UID_menuListHeader'}, '#displayContainer',);
                 scroller.to(
                     ("#_"+screenContent.savefile.gameData.selectedGame+render.strUID("_UID_element"))
                 )

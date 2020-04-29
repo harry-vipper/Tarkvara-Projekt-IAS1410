@@ -9,9 +9,9 @@
    3,
    5
   ],
-  "selectedGame": 1,
+  "selectedGame": 0,
   "currentQuestion": 7,
-  "state": 2
+  "state": 3
  },
  "settings": {
   "toggle": [
@@ -34,7 +34,7 @@
   "language": "EST"
  },
  "lastGame": {
-  "time": "16:55:41",
+  "time": "21:09:13",
   "title": "Kevadise ChillWeekendi hilisõhtune tunnetemäng",
   "condition": "0",
   "date": "29/04/2020"

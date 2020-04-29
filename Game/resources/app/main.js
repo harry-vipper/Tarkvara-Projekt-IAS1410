@@ -31,10 +31,10 @@ if(DEBUG){
 else{
     app.on("ready",function(){
         mainWindow = new BrowserWindow({
-            "fullscreen": true,
+            "fullscreen": false,
             width: 1240, 
             height: 1024, 
-            frame: false,
+            frame: true,
             webPreferences: {
                 nodeIntegration: true,
             }
