@@ -2,30 +2,21 @@
  "gameData": {
   "gameOrder": [
    0,
-   0,
-   0,
+   3,
+   4,
    -1,
-   0,
-   -2,
-   0,
-   0,
-   -1,
-   0,
-   -2,
+   2,
    1,
-   0,
-   0,
-   0,
-   2
+   5
   ],
   "selectedGame": 0,
-  "currentQuestion": 0,
-  "state": 1
+  "currentQuestion": 7,
+  "state": 3
  },
  "settings": {
   "toggle": [
-   1,
-   1
+   0,
+   0
   ],
   "mgFrequency": 4,
   "color": {
@@ -35,7 +26,7 @@
     64
    ],
    "background": [
-    67,
+    68,
     12,
     25
    ]
@@ -43,9 +34,9 @@
   "language": "EST"
  },
  "lastGame": {
-  "time": "21:29:55",
-  "title": "SFW version",
-  "condition": 2,
+  "time": "21:55:51",
+  "title": "Kevadise ChillWeekendi hilisõhtune tunnetemäng",
+  "condition": 0,
   "date": "29/04/2020"
  }
 }

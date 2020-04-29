@@ -119,12 +119,12 @@ screen_settingsMenu={
                     else {
                         screenContent.savefile.settings.toggle[screen_settingsMenu.selectedSetting]=1;
                     }
-                    screen_settingsMenu.toggleLoader(screenElement,screenContent);
+                    screen_settingsMenu.toggleLoader(context,screenContent);
                 }
                 else if(screen_settingsMenu.selectedSetting===9){
                     if(screenContent.savefile.settings.language==="ENG")screenContent.savefile.settings.language="EST";
                     else if(screenContent.savefile.settings.language==="EST")screenContent.savefile.settings.language="ENG"
-                    screen_settingsMenu.languageLoader(screenElement,screenContent);
+                    screen_settingsMenu.languageLoader(context,screenContent);
                     controls.key.clear.byKey("all");
                     system.screen.footer.clear();
                     controls.key.set('up', 0, ()=>{changeSetting('-');}, insertText("9"));
@@ -139,7 +139,7 @@ screen_settingsMenu={
                         if(contrast===true){
                             controls.key.clear.byKey("all");
                             system.screen.footer.clear();
-                            screen_settingsMenu.upDownLoader(screenElement,screenContent,screen_settingsMenu.selectedSetting,false);
+                            screen_settingsMenu.upDownLoader(context,screenContent,screen_settingsMenu.selectedSetting,false);
                             screen_settingsMenu.settingSelected=false;
         
                             controls.key.set('up', 0, ()=>{changeSetting('-');}, insertText("9"));
@@ -153,7 +153,7 @@ screen_settingsMenu={
                     else{
                         controls.key.clear.byKey("all");
                         system.screen.footer.clear();
-                        screen_settingsMenu.upDownLoader(screenElement,screenContent,screen_settingsMenu.selectedSetting,true);
+                        screen_settingsMenu.upDownLoader(context,screenContent,screen_settingsMenu.selectedSetting,true);
                         screen_settingsMenu.settingSelected=true;
                         
                         controls.key.set('up', 0, ()=>{changeValue('+',screen_settingsMenu.selectedSetting);}, insertText("15"));
@@ -173,7 +173,7 @@ screen_settingsMenu={
                         screenContent.savefile.settings.mgFrequency--;
                         if(screenContent.savefile.settings.mgFrequency<1)screenContent.savefile.settings.mgFrequency=1;
                     }
-                    screen_settingsMenu.minigameFrequencyLoader(screenElement,screenContent);
+                    screen_settingsMenu.minigameFrequencyLoader(context,screenContent);
                 }
                 else if(direction==="+"){
                     if(index===3 || index===4){
@@ -218,8 +218,8 @@ screen_settingsMenu={
                     color.setColor();
                     
                 }
-                screen_settingsMenu.valueLoader(screenElement,screenContent);
-                screen_settingsMenu.upDownLoader(screenElement,screenContent,screen_settingsMenu.selectedSetting,true);
+                screen_settingsMenu.valueLoader(context,screenContent);
+                screen_settingsMenu.upDownLoader(context,screenContent,screen_settingsMenu.selectedSetting,true);
             }
         });
         
