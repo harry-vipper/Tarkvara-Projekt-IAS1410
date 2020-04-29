@@ -27,6 +27,7 @@ screen_question_task={
        }
     );
     render.footer.transparentize();
+    
     system.screen.loadResource("/resources/css/element-question-task.css").then(
     (css)=>{
         if(fileCSS) {
@@ -42,7 +43,7 @@ screen_question_task={
         str=str.split("UID").join(UID);
 
         let screenElement=document.createElement("div");
-        screenElement.setAttribute("id",UID+"wrapper");
+        screenElement.setAttribute("id",UID+"_wrapper");
         screenElement.innerHTML=str;
 
         this.setContent(screenElement,screenContent,UID);
@@ -77,31 +78,29 @@ screen_question_task={
         screenElement.querySelector("#"+UID+"_listDescriptionText").innerHTML="<p>"+strToHTML(screenContent.content)+"</p>";
     },
     HTMLbase:`
-    <div id="screenContainer">
-        <div id="UID_elementContainer">
-            <div class="UID_listItem">
+    <div id="UID_elementContainer">
+        <div class="UID_listItem">
 
-                <div class="UID_listHeader">
-                    <div class="UID_listHeaderNumber" id="UID_listHeaderNumber">
-                        <p>2</p>
-                    </div>
-                    <div class="UID_listHeaderTitle" id="UID_listHeaderTitle">
-                        <p>TYPE</p>
-                    </div>
+            <div class="UID_listHeader">
+                <div class="UID_listHeaderNumber" id="UID_listHeaderNumber">
+                    <p>2</p>
                 </div>
-                
-                <div class="UID_listDescriptionBackground">
-                    <div class="UID_listDescription">
-                        <div class="UID_listDescriptionText" id="UID_listDescriptionText">
-                            <p>CONTENT</p>
-                        </div>
-                        <div class="UID_listDescriptionTimer">
-                            <p><span id="UID_timer">0:00</span></p>
-                        </div>
-                    </div>
+                <div class="UID_listHeaderTitle" id="UID_listHeaderTitle">
+                    <p>TYPE</p>
                 </div>
-                
             </div>
+            
+            <div class="UID_listDescriptionBackground">
+                <div class="UID_listDescription">
+                    <div class="UID_listDescriptionText" id="UID_listDescriptionText">
+                        <p>CONTENT</p>
+                    </div>
+                    <div class="UID_listDescriptionTimer">
+                        <p><span id="UID_timer">0:00</span></p>
+                    </div>
+                </div>
+            </div>
+            
         </div>
     </div>
     `,
