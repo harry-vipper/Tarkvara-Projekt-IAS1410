@@ -33,8 +33,9 @@
     transition: opacity 0.3s ease-in-out;
 }
 div#screenContainer {
-    width: 1024px;
-    /* min-height: 1024px; */
+    width: 960px;
+    /* height: 960px; */
+    min-height: 100%;
     position: relative;
     margin: auto;
     background: var(--bgColor-dark);
@@ -43,15 +44,15 @@ div#screenContainer {
     padding: 0 0 5em 0;
 }
 body {
-    background: #844343;
-    background: var(--bgColor-dark);
+    background: #000000;
+    /* background: var(--bgColor-dark); */
     margin: 0;
     padding: 0;
     font-family: 'Roboto';
     color: white;
-    min-height: 1024px;
-    /* width: 1280px; */
     overflow: hidden;
+    width: 100%;
+    height: 100%;
 }
 
 
@@ -196,3 +197,21 @@ body {
     100% {transform: none;opacity: 1;}
 }
 
+
+
+#screenScaler {
+    /* transform: scale(0.5); */
+    transform-origin: top left;
+    position: relative;
+    overflow: hidden;
+    width: 1280px;
+    height: 960px;
+    margin: auto;
+}
+
+#displayContainer {
+    width: 100%;
+    height: 960px;
+    position: relative;
+    background: var(--bgColor-dark);
+}
