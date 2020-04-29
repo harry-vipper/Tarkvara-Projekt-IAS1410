@@ -3,6 +3,7 @@ system={
     screen: {
         displayScreen: function(type, data) {
             window.scrollTo(0, 0);
+            document.getElementById('displayContainer').scrollTop=0;
             this.removeDOMLoadedCSS();
             render.footer.show();
             switch(type) {
