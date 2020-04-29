@@ -70,7 +70,7 @@ screen_editorConnect={
         let input=screen_editorConnect.generateName(true);
         screenElement.querySelector("#"+UID+"_param_SSID").innerHTML=input.SSID;
         screenElement.querySelector("#"+UID+"_param_PW").innerHTML=input.PW;
-        screenElement.querySelector("#"+UID+"_param_URL").innerHTML=`localhost`;
+        screenElement.querySelector("#"+UID+"_param_URL").innerHTML=`localhost/editor`;
 
         networkElement.querySelector("#"+UID+"_entry_0_ssid").innerHTML=input.SSID;
         
