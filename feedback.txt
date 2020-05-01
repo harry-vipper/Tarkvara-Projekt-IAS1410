@@ -1,0 +1,68 @@
+connectDevice
+Blur liiga palju
+Vb natsa läbipaistev, et aru saada, et mäng jookseb (blur taustale). Vb rändom
+"WiFi parool on"
+Wifi parool lihtne ja väikeste tähtedega
+
+"mida tähendab "lõpetades lae mängud seadmesse"->"salvesta seadmesse"ehk sama nimi nupule ja juhendile.
+
+Disain
+Ei mängi win95 välja, ei näe hea välja
+Ühe nupuvajutusega muutub liiga palju ekraanil, peab uuesti scannima liiga palju. Shadoweid ja toone juurde.
+Pealkirjad jätavad teksti capslocki mulje
+
+Play store'i äpp
+
+Footer Nupud noolteks?
+Footer kõik võiks korraga
+Puutetundlikud nupud on peded
+Tactile feedback
+
+Descriptionisse kuidas mängu mängitakse
+
+Küsimused liiga väikesed (autoscale)
+
+Truth or dare: kes küsib, kes teeb pole obvious.
+Heli "sina küsid", "sina teed".
+Pole obvious, et küsija peab ise välja mõtlema küsimuse. Minimängule ka number, et oleks aru saada.
+
+Lõpu splash on sitt
+
+
+Mängud peavad olema võimalikud, s.t "ütle oma crushile" ei tööta, sest keegi ei tee seda kainelt. Samuti peavad mängude sisu obvious olema.
+
+Paus nupp
+
+Settingutest ei saanud aru, kuidas numbri muutmisest välja saada.
+Alla hoidmisega numbrite muutmine
+
+
+Hoidmise aeg madalamaks.
+
+Ütle alati inimese nimi, mitte see kes ta on. Inimestele meeldib see. how to win friends and influence people.
+
+Live muutumine mängudes 
+
+Arvab, et mängud on järjekorras peamenüüs
+Dünaamilised ikooni main menüüsse. Konditsiooni ikoon dünaamiline seisev mees, vastu seina mees, ja maas mees.
+
+Bug korduvate küsimuste ajaarvutusega. Üldse aeg x1.5
+
+
+
+Minigame muusika/arcade music/hääl "reaktsiooni test"
+
+Reaktsiooni test algus veidi kauem. "vajuta KOHE, kui põlema läheb"
+
+
+
+
+Editor  3...7 või 3 kuni 7 mängijat
+
+"elemendi kestus"->"küsimuse kestus" Elemendi kestus pole arusaadav 
+
+"uus mäng" vajutades võiks tulla "uus mäng", mitte "mäng"
+
+kui salvestad seadmesse, võiks öelda, et "salvestamine õnnestus". Nupu nimi võiks olla "lae möllumasinasse"
+ "märjukese vürts"
+
