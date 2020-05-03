@@ -1,4 +1,0 @@
-Iga kord kui kasutatakse setColor() siis saadetakse Arduinole värv formaadis "#rrggb\n"
-
-Arduinolt oodatakse alati infot formaadis "rotate90\n","rotate180\n","rotate270\n" kõige muu puhul arvatakse et tuli "rotate0\n".
-Parser loeb rea kaupa kuni "\n".
