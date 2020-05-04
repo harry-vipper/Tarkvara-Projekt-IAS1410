@@ -85,7 +85,6 @@ var controls={
             
 
             function keyDownFunction(event){
-                console.log(event)
                 if ( whichKey[event.key] || controls.key.lockKeyDown) return;
                 let keyTarget= findKeyTarget(event.key);
                 if(keyTarget!=undefined){
@@ -115,10 +114,12 @@ var controls={
                     controls.key.timers[length]=setTimeout(()=>{
                         controls.key.lockKeyUp=true;
                         notify("Pressed "+event.key, "controls");
-                        if(values[keyTarget][byDuration].repeat){
-                            whichKey[event.key]=0;
-                            controls.key.lockKeyDown=false;
-                        }
+			            if(values[keyTarget][byDuration]!=undefined){
+                        	if(values[keyTarget][byDuration].repeat){
+                            		whichKey[event.key]=0;
+                            		controls.key.lockKeyDown=false;
+                        	}
+			            }
                         findAction(maxPressDuration+1,event);
                     },maxPressDuration);  
                 }
@@ -128,7 +129,6 @@ var controls={
             }
 
             function keyUpFunction(event){
-                console.log(event)
                 if(controls.key.currentKey != event.key)return;
                 if(controls.key.lockKeyUp){
                     clearTimeout(controls.key.timers[length]);
