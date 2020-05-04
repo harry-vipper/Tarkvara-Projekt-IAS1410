@@ -1,34 +1,32 @@
 function startup() {
     
     //Load savefile and game JSON
-
+    //file.apfile.save();
     file.savefile.load();
     file.gamefile.load();
     file.languagefile.load();
 
     color.setColor();
-    var fillCounter=0;
     //Always
 
     var lastScreenPromise=new Promise((resolve)=>{resolve()});
     
     if(file.savefile.content.gameData.state===2){//if there's an old game
-    lastScreenPromise=lastScreenPromise.then(()=>{
-        return system.screen.displayScreen("saveloadMenu", undefined);
+        lastScreenPromise=lastScreenPromise.then(()=>{
+            return system.screen.displayScreen("saveloadMenu", undefined);
     });
     }
     else{
-    lastScreenPromise=lastScreenPromise.then(()=>{
-        return system.screen.displayScreen("gameSelectionMenu", undefined);
+        lastScreenPromise=lastScreenPromise.then(()=>{
+            return system.screen.displayScreen("gameSelectionMenu", undefined);
     });
     }
     
     lastScreenPromise=lastScreenPromise.then((output)=>{
-
         return loop(output);
     });
     
-    
+    var fillCounter=0;
     function typeFinder(){//Find game element type and return correct screen
         fillCounter++;
         if(fillCounter===Math.floor(10/file.gamefile.content.content[file.savefile.content.gameData.selectedGame].properties.condition)){

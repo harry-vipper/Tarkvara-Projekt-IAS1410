@@ -131,7 +131,7 @@ screen_settingsMenu={
                     controls.key.set('down', 0, ()=>{changeSetting('+');}, insertText("10"));
                     controls.key.set('confirm', 0, ()=>{selectSetting();}, insertText("13"));
                     controls.key.set('left', 0, ()=>{end({type:"gameSelectionMenu"});}, insertText("14"));
-                    controls.key.set('down', 1000, ()=>{end({type:"editorConnect"});}, insertText("46"));
+                    controls.key.set('right', 1000, ()=>{end({type:"editorConnect"});}, insertText("46"));
                 }
                 else{
                     if(screen_settingsMenu.settingSelected){
@@ -146,7 +146,7 @@ screen_settingsMenu={
                             controls.key.set('down', 0, ()=>{changeSetting('+');}, insertText("10"));
                             controls.key.set('confirm', 0, ()=>{selectSetting();}, insertText("13"));
                             controls.key.set('left', 0, ()=>{end({type:"gameSelectionMenu"});}, insertText("14"));
-                            controls.key.set('down', 1000, ()=>{end({type:"editorConnect"});}, insertText("46"));
+                            controls.key.set('right', 1000, ()=>{end({type:"editorConnect"});}, insertText("46"));
                         }
                        
                     }
@@ -156,8 +156,8 @@ screen_settingsMenu={
                         screen_settingsMenu.upDownLoader(context,screenContent,screen_settingsMenu.selectedSetting,true);
                         screen_settingsMenu.settingSelected=true;
                         
-                        controls.key.set('up', 0, ()=>{changeValue('+',screen_settingsMenu.selectedSetting);}, insertText("15"));
-                        controls.key.set('down', 0, ()=>{changeValue('-',screen_settingsMenu.selectedSetting);}, insertText("16"));
+                        controls.key.set('up', 100, ()=>{changeValue('+',screen_settingsMenu.selectedSetting);}, insertText("15"),true);
+                        controls.key.set('down', 100, ()=>{changeValue('-',screen_settingsMenu.selectedSetting);}, insertText("16"),true);
                         controls.key.set('confirm', 0, ()=>{selectSetting();}, insertText("17"));
                     }
                 }

@@ -70,4 +70,34 @@ file={
         },
         path: path.join(__dirname, '/save/language/languagefile.JSON')
     }
+    /*apfile:{
+        apSSID:"TESTSSID",
+        apPW:"TESTPASSWORD",//Min 8 max 63 char
+        content:`interface=wlan0
+driver=nl80211
+        
+hw_mode=g
+channel=6
+ieee80211n=1
+wmm_enabled=0
+macaddr_acl=0
+ignore_broadcast_ssid=0
+        
+auth_algs=1
+wpa=2
+wpa_key_mgmt=WPA-PSK
+wpa_pairwise=TKIP
+rsn_pairwise=CCMP
+        
+ssid=###
+wpa_passphrase=$$$`,//^^^See on põhjusega imelikult indentitud
+        save: function() {
+            let str=this.content.split("###").join(this.apSSID.toString());
+            str=str.split("$$$").join(this.apPW.toString());
+            console.log(str);
+            //fs.writeFileSync(this.path, str, function (err){if(DEBUG)notify("Save ERROR","function")});
+        },
+        path: path.join(__dirname, '/save/ap/changedhostapd.conf')
+        
+    }*/
 }

@@ -263,5 +263,10 @@
     {
         "EST":"WPA-2 Misiganes muud advanced settingud igaks juhuks",
         "ENG":"WPA-2 Settings"
+    },
+    "53":
+    {
+        "EST":"PAUS",
+        "ENG":"PAUSE"
     }
 }

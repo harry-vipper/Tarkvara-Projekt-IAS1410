@@ -2,28 +2,42 @@
  "gameData": {
   "gameOrder": [
    0,
-   3,
-   4,
-   -1,
-   2,
    1,
-   5
+   0,
+   1,
+   1,
+   1,
+   0,
+   0,
+   1,
+   0,
+   1,
+   1,
+   0,
+   1,
+   0,
+   1,
+   0,
+   1,
+   0,
+   0,
+   2
   ],
-  "selectedGame": 0,
-  "currentQuestion": 7,
-  "state": 3
+  "selectedGame": 1,
+  "currentQuestion": 20,
+  "state": 2
  },
  "settings": {
   "toggle": [
    0,
    0
   ],
-  "mgFrequency": 4,
+  "mgFrequency": 5,
   "color": {
    "foreground": [
-    97,
-    100,
-    64
+    67,
+    57,
+    75
    ],
    "background": [
     68,
@@ -34,9 +48,9 @@
   "language": "EST"
  },
  "lastGame": {
-  "time": "21:55:51",
-  "title": "Kevadise ChillWeekendi hilisõhtune tunnetemäng",
-  "condition": 0,
-  "date": "29/04/2020"
+  "time": "18:37:29",
+  "title": "Mardo möllu-möll",
+  "condition": 1,
+  "date": "03/05/2020"
  }
 }

@@ -42,7 +42,7 @@ else{
         mainWindow.on('closed', () => {
             app.exit(0);
         })
-        mainWindow.setAutoHideMenuBar(true);
+        mainWindow.setMenuBarVisibility(false)
             
         mainWindow.loadURL(url.format({
             pathname: path.join(__dirname,"Game.html"),

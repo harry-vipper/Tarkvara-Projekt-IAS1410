@@ -3,6 +3,8 @@ var controls={
         listenerActive:false,
         linkId:0,
         lockKeyUp:false,
+        lockKeyDown:false,
+        currentKey:"",
         timers:[],
         bind:{
             up: ['w', '8'],
@@ -18,11 +20,13 @@ var controls={
              right:[],
              confirm:[]
         },
-        fill:function(selectedKey,keyDuration,keyAction,keyDescription,bindId){
+        fill:function(selectedKey,keyDuration,keyAction,keyDescription,holdRepeat,keyLEDstate,bindId){
             var keyObject={
                 duration:keyDuration,
                 action:keyAction,
                 description:keyDescription,
+                repeat:holdRepeat,
+                LEDstate:keyLEDstate,
                 id: bindId
                 }
             if(DEBUG)console.log(keyObject);
@@ -58,8 +62,10 @@ var controls={
             }
         },
         
-        set: function(selectedKey,keyDuration,keyAction,keyDescription){
+        set: function(selectedKey,keyDuration,keyAction,keyDescription,holdRepeat,keyLEDstate){
             if(keyDescription!==false)keyDescription=keyDescription.toUpperCase();
+            if(holdRepeat==undefined)holdRepeat=false;
+            if(keyLEDstate==undefined)keyLEDstate=false;
             var keyBinds = [
                 controls.key.bind.up, 
                 controls.key.bind.down, 
@@ -69,53 +75,71 @@ var controls={
             ];
             this.linkId++;
             if(!controls.key.listenerActive){
-                document.addEventListener('keydown',keyDownFunction,{once:true});
+                document.addEventListener('keydown',keyDownFunction);
                 document.addEventListener('keyup',keyUpFunction);
                 controls.key.listenerActive=true;
             }
-            controls.key.fill(selectedKey,keyDuration,keyAction,keyDescription,this.linkId);
+            controls.key.fill(selectedKey,keyDuration,keyAction,keyDescription,holdRepeat,keyLEDstate,this.linkId);
             var whichKey = {};
             var length=this.timers.length;
             
 
             function keyDownFunction(event){
-                if ( whichKey[event.key] ) return;
+                console.log(event)
+                if ( whichKey[event.key] || controls.key.lockKeyDown) return;
                 let keyTarget= findKeyTarget(event.key);
                 if(keyTarget!=undefined){
+                    controls.key.currentKey=event.key;
+                    controls.key.lockKeyDown=true;
                     let values=Object.values(controls.key.link);
                     if(values[keyTarget].length!==0){
                         let keyDurations=[];
-                        for(let j=0;j<values[keyTarget].length;j++){
-                            keyDurations[j]=values[keyTarget][j].duration;
+                        for(let i=0;i<values[keyTarget].length;i++){
+                            keyDurations[i]=values[keyTarget][i].duration;
                         }
                         keyDurations.sort(function(a, b){return a-b});
                         var maxPressDuration=keyDurations.pop();
+                        for(let i=0;i<values[keyTarget].length;i++){
+                            if(maxPressDuration===values[keyTarget][i].duration){
+                                var byDuration=i;
+                                break;
+                            }
+                        }
                     }
-                    else var maxPressDuration=0;
-
+                    else{
+                        var maxPressDuration=0;
+                        var byDuration=0;
+                    }
+                    
                     whichKey[event.key] = JSON.parse(JSON.stringify(event.timeStamp));
                     controls.key.timers[length]=setTimeout(()=>{
                         controls.key.lockKeyUp=true;
                         notify("Pressed "+event.key, "controls");
+                        if(values[keyTarget][byDuration].repeat){
+                            whichKey[event.key]=0;
+                            controls.key.lockKeyDown=false;
+                        }
                         findAction(maxPressDuration+1,event);
                     },maxPressDuration);  
                 }
                 else{
-                    document.addEventListener('keydown',keyDownFunction,{once:true});
                     return;
                 } 
             }
 
             function keyUpFunction(event){
-                if(!whichKey[event.key])return;
+                console.log(event)
+                if(controls.key.currentKey != event.key)return;
                 if(controls.key.lockKeyUp){
+                    clearTimeout(controls.key.timers[length]);
+                    controls.key.lockKeyDown=false;
+                    controls.key.lockKeyUp=false;
                     whichKey[event.key] = 0;
-                    controls.key.lockKeyUp=false; 
-                    document.addEventListener('keydown',keyDownFunction,{once:true});
                     return;
                 }
-                document.addEventListener('keydown',keyDownFunction,{once:true});
+
                 clearTimeout(controls.key.timers[length]);
+                controls.key.lockKeyDown=false;
                 let pressDuration = event.timeStamp - whichKey[event.key];
                 whichKey[event.key] = 0;
                 notify("Held "+event.key+" for "+Math.floor(pressDuration)+"ms", "controls");
@@ -172,7 +196,9 @@ var controls={
                     }
                 }
             }
-            
+            if(keyLEDstate===true){
+                //LED.set(selectedKey,true);
+            }
             if(keyDescription===false){return this.linkId;}
             else{
                 system.screen.footer.UISVG(keyDescription,selectedKey,keyDuration);

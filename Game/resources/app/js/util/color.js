@@ -39,6 +39,34 @@ var color=new function() {
         this.S=S;
         this.L=L;
     };
+    this.toHex=function(H100,S100,L100){//Modified W3schools color converter
+        let R255, G255, B255, t1, t2, H, S, L;
+        H=H100*0.06;
+        S=S100/100;
+        L=L100/100;
+        if ( L <= 0.5 ) {
+          t2 = L * (S + 1);
+        } else {
+          t2 = L + S - (L * S);
+        }
+        t1 = L * 2 - t2;
+
+        function HToRgb(t1, t2, H) {
+            if (H < 0) H += 6;
+            if (H >= 6) H -= 6;
+            if (H < 1) return (t2 - t1) * H + t1;
+            else if(H < 3) return t2;
+            else if(H < 4) return (t2 - t1) * (4 - H) + t1;
+            else return t1;
+        }
+
+        R255 = Math.round(HToRgb(t1, t2, H + 2) * 255);
+        G255 = Math.round(HToRgb(t1, t2, H) * 255);
+        B255 = Math.round(HToRgb(t1, t2, H - 2) * 255);
+
+        return (R255.toString(16) + G255.toString(16) + B255.toString(16) + "\n");
+    }
+
    
     this.css=function(values) {
         return "hsl("+this.hue.normalize(values.H)+","+(values.S).toFixed(0)+"%,"+(values.L).toFixed(0)+"%)";
@@ -95,7 +123,7 @@ var color=new function() {
             this.bgcolor=new this.Color(colors.background[0],colors.background[1],colors.background[2]);
             this.fgcolor=new this.Color(colors.foreground[0],colors.foreground[1],colors.foreground[2]);
             this.palette=this.getPalette(this.fgcolor,this.bgcolor);
-        
+            //port.write(this.toHex(colors.foreground[0],colors.foreground[1],colors.foreground[2]));
         
             return document.getElementById("color-style").innerHTML=`:root {
                 --fgColor-dull: `+this.css(this.palette.fg.dull)+`;

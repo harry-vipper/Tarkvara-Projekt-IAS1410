@@ -171,7 +171,7 @@ screen_gameSelectionMenu={
                     controls.key.set('down', 0, ()=>{selectGame('+');}, insertText("10"));
                     controls.key.set('confirm', 1000, ()=>{end({type:"startGame"});}, insertText("11"));
                     controls.key.set('left', 0, ()=>{end({type:"settingsMenu"});}, insertText("12"));
-                    controls.key.set('down', 1000, ()=>{end({type:"editorConnect"});}, insertText("46"));
+                    controls.key.set('right', 1000, ()=>{end({type:"editorConnect"});}, insertText("46"));
                     
                     function selectGame(direction) {
                         render.menuEntry.deactivate(screenContent.savefile.gameData.selectedGame);

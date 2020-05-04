@@ -72,7 +72,6 @@ screen_editorConnect={
         screenElement.querySelector("#"+UID+"_instructionImage_entries").appendChild(networkElement);
 
         let nrOfMeMes=5;
-        console.log(nrOfMeMes)
         for(;i<nrOfMeMes;i++){
             networkElement=document.createElement("div");
 
@@ -95,8 +94,6 @@ screen_editorConnect={
             return {"SSID":"localhost","PW":"My name jeff"}//Care length
         }
         else{
-            //Future function here
-
             return {"meme":"Vandivõrk"};
         }
     },

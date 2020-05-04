@@ -1,5 +1,4 @@
 function conditionToText(condition) {
-    console.log(condition);
     switch(String(condition)) {
         
         case "0":
