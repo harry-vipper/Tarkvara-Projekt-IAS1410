@@ -172,7 +172,7 @@
     "34":
     {
         "EST":"VAJUTA",
-        "ENG":"PRESS"
+        "ENG":"TOUCH"
     },
     "35":
     {
@@ -212,12 +212,12 @@
     "42":
     {
         "EST":"Jätka viimase mänguga",
-        "ENG":"Continue with the last game"
+        "ENG":"Continue the last game"
     },
     "43":
     {
         "EST":"Alusta uue mänguga",
-        "ENG":"Begin with a new game"
+        "ENG":"Begin a new game"
     },
     "44":
     {
@@ -237,17 +237,17 @@
     "47":
     {
         "EST":"KLAASID",
-        "ENG":"CUPS"
+        "ENG":"GLASSES"
     },
     "48":
     {
         "EST":"Ühenda oma nutiseade või sülearvuti WiFi võrguga",
-        "ENG":"Connect your device with the WiFi network"
+        "ENG":"Connect your device to the WiFi network"
     },
     "49":
     {
-        "EST":"Võrgu parool on:",
-        "ENG":"Network password is:"
+        "EST":"WiFi parool:",
+        "ENG":"WiFi password:"
     },
     "50":
     {
@@ -257,7 +257,7 @@
     "51":
     {
         "EST":"Lõpetades lae mängud seadmesse",
-        "ENG":"When you are finished load the games onto the device"
+        "ENG":"When finished, upload to device"
     },
     "52":
     {

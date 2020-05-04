@@ -75,6 +75,8 @@
     /* height: 50%; */
     /* margin: auto; */
     /* display: block; */
+    /* transform: scale(1.5); */
+    filter: blur(4px);
 }
 
 .UID_instructionImage_entries svg {
@@ -87,12 +89,12 @@
 }
 
 .UID_instructionImage_background {
-    filter: blur(1px);
+    /* filter: blur(1px); */
     -webkit-mask-image: linear-gradient(rgba(0, 0, 0, 0.6)1%, rgba(0, 0, 0, 1.0) 20%,rgba(0, 0, 0, 1.0) 70%, rgba(0, 0, 0, 0.7) 90%);
 }
 
 .UID_instructionImage_otherEntry {
-    filter: blur(1px);
+    filter: blur(2px);
 }
 
 .UID_instructionImage_entry {
