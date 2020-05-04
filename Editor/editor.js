@@ -14,8 +14,46 @@ function decodeInput(str) {
 }
 function calculateExpectedTimes() {
     for(let i=0; i<file.length; i++) {
-        file[i]["properties"]["duration"]=file[i]["contentElements"].length*file[i]["settings"]["contentElementDuration"]/60;
+        let elements=0;
+        file[i]["contentElements"].forEach(function(element){
+            if(element.repeatable==true) {
+                elements+=Number(element.likelyRepeats);
+            }
+            else{
+                elements++;
+            }
+        });
+        console.log(elements);
+        file[i]["properties"]["duration"]=elements*file[i]["settings"]["contentElementDuration"]/60;
     }
+}
+function jsonToDevice() {
+    calculateExpectedTimes();
+    jsonWrapper.content=file;
+    var text=JSON.stringify(jsonWrapper);
+
+
+    var formData = new FormData();
+
+    formData.append("json", text);
+
+    var blob = new Blob([''], { type: "text/xml"});
+
+    formData.append("file", blob);
+
+    var request = new XMLHttpRequest();
+    request.open("POST", "/php/jsonStoreHandler.php");
+    request.send(formData);
+    request.onload = function() {
+        if(this.responseText=="OK") {
+            window.alert("Edukalt üles laetud");
+        }
+        else {
+            window.alert("Üleslaadimine ei õnnestunud");
+        }
+        console.log(this.responseText);
+    }
+
 }
 function jsonDownload() {
     calculateExpectedTimes();
@@ -375,7 +413,7 @@ function GameObject() {
     let index=nextFileIndex;
     this.id=nextFileIndex;
     this.properties={
-        title: "Mäng "+String(name),
+        title: "Uus mäng",
         duration: 60,
         description: "",
         players: {
@@ -441,8 +479,8 @@ function createGameSettings(id) {
         </select>
     </p>
 
-    <p>Elemendi kestus<span class="input-bg"><input onchange="saveData('contentElementDuration', 'settings-contentElementDuration')" class="input-digit" id="settings-contentElementDuration"></input>sec</span></p>
-    <p><span id="c_random" class="checkbox checkbox-unchecked" onclick="toggleCheckbox('c_random')"></span>Suvaline elementide järjestus</p>
+    <p>Küsimuse kestus<span class="input-bg"><input onchange="saveData('contentElementDuration', 'settings-contentElementDuration')" class="input-digit" id="settings-contentElementDuration"></input>sec</span></p>
+    <p><span id="c_random" class="checkbox checkbox-unchecked" onclick="toggleCheckbox('c_random')"></span>Suvaline küsimuste järjestus</p>
     <h3>Minimängud</h3>
 
     <p><span id="c_mg1" class="checkbox checkbox-unchecked" onclick="toggleCheckbox('c_mg1')"></span>Truth Dare</p>

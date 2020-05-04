@@ -92,12 +92,23 @@ screen_editorConnect={
     },
     generateName:function(random){
         if(random){
-            return {"SSID":"localhost","PW":"My name jeff"}//Care length
+            return {"SSID":"lauamäng","PW":"mynamejeff"}//Care length
         }
         else{
-            //Future function here
+            function randomIntFromInterval(min, max) { // min and max included 
+                return Math.floor(Math.random() * (max - min + 1) + min);
+              }
+            let words=[
+                ['Petsi', 'Jaani', 'Mardo'],
+                ['Giga', 'Kodu', 'võrgu'],
+                ['Pauk', 'LAN', '1337']
+            ];
+            let output="";
+            words.forEach(function(word){
+                output+=word[randomIntFromInterval(0, word.length-1)];
+            })
 
-            return {"meme":"Vandivõrk"};
+            return {"meme":output};
         }
     },
     HTMLbase:`
@@ -107,19 +118,19 @@ screen_editorConnect={
             <div class="UID_instruction_class">
                 <div class="UID_instruction_group">
                     <p id="UID_desc_SSID">Ühenda oma nutiseade või sülearvuti WiFi võrguga</p>
-                    <p id="UID_param_SSID" class="UID_param">testNet</p>
+                    <p id="UID_param_SSID" class="UID_param"></p>
                 </div>
                 <div class="UID_instruction_group">
                     <p id="UID_desc_PW">Võrgu parool on:</p>
-                    <p id="UID_param_PW" class="UID_param">testPas</p>
-                    <p id="UID_desc_WPA" class="UID_param_other">WPA-2 Misiganes muud advanced settingud igaks juhuks</p>
+                    <p id="UID_param_PW" class="UID_param"></p>
+                    <p id="UID_desc_WPA" class="UID_param_other"></p>
                 </div>
                 
             </div>
             <div class="UID_instruction_class">
                 <div class="UID_instruction_group">
                     <p id="UID_desc_URL">Ava brauseris leht</p>
-                    <p id="UID_param_URL" class="UID_param">test.ee</p>
+                    <p id="UID_param_URL" class="UID_param"></p>
                 </div>
             </div>
             <div class="UID_instruction_class">
