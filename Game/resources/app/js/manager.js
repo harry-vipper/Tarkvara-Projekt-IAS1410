@@ -4,10 +4,13 @@ const defaultHold=1000;
 function startup() {
     //Load save-, game- and languagefiles
     file.savefile.load();
-
     file.gamefile.load();
+    file.languagefile.load();
 
-    file.languagefile.load();    
+
+
+
+
     
     color.setColor();//Set colors of the game based on saved data.
     
