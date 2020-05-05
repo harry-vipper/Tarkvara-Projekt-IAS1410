@@ -1,1 +1,156 @@
-{"content":[{"id":0,"properties":{"title":"Kevadise ChillWeekendi hilisõhtune tunnetemäng","duration":6,"description":"Pole sõnu? Ei julge? Mille muu jaoks üldse alkohol ja suunav mõjutamine leiutatud on.","players":{"min":3,"max":7},"volume":"4.5","condition":"0"},"settings":{"random":true,"contentElementDuration":"60","minigames":{"mg1":true,"mg2":false,"mg3":false}},"contentElements":[{"id":0,"type":"task","str":"Ütle talle, et sa armastad teda.\n\n\nIkka nii, et ta usuks ka. ","repeatable":false,"likelyRepeats":2},{"id":1,"type":"task","str":"Worst breakup story.\n\n\"haahaa, mul pole ühtegi\" - no jumal küll, mõtle välja siis midagi. Kui sul isegi täna peaks kuidagi õnnestuma, siis sinu track recordit vaadates on homme sul kindlasti sellele vastus.","repeatable":false,"likelyRepeats":2},{"id":2,"type":"task","str":"Vaata talle silmadesse.\n\nSa ei pea midagi ütlema. Ta saab aru küll.","repeatable":false,"likelyRepeats":2},{"id":3,"type":"task","str":"Ütle oma crushile, et ta meeldib sulle.\n\nTa ilmselt juba teab, sest sa käitud ta juuresolekul imelikult. Aga vähemalt saad selle raskuse õlult ja oma eluga edasi minna.","repeatable":false,"likelyRepeats":2},{"id":4,"type":"question","str":"Mitu kilomeetrit sa oleksid nõus jooksma, et oma kallimat näha?\n\nArvesta, et ta kuuleb sind.\n\n\nSamas, me kõik teame, et sa üle kolme kilomeetri niikuinii joosta ei jõua.","repeatable":false,"likelyRepeats":2},{"id":5,"type":"task","str":"Näita endas sügaval peituvad romantikut.\n\nEi, mitte seda. Tõelist romantikut, seda, mis veel sügavamal on.","repeatable":false,"likelyRepeats":2}]},{"id":1,"properties":{"title":"Mardo möllu-möll","duration":3,"description":"Ou, sul on viina v","players":{"min":3,"max":7},"volume":"40","condition":"1"},"settings":{"random":true,"contentElementDuration":60,"minigames":{"mg1":false,"mg2":false,"mg3":false}},"contentElements":[{"id":0,"type":"task","str":"Ou vala juurde","repeatable":true,"likelyRepeats":10},{"id":1,"type":"task","str":"Vähem möla, rohkem joomist","repeatable":true,"likelyRepeats":"10"},{"id":2,"type":"question","str":"Okei kes tahab tatti panna","repeatable":false,"likelyRepeats":2}]},{"id":2,"properties":{"title":"Eestlane kapis","duration":19.966666666666665,"description":"Raskeim raskusaste","players":{"min":"1","max":"1"},"volume":100,"condition":2},"settings":{"random":false,"contentElementDuration":599,"minigames":{"mg1":false,"mg2":false,"mg3":true}},"contentElements":[{"id":0,"type":"task","str":"Mine kappi","repeatable":false,"likelyRepeats":2},{"id":1,"type":"question","str":"Kas sa oled kapis?","repeatable":false,"likelyRepeats":2}]}]}
+{
+    "content": [
+        {
+            "id": 0,
+            "properties": {
+                "title": "Kevadise ChillWeekendi hilisõhtune tunnetemäng",
+                "duration": 6,
+                "description": "Pole sõnu? Ei julge? Mille muu jaoks üldse alkohol ja suunav mõjutamine leiutatud on.",
+                "players": {
+                    "min": 3,
+                    "max": 7
+                },
+                "volume": "4.5",
+                "condition": "0"
+            },
+            "settings": {
+                "random": true,
+                "contentElementDuration": "60",
+                "minigames": {
+                    "mg1": true,
+                    "mg2": false,
+                    "mg3": false
+                }
+            },
+            "contentElements": [
+                {
+                    "id": 0,
+                    "type": "task",
+                    "str": "Ütle talle, et sa armastad teda.\n\n\nIkka nii, et ta usuks ka. ",
+                    "repeatable": false,
+                    "likelyRepeats": 2
+                },
+                {
+                    "id": 1,
+                    "type": "task",
+                    "str": "Worst breakup story.\n\n\"haahaa, mul pole ühtegi\" - no jumal küll, mõtle välja siis midagi. Kui sul isegi täna peaks kuidagi õnnestuma, siis sinu track recordit vaadates on homme sul kindlasti sellele vastus.",
+                    "repeatable": false,
+                    "likelyRepeats": 2
+                },
+                {
+                    "id": 2,
+                    "type": "task",
+                    "str": "Vaata talle silmadesse.\n\nSa ei pea midagi ütlema. Ta saab aru küll.",
+                    "repeatable": false,
+                    "likelyRepeats": 2
+                },
+                {
+                    "id": 3,
+                    "type": "task",
+                    "str": "Ütle oma crushile, et ta meeldib sulle.\n\nTa ilmselt juba teab, sest sa käitud ta juuresolekul imelikult. Aga vähemalt saad selle raskuse õlult ja oma eluga edasi minna.",
+                    "repeatable": false,
+                    "likelyRepeats": 2
+                },
+                {
+                    "id": 4,
+                    "type": "question",
+                    "str": "Mitu kilomeetrit sa oleksid nõus jooksma, et oma kallimat näha?\n\nArvesta, et ta kuuleb sind.\n\n\nSamas, me kõik teame, et sa üle kolme kilomeetri niikuinii joosta ei jõua.",
+                    "repeatable": false,
+                    "likelyRepeats": 2
+                },
+                {
+                    "id": 5,
+                    "type": "task",
+                    "str": "Näita endas sügaval peituvad romantikut.\n\nEi, mitte seda. Tõelist romantikut, seda, mis veel sügavamal on.",
+                    "repeatable": false,
+                    "likelyRepeats": 2
+                }
+            ]
+        },
+        {
+            "id": 1,
+            "properties": {
+                "title": "Mardo möllu-möll",
+                "duration": 3,
+                "description": "Ou, sul on viina v",
+                "players": {
+                    "min": 3,
+                    "max": 7
+                },
+                "volume": "40",
+                "condition": "1"
+            },
+            "settings": {
+                "random": true,
+                "contentElementDuration": 60,
+                "minigames": {
+                    "mg1": false,
+                    "mg2": true,
+                    "mg3": false
+                }
+            },
+            "contentElements": [
+                {
+                    "id": 0,
+                    "type": "task",
+                    "str": "Ou vala juurde",
+                    "repeatable": true,
+                    "likelyRepeats": 10
+                },
+                {
+                    "id": 1,
+                    "type": "task",
+                    "str": "Vähem möla, rohkem joomist",
+                    "repeatable": true,
+                    "likelyRepeats": "10"
+                },
+                {
+                    "id": 2,
+                    "type": "question",
+                    "str": "Okei kes tahab tatti panna",
+                    "repeatable": false,
+                    "likelyRepeats": 2
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "properties": {
+                "title": "Eestlane kapis",
+                "duration": 19.966666666666665,
+                "description": "Raskeim raskusaste",
+                "players": {
+                    "min": "1",
+                    "max": "1"
+                },
+                "volume": 100,
+                "condition": 2
+            },
+            "settings": {
+                "random": false,
+                "contentElementDuration": 599,
+                "minigames": {
+                    "mg1": false,
+                    "mg2": false,
+                    "mg3": true
+                }
+            },
+            "contentElements": [
+                {
+                    "id": 0,
+                    "type": "task",
+                    "str": "Mine kappi",
+                    "repeatable": false,
+                    "likelyRepeats": 2
+                },
+                {
+                    "id": 1,
+                    "type": "question",
+                    "str": "Kas sa oled kapis?",
+                    "repeatable": false,
+                    "likelyRepeats": 2
+                }
+            ]
+        }
+    ]
+}
