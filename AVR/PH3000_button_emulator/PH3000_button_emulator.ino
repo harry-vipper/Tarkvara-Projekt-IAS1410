@@ -18,15 +18,16 @@ void setup() {
   pinMode(B_RIGHT, INPUT_PULLUP);
 
   pinMode(L_CENTER, OUTPUT);
-  pinMode(B_LEFT, OUTPUT);
-  pinMode(B_UP, OUTPUT);
-  pinMode(B_DOWN, OUTPUT);
-  pinMode(B_RIGHT, OUTPUT);
+  pinMode(L_LEFT, OUTPUT);
+  pinMode(L_UP, OUTPUT);
+  pinMode(L_DOWN, OUTPUT);
+  pinMode(L_RIGHT, OUTPUT);
 }
 char inputField[]={'\'', '_', '\'', ':', '#'};
 int B_key[5]={B_CENTER, B_LEFT, B_UP, B_DOWN, B_RIGHT};
 String B_str[5]={String("confirm"), String("left"), String("up"), String("down"), String("right")};
 bool B_states[5]={HIGH, HIGH, HIGH, HIGH, HIGH};
+bool LAST_B_states[5]={HIGH, HIGH, HIGH, HIGH, HIGH};
 
 uint8_t colors[3];
 void loop() {
@@ -34,12 +35,13 @@ void loop() {
     //Serial.println(digitalRead(B_key[k]));
     if(digitalRead(B_key[k])!=B_states[k]) {
       B_states[k]=digitalRead(B_key[k]);
-      if(B_states[k]==LOW) {
+      if(B_states[k]!=LAST_B_states[k]) {
         Serial.print(B_str[k]);
         Serial.print('\n');
       }
     }
   }
+  /*
   if(Serial.available()>0) {
     int data=-1;
     if((data=Serial.read())!=-1) {
@@ -121,6 +123,8 @@ void loop() {
         }
       }
     }
+  }*/
+  for(int i=0;i<5;i++){
+    LAST_B_states[i]=B_states[i];
   }
-
 }

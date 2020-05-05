@@ -358,7 +358,7 @@ var LED={//The LED method
         return port.write(str);
     },
     reset:function(){//LED.reset function to send color of all key LEDs to the Arduino, used after changing controls.  
-        
+
         let state={"up":false,"down":false,"left":false,"right":false,"confirm":false}; 
         var keys=Object.keys(state)
 
