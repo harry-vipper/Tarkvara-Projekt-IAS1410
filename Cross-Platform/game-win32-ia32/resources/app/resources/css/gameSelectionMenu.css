@@ -1,0 +1,155 @@
+#UID_menulistContainer {
+    width: 80%;
+    margin: auto;
+    /* height: auto; */
+    position: relative;
+    padding: 5% 0;
+}
+.UID_menulistItem::after {
+    /* display: block; */
+    /* content: ""; */
+    height: 1px;
+}
+.UID_menulistHeaderActive {
+    background: var(--fgColor-normal);
+}
+.UID_menulistItem {
+    width: 100%;
+    position: relative;
+}
+
+.UID_menulistHeader {
+    width: 100%;
+    position: relative;
+    min-height: 4em;
+    display: grid;
+    grid-column-gap: 0.8em;
+    grid-template-columns: min-content auto;
+    margin: 1em 0;
+}
+
+.UID_menulistHeaderNumber {
+    background: var(--bgColor-normal);
+    height: 100%;
+    position: relative;
+    min-width: 3em;
+    color: var(--fgColor-normal);
+    font-size: 1.4em;
+    text-align: center;
+    /* padding: 0.3em 0.5em 0 0.5em; */
+    box-sizing: border-box;
+    display: table;
+}
+
+.UID_menulistHeaderTitle {
+    background: var(--bgColor-normal);
+    color: var(--fgColor-normal);
+    font-family: 'Raleway';
+    font-weight: 500;
+    font-size: 2.6em;
+    font-family: 'Roboto';
+}
+.UID_menulistHeaderActive {
+    background: var(--fgColor-normal)!important;
+    color: var(--bgColor-dark)!important;
+    transition: background 0.1s ease-in-out;
+}
+.UID_menulistDescriptionBackground {
+    width: 200%;
+    position: relative;
+    left: -50%;
+    padding: 0 50%;
+    background: var(--bgColor-darkest);
+    clear: both;
+}
+
+.UID_menulistDescription {
+    width: 50%;
+    display: grid;
+    padding: 1em 0;
+    margin: 0;
+    grid-template-columns: 60% auto;
+    grid-column-gap: 1em;
+}
+
+.UID_menulistDescriptionText {
+    /* background: #ff000026; */
+    color: var(--fgColor-normal);
+    font-size: 1.7em;
+    font-weight: 300;
+    margin: 0;
+}
+
+.UID_menulistDescriptionPropertiesElement {
+    width: 100%;
+    min-height: 4em;
+    display: grid;
+    grid-template-columns: 4em auto;
+    margin: 0.5em 0;
+}
+
+.UID_menulistDescriptionProperties {
+    position: relative;
+    margin: 0;
+}
+
+.UID_menulistDescriptionPropertiesElementIcon {
+    height: 4em;
+    width: 4em;
+    background: var(--fgColor-normal);
+}
+
+.UID_menulistDescriptionPropertiesElementValue {
+    color: var(--fgColor-normal);
+    font-size: 3.3em;
+    font-weight: 300;
+}
+
+.UID_menulistDescriptionPropertiesElementValue p {
+    margin: 0 0.3em;
+}
+
+span.UID_menulistDescriptionPropertiesElementValue-small {
+    font-size: 0.6em;
+    padding: 0 0.2em;
+}
+
+.UID_menulistDescriptionText p {
+    margin: 0;
+}
+
+.UID_menulistHeaderNumber p {
+    margin: 0;
+    padding: 0;
+    font-size: 2em;
+    font-family: 'Now Light';
+    text-align: center;
+    width: min-content;
+    display: inline;
+    margin-inline-end: 0;
+    margin-inline-start: 0;
+    margin-block-end: 0;
+    margin-block-start: 0;
+    display: table-cell;
+    vertical-align: middle;
+    top: 0.06em;
+    position: relative;
+}
+
+.UID_menulistHeaderTitle p {
+    margin: 0.18em 0.3em;
+}
+
+.UID_element_after {
+    /* height: 1px; */
+}
+
+.UID_menulistDescriptionPropertiesElementIcon svg {
+    width: 100%;
+    height: 100%;
+    --svgColor: var(--bgColor-dark);
+}
+
+.UID_menuListHeader {
+    height: 100px;
+}

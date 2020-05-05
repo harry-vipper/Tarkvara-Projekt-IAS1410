@@ -1,0 +1,41 @@
+.UID_screenwrapper p {
+    font-size: 8em;
+    white-space: nowrap;
+    position: relative;
+    margin: 0;
+    color: var(--fgColor-dull);
+    font-family: 'Raleway';
+    font-weight: 100;
+    text-align: center;
+}
+
+.UID_screenwrapper p span {
+    /* background: var(--fgColor-normal); */
+    /* color: var(--bgColor-dark); */
+    padding: 0 0.4em;
+    width: 5em;
+    color: var(--fgColor-normal);
+    font-weight: 800;
+}
+
+.UID_textwrapper {
+    transform: translateX(calc(-50% + 512px));
+    top: -1em;
+    /* transform: rotateZ(-0deg); */
+    position: relative;
+    width: max-content;
+}
+
+p#UID_p-1 {transform: translateX(-6%);}
+
+p#UID_p-5 {
+    transform: translateX(5%);
+}
+
+p#UID_p-2 {
+    transform: translateX(8%);
+}
+
+p#UID_p-6 {
+    transform: translateX(8%);
+}
