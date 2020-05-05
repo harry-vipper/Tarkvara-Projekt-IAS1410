@@ -95,11 +95,11 @@ screen_reaction_test={
                 notify("Random button index: "+String(promptKeyIndex), "screen");
                 for (let i=0; i<buttons.length; i++) {
                     if(promptKeyIndex===i) {
-                        actionIDs[i]=controls.key.set(buttons[i], 0, reactionCapture_correct, false);
+                        actionIDs[i]=controls.key.set(buttons[i], 0, reactionCapture_correct, false, false, true);
                         notify(buttons[i], "screen");
                     }
                     else {
-                        actionIDs[i]=controls.key.set(buttons[i], 0, reactionCapture_incorrect, false);
+                        actionIDs[i]=controls.key.set(buttons[i], 0, reactionCapture_incorrect, false, false, false);
                     }
                 }
             }
@@ -174,10 +174,10 @@ screen_reaction_test={
             return delay(MG_SETTINGS.inBetweenTime,localTimerIds);
         }).then(()=>{ 
             
-            controls.key.set("up",1000,()=>{end({type: "gameSelectionMenu", value: null});},insertText(6));
-            controls.key.set("left",1000,()=>{end({type: "nextScreen", value: "last"});},insertText(7));
-            controls.key.set("right",1000,()=>{end({type: "nextScreen", value: "next"});},insertText(8));
-            controls.key.set('down', 1000, ()=>{end({type:"editorConnect"});}, insertText("46"));
+            controls.key.set("up",1000,()=>{end({type: "gameSelectionMenu", value: null});},insertText(6),false,true);
+            controls.key.set("left",1000,()=>{end({type: "nextScreen", value: "last"});},insertText(7),false,true);
+            controls.key.set("right",1000,()=>{end({type: "nextScreen", value: "next"});},insertText(8),false,true);
+            controls.key.set('down', 1000, ()=>{end({type:"editorConnect"});}, insertText("46"),false,true);
 
             return render.fade.in(document.getElementById(UID+"_UIdiv"));
         }).then(()=>{ 

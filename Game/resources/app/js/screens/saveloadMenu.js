@@ -29,17 +29,24 @@ screen_saveloadMenu={
         }
     }
     ).then(()=>{
+
         let str=this.HTMLbase;
         str=str.split("UID").join(UID);
-        context.innerHTML=str;
-        this.setContent(context,screenContent,UID);
+
+        let screenElement=document.createElement("div");
+        screenElement.setAttribute("id",UID+"wrapper");
+        screenElement.innerHTML=str;
+
+        this.setContent(screenElement,screenContent,UID);
+        
+        context.appendChild(screenElement);
         return render.fade.in(context);
     }
     ).then(()=>{
         let choice=0;
-        controls.key.set("up",0,()=>{changeChoice();},lastCondition=insertText("9"));
-        controls.key.set("down",0,()=>{changeChoice();},lastCondition=insertText("10"));
-        controls.key.set("confirm",0,()=>{end({type: "choiceMade", value: choice});},lastCondition=insertText("17"));
+        controls.key.set("up",0,()=>{changeChoice();},lastCondition=insertText("9"),false,true);
+        controls.key.set("down",0,()=>{changeChoice();},lastCondition=insertText("10"),false,true);
+        controls.key.set("confirm",0,()=>{end({type: "choiceMade", value: choice});},lastCondition=insertText("17"),false,true);
         
         function changeChoice(){
             document.getElementById("_"+choice+"_"+UID+"_header_title").classList.remove(UID+"_menulistHeaderActive");

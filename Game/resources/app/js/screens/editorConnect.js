@@ -18,6 +18,7 @@ screen_editorConnect={
                 end=resolve;
             }
         );
+        var screenElement=document.createElement("div");
 
         render.strUID=function(str) {
             return str.split("UID").join(UID);
@@ -34,12 +35,21 @@ screen_editorConnect={
         }).then(()=>{
             let str=this.HTMLbase;
             str=str.split("UID").join(UID);
-            context.innerHTML=str;
-            return this.setContent(context,UID);
+    
+            screenElement.setAttribute("id",UID+"_wrapper");
+            screenElement.innerHTML=str;
+            context.appendChild(screenElement);
+
+            return this.setContent(screenElement,UID);
         }).then(()=>{
             return render.fade.in(context);
         }).then(()=>{
-            controls.key.set('down', 1000, ()=>{end({type:"return"});}, insertText("45"));
+            if(SYSTEM==="PI"){
+                file.apfile.save(this.generateName(true));
+                const exec = require('child_process').exec;
+                exec('sudo  /home/pi/APchange.sh');
+            }
+            controls.key.set('down', 1000, ()=>{end({type:"return"});}, insertText("45"),false,true);
         });
         return endpromise;
         
@@ -65,7 +75,7 @@ screen_editorConnect={
         let input=screen_editorConnect.generateName(true);
         screenElement.querySelector("#"+UID+"_param_SSID").innerHTML=input.SSID;
         screenElement.querySelector("#"+UID+"_param_PW").innerHTML=input.PW;
-        screenElement.querySelector("#"+UID+"_param_URL").innerHTML=`localhost/editor`;
+        screenElement.querySelector("#"+UID+"_param_URL").innerHTML=`192.168.220.1`;
 
         networkElement.querySelector("#"+UID+"_entry_0_ssid").innerHTML=input.SSID;
         
@@ -117,19 +127,19 @@ screen_editorConnect={
             <div class="UID_instruction_class">
                 <div class="UID_instruction_group">
                     <p id="UID_desc_SSID">Ühenda oma nutiseade või sülearvuti WiFi võrguga</p>
-                    <p id="UID_param_SSID" class="UID_param"></p>
+                    <p id="UID_param_SSID" class="UID_param">testNet</p>
                 </div>
                 <div class="UID_instruction_group">
                     <p id="UID_desc_PW">Võrgu parool on:</p>
-                    <p id="UID_param_PW" class="UID_param"></p>
-                    <p id="UID_desc_WPA" class="UID_param_other"></p>
+                    <p id="UID_param_PW" class="UID_param">testPas</p>
+                    <p id="UID_desc_WPA" class="UID_param_other">WPA-2 Misiganes muud advanced settingud igaks juhuks</p>
                 </div>
                 
             </div>
             <div class="UID_instruction_class">
                 <div class="UID_instruction_group">
                     <p id="UID_desc_URL">Ava brauseris leht</p>
-                    <p id="UID_param_URL" class="UID_param"></p>
+                    <p id="UID_param_URL" class="UID_param">test.ee</p>
                 </div>
             </div>
             <div class="UID_instruction_class">

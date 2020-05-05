@@ -20,6 +20,8 @@ screen_settingsMenu={
                 end=resolve;
             }
         );
+        var screenElement=document.createElement("div");
+        
         render.strUID=function(str) {
             return str.split("UID").join(UID);
             };
@@ -51,23 +53,28 @@ screen_settingsMenu={
                     style.innerHTML=css;
                 }
         }).then(()=>{
+
             let str=this.HTMLbase;
             str=str.split("UID").join(UID);
-            context.innerHTML=str;
-            return this.setContent(context,screenContent);
+    
+            screenElement.setAttribute("id",UID+"_wrapper");
+            screenElement.innerHTML=str;
+            context.appendChild(screenElement);
+
+            return this.setContent(screenElement,screenContent);
         }).then(()=>{          
-            const scroller = new SweetScroll({}, '#displayContainer',);
+            const scroller = new SweetScroll();
             scroller.to(
                 ("#"+render.strUID("_0_UID_menuHeader"))
             )  
             return render.fade.in(context).then(()=>{return scroller;});
         }).then((scroller)=>{
 
-            controls.key.set('up', 0, ()=>{changeSetting('-');}, insertText("9"));
-            controls.key.set('down', 0, ()=>{changeSetting('+');}, insertText("10"));
-            controls.key.set('confirm', 0, ()=>{selectSetting();}, insertText("13"));
-            controls.key.set('left', 0, ()=>{end({type:"gameSelectionMenu"});}, insertText("14"));
-            controls.key.set('down', 1000, ()=>{end({type:"editorConnect"});}, insertText("46"));
+            controls.key.set('up', 0, ()=>{changeSetting('-');}, insertText("9"),false,true);
+            controls.key.set('down', 0, ()=>{changeSetting('+');}, insertText("10"),false,true);
+            controls.key.set('confirm', 0, ()=>{selectSetting();}, insertText("13"),false,true);
+            controls.key.set('left', 0, ()=>{end({type:"gameSelectionMenu"});}, insertText("14"),false,true);
+            controls.key.set('right', 1000, ()=>{end({type:"editorConnect"});}, insertText("46"),false,true);
 
             function changeSetting(direction) {
                 render.menuEntry.deactivate(screen_settingsMenu.selectedSetting);
@@ -119,19 +126,19 @@ screen_settingsMenu={
                     else {
                         screenContent.savefile.settings.toggle[screen_settingsMenu.selectedSetting]=1;
                     }
-                    screen_settingsMenu.toggleLoader(context,screenContent);
+                    screen_settingsMenu.toggleLoader(screenElement,screenContent);
                 }
                 else if(screen_settingsMenu.selectedSetting===9){
                     if(screenContent.savefile.settings.language==="ENG")screenContent.savefile.settings.language="EST";
                     else if(screenContent.savefile.settings.language==="EST")screenContent.savefile.settings.language="ENG"
-                    screen_settingsMenu.languageLoader(context,screenContent);
+                    screen_settingsMenu.languageLoader(screenElement,screenContent);
                     controls.key.clear.byKey("all");
                     system.screen.footer.clear();
-                    controls.key.set('up', 0, ()=>{changeSetting('-');}, insertText("9"));
-                    controls.key.set('down', 0, ()=>{changeSetting('+');}, insertText("10"));
-                    controls.key.set('confirm', 0, ()=>{selectSetting();}, insertText("13"));
-                    controls.key.set('left', 0, ()=>{end({type:"gameSelectionMenu"});}, insertText("14"));
-                    controls.key.set('right', 1000, ()=>{end({type:"editorConnect"});}, insertText("46"));
+                    controls.key.set('up', 0, ()=>{changeSetting('-');}, insertText("9"),false,true);
+                    controls.key.set('down', 0, ()=>{changeSetting('+');}, insertText("10"),false,true);
+                    controls.key.set('confirm', 0, ()=>{selectSetting();}, insertText("13"),false,true);
+                    controls.key.set('left', 0, ()=>{end({type:"gameSelectionMenu"});}, insertText("14"),false,true);
+                    controls.key.set('right', 1000, ()=>{end({type:"editorConnect"});}, insertText("46"),false,true);
                 }
                 else{
                     if(screen_settingsMenu.settingSelected){
@@ -139,26 +146,26 @@ screen_settingsMenu={
                         if(contrast===true){
                             controls.key.clear.byKey("all");
                             system.screen.footer.clear();
-                            screen_settingsMenu.upDownLoader(context,screenContent,screen_settingsMenu.selectedSetting,false);
+                            screen_settingsMenu.upDownLoader(screenElement,screenContent,screen_settingsMenu.selectedSetting,false);
                             screen_settingsMenu.settingSelected=false;
         
-                            controls.key.set('up', 0, ()=>{changeSetting('-');}, insertText("9"));
-                            controls.key.set('down', 0, ()=>{changeSetting('+');}, insertText("10"));
-                            controls.key.set('confirm', 0, ()=>{selectSetting();}, insertText("13"));
-                            controls.key.set('left', 0, ()=>{end({type:"gameSelectionMenu"});}, insertText("14"));
-                            controls.key.set('right', 1000, ()=>{end({type:"editorConnect"});}, insertText("46"));
+                            controls.key.set('up', 0, ()=>{changeSetting('-');}, insertText("9"),false,true);
+                            controls.key.set('down', 0, ()=>{changeSetting('+');}, insertText("10"),false,true);
+                            controls.key.set('confirm', 0, ()=>{selectSetting();}, insertText("13"),false,true);
+                            controls.key.set('left', 0, ()=>{end({type:"gameSelectionMenu"});}, insertText("14"),false,true);
+                            controls.key.set('right', 1000, ()=>{end({type:"editorConnect"});}, insertText("46"),false,true);
                         }
                        
                     }
                     else{
                         controls.key.clear.byKey("all");
                         system.screen.footer.clear();
-                        screen_settingsMenu.upDownLoader(context,screenContent,screen_settingsMenu.selectedSetting,true);
+                        screen_settingsMenu.upDownLoader(screenElement,screenContent,screen_settingsMenu.selectedSetting,true);
                         screen_settingsMenu.settingSelected=true;
                         
-                        controls.key.set('up', 100, ()=>{changeValue('+',screen_settingsMenu.selectedSetting);}, insertText("15"),true);
-                        controls.key.set('down', 100, ()=>{changeValue('-',screen_settingsMenu.selectedSetting);}, insertText("16"),true);
-                        controls.key.set('confirm', 0, ()=>{selectSetting();}, insertText("17"));
+                        controls.key.set('up', 0, ()=>{changeValue('+',screen_settingsMenu.selectedSetting);}, insertText("15"),true,true);
+                        controls.key.set('down', 0, ()=>{changeValue('-',screen_settingsMenu.selectedSetting);}, insertText("16"),true,true);
+                        controls.key.set('confirm', 0, ()=>{selectSetting();}, insertText("17"),false,true);
                     }
                 }
 
@@ -173,7 +180,7 @@ screen_settingsMenu={
                         screenContent.savefile.settings.mgFrequency--;
                         if(screenContent.savefile.settings.mgFrequency<1)screenContent.savefile.settings.mgFrequency=1;
                     }
-                    screen_settingsMenu.minigameFrequencyLoader(context,screenContent);
+                    screen_settingsMenu.minigameFrequencyLoader(screenElement,screenContent);
                 }
                 else if(direction==="+"){
                     if(index===3 || index===4){
@@ -218,8 +225,8 @@ screen_settingsMenu={
                     color.setColor();
                     
                 }
-                screen_settingsMenu.valueLoader(context,screenContent);
-                screen_settingsMenu.upDownLoader(context,screenContent,screen_settingsMenu.selectedSetting,true);
+                screen_settingsMenu.valueLoader(screenElement,screenContent);
+                screen_settingsMenu.upDownLoader(screenElement,screenContent,screen_settingsMenu.selectedSetting,true);
             }
         });
         

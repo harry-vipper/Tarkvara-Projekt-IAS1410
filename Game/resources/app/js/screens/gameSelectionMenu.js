@@ -141,11 +141,8 @@ screen_gameSelectionMenu={
                 else{
                     style.innerHTML=css;
                 }
-                let menuListHeader=document.createElement('div');
-                menuListHeader.setAttribute("id", render.strUID("UID_menuListHeader"));
-                menuListHeader.classList.add("UID_menuListHeader");
-                context.appendChild(menuListHeader);
-
+                
+                
                 //Create list
                 let menuListContainer=document.createElement('div');
                 menuListContainer.setAttribute("id", render.strUID("UID_menulistContainer"));
@@ -159,7 +156,7 @@ screen_gameSelectionMenu={
                 })
                 screenContent.savefile.gameData.selectedGame=0;
                     render.menuEntry.activate(screenContent.savefile.gameData.selectedGame);
-                const scroller = new SweetScroll({header: '#UID_menuListHeader'}, '#displayContainer',);
+                const scroller = new SweetScroll();
                 scroller.to(
                     ("#_"+screenContent.savefile.gameData.selectedGame+render.strUID("_UID_element"))
                 )
@@ -167,11 +164,11 @@ screen_gameSelectionMenu={
             }).then(
                 (scroller)=>{
 
-                    controls.key.set('up', 0, ()=>{selectGame('-');}, insertText("9"));
-                    controls.key.set('down', 0, ()=>{selectGame('+');}, insertText("10"));
-                    controls.key.set('confirm', 1000, ()=>{end({type:"startGame"});}, insertText("11"));
-                    controls.key.set('left', 0, ()=>{end({type:"settingsMenu"});}, insertText("12"));
-                    controls.key.set('right', 1000, ()=>{end({type:"editorConnect"});}, insertText("46"));
+                    controls.key.set('up', 0, ()=>{selectGame('-');}, insertText("9"),false,true);
+                    controls.key.set('down', 0, ()=>{selectGame('+');}, insertText("10"),false,true);
+                    controls.key.set('confirm', 1000, ()=>{end({type:"startGame"});}, insertText("11"),false,true);
+                    controls.key.set('left', 0, ()=>{end({type:"settingsMenu"});}, insertText("12"),false,true);
+                    controls.key.set('right', 1000, ()=>{end({type:"editorConnect"});}, insertText("46"),false,true);
                     
                     function selectGame(direction) {
                         render.menuEntry.deactivate(screenContent.savefile.gameData.selectedGame);
