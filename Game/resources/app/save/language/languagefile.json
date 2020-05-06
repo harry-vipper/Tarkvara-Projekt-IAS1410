@@ -268,5 +268,60 @@
     {
         "EST":"PAUS",
         "ENG":"PAUSE"
+    },
+    "54":
+    {
+        "EST":"Imeline",
+        "ENG":"Amazing"
+    },
+    "55":
+    {
+        "EST":"Kiire",
+        "ENG":"Fast"
+    },
+    "56":
+    {
+        "EST":"Väsinud",
+        "ENG":"Tired"
+    },
+    "57":
+    {
+        "EST":"Aeglane",
+        "ENG":"Slow"
+    },
+    "58":
+    {
+        "EST":"Mine magama",
+        "ENG":"Go to sleep"
+    },
+    "59":
+    {
+        "EST":"VALMIS",
+        "ENG":"READY"
+    },
+    "60":
+    {
+        "EST":"LÄKS",
+        "ENG":"GO"
+    },
+    "61":
+    {
+        "EST":"VAJUTA NUPPU KOHE, KUI SEE PÕLEMA LÄHEB",
+        "ENG":"PRESS THE BUTTON AS SOON AS IT LIGHTS UP"
+    },
+    "62":
+    {
+        "EST":"Vale",
+        "ENG":"Wrong"
+    },
+    "63":
+    {
+        "EST":"VAJUTA NUPPU, ET ALUSTADA",
+        "ENG":"PRESS THE BUTTON TO START"
+    },
+    "64":
+    {
+        "EST":"Tehtud? Hoia edasi nuppu, et edasi liikuda.",
+        "ENG":"Finished? Hold the forward button to move forwards."
     }
 }

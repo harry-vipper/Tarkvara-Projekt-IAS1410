@@ -24,6 +24,9 @@ function strToHTML(str) {//strToHTML function to convert string new line charact
     return str.replace(/(?:\r\n|\r|\n)/g, '<br>');
 }
 
+function randomIntFromInterval(min, max) {//The random integer from interval function returns a random integer from a give interval.
+    return Math.floor(Math.random() * (max - min + 1) + min);
+}
 
 function castToType(type, input) {//Cast to type function to check type of input for input filtering.
     

@@ -2,22 +2,24 @@
  "gameData": {
   "gameOrder": [
    0,
+   3,
+   -1,
    2,
+   -1,
    1,
    4,
-   3,
    5
   ],
-  "selectedGame": 0,
-  "currentQuestion": 0,
-  "state": 1
+  "selectedGame": 2,
+  "currentQuestion": 1,
+  "state": 3
  },
  "settings": {
   "toggle": [
-   0,
+   1,
    0
   ],
-  "mgFrequency": 5,
+  "mgFrequency": 2,
   "color": {
    "foreground": [
     67,
@@ -33,7 +35,7 @@
   "language": "EST"
  },
  "lastGame": {
-  "time": "11:23:42",
+  "time": "23:31:29",
   "title": "Kevadise ChillWeekendi hilisõhtune tunnetemäng",
   "condition": 0,
   "date": "06/05/2020"

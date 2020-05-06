@@ -34,6 +34,9 @@ render.forceRedraw=function(element) {//The force redraw function to set an elem
   element.offsetHeight;
 };
 
+render.insertUID=function(string,UID) {//The insert UID function to change placeholder UIDs to the correct ones in a string.
+	return string.split("UID").join(UID);
+};
 
 //Animation control functions to add and remove animations from an element.
 render.setAnimation=function (id, className) {
