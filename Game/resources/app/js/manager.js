@@ -1,6 +1,3 @@
-const SYSTEM="WIN";//Panna paremasse kohta
-const defaultHold=1000;
-
 function startup() {
     //Load save-, game- and languagefiles
     file.savefile.load();
@@ -11,14 +8,17 @@ function startup() {
 
 
 
-    
-    color.setColor();//Set colors of the game based on saved data.
-    
-    LED.reset();//Set LEDs to off state.
+    //Set colors of the game based on saved data.
+    color.setColor();
 
-    var lastScreenPromise=new Promise((resolve)=>{resolve()});//Start promise chain.
-    
-    if(file.savefile.content.gameData.state===2){//If there was a game in progress display saveloadMenu to user else display game selection menu.
+    //Set LEDs to off state.
+    LED.reset();
+
+    //Start promise chain.
+    var lastScreenPromise=new Promise((resolve)=>{resolve()});
+
+    //If there was a game in progress display saveloadMenu to user else display game selection menu.
+    if(file.savefile.content.gameData.state===2){
         lastScreenPromise=lastScreenPromise.then(()=>{
             return system.screen.displayScreen("saveloadMenu", undefined);
         });

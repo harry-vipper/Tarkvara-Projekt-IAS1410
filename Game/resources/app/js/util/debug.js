@@ -1,7 +1,10 @@
-const DEBUG=true;
+const DEBUG=true;//Set game side settings
 const DEFAULT_UID=true;
 const fileCSS=true;
-function notify(str, typestr) {
+const SYSTEM="WIN";
+const defaultHold=1000;
+
+function notify(str, typestr) {//Notify function to display custom console info
 	var typeColors={
 		"draw": {
 			"c":"#fff",
@@ -29,10 +32,4 @@ function notify(str, typestr) {
 		}
 		
 	}
-}
-if (DEBUG) {
-    /*debugger;
-    //electron.BrowserWindow.getCurrentWindow
-    debugger;
-    mainWindow.webContents.openDevTools()*/
 }

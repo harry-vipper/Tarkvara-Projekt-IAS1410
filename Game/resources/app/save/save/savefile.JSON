@@ -2,10 +2,10 @@
  "gameData": {
   "gameOrder": [
    0,
-   4,
-   3,
    2,
    1,
+   4,
+   3,
    5
   ],
   "selectedGame": 0,
@@ -33,9 +33,9 @@
   "language": "EST"
  },
  "lastGame": {
-  "time": "16:03:20",
+  "time": "11:23:42",
   "title": "Kevadise ChillWeekendi hilisõhtune tunnetemäng",
   "condition": 0,
-  "date": "05/05/2020"
+  "date": "06/05/2020"
  }
 }

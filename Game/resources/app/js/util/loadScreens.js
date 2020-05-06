@@ -1,4 +1,4 @@
-var screens={
+var screens={//Screens object to store all screen types
     gameSelectionMenu: screen_gameSelectionMenu,
     splash:screen_splash,
     question_task:screen_question_task,
