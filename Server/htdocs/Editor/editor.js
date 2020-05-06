@@ -185,13 +185,11 @@ function castToType(type, input) {
 function checkStructure(object) {
     try {
         object.content.forEach(function(game){
-            game.properties.condition=castToType("number", game.properties.condition);
             game.properties.description=castToType("string", game.properties.description);
             game.properties.duration=castToType("number", game.properties.duration);
             game.properties.players.min=castToType("number", game.properties.players.min);
             game.properties.players.max=castToType("number", game.properties.players.max);
             game.properties.title=castToType("string", game.properties.title);
-            game.properties.volume=castToType("number", game.properties.volume);
 
 
             game.settings.contentElementDuration=castToType("number", game.settings.contentElementDuration);
@@ -371,30 +369,6 @@ function saveData(property, id) {
                 document.getElementById(id).value=1;
                 return game["properties"]["players"]["max"]=1;
             }
-        case 'volume':
-            maxVal=100;
-            minVal=0;
-            val=encodeInput(document.getElementById(id).value);
-            if (!isNaN(val)) {
-                if (val>=minVal && val<=maxVal) {
-                    return game["properties"]["volume"]=val;
-                }
-                else {
-                    if (val<minVal) {
-                        document.getElementById(id).value=minVal;
-                        return game["properties"]["volume"]=minVal;
-                    }
-                    if (val>maxVal) {
-                        document.getElementById(id).value=maxVal;
-                        return game["properties"]["volume"]=maxVal;
-                    }
-                    
-                }
-            }
-            else {
-                document.getElementById(id).value=maxVal;
-                return game["properties"]["volume"]=maxVal;
-            }
         case 'contentElementDuration':
             maxVal=599;
             minVal=60;
@@ -419,8 +393,6 @@ function saveData(property, id) {
                 document.getElementById(id).value=maxVal;
                 return game["settings"]["contentElementDuration"]=maxVal;
             }
-        case 'condition':
-            return game["properties"]["condition"]=encodeInput(document.getElementById(id).value);;
         case 'c_random':
             return game["settings"]["random"]=!game["settings"]["random"];
         case 'c_mg1':
@@ -499,9 +471,7 @@ function GameObject() {
         players: {
             min: 3,
             max: 7
-        },
-        volume: 5,
-        condition: 2
+        }
     };
     this.settings={
         random: true,
@@ -626,14 +596,6 @@ function createGameSettings(id) {
     <textarea onchange="saveData('description', 'settings-desc')" spellcheck="false" class="t-area-wide list-settings-desc" id="settings-desc"></textarea>
     <h3>Sätted</h3>
     <p>Mängijate soovituslik arv<span class="input-bg"><input onchange="saveData('min', 'settings-players-min')" class="input-digit" id="settings-players-min"></input>kuni <input onchange="saveData('max', 'settings-players-max')" class="input-digit"  id="settings-players-max"></input></span></p>
-    <p>Soovituslik vol<span class="input-bg"><input onchange="saveData('volume', 'settings-volume')" class="input-digit" id="settings-volume"></input>%</span></p>
-    <p>Konditsioon
-        <select onchange="saveData('condition', 'settings-condition')" class="select-str" id="settings-condition">
-            <option value="0">Kaine</option>
-            <option value="1">Juba timm</option>
-            <option value="2">Lappes</option>
-        </select>
-    </p>
 
     <p>Küsimuse kestus<span class="input-bg"><input onchange="saveData('contentElementDuration', 'settings-contentElementDuration')" class="input-digit" id="settings-contentElementDuration"></input>sec</span></p>
     <p><span id="c_random" class="checkbox checkbox-unchecked" onclick="toggleCheckbox('c_random')"></span>Suvaline küsimuste järjestus</p>
@@ -648,8 +610,6 @@ function createGameSettings(id) {
     
     document.getElementById("settings-players-min").value=file[getIndexFromId(selectedGame)]["properties"]["players"]["min"];
     document.getElementById("settings-players-max").value=file[getIndexFromId(selectedGame)]["properties"]["players"]["max"];
-    document.getElementById("settings-volume").value=file[getIndexFromId(selectedGame)]["properties"]["volume"];
-    document.getElementById("settings-condition").value=file[getIndexFromId(selectedGame)]["properties"]["condition"];
     document.getElementById("settings-contentElementDuration").value=file[getIndexFromId(selectedGame)]["settings"]["contentElementDuration"];
     setCheckbox("c_random", file[getIndexFromId(selectedGame)]["settings"]["random"]);
     setCheckbox("c_mg1", file[getIndexFromId(selectedGame)]["settings"]["minigames"]["mg1"]);
