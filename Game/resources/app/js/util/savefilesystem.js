@@ -23,14 +23,17 @@ file={
     gamefile: {
         content: undefined,
         load: function() {
-            let primary=this.path.substring(0,this.path.length-18)
- 
-            let games=path.join(primary,"Server/htdocs/games/");
-            let state=path.join(primary,"Server/htdocs/state/state.JSON");
-
-            let loadFile = fs.readFileSync(state);
-            let current =JSON.parse(loadFile);
-
+            if(SYSTEM==="PI"){
+                var games="/var/www/html/Editor/games/";
+                var state="/var/www/html/Editor/state/state.json";
+            }
+            else{
+                var games=path.join(__dirname,"/../../../Server/htdocs/games/");
+                var state=path.join(__dirname,"/../../../Server/htdocs/state/state.JSON");
+            }
+            var loadFile = fs.readFileSync(state);
+            var current =JSON.parse(loadFile);
+            
             games=path.join(games,current.activeSaveFile);
 
             loadFile = fs.readFileSync(games);
@@ -47,7 +50,6 @@ file={
                 this.content.content[i].settings.contentElementDuration=castToType("number",this.content.content[i].settings.contentElementDuration);
                 this.content.content[i].settings.minigames.mg1=castToType("boolean",this.content.content[i].settings.minigames.mg1);
                 this.content.content[i].settings.minigames.mg2=castToType("boolean",this.content.content[i].settings.minigames.mg2);
-                //this.content.content[i].settings.minigames.mg3=castToType("boolean",this.content.content[i].settings.minigames.mg3);
                 for(let j=0;j<this.content.content[i].contentElements.length;j++){
                     this.content.content[i].contentElements[j].id=castToType("number",this.content.content[i].contentElements[j].id);
                     this.content.content[i].contentElements[j].type=castToType("contentElementType",this.content.content[i].contentElements[j].type);
@@ -58,9 +60,7 @@ file={
 
                 }
             }
-            this.content
-        },
-        path: __dirname
+        }
     },
     languagefile:{
         content:undefined,
@@ -69,35 +69,33 @@ file={
             this.content=JSON.parse(loadFile);
         },
         path: path.join(__dirname, '/save/language/languagefile.JSON')
-    }
-    /*apfile:{
+    },
+    apfile:{
         apSSID:"TESTSSID",
         apPW:"TESTPASSWORD",//Min 8 max 63 char
         content:`interface=wlan0
 driver=nl80211
-        
+
 hw_mode=g
 channel=6
 ieee80211n=1
 wmm_enabled=0
 macaddr_acl=0
 ignore_broadcast_ssid=0
-        
+
 auth_algs=1
 wpa=2
 wpa_key_mgmt=WPA-PSK
 wpa_pairwise=TKIP
 rsn_pairwise=CCMP
-        
+
 ssid=###
 wpa_passphrase=$$$`,//^^^See on põhjusega imelikult indentitud
-        save: function() {
-            let str=this.content.split("###").join(this.apSSID.toString());
-            str=str.split("$$$").join(this.apPW.toString());
-            console.log(str);
-            //fs.writeFileSync(this.path, str, function (err){if(DEBUG)notify("Save ERROR","function")});
+        save: function(input) {
+            let str=this.content.split("###").join(input.SSID.toString());
+            str=str.split("$$$").join(input.PW.toString());
+            fs.writeFileSync(this.path, str, function (err){if(DEBUG)notify("Save ERROR","function")});
         },
         path: path.join(__dirname, '/save/ap/changedhostapd.conf')
-        
-    }*/
+    }
 }

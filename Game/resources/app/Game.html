@@ -11,7 +11,6 @@
         <script type="text/javascript" src="js/lib/sweet-scroll.min.js"></script>
 
         <!--utilities-->
-        <script type="text/javascript" src="js/util/compability.js"></script>
         <script type="text/javascript" src="js/util/electron.js"></script>
         <script type="text/javascript" src="js/util/debug.js"></script>
         <script type="text/javascript" src="js/util/reusable.js"></script>
@@ -42,16 +41,9 @@
         <meta name="viewport" content="width=device-width,initial-scale=1">
     </head>
     <body onload="startup()">
-        <div id="screenScaler">
-            <div id="displayContainer">
-                <div id="screenContainer" class="r_invis r_invisCapable"></div>
-                <div id="footer" class="footer">
-                    <div id="footer_scrollWrapper"></div>
-                </div> 
+            <div id="screenContainer" class="r_invis r_invisCapable"></div>
+            <div id="footer" class="footer">
+                <div id="footer_scrollWrapper"></div>
             </div>
-            
-        </div>
-    <script>setTimeout(resize, 10);enableCompabitibility();</script>
-        
     </body>
 </html>

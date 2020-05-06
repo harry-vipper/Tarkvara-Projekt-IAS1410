@@ -52,11 +52,11 @@ screen_question_task={
         return render.fade.in(context);
     }
     ).then(()=>{
-
-        controls.key.set("up",1000,()=>{end({type: "gameSelectionMenu", value: null});},insertText(6));
-        controls.key.set("left",1000,()=>{end({type: "nextScreen", value: "last"});},insertText(7));
-        controls.key.set("right",1000,()=>{end({type: "nextScreen", value: "next"});},insertText(8));
-        controls.key.set('down', 1000, ()=>{end({type:"editorConnect"});}, insertText("46"));
+        controls.key.set("up",1000,()=>{end({type: "gameSelectionMenu", value: null});},insertText(6),false,true);
+        controls.key.set("left",1000,()=>{end({type: "nextScreen", value: "last"});},insertText(7),false,true);
+        controls.key.set("right",1000,()=>{end({type: "nextScreen", value: "next"});},insertText(8),false,true);
+        controls.key.set('down', 1000, ()=>{end({type:"editorConnect"});}, insertText("46"),false,true);
+        
         return startTimer(screenSettings.duration,UID+"_timer",localTimerIds);
     }
     ).then(()=>{
