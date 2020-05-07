@@ -86,7 +86,7 @@ var screen_editorConnect={
         let input=screen_editorConnect.generateName(true);
         screenElement.querySelector("#"+UID+"_param_SSID").innerHTML=input.SSID;
         screenElement.querySelector("#"+UID+"_param_PW").innerHTML=input.PW;
-        screenElement.querySelector("#"+UID+"_param_URL").innerHTML=`192.168.220.1`;
+        screenElement.querySelector("#"+UID+"_param_URL").innerHTML=`localhost/Editor`;
 
         networkElement.querySelector("#"+UID+"_entry_0_ssid").innerHTML=input.SSID;
         
@@ -116,7 +116,7 @@ var screen_editorConnect={
     },
     generateName:function(random){//The generate name function to return a random network name or the set WiFi SSID and password.
         if(random){
-            return {"SSID":"lauamäng","PW":"mynamejeff"}//SSID and password can be changed here, careful with special characters and lenght (min:8 max:63 char).
+            return {"SSID":"Pole testijakomplektis ettenähtud","PW":"Pole testijakomplektis ettenähtud"}//SSID and password can be changed here, careful with special characters and lenght (min:8 max:63 char).
         }
         else{
             let words=[
