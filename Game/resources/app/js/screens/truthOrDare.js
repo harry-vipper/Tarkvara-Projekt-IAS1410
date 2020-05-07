@@ -1,5 +1,5 @@
-var screen_truth_or_dare;
-screen_truth_or_dare={
+//The truth or dare minigame screen to let the user play the truth or dare game.
+var screen_truth_or_dare={
     handler:function (context,       
         style,        
         controls,       
@@ -8,67 +8,100 @@ screen_truth_or_dare={
         screenSettings, 
         render,
         UID,
-    ){
-    var end;
-    var endpromise=new Promise((resolve) =>{
-          end=resolve;
-        }
-    );
-    render.footer.transparentize();
-    system.screen.loadResource("/resources/css/truthOrDare.css").then(
-    (css)=>{
+    )
+    /*
+    context,        <div> to draw into
+    style,          <style> to send styles to
+    controls,       controls object with methods to handle controls
+    screenContent,  data passed to the screen, in any format, possibly suitable to this screen only
+    localTimerIds,  Array of active timers
+    screenSettings, settings like colors
+    UID             Unique ID of the HTML/CSS elements
+    */
+    {
+        var end;
+        //Setting the endpromise to trigger when the end promise comes true.
+        var endpromise=new Promise((resolve) =>{
+            end=resolve;
+            }
+        );
 
-        if(fileCSS) {
-           system.screen.loadCSStoDOM("resources/css/truthOrDare.css");
-        }
-        else{
-           style.innerHTML=css;
-        }
-    }).then(()=>{
-        let str=this.HTMLbase.key;
-        str=str.split("UID").join(UID);
+        //Make the footer semi transparent.
+        render.footer.transparentize();
 
-        context.innerHTML=str;
-        return render.fade.in(context);
-    }).then(()=>{
-        const MG_SETTINGS = {//Need võiks anda handlerile parameetrina
-            fadeTime:400,
-            inBetweenTime: 400,
-            rollTime:3000,
-            instructionPopupTime: 15000
-        }
-        const arrow_pointing_angle=Math.random()*360+5*360;
-        const arrow_pointed_angle=Math.random()*360+5*360;
+        //Load the screen CSS to DOM or the style element.
+        system.screen.loadResource("/resources/css/truthOrDare.css").then((css)=>{
+            if(fileCSS) {
+                system.screen.loadCSStoDOM("resources/css/truthOrDare.css");
+            }
+            else{
+                style.innerHTML=css;
+            }
 
-        function screen_startMinigame() {
-            controls.key.clear.byId(keylinkId);
-            system.screen.footer.reload();
-            render.fade.out(document.getElementById(UID+"_UIdiv"));
-            localTimerIds.push(setTimeout(function(){
-                let str=screen_truth_or_dare.HTMLbase.arrow;
-                str=str.split("UID").join(UID);
+        }).then(()=>{
+            //Make a copy of the HTMLbase key, replace the placeholders and set it into the needed element.
+            let str=this.HTMLbase.key;
+            str=str.split("###").join(insertText(63));
+            str=render.insertUID(str,UID);
+            context.innerHTML=str;
 
-                context.innerHTML=str;
-                render.fade.in(document.getElementById(UID+"_UIdiv"));
-                localTimerIds.push(setTimeout(function(){
+            //Fade in the screen
+            return render.fade.in(context);
+        }).then(()=>{
+            //Calculate the angles of the arrows.
+            const arrow_pointing_angle=Math.random()*360+5*360;
+            const arrow_pointed_angle=Math.random()*360+5*360;
+
+            function startMinigame(){//Start minigame function to start the minigame.
+                //Clear the start key and reload, footer and fade out the instructions.
+                controls.key.clear.byId(keylinkId);
+
+                system.screen.footer.reload();
+
+                return render.fade.out(document.getElementById(UID+"_UIdiv")).then(()=>{
+                    //Wait.
+                    return delay(screenSettings.fadeTime+screenSettings.inBetweenTimem,localTimerIds);
+
+                }).then(()=>{
+                    //Make a copy of the HTMLbase arrow, replace the placeholders and set it into the element.
+                    let str=screen_truth_or_dare.HTMLbase.arrow;
+                    str=str.split("###").join(insertText(64));
+                    str=render.insertUID(str,UID);
+                    context.innerHTML=str;
+
+                    //Fade in the arrows.
+                    return render.fade.in(document.getElementById(UID+"_UIdiv"));
+                }).then(()=>{
+                    //Wait.
+                    return delay(screenSettings.rollTime,localTimerIds);
+
+                }).then(()=>{
+                    //Set the animations of the arrows.
                     render.setAnimation(UID+"_UI-arrow-pointed", UID+"_arrow_pointed_animation");
                     render.setAnimation(UID+"_UI-arrow-pointing", UID+"_arrow_pointing_animation");
-                    localTimerIds.push(setTimeout(function(){
-                        render.fade.in(document.getElementById(UID+"_nextNotice"));
-                    }, 
-                    MG_SETTINGS.instructionPopupTime));
-                }, MG_SETTINGS.rollTime));
-            }, MG_SETTINGS.fadeTime+MG_SETTINGS.inBetweenTime));
-        }
-        controls.key.set("up",1000,()=>{end({type: "gameSelectionMenu", value: null});},insertText(6),false,true);
-        controls.key.set("left",1000,()=>{end({type: "nextScreen", value: "last"});},insertText(7),false,true);
-        controls.key.set("right",1000,()=>{end({type: "nextScreen", value: "next"});},insertText(8),false,true);
-        controls.key.set('down', 1000, ()=>{end({type:"editorConnect"});}, insertText("46"),false,true);
-        let keylinkId=controls.key.set("confirm",0, screen_startMinigame,insertText(11),false,true);
+                    
+                    //Wait.
+                    return delay(screenSettings.instructionPopupTime,localTimerIds);
+
+                }).then(()=>{
+                    //Fade in the end notice.
+                    render.fade.in(document.getElementById(UID+"_nextNotice"));
+                    return true;
+                });
+            }
+
+            //Set the controls and link the start key to an id so it can be cleared.
+            controls.key.set("up",1000,()=>{end({type: "gameSelectionMenu", value: null});},insertText(6),false,true);
+            controls.key.set("left",1000,()=>{end({type: "nextScreen", value: "last"});},insertText(7),false,true);
+            controls.key.set("right",1000,()=>{end({type: "nextScreen", value: "next"});},insertText(8),false,true);
+            controls.key.set('down', 1000, ()=>{end({type:"editorConnect"});}, insertText("46"),false,true);
+
+            let keylinkId=controls.key.set("confirm",0, startMinigame,insertText(11),false,true);
         });
 
         return endpromise
     },
+    //The stored HTMLs to be filled and displayed on the screen.
     HTMLbase:{
         key:`
         <div id="UID_UIdiv" class="r_invisCapable">
@@ -102,7 +135,7 @@ screen_truth_or_dare={
                         <path d="m4.7625 289.06v3.175h3.175v-3.175zm0.5292 0.52917h2.1167v2.1167h-2.1167z" style="fill:var(--svg-b-center);paint-order:markers fill stroke"/>
                     </g>
             </svg>
-            <p class="UID_UI_smalltext UID_UI_text_startNotice">VAJUTA NUPPU, ET ALUSTADA</p>
+            <p class="UID_UI_smalltext UID_UI_text_startNotice">###</p>
         </div>
     `,
     arrow:`
@@ -127,7 +160,7 @@ screen_truth_or_dare={
 
                 </div>
             </div>
-            <p id="UID_nextNotice" class="UID_UI_smalltext UID_UI_text_nextNotice r_invis r_invisCapable">Tehtud? hoia edasi nuppu, et edasi liikuda</p>
+            <p id="UID_nextNotice" class="UID_UI_smalltext UID_UI_text_nextNotice r_invis r_invisCapable">###</p>
         </div>
     `
     }

@@ -1,6 +1,5 @@
-//Editor connect
-var screen_editorConnect;
-screen_editorConnect={
+//The editor connect screen for connecting to the WiFi access point of the Raspberry Pi.
+var screen_editorConnect={
     type: "editorConnect",
     handler: function(
         context,       
@@ -12,38 +11,50 @@ screen_editorConnect={
         render,
         UID,             
     )
+    /*
+    context,        <div> to draw into
+    style,          <style> to send styles to
+    controls,       controls object with methods to handle controls
+    screenContent,  data passed to the screen, in any format, possibly suitable to this screen only
+    localTimerIds,  Array of active timers
+    screenSettings, settings like colors
+    UID             Unique ID of the HTML/CSS elements
+    */
     {   
         var end;
+        //Setting the endpromise to trigger when the end promise comes true.
         var endpromise=new Promise((resolve) =>{
                 end=resolve;
             }
         );
-        var screenElement=document.createElement("div");
 
-        render.strUID=function(str) {
-            return str.split("UID").join(UID);
-            };
         
-        system.screen.loadResource("/resources/css/editorConnect.css").then(
-            (css)=>{
-                if(fileCSS) {
-                    system.screen.loadCSStoDOM("resources/css/editorConnect.css");
-                }
-                else{
-                    style.innerHTML=css;
-                }
-        }).then(()=>{
-            let str=this.HTMLbase;
-            str=str.split("UID").join(UID);
-    
-            screenElement.setAttribute("id",UID+"_wrapper");
-            screenElement.innerHTML=str;
-            context.appendChild(screenElement);
+        //Load the screen CSS to DOM or the style element.
+        system.screen.loadResource("/resources/css/editorConnect.css").then((css)=>{
+            if(fileCSS) {
+                system.screen.loadCSStoDOM("resources/css/editorConnect.css");
+            }
+            else{
+                style.innerHTML=css;
+            }
+        
 
-            return this.setContent(screenElement,UID);
         }).then(()=>{
+            //Make a copy of the HTMLbase, replace the placeholders and set it into the needed element.
+            let str=this.HTMLbase;
+            str=render.insertUID(str,UID);
+            context.innerHTML=str;
+
+            return this.setContent(context,UID);
+
+
+        }).then(()=>{
+            //Fade in the screen
             return render.fade.in(context);
+
+
         }).then(()=>{
+            //Check if the system is PI if yes change the access point name and password.
             if(SYSTEM==="PI"){
                 file.apfile.save(this.generateName(true));
                 const exec = require('child_process').exec;
@@ -54,7 +65,7 @@ screen_editorConnect={
         return endpromise;
         
     },
-    setContent:function(screenElement,UID){
+    setContent:function(screenElement,UID){//The set content function to fill the required fields of the base string with current data.
         let i=0;
         render.footer.transparentize();
         screenElement.querySelector("#"+UID+"_desc_SSID").innerHTML=insertText("48");
@@ -81,45 +92,48 @@ screen_editorConnect={
         
         screenElement.querySelector("#"+UID+"_instructionImage_entries").appendChild(networkElement);
 
-        let nrOfMeMes=5;
-        for(;i<nrOfMeMes;i++){
+        //Generate random network names to fill the phone screen.
+        let nrJokeNets=5;
+        for(;i<nrJokeNets;i++){
             networkElement=document.createElement("div");
 
             networkElement.classList.add(UID+"instructionImage_entry",UID+"_instructionImage_otherEntry");
             
             let str=screen_editorConnect.networkHTML;
-            str=str.split("UID").join(UID);
+
+            str=render.insertUID(str,UID);
+
             str=str.split("###").join(i);
+
             networkElement.innerHTML=str;
 
             input=screen_editorConnect.generateName(false);
             
-            networkElement.querySelector("#"+UID+"_entry_"+i+"_ssid").innerHTML=input.meme;
+            networkElement.querySelector("#"+UID+"_entry_"+i+"_ssid").innerHTML=input.joke;
             screenElement.querySelector("#"+UID+"_instructionImage_entries").appendChild(networkElement);
         }
         return true;
     },
-    generateName:function(random){
+    generateName:function(random){//The generate name function to return a random network name or the set WiFi SSID and password.
         if(random){
-            return {"SSID":"lauamäng","PW":"mynamejeff"}//Care length
+            return {"SSID":"lauamäng","PW":"mynamejeff"}//SSID and password can be changed here, careful with special characters and lenght (min:8 max:63 char).
         }
         else{
-            function randomIntFromInterval(min, max) { // min and max included 
-                return Math.floor(Math.random() * (max - min + 1) + min);
-              }
             let words=[
                 ['Petsi', 'Jaani', 'Mardo'],
                 ['Giga', 'Kodu', 'võrgu'],
                 ['Pauk', 'LAN', '1337']
             ];
+
             let output="";
             words.forEach(function(word){
                 output+=word[randomIntFromInterval(0, word.length-1)];
             })
 
-            return {"meme":output};
+            return {"joke":output};
         }
     },
+    //The stored HTML to be filled and displayed on the screen.
     HTMLbase:`
     <div id="screenContainer">
     <div class="UID_screenwrapper">

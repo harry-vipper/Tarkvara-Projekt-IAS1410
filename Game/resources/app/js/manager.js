@@ -1,6 +1,3 @@
-const SYSTEM="WIN";//Panna paremasse kohta
-const defaultHold=1000;
-
 function startup() {
     //Load save-, game- and languagefiles
     file.savefile.load();
@@ -11,14 +8,17 @@ function startup() {
 
 
 
-    
-    color.setColor();//Set colors of the game based on saved data.
-    
-    LED.reset();//Set LEDs to off state.
+    //Set colors of the game based on saved data.
+    color.setColor();
 
-    var lastScreenPromise=new Promise((resolve)=>{resolve()});//Start promise chain.
-    
-    if(file.savefile.content.gameData.state===2){//If there was a game in progress display saveloadMenu to user else display game selection menu.
+    //Set LEDs to off state.
+    LED.reset();
+
+    //Start promise chain.
+    var lastScreenPromise=new Promise((resolve)=>{resolve()});
+
+    //If there was a game in progress display saveloadMenu to user else display game selection menu.
+    if(file.savefile.content.gameData.state===2){
         lastScreenPromise=lastScreenPromise.then(()=>{
             return system.screen.displayScreen("saveloadMenu", undefined);
         });
@@ -205,7 +205,7 @@ function shuffle(array) {//Shuffle function, based on the Fisher–Yates shuffle
     return array;
 }
 
-function startTimer(duration,timerLocationId,localTimerIds) {//StartTimer function, sets a visible countdown to the specified location
+function startTimer(duration,timerLocationId,localTimerIds) {//Start timer function, sets a visible countdown to the specified location
 
     return new Promise((resolve)=>{
 
@@ -239,13 +239,13 @@ function startTimer(duration,timerLocationId,localTimerIds) {//StartTimer functi
     });
 }
 
-function insertText(index){//InsertText function returns the correct text from the languagefile based on given index.
+function insertText(index){//Insert text function returns the correct text from the languagefile based on given index.
     return file.languagefile.content[index][file.savefile.content.settings.language];
 }
 
 const port=setPort();//Defines port so data can be writen to the Arduino.
 
-function setPort(){//SetPort function, uses the SerialPort node module to communicate with the Arduino through UART pins on the PI GPIO.
+function setPort(){//Set port function, uses the SerialPort node module to communicate with the Arduino through UART pins on the PI GPIO.
     
     if(SYSTEM!="PI"){//If the system is not PI returns to allow development on other systems.
         return null;
@@ -346,7 +346,7 @@ function setPort(){//SetPort function, uses the SerialPort node module to commun
 }
 
 var LED={//The LED method 
-    set:function(key,state){//LED.set function to send color of a key LED to the Arduino for application to the LED
+    set:function(key,state){//LED set function to send color of a key LED to the Arduino for application to the LED
         let str;
         if(state){
             let colors=file.savefile.content.settings.color;
@@ -360,7 +360,7 @@ var LED={//The LED method
         }
         return port.write(str);
     },
-    reset:function(){//LED.reset function to send color of all key LEDs to the Arduino, used after changing controls.  
+    reset:function(){//LED reset function to send color of all key LEDs to the Arduino, used after changing controls.  
 
         let state={"up":false,"down":false,"left":false,"right":false,"confirm":false}; 
         var keys=Object.keys(state)

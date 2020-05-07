@@ -1,10 +1,19 @@
-var system;
-system={
+var system={//The system method for handling most central functions of the game.
     screen: {
         displayScreen: function(type, data) {
+            //The display screen function to display a screen based on input parameter type.
+
+            //Set the scroller to the top of the screen.
             window.scrollTo(0, 0);
+
+            //Clear old style.
             this.removeDOMLoadedCSS();
+
+            //Display the footer.
             render.footer.show();
+
+            //Choose which screen to show. For all screens fade out after the screen has ended, and pass on output back to the main game loop.
+            //Minigame splashes are displayed before the minigame screen.
             switch(type) {
                 case "game-element-reaction-test":
                     return screens.splash.handler(
@@ -31,7 +40,13 @@ system={
                             controls,
                             null,
                             system.screen.timers.localTimerIds,
-                            null,
+                            {
+                                inBetweenTime: 400,
+                                instructionTime:3000,
+                                readyTime: 1000,
+                                maxReactions: 10,
+                                endNoticeTime: 6000
+                            },
                             render,
                             system.screen.UID.generate()
                         )}
@@ -63,7 +78,12 @@ system={
                             controls,
                             null,
                             system.screen.timers.localTimerIds,
-                            null,
+                            {
+                                fadeTime:400,
+                                inBetweenTime: 400,
+                                rollTime:3000,
+                                instructionPopupTime: 15000
+                            },
                             render,
                             system.screen.UID.generate()
                         )}
@@ -202,17 +222,22 @@ system={
                     });
             }
         },
-        UID: {
+
+        UID: {//Unique Id generation method to make unique identifiers for HTML/CSS elements.
             lastUID: 0,
             generate: function() {
+
                 if (DEFAULT_UID) {
                     return "UID";
                 }
+
                 let length=4;
                 let char='abcdefghijklmnopqrstuvwxyz';
+
                 if (this.lastUID>=Math.pow(char.length, length)) {
                     this.lastUID=0;
                 }
+
                 let str="";
                 let tmpUID=this.lastUID;
                 
@@ -220,11 +245,13 @@ system={
                     str += char.charAt(Math.floor(tmpUID%char.length));
                     tmpUID=Math.floor(tmpUID/char.length);
                 }
+
                 this.lastUID++;
                 return str;
             }
         },
-        timers: {
+
+        timers: {//The timers method for storing timers and clearing all of them to avoid unwanted function triggering.
             localTimerIds: [],
             clear: function(){
                 for(i=0;i<this.localTimerIds.length;i++){
@@ -233,21 +260,27 @@ system={
                 this.localTimerIds.length=0;
             }
         },
-        body:{
+
+        body:{//The body clear function to clear the contents of the screenContainer.
             clear:function(){
                 document.getElementById("screenContainer").innerHTML="";
             }
         },
-        style: {
+
+        style: {//The style clear function to clear the contents of the screenStyleContainer.
             clear: function() {
                 document.getElementById("screenStyleContainer").innerHTML="";
-            }
+            } 
         },
-        footer:{
+
+        footer:{//The footer method for handling the footer.
+
             SCROLL_PIXELS_PER_SECOND: 60,
             SCROLL_WAITTIME: 2,
             SCROLL_FADETIME: 0.8,
-            updateAnimation: function() {
+
+            updateAnimation: function() {//The update animation function to update footer scroll lenght and duration based on contents.
+
                 notify("Updating footer animation", "function");
                 let wrapperDiv=document.getElementById("footer_scrollWrapper");
                 let displayDiv=document.getElementById("footer");
@@ -258,6 +291,7 @@ system={
                 let time=0;
                 let keyframes;
                 let style;
+
                 if (wrapperDiv.clientWidth>displayDiv.clientWidth) {
                     
                     time=Math.abs(scrollDistance)/this.SCROLL_PIXELS_PER_SECOND+(this.SCROLL_WAITTIME*2);
@@ -281,7 +315,8 @@ system={
                 }
                 return time;
             },
-            reload:function(){
+
+            reload:function(){//The footer reload function to reload footer content after an element is removed from controls.key.link.
                 this.clear();
                 let i;                
                 for(i=0;i<controls.key.link.up.length;i++){
@@ -301,14 +336,16 @@ system={
                 }
                 system.screen.footer.updateAnimation();
             },
-            clear: function(){
+            clear: function(){//The footer clear function to clear the contents of the footer_scrollWrapper.
                 this.hold=false;
                 this.press=false;
                 document.getElementById("footer_scrollWrapper").innerHTML="";
             },
+
             hold:false,
             press:false,
-            UISVG: function(description,key,duration){
+
+            UISVG: function(description,key,duration){//The user interface SVG function to add graphics to the footer representing the game platform buttons.
                 let icon=`<svg class="UI-smallSVG buttonSymbol_glow_`+key+`" version="1.1" viewBox="0 0 12.7 12.7" preserveAspectRatio="xMinYMin meet" xmlns="http://www.w3.org/2000/svg">
                 <filter id="filter2993" x="-.256" y="-.256" width="1.512" height="1.512" style="color-interpolation-filters:sRGB">
                 <feGaussianBlur stdDeviation="0.33866608"/>
@@ -386,10 +423,12 @@ system={
             }
 
         },
-        loadResource: function(URI) {
+
+        loadResource: function(URI) {//The load resource function to load CSS resources into a variable.
             return fs.promises.readFile(path.join(__dirname, URI), {encoding: 'UTF-8'});
         },
-        loadCSStoDOM: function(URI) {
+
+        loadCSStoDOM: function(URI) {//The load CSS to DOM function to load the CSS file into a HTML document object model.
             let link=document.getElementById("placeHolderDOMCSS");
             if(link!=undefined) {
                 link.remove();
@@ -401,22 +440,21 @@ system={
             link.setAttribute("id", "placeHolderDOMCSS");
             document.getElementsByTagName('head')[0].appendChild(link)
         },
-        removeDOMLoadedCSS() {
+
+        removeDOMLoadedCSS() {//The remove DOM loaded CSS to remove the CSS from the DOM.
             let link=document.getElementById("placeHolderDOMCSS");
             if(link!=undefined) {
                 link.remove();
             }
         },
-        destroy: function() {
+
+        destroy: function() {//The destroy function to clear all necessary data after a screen ends.
             this.timers.clear();
             controls.key.clear.byKey("all");
             this.body.clear();
             this.style.clear();
             this.footer.clear();
+            LED.reset();
         }
-        /*launch: function() {
-
-        }*/
-    },
-    settings: {} 
+    }
 }

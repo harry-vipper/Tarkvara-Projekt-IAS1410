@@ -1,29 +1,38 @@
-var file;
-file={
+var file={//The file method for handling the saving and loading of files.
     savefile: {
         content: undefined,
-        save: function() {
-            function zero(input) {
+
+        save: function() {//The savefile saving function to to set the save time in to the savefile and then save it.
+
+            function zero(input) {//Zero function to add a zero infront of number smaller than 10, 7 becomes 07...
                 if (input < 10)input="0"+input;
                 return input;
-              }
+            }
+
             let current=new Date();
+
             this.content.lastGame.time= (zero(current.getHours())+":"+zero(current.getMinutes())+":"+zero(current.getSeconds())).toString();
             this.content.lastGame.date= (zero(current.getDate())+"/"+zero(current.getMonth()+1)+"/"+zero(current.getFullYear())).toString();;
+
             let str=JSON.stringify(this.content,null,1);
-            fs.writeFileSync(this.path, str, function (err){if(DEBUG)notify("Save ERROR","function")});
+
+            fs.writeFileSync(this.path, str, function (err){if(DEBUG)notify("SF save ERROR","function")});
         },
-        load: function() {
+        
+        load: function() {//The savefile load function to load the savefile .
+
             let str = fs.readFileSync(this.path);
             this.content=JSON.parse(str);
         },
+
         path: path.join(__dirname, '/save/save/savefile.JSON')
 
     },
-    gamefile: {
+    gamefile: {//Gamefile object to load and store the currently active gamefile into the game.
         content: undefined,
+
         load: function() {
-            if(SYSTEM==="PI"){
+            if(SYSTEM==="PI"){//If the system is PI take the file from a different location.
                 var games="/var/www/html/Editor/games/";
                 var state="/var/www/html/Editor/state/state.json";
             }
@@ -33,46 +42,25 @@ file={
             }
             var loadFile = fs.readFileSync(state);
             var current =JSON.parse(loadFile);
-            
+        
             games=path.join(games,current.activeSaveFile);
 
             loadFile = fs.readFileSync(games);
             this.content=JSON.parse(loadFile);
-            for(let i=0;i<this.content.content.length;i++){
-                this.content.content[i].id=castToType("number",this.content.content[i].id);
-                this.content.content[i].properties.title=castToType("string",this.content.content[i].properties.title);
-                this.content.content[i].properties.description=castToType("string",this.content.content[i].properties.description);
-                this.content.content[i].properties.players.min=castToType("number",this.content.content[i].properties.players.min);
-                this.content.content[i].properties.players.max=castToType("number",this.content.content[i].properties.players.max);
-                this.content.content[i].properties.volume=castToType("number",this.content.content[i].properties.volume);
-                this.content.content[i].properties.condition=castToType("number",this.content.content[i].properties.condition);
-                this.content.content[i].settings.random=castToType("boolean",this.content.content[i].settings.random);
-                this.content.content[i].settings.contentElementDuration=castToType("number",this.content.content[i].settings.contentElementDuration);
-                this.content.content[i].settings.minigames.mg1=castToType("boolean",this.content.content[i].settings.minigames.mg1);
-                this.content.content[i].settings.minigames.mg2=castToType("boolean",this.content.content[i].settings.minigames.mg2);
-                for(let j=0;j<this.content.content[i].contentElements.length;j++){
-                    this.content.content[i].contentElements[j].id=castToType("number",this.content.content[i].contentElements[j].id);
-                    this.content.content[i].contentElements[j].type=castToType("contentElementType",this.content.content[i].contentElements[j].type);
-                    this.content.content[i].contentElements[j].str=castToType("string",this.content.content[i].contentElements[j].str);
-                    this.content.content[i].contentElements[j].repeatable=castToType("boolean",this.content.content[i].contentElements[j].repeatable);
-                    this.content.content[i].contentElements[j].likelyRepeats=castToType("number",this.content.content[i].contentElements[j].likelyRepeats);
-
-
-                }
-            }
+            checkStructure(this.content);//Check the structure of the file
         }
     },
-    languagefile:{
+    languagefile:{//Languagefile object to load the language file into an object
         content:undefined,
+
         load: function() {
             let loadFile = fs.readFileSync(this.path);
             this.content=JSON.parse(loadFile);
         },
+
         path: path.join(__dirname, '/save/language/languagefile.JSON')
     },
-    apfile:{
-        apSSID:"TESTSSID",
-        apPW:"TESTPASSWORD",//Min 8 max 63 char
+    apfile:{//Apfile to handle Access Point configuration saving
         content:`interface=wlan0
 driver=nl80211
 
@@ -90,11 +78,13 @@ wpa_pairwise=TKIP
 rsn_pairwise=CCMP
 
 ssid=###
-wpa_passphrase=$$$`,//^^^See on põhjusega imelikult indentitud
+wpa_passphrase=$$$`,//^^^This is intentionally unindented. Linux configuration requires this.
+
         save: function(input) {
+            //Insert the input into the configuration file.
             let str=this.content.split("###").join(input.SSID.toString());
             str=str.split("$$$").join(input.PW.toString());
-            fs.writeFileSync(this.path, str, function (err){if(DEBUG)notify("Save ERROR","function")});
+            fs.writeFileSync(this.path, str, function (err){if(DEBUG)notify("AP save ERROR","function")});
         },
         path: path.join(__dirname, '/save/ap/changedhostapd.conf')
     }

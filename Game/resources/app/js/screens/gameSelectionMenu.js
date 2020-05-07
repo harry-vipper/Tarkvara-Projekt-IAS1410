@@ -1,6 +1,5 @@
-//Main menu
-var screen_gameSelectionMenu;
-screen_gameSelectionMenu={
+//Main menu screen to allow the user to select between games.
+var screen_gameSelectionMenu={
     type: "gameSelectionMenu",
     handler: function(
         context,       
@@ -13,31 +12,35 @@ screen_gameSelectionMenu={
         UID,             
     )
     /*
-    context,      <div> to draw into
+    context,        <div> to draw into
     style,          <style> to send styles to
     controls,       controls object with methods to handle controls
-    screenContent,  data passed to screen, in any format, possibly suitable to this screen only
+    screenContent,  data passed to the screen, in any format, possibly suitable to this screen only
     localTimerIds,  Array of active timers
     screenSettings, settings like colors
-    UID   
+    UID             Unique ID of the HTML/CSS elements
     */
     {   
-        
         var end;
+        //Setting the endpromise to trigger when the end promise comes true.
         var endpromise=new Promise((resolve) =>{
                 end=resolve;
             }
         );
+
+        //Display the footer.
         render.footer.show();
-        render.strUID=function(str) {
-            return str.split("UID").join(UID);
-        };
+        
         render.menuEntry={
-            //listEntry
+            //The menu entry creation function to make an entry based on given data.
             create: function(instance) {
+
+                //Make a container for the entry.
                 let container=document.createElement('div');
-                container.classList.add(render.strUID("UID_menulistItem"))
+                container.classList.add(render.insertUID("UID_menulistItem",UID))
                 container.setAttribute("id", "_"+instance.index+"_UID_element");
+
+                //Set correct data into the predefined string.
                 let str=`
                     <div class="UID_menulistHeader">
                         <div id="_`+instance.index+`_UID_header_index" class="UID_menulistHeaderNumber">
@@ -108,110 +111,120 @@ screen_gameSelectionMenu={
                     </div>
                     <div id="_`+instance.index+`_UID_element_after" class="UID_element_after"></div>
                 `;
-                str.split("UID").join(UID);
+
+                //Replace the placeholder UIDs with real UIDs and set the string into the container.
+                str=render.insertUID(str,UID);
                 container.innerHTML=str;
+
                 return(container);
             },
+
+            //The activate and deactivate functions to either activate or deactivate a menu entry by changing its CSS classes.
             activate: function(index) {
                 index=String(index);
-                document.getElementById("_"+index+render.strUID("_UID_header_index")).classList.add(render.strUID("UID_menulistHeaderActive"));
-                document.getElementById("_"+index+render.strUID("_UID_header_title")).classList.add(render.strUID("UID_menulistHeaderActive"));
-                document.getElementById("_"+index+render.strUID("_UID_header_description")).classList.remove(render.strUID("r_hidden_animatable"));
+                document.getElementById("_"+index+render.insertUID("_UID_header_index",UID)).classList.add(render.insertUID("UID_menulistHeaderActive",UID));
+                document.getElementById("_"+index+render.insertUID("_UID_header_title",UID)).classList.add(render.insertUID("UID_menulistHeaderActive",UID));
+                document.getElementById("_"+index+render.insertUID("_UID_header_description",UID)).classList.remove(render.insertUID("r_hidden_animatable",UID));
             },
             deactivate: function(index) {
                 index=String(index);
-                document.getElementById("_"+index+render.strUID("_UID_header_index")).classList.remove(render.strUID("UID_menulistHeaderActive"));
-                document.getElementById("_"+index+render.strUID("_UID_header_title")).classList.remove(render.strUID("UID_menulistHeaderActive"));
-                document.getElementById("_"+index+render.strUID("_UID_header_description")).classList.add(render.strUID("r_hidden_animatable"));
+                document.getElementById("_"+index+render.insertUID("_UID_header_index",UID)).classList.remove(render.insertUID("UID_menulistHeaderActive",UID));
+                document.getElementById("_"+index+render.insertUID("_UID_header_title",UID)).classList.remove(render.insertUID("UID_menulistHeaderActive",UID));
+                document.getElementById("_"+index+render.insertUID("_UID_header_description",UID)).classList.add(render.insertUID("r_hidden_animatable",UID));
             }
         };
-        function getMinMaxStr(min, max) {
+
+
+        function getMinMaxStr(min, max) {//The min-max string creation function to construct the suggested player amount for each game.
             if (min==max) {
                 return min;
             }
             return min+"-"+max;
         }
-        system.screen.loadResource("/resources/css/gameSelectionMenu.css").then(
-            (css)=>{
-                //Render
 
-                if(fileCSS) {
-                    system.screen.loadCSStoDOM("resources/css/gameSelectionMenu.css");
-                }
-                else{
-                    style.innerHTML=css;
-                }
+        //Load the screen CSS to DOM or the style element.
+        system.screen.loadResource("/resources/css/gameSelectionMenu.css").then((css)=>{
+            if(fileCSS) {
+                system.screen.loadCSStoDOM("resources/css/gameSelectionMenu.css");
+            }
+            else{
+                style.innerHTML=css;
+            }
                 
                 
-                //Create list
-                let menuListContainer=document.createElement('div');
-                menuListContainer.setAttribute("id", render.strUID("UID_menulistContainer"));
-                context.appendChild(menuListContainer);
+            //Create list container.
+            let menuListContainer=document.createElement('div');
+            menuListContainer.setAttribute("id", render.insertUID("UID_menulistContainer",UID));
+            context.appendChild(menuListContainer);
 
-                let i=0;
-                screenContent.gamefile.content.forEach((entry)=>{
-                    entry.index=i;
-                    i++;
-                    menuListContainer.appendChild(render.menuEntry.create(entry));
-                })
-                screenContent.savefile.gameData.selectedGame=0;
-                    render.menuEntry.activate(screenContent.savefile.gameData.selectedGame);
-                const scroller = new SweetScroll();
-                scroller.to(
-                    ("#_"+screenContent.savefile.gameData.selectedGame+render.strUID("_UID_element"))
-                )
-                return render.fade.in(context).then(()=>{return scroller;});
-            }).then(
-                (scroller)=>{
+            //Fill the list with games.
+            let i=0;
+            screenContent.gamefile.content.forEach((entry)=>{
+                entry.index=i;
+                i++;
+                menuListContainer.appendChild(render.menuEntry.create(entry));
+            })
 
-                    controls.key.set('up', 0, ()=>{selectGame('-');}, insertText("9"),false,true);
-                    controls.key.set('down', 0, ()=>{selectGame('+');}, insertText("10"),false,true);
-                    controls.key.set('confirm', 1000, ()=>{end({type:"startGame"});}, insertText("11"),false,true);
-                    controls.key.set('left', 0, ()=>{end({type:"settingsMenu"});}, insertText("12"),false,true);
-                    controls.key.set('right', 1000, ()=>{end({type:"editorConnect"});}, insertText("46"),false,true);
+            //Set the scroller to the top of the screen and activate the first element.
+            screenContent.savefile.gameData.selectedGame=0;
+            render.menuEntry.activate(screenContent.savefile.gameData.selectedGame);
+
+            const scroller = new SweetScroll();
+            scroller.to("#_"+screenContent.savefile.gameData.selectedGame+render.insertUID("_UID_element",UID));
+            
+
+            //Fade in the screen.
+            return render.fade.in(context).then(()=>{return scroller;});
+
+            }).then((scroller)=>{
+                //Set controls of the menu.
+                controls.key.set('up', 0, ()=>{selectGame('-');}, insertText("9"),false,true);
+                controls.key.set('down', 0, ()=>{selectGame('+');}, insertText("10"),false,true);
+                controls.key.set('confirm', 1000, ()=>{end({type:"startGame"});}, insertText("11"),false,true);
+                controls.key.set('left', 0, ()=>{end({type:"settingsMenu"});}, insertText("12"),false,true);
+                controls.key.set('right', 1000, ()=>{end({type:"editorConnect"});}, insertText("46"),false,true);
+                
+                function selectGame(direction) {//Select game function to activate/deactivate menu entries and keep track of the currently selected entry.
+
+                    render.menuEntry.deactivate(screenContent.savefile.gameData.selectedGame);
+
+                    screenContent.savefile.gameData.selectedGame=calcNextIndex(
+                        direction, 
+                        screenContent.savefile.gameData.selectedGame, 
+                        screenContent.gamefile.content.length
+                    );
                     
-                    function selectGame(direction) {
-                        render.menuEntry.deactivate(screenContent.savefile.gameData.selectedGame);
-                        screenContent.savefile.gameData.selectedGame=calcNextIndex(
-                            direction, 
-                            screenContent.savefile.gameData.selectedGame, 
-                            screenContent.gamefile.content.length
-                        );
-                        //document.getElementById(screenContent.savefile.gameData.selectedGame+render.strUID("_UID_header_title")).scrollIntoView();
-                        
-                        let elementId="_"+screenContent.savefile.gameData.selectedGame+render.strUID("_UID_element");
-                        
-                        
-                        render.menuEntry.activate(screenContent.savefile.gameData.selectedGame);
-                        scroller.to(
-                            ("#"+elementId)
-                        )
-                        //render.forceRedraw(document.getElementById(render.strUID("UID_menulistContainer")));
+                    let elementId="_"+screenContent.savefile.gameData.selectedGame+render.insertUID("_UID_element",UID);
+                    
+                    render.menuEntry.activate(screenContent.savefile.gameData.selectedGame);
+                    scroller.to(
+                        ("#"+elementId)
+                    )
+                    
+                }
+
+                function calcNextIndex(direction, data, size) {//The calculate next index function to allow selection of only valid entries.
+                    
+                    if(direction==='+') {
+                        if(data<size-1) {
+                            data++;
+                        }
+                        else {
+                            data=0;
+                        }
                     }
-                    function calcNextIndex(direction, data, size) {
-                        if(direction==='+') {
-                            if(data<size-1) {
-                                data++;
-                            }
-                            else {
-                                data=0;
-                            }
+
+                    else if(direction==='-') {
+                        if(data>0){
+                            data--;
                         }
-                        else if(direction==='-') {
-                            if(data>0){
-                                data--;
-                            }
-                            else data=size-1;
-                        }
+                        else data=size-1;
+                    }
 
                         return data;
-                    }
                 }
+            }
         );
-        
-        
-        //Make a palette if there is none
-        //do stuff
         return endpromise;
     }
 }

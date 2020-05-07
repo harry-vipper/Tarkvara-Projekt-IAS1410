@@ -1,5 +1,5 @@
-var screen_splash;
-screen_splash={
+//The splash screen to get the users attention before minigames, and at the game end.
+var screen_splash={
     type: "splash",
     handler: function(
         context,       
@@ -9,13 +9,23 @@ screen_splash={
         localTimerIds,  
         screenSettings, 
         render,
-        UID,             
+        UID             
     )
+    /*
+    context,        <div> to draw into
+    style,          <style> to send styles to
+    controls,       controls object with methods to handle controls
+    screenContent,  data passed to the screen, in any format, possibly suitable to this screen only
+    localTimerIds,  Array of active timers
+    screenSettings, settings like colors
+    UID             Unique ID of the HTML/CSS elements
+    */
     {
-    render.footer.hide();
-    return system.screen.loadResource("/resources/css/interSplash.css").then(
-        (css)=>{
-            //Load style for splash
+        //Hide the footer.
+        render.footer.hide();
+
+        //Load the screen CSS to DOM or the style element.
+        return system.screen.loadResource("/resources/css/interSplash.css").then((css)=>{
             if(fileCSS) {
                 system.screen.loadCSStoDOM("resources/css/interSplash.css");
             }
@@ -23,6 +33,7 @@ screen_splash={
                 style.innerHTML=css;
             }
 
+            //Make a copy of the HTMLbase, replace the placeholders and set it into the needed element.
             let str=`
                 <svg style="display: none" width="50.8mm" height="50.8mm" version="1.1" viewBox="0 0 50.8 50.8" preserveAspectRatio="xMinYMin meet" xmlns="http://www.w3.org/2000/svg">
                     <defs>
@@ -61,35 +72,47 @@ screen_splash={
                     </div>
                 </div>`;
 
-            str=str.split("UID").join(UID);//Replace UID in str with correct UID
+            str=render.insertUID(str,UID);
             context.innerHTML=str;
 
+            //Wait for the elements to move.
             return delay(screenContent.movetime,localTimerIds);
+            
+        }).then(()=>{
+            //Start box animation to move to the middle of the screen.
+            document.getElementById(UID+"_splashbox_left").classList.add(UID+"_splashbox_left-end");
+            document.getElementById(UID+"_splashbox_right").classList.add(UID+"_splashbox_right-end");
+
+            document.getElementById(UID+"_splashbox_left").classList.remove(UID+"_splashbox_left-start");
+            document.getElementById(UID+"_splashbox_right").classList.remove(UID+"_splashbox_right-start");
+            
+            //Display the boxes.
+            render.fade.in(context); 
+
+            //Wait for boxes to move to the middle of the screen.
+            return delay(screenContent.movetime,localTimerIds);
+                    
+        }).then(()=>{
         
-    }).then(()=>{
-                //Start box animation to move to the middle of the screen  
-                document.getElementById(UID+"_splashbox_left").classList.add(UID+"_splashbox_left-end");
-                document.getElementById(UID+"_splashbox_right").classList.add(UID+"_splashbox_right-end");
+            //Wait so the user can read boxes.
+            return delay(screenContent.staytime,localTimerIds);
 
-                document.getElementById(UID+"_splashbox_left").classList.remove(UID+"_splashbox_left-start");
-                document.getElementById(UID+"_splashbox_right").classList.remove(UID+"_splashbox_right-start");
-                render.fade.in(context); //Display boxes
-                return delay(screenContent.movetime,localTimerIds);//Wait for boxes to move to the middle of the screen
-                
-    }).then(()=>{
-        
-            return delay(screenContent.staytime,localTimerIds);//Wait so user can read boxes
+        }).then(()=>{
+                //Start box animation to move off the screen.
+                document.getElementById(UID+"_splashbox_left").classList.remove(UID+"_splashbox_left-end");
+                document.getElementById(UID+"_splashbox_right").classList.remove(UID+"_splashbox_right-end");
 
-    }).then(()=>{
-            //Start box animation to move off the screen  
-            document.getElementById(UID+"_splashbox_left").classList.remove(UID+"_splashbox_left-end");
-            document.getElementById(UID+"_splashbox_right").classList.remove(UID+"_splashbox_right-end");
+                document.getElementById(UID+"_splashbox_left").classList.add(UID+"_splashbox_left-start");
+                document.getElementById(UID+"_splashbox_right").classList.add(UID+"_splashbox_right-start");
 
-            document.getElementById(UID+"_splashbox_left").classList.add(UID+"_splashbox_left-start");
-            document.getElementById(UID+"_splashbox_right").classList.add(UID+"_splashbox_right-start");
-            return delay(screenContent.movetime,localTimerIds); //Wait for boxes to move off the screen
-    }).then(()=>{
-        return render.fade.out(context);
-    });
+                //Wait for boxes to move off the screen.
+                return delay(screenContent.movetime,localTimerIds); 
+
+        }).then(()=>{
+            
+            //Fade out the screen.
+            return render.fade.out(context);
+            
+        });
     }
 }
