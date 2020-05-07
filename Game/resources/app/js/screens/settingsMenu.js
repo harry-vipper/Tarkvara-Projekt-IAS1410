@@ -291,7 +291,7 @@ var screen_settingsMenu={
     contrastCheck:function(FGoffset,BGoffset,screenContent){//Contrast check function to check if the contrast between the foreground and background color is good.
         let FGL=(screenContent.savefile.settings.color.foreground[2])+FGoffset;
         let BGL=(screenContent.savefile.settings.color.background[2])+BGoffset;
-        if(FGL-BGL<15 || BGL<25 || FGL<40){//Compare lightness values.
+        if(FGL-BGL<15 || BGL<25 || FGL<40 || FGL>100){//Compare lightness values.
             return false;
         }
         else{
