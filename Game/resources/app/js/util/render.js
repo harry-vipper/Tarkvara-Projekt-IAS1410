@@ -52,11 +52,11 @@ render.removeAnimation=function (id, className) {
 
 
 //Event listener to start the Sweet-Scroll when the screen has loaded.
-document.addEventListener(
+/*document.addEventListener(
     'DOMContentLoaded',
     () => {
       const scroller = new SweetScroll({
       });
     },
 	false,
-);
+);*/

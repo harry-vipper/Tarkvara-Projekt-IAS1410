@@ -33,10 +33,13 @@ function startup() {
         return mainGameLoop(output);//Start promise loop.
     });
     
+    //Set fill screen settings
     var fillCounter=0;
+    var fillFrequency=3;
+
     function typeFinder(){//Find game element type and return correct screen.
         fillCounter++;
-        if(fillCounter===Math.floor(10/file.gamefile.content.content[file.savefile.content.gameData.selectedGame].properties.condition)){
+        if(fillCounter===Math.floor(10/fillFrequency)){
             fillCounter=0;
             return system.screen.displayScreen("fill", undefined);
         }
@@ -81,7 +84,6 @@ function startup() {
                 file.savefile.content.gameData.currentQuestion=0;
                 file.savefile.content.gameData.gameOrder=gameOrderer();
                 file.savefile.content.lastGame.title=file.gamefile.content.content[file.savefile.content.gameData.selectedGame].properties.title;
-                file.savefile.content.lastGame.condition=file.gamefile.content.content[file.savefile.content.gameData.selectedGame].properties.condition;
                 fillCounter=0;
 
                 return typeFinder();

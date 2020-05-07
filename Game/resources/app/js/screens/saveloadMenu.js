@@ -51,9 +51,9 @@ var screen_saveloadMenu={
         }).then(()=>{
             //Bind the controls.
             let choice=0;
-            controls.key.set("up",0,()=>{changeChoice();},lastCondition=insertText("9"),false,true);
-            controls.key.set("down",0,()=>{changeChoice();},lastCondition=insertText("10"),false,true);
-            controls.key.set("confirm",0,()=>{end({type: "choiceMade", value: choice});},lastCondition=insertText("17"),false,true);
+            controls.key.set("up",0,()=>{changeChoice();},insertText("9"),false,true);
+            controls.key.set("down",0,()=>{changeChoice();},insertText("10"),false,true);
+            controls.key.set("confirm",0,()=>{end({type: "choiceMade", value: choice});},insertText("17"),false,true);
             
 
             function changeChoice(){//The change choice function to handle the user switching between options.
@@ -71,17 +71,12 @@ var screen_saveloadMenu={
     },
 
     setContent:function(screenElement,screenContent,UID){//The set content function to correct the data in the element.
-        let lastCondition=undefined;
-
-        lastCondition=conditionToText(screenContent.savefile.lastGame.condition)
-        
+                
         screenElement.querySelector("#_"+UID+"_menulistDescriptionText").innerHTML=`<p>
             `+insertText("35")+`
             <br><span class="UID_menulistDescriptionText_title" id="UID_lastGame_title">`+screenContent.savefile.lastGame.title.toUpperCase()+`</span><br><br>
             `+insertText("36")+`: <span class="UID_menulistDescriptionText_time" id="UID_lastGame_time">`+screenContent.savefile.lastGame.time+` </span>
             <span class="UID_menulistDescriptionText_date" id="UID_lastGame_date">`+screenContent.savefile.lastGame.date+`</span><br><br>
-            `+insertText("37")+`
-            <span class="UID_menulistDescriptionText_condition" id="UID_lastGame_condition">`+lastCondition+`</span>
         </p>`;
 
         screenElement.querySelector("#_0_"+UID+"_header_title").innerHTML="<p>"+insertText("42")+"</p>";

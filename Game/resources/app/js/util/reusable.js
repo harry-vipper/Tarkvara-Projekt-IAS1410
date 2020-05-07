@@ -1,25 +1,3 @@
-function conditionToText(condition) {
-    //Condition to text function to insert correct text to match condition.
-    switch(String(condition)) {
-        
-        case "0":
-        return insertText("38");
-
-        case "1":
-        return insertText("39");
-
-        case "2":
-        return insertText("40");  
-
-        case "3":
-        return insertText("41");
-
-        default:
-        return insertText("38");
-    }
-}
-
-
 function strToHTML(str) {//strToHTML function to convert string new line characters to HTML format.
     return str.replace(/(?:\r\n|\r|\n)/g, '<br>');
 }
@@ -57,7 +35,6 @@ function checkStructure(object) {//Check structure function to check gamefile st
     try {
         object.content.forEach(function(game){
 
-            game.properties.condition=castToType("number", game.properties.condition);
 
             game.properties.description=castToType("string", game.properties.description);
 
@@ -69,7 +46,6 @@ function checkStructure(object) {//Check structure function to check gamefile st
 
             game.properties.title=castToType("string", game.properties.title);
 
-            game.properties.volume=castToType("number", game.properties.volume);
 
 
             game.settings.contentElementDuration=castToType("number", game.settings.contentElementDuration);

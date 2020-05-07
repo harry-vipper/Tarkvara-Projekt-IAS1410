@@ -186,28 +186,28 @@
     },
     "37":
     {
-        "EST":"Sa olid tõenäoliselt",
-        "ENG":"You probably were"
+        "EST":"",
+        "ENG":""
     },
     "38":
     {
-        "EST":"Kaine",
-        "ENG":"Sober"
+        "EST":"",
+        "ENG":""
     },
     "39":
     {
-        "EST":"Juba timm",
-        "ENG":"Buzzed"
+        "EST":"",
+        "ENG":""
     },
     "40":
     {
-        "EST":"Lappes",
-        "ENG":"Hammered"
+        "EST":"",
+        "ENG":""
     },
     "41":
     {
-        "EST":"Mälus",
-        "ENG":"F*cked"
+        "EST":"",
+        "ENG":""
     },
     "42":
     {
@@ -221,7 +221,7 @@
     },
     "44":
     {
-        "EST":"TÄIDA",
+        "EST":"TÄITKE",
         "ENG":"FILL"
     },
     "45":
@@ -236,8 +236,8 @@
     },
     "47":
     {
-        "EST":"KLAASID",
-        "ENG":"GLASSES"
+        "EST":"SNÄKID",
+        "ENG":"SNACKS"
     },
     "48":
     {
@@ -261,7 +261,7 @@
     },
     "52":
     {
-        "EST":"WPA-2 Misiganes muud advanced settingud igaks juhuks",
+        "EST":"WPA-2 Seaded",
         "ENG":"WPA-2 Settings"
     },
     "53":
