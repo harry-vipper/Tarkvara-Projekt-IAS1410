@@ -91,10 +91,10 @@ var screen_truth_or_dare={
             }
 
             //Set the controls and link the start key to an id so it can be cleared.
-            controls.key.set("up",1000,()=>{end({type: "gameSelectionMenu", value: null});},insertText(6),false,true);
-            controls.key.set("left",1000,()=>{end({type: "nextScreen", value: "last"});},insertText(7),false,true);
-            controls.key.set("right",1000,()=>{end({type: "nextScreen", value: "next"});},insertText(8),false,true);
-            controls.key.set('down', 1000, ()=>{end({type:"editorConnect"});}, insertText("46"),false,true);
+            controls.key.set("up",defaultHold,()=>{end({type: "gameSelectionMenu", value: null});},insertText(6),false,true);
+            controls.key.set("left",defaultHold,()=>{end({type: "nextScreen", value: "last"});},insertText(7),false,true);
+            controls.key.set("right",defaultHold,()=>{end({type: "nextScreen", value: "next"});},insertText(8),false,true);
+            controls.key.set('down', defaultHold, ()=>{end({type:"editorConnect"});}, insertText("46"),false,true);
 
             let keylinkId=controls.key.set("confirm",0, startMinigame,insertText(11),false,true);
         });

@@ -84,7 +84,7 @@ var screen_settingsMenu={
             controls.key.set('down', 0, ()=>{changeSetting('+');}, insertText("10"),false,true);
             controls.key.set('confirm', 0, ()=>{selectSetting();}, insertText("13"),false,true);
             controls.key.set('left', 0, ()=>{end({type:"gameSelectionMenu"});}, insertText("14"),false,true);
-            controls.key.set('right', 1000, ()=>{end({type:"editorConnect"});}, insertText("46"),false,true);
+            controls.key.set('right', defaultHold, ()=>{end({type:"editorConnect"});}, insertText("46"),false,true);
 
             function changeSetting(direction){//Change setting function to handle scrolling, entry activation and deactivation.
                 render.menuEntry.deactivate(screen_settingsMenu.selectedSetting);
@@ -164,7 +164,7 @@ var screen_settingsMenu={
                     controls.key.set('down', 0, ()=>{changeSetting('+');}, insertText("10"),false,true);
                     controls.key.set('confirm', 0, ()=>{selectSetting();}, insertText("13"),false,true);
                     controls.key.set('left', 0, ()=>{end({type:"gameSelectionMenu"});}, insertText("14"),false,true);
-                    controls.key.set('right', 1000, ()=>{end({type:"editorConnect"});}, insertText("46"),false,true);
+                    controls.key.set('right', defaultHold, ()=>{end({type:"editorConnect"});}, insertText("46"),false,true);
                 }
 
                 else{//Color setting change.
@@ -186,7 +186,7 @@ var screen_settingsMenu={
                             controls.key.set('down', 0, ()=>{changeSetting('+');}, insertText("10"),false,true);
                             controls.key.set('confirm', 0, ()=>{selectSetting();}, insertText("13"),false,true);
                             controls.key.set('left', 0, ()=>{end({type:"gameSelectionMenu"});}, insertText("14"),false,true);
-                            controls.key.set('right', 1000, ()=>{end({type:"editorConnect"});}, insertText("46"),false,true);
+                            controls.key.set('right', defaultHold, ()=>{end({type:"editorConnect"});}, insertText("46"),false,true);
                         }
                        
                     }
