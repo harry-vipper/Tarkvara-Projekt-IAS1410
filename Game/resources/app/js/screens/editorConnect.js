@@ -60,7 +60,7 @@ var screen_editorConnect={
                 const exec = require('child_process').exec;
                 exec('sudo  /home/pi/APchange.sh');
             }
-            controls.key.set('down', 1000, ()=>{end({type:"return"});}, insertText("45"),false,true);
+            controls.key.set('down', defaultHold, ()=>{end({type:"return"});}, insertText("45"),false,true);
         });
         return endpromise;
         

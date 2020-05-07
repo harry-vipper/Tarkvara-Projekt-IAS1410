@@ -224,10 +224,10 @@ var screen_reaction_test={
 
         }).then(()=>{ 
             //Set the controls so the user can skip waiting or take other actions and display the total score.
-            controls.key.set("up",1000,()=>{end({type: "gameSelectionMenu", value: null});},insertText(6),false,true);
-            controls.key.set("left",1000,()=>{end({type: "nextScreen", value: "last"});},insertText(7),false,true);
-            controls.key.set("right",1000,()=>{end({type: "nextScreen", value: "next"});},insertText(8),false,true);
-            controls.key.set('down', 1000, ()=>{end({type:"editorConnect"});}, insertText(46),false,true);
+            controls.key.set("up",defaultHold,()=>{end({type: "gameSelectionMenu", value: null});},insertText(6),false,true);
+            controls.key.set("left",defaultHold,()=>{end({type: "nextScreen", value: "last"});},insertText(7),false,true);
+            controls.key.set("right",defaultHold,()=>{end({type: "nextScreen", value: "next"});},insertText(8),false,true);
+            controls.key.set('down', defaultHold, ()=>{end({type:"editorConnect"});}, insertText(46),false,true);
 
             return render.fade.in(document.getElementById(UID+"_UIdiv"));
 

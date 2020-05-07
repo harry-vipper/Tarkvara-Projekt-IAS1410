@@ -180,9 +180,9 @@ var screen_gameSelectionMenu={
                 //Set controls of the menu.
                 controls.key.set('up', 0, ()=>{selectGame('-');}, insertText("9"),false,true);
                 controls.key.set('down', 0, ()=>{selectGame('+');}, insertText("10"),false,true);
-                controls.key.set('confirm', 1000, ()=>{end({type:"startGame"});}, insertText("11"),false,true);
+                controls.key.set('confirm', defaultHold, ()=>{end({type:"startGame"});}, insertText("11"),false,true);
                 controls.key.set('left', 0, ()=>{end({type:"settingsMenu"});}, insertText("12"),false,true);
-                controls.key.set('right', 1000, ()=>{end({type:"editorConnect"});}, insertText("46"),false,true);
+                controls.key.set('right', defaultHold, ()=>{end({type:"editorConnect"});}, insertText("46"),false,true);
                 
                 function selectGame(direction) {//Select game function to activate/deactivate menu entries and keep track of the currently selected entry.
 
