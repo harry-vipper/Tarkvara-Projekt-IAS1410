@@ -7,14 +7,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (empty($json)) {
         echo "EMPTY_STRING";
     } else {
-        
-        $filename='games_'.date('Y-m-d_H-i-s').'.json';
-        file_put_contents($PATH_GAMES.$filename, $json);
-        
-        $statefile=json_decode(file_get_contents($PATH_STATE));
-        $statefile->activeSaveFile=$filename;
-        file_put_contents($PATH_STATE, json_encode($statefile));
-        echo $json;
+        $error=false;
+        try{
+           $filename='games_'.date('Y-m-d_H-i-s').'.json';
+            file_put_contents($PATH_GAMES.$filename, $json);
+            
+            $statefile=json_decode(file_get_contents($PATH_STATE));
+            $statefile->activeSaveFile=$filename;
+            file_put_contents($PATH_STATE, json_encode($statefile));
+        }
+        catch(Exception $e) {
+        }
+        finally{
+            if($error==false) {
+                echo "OK";
+            }
+        }
     }
 }
 ?>
